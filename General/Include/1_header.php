@@ -110,10 +110,10 @@
             <?php
             $array = array(
                 "1" => array("nombre" => "INICIO", "link" => "../../Inicio/Vista/Escritorio.php"),
-                "2" => array("nombre" => "TRABAJADOR", "link" => "../../Trabajador/Vista/Escritorio.php"),
+                "2" => array("nombre" => "USUARIO", "link" => "../../Usuario/Vista/Escritorio.php"),
                 "3" => array("nombre" => "INSTITUCION", "link" => "../../Institucion/Vista/Escritorio.php"),
                 "4" => array("nombre" => "MATRICULA", "link" => "../../Matricula/Vista/Escritorio.php"),
-                "5" => array("nombre" => "DOCUMENTO", "link" => "../../Documentacion/Vista/Escritorio.php")
+                "5" => array("nombre" => "DOCUMENTO", "link" => "../../Documentacion/Vista/Escritorio.php"),
             );
             ?>
             <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">

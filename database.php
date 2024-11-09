@@ -2,7 +2,7 @@
     $servidor="127.0.0.1";
     $usuario="root";
     $clave="";
-    $bd="2024";
+    $bd="2025";
     $encode="utf8";
 
     setlocale(LC_TIME, 'es_ES.UTF-8');
