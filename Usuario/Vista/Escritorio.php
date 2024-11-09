@@ -56,8 +56,8 @@ if (!isset($_SESSION['nombre'])) {
                 <?php
                 $array = array(
                     "1" => array("nombre" => "CARGO", "link" => "usuario_cargo.php"),
-                    "2" => array("nombre" => "CONTRATO", "link" => "Trabajador.php"),
-                    "3" => array("nombre" => "DOCUMENTO", "link" => "Trabajador.php"),
+                    "2" => array("nombre" => "CONTRATO", "link" => "usuario_tipo_contrato.php"),
+                    "3" => array("nombre" => "DOCUMENTO", "link" => "usuario_documento.php"),
                     "4" => array("nombre" => "ESTADO CIVIL", "link" => "usuario_estado_civil.php"),
                     "5" => array("nombre" => "SEXO", "link" => "usuario_sexo.php"),
                 );
