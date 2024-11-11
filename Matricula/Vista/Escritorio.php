@@ -13,16 +13,13 @@ if (!isset($_SESSION['nombre'])) {
 
         <!-- CUERPO_INICIO -->
         <div class="my-3 p-3 bg-body rounded shadow-sm" id="listado">
-            <h5 class="border-bottom pb-2 mb-0"><b>INSTITUCION</b></h5>
+            <h5 class="border-bottom pb-2 mb-0"><b>AJUSTES</b></h5>
             <div class="d-flex text-body-secondary pt-3">
                 <br>
                 <?php
                 $array = array(
-                    "1" => array("nombre" => "INSTITUCION", "link" => "Institucion.php"),
-                    "2" => array("nombre" => "AÑO LECTIVO", "link" => "Institucion_lectivo.php"),
-                    "3" => array("nombre" => "NIVEL", "link" => "Institucion_nivel.php"),
-                    "4" => array("nombre" => "GRADO", "link" => "Institucion_grado.php"),
-                    "5" => array("nombre" => "SECCION", "link" => "Institucion_seccion.php"),
+                    "1" => array("nombre" => "METODO PAGO", "link" => "matricula_metodo_pago.php"),
+                    "2" => array("nombre" => "CATEGORIA", "link" => "matricula_categoria.php"),
                 );
                 ?>
                 <table class="table">
