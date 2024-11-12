@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-11-2024 a las 17:58:18
+-- Tiempo de generación: 12-11-2024 a las 02:28:25
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -37,6 +37,123 @@ CREATE TABLE `institucion` (
   `ruc` varchar(11) NOT NULL,
   `razon_social` varchar(100) NOT NULL,
   `direccion` varchar(255) DEFAULT NULL,
+  `observaciones` text,
+  `fechacreado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `estado` tinyint(1) DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `institucion_grado`
+--
+
+CREATE TABLE `institucion_grado` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `id_institucion_nivel` int(11) NOT NULL,
+  `observaciones` text,
+  `fechacreado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `estado` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `institucion_lectivo`
+--
+
+CREATE TABLE `institucion_lectivo` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `nombre_lectivo` varchar(300) NOT NULL,
+  `id_institucion` int(11) NOT NULL,
+  `observaciones` text,
+  `fechacreado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `estado` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `institucion_nivel`
+--
+
+CREATE TABLE `institucion_nivel` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `id_institucion_lectivo` int(11) NOT NULL,
+  `observaciones` text,
+  `fechacreado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `estado` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `institucion_seccion`
+--
+
+CREATE TABLE `institucion_seccion` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `id_institucion_grado` int(11) NOT NULL,
+  `observaciones` text,
+  `fechacreado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `estado` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `matricula_categoria`
+--
+
+CREATE TABLE `matricula_categoria` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `observaciones` text,
+  `fechacreado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `estado` tinyint(1) DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `matricula_documentos_responsable`
+--
+
+CREATE TABLE `matricula_documentos_responsable` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `observaciones` text,
+  `fechacreado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `estado` tinyint(1) DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `matricula_meses`
+--
+
+CREATE TABLE `matricula_meses` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `observaciones` text,
+  `fechacreado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `estado` tinyint(1) DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `matricula_metodo_pago`
+--
+
+CREATE TABLE `matricula_metodo_pago` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
   `observaciones` text,
   `fechacreado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `estado` tinyint(1) DEFAULT '1'
@@ -158,6 +275,58 @@ ALTER TABLE `institucion`
   ADD KEY `id_usuario_docente` (`id_usuario_docente`);
 
 --
+-- Indices de la tabla `institucion_grado`
+--
+ALTER TABLE `institucion_grado`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_institucion_nivel` (`id_institucion_nivel`);
+
+--
+-- Indices de la tabla `institucion_lectivo`
+--
+ALTER TABLE `institucion_lectivo`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_institucion` (`id_institucion`);
+
+--
+-- Indices de la tabla `institucion_nivel`
+--
+ALTER TABLE `institucion_nivel`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_institucion_lectivo` (`id_institucion_lectivo`);
+
+--
+-- Indices de la tabla `institucion_seccion`
+--
+ALTER TABLE `institucion_seccion`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_institucion_grado` (`id_institucion_grado`);
+
+--
+-- Indices de la tabla `matricula_categoria`
+--
+ALTER TABLE `matricula_categoria`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `matricula_documentos_responsable`
+--
+ALTER TABLE `matricula_documentos_responsable`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `matricula_meses`
+--
+ALTER TABLE `matricula_meses`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `matricula_metodo_pago`
+--
+ALTER TABLE `matricula_metodo_pago`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `usuario_cargo`
 --
 ALTER TABLE `usuario_cargo`
@@ -209,6 +378,54 @@ ALTER TABLE `institucion`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT de la tabla `institucion_grado`
+--
+ALTER TABLE `institucion_grado`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT de la tabla `institucion_lectivo`
+--
+ALTER TABLE `institucion_lectivo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `institucion_nivel`
+--
+ALTER TABLE `institucion_nivel`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `institucion_seccion`
+--
+ALTER TABLE `institucion_seccion`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT de la tabla `matricula_categoria`
+--
+ALTER TABLE `matricula_categoria`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `matricula_documentos_responsable`
+--
+ALTER TABLE `matricula_documentos_responsable`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `matricula_meses`
+--
+ALTER TABLE `matricula_meses`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT de la tabla `matricula_metodo_pago`
+--
+ALTER TABLE `matricula_metodo_pago`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT de la tabla `usuario_cargo`
 --
 ALTER TABLE `usuario_cargo`
@@ -218,7 +435,7 @@ ALTER TABLE `usuario_cargo`
 -- AUTO_INCREMENT de la tabla `usuario_docente`
 --
 ALTER TABLE `usuario_docente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario_documento`
@@ -253,6 +470,30 @@ ALTER TABLE `usuario_tipo_contrato`
 --
 ALTER TABLE `institucion`
   ADD CONSTRAINT `institucion_ibfk_1` FOREIGN KEY (`id_usuario_docente`) REFERENCES `usuario_docente` (`id`);
+
+--
+-- Filtros para la tabla `institucion_grado`
+--
+ALTER TABLE `institucion_grado`
+  ADD CONSTRAINT `institucion_grado_ibfk_1` FOREIGN KEY (`id_institucion_nivel`) REFERENCES `institucion_nivel` (`id`);
+
+--
+-- Filtros para la tabla `institucion_lectivo`
+--
+ALTER TABLE `institucion_lectivo`
+  ADD CONSTRAINT `institucion_lectivo_ibfk_1` FOREIGN KEY (`id_institucion`) REFERENCES `institucion` (`id`);
+
+--
+-- Filtros para la tabla `institucion_nivel`
+--
+ALTER TABLE `institucion_nivel`
+  ADD CONSTRAINT `institucion_nivel_ibfk_1` FOREIGN KEY (`id_institucion_lectivo`) REFERENCES `institucion_lectivo` (`id`);
+
+--
+-- Filtros para la tabla `institucion_seccion`
+--
+ALTER TABLE `institucion_seccion`
+  ADD CONSTRAINT `institucion_seccion_ibfk_1` FOREIGN KEY (`id_institucion_grado`) REFERENCES `institucion_grado` (`id`);
 
 --
 -- Filtros para la tabla `usuario_docente`

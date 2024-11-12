@@ -142,7 +142,7 @@ if (!isset($_SESSION['nombre'])) {
 
                             <div class="p-3">
                                 <label for="clave" class="form-label"><b>CLAVE:</b></label>
-                                <input type="password" id="clave" name="clave" class="form-control" placeholder="Clave">
+                                <input type="text" id="clave" name="clave" class="form-control" placeholder="Clave">
                             </div>
                         </div>
 
