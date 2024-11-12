@@ -9,16 +9,9 @@ class MatriculaDocumentos
 
     // Método para guardar un nuevo documento de matrícula
     public function guardar(
-        $id_matricula_documentos_responsable, $nombre, $obligatorio, 
-        $observaciones, $estado = 1
+        $id_matricula_documentos_responsable, $nombre, $obligatorio, $observaciones, $estado = 1
     ) {
-        $sql = "INSERT INTO matricula_documentos (
-                    id_matricula_documentos_responsable, nombre, obligatorio, 
-                    observaciones, estado
-                ) VALUES (
-                    '$id_matricula_documentos_responsable', '$nombre', '$obligatorio', 
-                    '$observaciones', '$estado'
-                )";
+        $sql = "INSERT INTO matricula_documentos (id_matricula_documentos_responsable, nombre, obligatorio, observaciones, estado) VALUES ('$id_matricula_documentos_responsable', '$nombre', '$obligatorio', '$observaciones', '$estado')";
         return ejecutarConsulta($sql);
     }
 
@@ -27,11 +20,7 @@ class MatriculaDocumentos
         $id, $id_matricula_documentos_responsable, $nombre, $obligatorio, 
         $observaciones, $estado
     ) {
-        $sql = "UPDATE matricula_documentos SET 
-                    id_matricula_documentos_responsable='$id_matricula_documentos_responsable', 
-                    nombre='$nombre', obligatorio='$obligatorio', 
-                    observaciones='$observaciones', estado='$estado'
-                WHERE id='$id'";
+        $sql = "UPDATE matricula_documentos SET id_matricula_documentos_responsable='$id_matricula_documentos_responsable', nombre='$nombre', obligatorio='$obligatorio', observaciones='$observaciones', estado='$estado' WHERE id='$id'";
         return ejecutarConsulta($sql);
     }
 
