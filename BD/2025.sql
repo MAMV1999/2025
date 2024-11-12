@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-11-2024 a las 02:28:25
+-- Tiempo de generación: 12-11-2024 a las 08:27:23
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -120,12 +120,14 @@ CREATE TABLE `matricula_categoria` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `matricula_documentos_responsable`
+-- Estructura de tabla para la tabla `matricula_documentos`
 --
 
-CREATE TABLE `matricula_documentos_responsable` (
+CREATE TABLE `matricula_documentos` (
   `id` int(11) NOT NULL,
-  `nombre` varchar(50) NOT NULL,
+  `id_matricula_documentos_responsable` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `obligatorio` tinyint(1) NOT NULL DEFAULT '0',
   `observaciones` text,
   `fechacreado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `estado` tinyint(1) DEFAULT '1'
@@ -134,10 +136,10 @@ CREATE TABLE `matricula_documentos_responsable` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `matricula_meses`
+-- Estructura de tabla para la tabla `matricula_documentos_responsable`
 --
 
-CREATE TABLE `matricula_meses` (
+CREATE TABLE `matricula_documentos_responsable` (
   `id` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL,
   `observaciones` text,
@@ -309,15 +311,16 @@ ALTER TABLE `matricula_categoria`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `matricula_documentos`
+--
+ALTER TABLE `matricula_documentos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_matricula_documentos_responsable` (`id_matricula_documentos_responsable`);
+
+--
 -- Indices de la tabla `matricula_documentos_responsable`
 --
 ALTER TABLE `matricula_documentos_responsable`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `matricula_meses`
---
-ALTER TABLE `matricula_meses`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -408,16 +411,16 @@ ALTER TABLE `matricula_categoria`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT de la tabla `matricula_documentos`
+--
+ALTER TABLE `matricula_documentos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
 -- AUTO_INCREMENT de la tabla `matricula_documentos_responsable`
 --
 ALTER TABLE `matricula_documentos_responsable`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT de la tabla `matricula_meses`
---
-ALTER TABLE `matricula_meses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `matricula_metodo_pago`
@@ -494,6 +497,12 @@ ALTER TABLE `institucion_nivel`
 --
 ALTER TABLE `institucion_seccion`
   ADD CONSTRAINT `institucion_seccion_ibfk_1` FOREIGN KEY (`id_institucion_grado`) REFERENCES `institucion_grado` (`id`);
+
+--
+-- Filtros para la tabla `matricula_documentos`
+--
+ALTER TABLE `matricula_documentos`
+  ADD CONSTRAINT `matricula_documentos_ibfk_1` FOREIGN KEY (`id_matricula_documentos_responsable`) REFERENCES `matricula_documentos_responsable` (`id`);
 
 --
 -- Filtros para la tabla `usuario_docente`
