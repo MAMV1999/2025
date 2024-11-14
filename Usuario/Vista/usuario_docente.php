@@ -22,7 +22,6 @@ if (!isset($_SESSION['nombre'])) {
                             <th>NOMBRE Y APELLIDO</th>
                             <th>EDAD</th>
                             <th>CARGO</th>
-                            <th>CONTRATO</th>
                             <th>ACCIONES</th>
                         </tr>
                     </thead>

@@ -55,7 +55,7 @@ if (!isset($_SESSION['nombre'])) {
                 <br>
                 <?php
                 $array = array(
-                    "1" => array("nombre" => "RESPONSABLE", "link" => "matricula_documentos_responsable.php"),
+                    "1" => array("nombre" => "RESPONSABLE DE ENTREGA", "link" => "matricula_documentos_responsable.php"),
                     "2" => array("nombre" => "DOCUMENTOS", "link" => "matricula_documentos.php"),
                 );
                 ?>

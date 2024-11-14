@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-11-2024 a las 08:27:23
+-- Tiempo de generación: 14-11-2024 a las 03:04:50
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -101,6 +101,25 @@ CREATE TABLE `institucion_seccion` (
   `observaciones` text,
   `fechacreado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `estado` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `matricula`
+--
+
+CREATE TABLE `matricula` (
+  `id` int(11) NOT NULL,
+  `id_institucion_seccion` int(11) NOT NULL,
+  `id_usuario_docente` int(11) NOT NULL,
+  `preciomatricula` decimal(10,2) NOT NULL,
+  `preciomensualidad` decimal(10,2) NOT NULL,
+  `preciomantenimiento` decimal(10,2) NOT NULL,
+  `aforo` int(11) NOT NULL,
+  `observaciones` text,
+  `fechacreado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `estado` tinyint(1) DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -305,6 +324,14 @@ ALTER TABLE `institucion_seccion`
   ADD KEY `id_institucion_grado` (`id_institucion_grado`);
 
 --
+-- Indices de la tabla `matricula`
+--
+ALTER TABLE `matricula`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_institucion_seccion` (`id_institucion_seccion`),
+  ADD KEY `id_usuario_docente` (`id_usuario_docente`);
+
+--
 -- Indices de la tabla `matricula_categoria`
 --
 ALTER TABLE `matricula_categoria`
@@ -405,6 +432,12 @@ ALTER TABLE `institucion_seccion`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
+-- AUTO_INCREMENT de la tabla `matricula`
+--
+ALTER TABLE `matricula`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `matricula_categoria`
 --
 ALTER TABLE `matricula_categoria`
@@ -497,6 +530,13 @@ ALTER TABLE `institucion_nivel`
 --
 ALTER TABLE `institucion_seccion`
   ADD CONSTRAINT `institucion_seccion_ibfk_1` FOREIGN KEY (`id_institucion_grado`) REFERENCES `institucion_grado` (`id`);
+
+--
+-- Filtros para la tabla `matricula`
+--
+ALTER TABLE `matricula`
+  ADD CONSTRAINT `matricula_ibfk_1` FOREIGN KEY (`id_institucion_seccion`) REFERENCES `institucion_seccion` (`id`),
+  ADD CONSTRAINT `matricula_ibfk_2` FOREIGN KEY (`id_usuario_docente`) REFERENCES `usuario_docente` (`id`);
 
 --
 -- Filtros para la tabla `matricula_documentos`

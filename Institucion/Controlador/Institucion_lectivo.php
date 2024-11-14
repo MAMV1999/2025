@@ -41,7 +41,7 @@ switch ($_GET["op"]) {
         while ($reg = $rspta->fetch_object()) {
             $nombre_lectivo = strlen($reg->nombre_lectivo) > 40 ? substr($reg->nombre_lectivo, 0, 40) . '...' : $reg->nombre_lectivo;
             $data[] = array(
-                "0" => $reg->id,
+                "0" => 'N° '.$reg->id,
                 "1" => $reg->nombre,
                 "2" => $nombre_lectivo,
                 "3" => $reg->institucion,

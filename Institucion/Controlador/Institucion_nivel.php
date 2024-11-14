@@ -39,8 +39,8 @@ switch ($_GET["op"]) {
 
         while ($reg = $rspta->fetch_object()) {
             $data[] = array(
-                "0" => $reg->id,
-                "1" => 'LECTIVO ' . $reg->institucion_lectivo,
+                "0" => 'N° '.$reg->id,
+                "1" => 'PE. LECTIVO ' . $reg->institucion_lectivo,
                 "2" => $reg->nombre,
                 "3" => ($reg->estado) ?
                     '<button class="btn btn-warning btn-sm" onclick="mostrar(' . $reg->id . ')">EDITAR</button> <button class="btn btn-danger btn-sm" onclick="desactivar(' . $reg->id . ')">DESACTIVAR</button>' :

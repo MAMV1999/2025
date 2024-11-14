@@ -39,7 +39,7 @@ switch ($_GET["op"]) {
 
         while ($reg = $rspta->fetch_object()) {
             $data[] = array(
-                "0" => $reg->id,
+                "0" => 'N° '.$reg->id,
                 "1" => $reg->nombre_lectivo . ' - ' . $reg->nombre_nivel,
                 "2" => $reg->nombre_grado,
                 "3" => ($reg->estado) ?

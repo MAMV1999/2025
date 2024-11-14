@@ -76,8 +76,7 @@ switch ($_GET["op"]) {
                 "1" => $reg->nombreyapellido,
                 "2" => $reg->edad . " AÑOS",
                 "3" => $reg->cargo,
-                "4" => $reg->tipo_contrato,
-                "5" => ($reg->estado) ?
+                "4" => ($reg->estado) ?
                     '<button type="button" onclick="mostrar(' . $reg->id . ')" class="btn btn-warning btn-sm">EDITAR</button> <button type="button" onclick="desactivar(' . $reg->id . ')" class="btn btn-danger btn-sm">DESACTIVAR</button>' :
                     '<button type="button" onclick="mostrar(' . $reg->id . ')" class="btn btn-warning btn-sm">EDITAR</button> <button type="button" onclick="activar(' . $reg->id . ')" class="btn btn-success btn-sm">ACTIVAR</button>'
             );

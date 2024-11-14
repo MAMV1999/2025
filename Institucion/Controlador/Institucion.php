@@ -46,7 +46,7 @@ switch ($_GET["op"]) {
 
         while ($reg = $rspta->fetch_object()) {
             $data[] = array(
-                "0" => $reg->id,
+                "0" => 'N° '.$reg->id,
                 "1" => $reg->nombre,
                 "2" => $reg->usuario_docente,
                 "3" => $reg->ruc . " - " . $reg->razon_social,
