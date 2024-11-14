@@ -3,9 +3,7 @@ require_once("../../database.php");
 
 class Institucion_grado
 {
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     // Método para guardar un nuevo grado de institución
     public function guardar($nombre, $id_institucion_nivel, $observaciones)
@@ -31,9 +29,18 @@ class Institucion_grado
     // Método para listar todos los grados de institución
     public function listar()
     {
-        $sql = "SELECT ig.id, ig.nombre, inl.nombre AS institucion_nivel, ig.observaciones, ig.estado, ig.fechacreado 
-                FROM institucion_grado ig 
-                LEFT JOIN institucion_nivel inl ON ig.id_institucion_nivel = inl.id";
+        $sql = "SELECT 
+                ig.id,
+                ig.nombre AS nombre_grado,
+                il.nombre AS nombre_lectivo,
+                inl.nombre AS nombre_nivel,
+                ig.id_institucion_nivel,
+                ig.observaciones,
+                ig.fechacreado,
+                ig.estado
+            FROM institucion_grado ig
+            LEFT JOIN institucion_nivel inl ON ig.id_institucion_nivel = inl.id
+            LEFT JOIN institucion_lectivo il ON inl.id_institucion_lectivo = il.id";
         return ejecutarConsulta($sql);
     }
 
@@ -61,4 +68,3 @@ class Institucion_grado
         return ejecutarConsulta($sql);
     }
 }
-?>

@@ -3,9 +3,7 @@ require_once("../../database.php");
 
 class Institucion_seccion
 {
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     // Método para guardar una nueva sección de institución
     public function guardar($nombre, $id_institucion_grado, $observaciones)
@@ -31,9 +29,15 @@ class Institucion_seccion
     // Método para listar todas las secciones
     public function listar()
     {
-        $sql = "SELECT isec.id, isec.nombre, ig.nombre AS institucion_grado, isec.observaciones, isec.estado, isec.fechacreado 
-                FROM institucion_seccion isec 
-                LEFT JOIN institucion_grado ig ON isec.id_institucion_grado = ig.id";
+        $sql = "SELECT 
+                isec.*,
+                il.nombre AS nombre_lectivo,
+                inl.nombre AS nombre_nivel,
+                ig.nombre AS nombre_grado
+            FROM institucion_seccion isec
+            LEFT JOIN institucion_grado ig ON isec.id_institucion_grado = ig.id
+            LEFT JOIN institucion_nivel inl ON ig.id_institucion_nivel = inl.id
+            LEFT JOIN institucion_lectivo il ON inl.id_institucion_lectivo = il.id";
         return ejecutarConsulta($sql);
     }
 
@@ -62,4 +66,3 @@ class Institucion_seccion
         return ejecutarConsulta($sql);
     }
 }
-?>

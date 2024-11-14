@@ -39,12 +39,13 @@ switch ($_GET["op"]) {
         $data = array();
 
         while ($reg = $rspta->fetch_object()) {
+            $nombre_lectivo = strlen($reg->nombre_lectivo) > 40 ? substr($reg->nombre_lectivo, 0, 40) . '...' : $reg->nombre_lectivo;
             $data[] = array(
                 "0" => $reg->id,
                 "1" => $reg->nombre,
-                "2" => $reg->nombre_lectivo,
+                "2" => $nombre_lectivo,
                 "3" => $reg->institucion,
-                "4" => ($reg->estado) ? 
+                "4" => ($reg->estado) ?
                     '<button class="btn btn-warning btn-sm" onclick="mostrar(' . $reg->id . ')">EDITAR</button> <button class="btn btn-danger btn-sm" onclick="desactivar(' . $reg->id . ')">DESACTIVAR</button>' :
                     '<button class="btn btn-warning btn-sm" onclick="mostrar(' . $reg->id . ')">EDITAR</button> <button class="btn btn-primary btn-sm" onclick="activar(' . $reg->id . ')">ACTIVAR</button>'
             );
@@ -58,6 +59,7 @@ switch ($_GET["op"]) {
         echo json_encode($results);
         break;
 
+
     case 'listar_instituciones_activas':
         $rspta = $institucionLectivo->listarInstitucionesActivas();
         while ($reg = $rspta->fetch_object()) {
@@ -65,4 +67,3 @@ switch ($_GET["op"]) {
         }
         break;
 }
-?>
