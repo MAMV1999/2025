@@ -19,9 +19,11 @@ if (!isset($_SESSION['nombre'])) {
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>PERIODO</th>
-                        <th>NIVEL / GRADO / SECCION</th>
+                        <th>RUTA</th>
                         <th>DOCENTE</th>
+                        <th>MATRICULA</th>
+                        <th>MENSUALIDAD</th>
+                        <th>MANTENIMIENTO</th>
                         <th>AFORO</th>
                         <th>ESTADO</th>
                     </tr>
