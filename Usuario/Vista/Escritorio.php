@@ -19,8 +19,8 @@ if (!isset($_SESSION['nombre'])) {
                 <?php
                 $array = array(
                     "1" => array("nombre" => "DOCENTES", "link" => "usuario_docente.php"),
-                    "2" => array("nombre" => "APODERADOS", "link" => "usuario_docente.php"),
-                    "3" => array("nombre" => "ALUMNOS", "link" => "usuario_docente.php"),
+                    "2" => array("nombre" => "APODERADOS", "link" => "Usuario_apoderado.php"),
+                    "3" => array("nombre" => "ALUMNOS", "link" => "Usuario_alumno.php"),
                 );
                 ?>
                 <table class="table">
@@ -55,11 +55,12 @@ if (!isset($_SESSION['nombre'])) {
                 <br>
                 <?php
                 $array = array(
-                    "1" => array("nombre" => "CARGO", "link" => "usuario_cargo.php"),
-                    "2" => array("nombre" => "CONTRATO", "link" => "usuario_tipo_contrato.php"),
+                    "1" => array("nombre" => "CONTRATO", "link" => "usuario_tipo_contrato.php"),
+                    "2" => array("nombre" => "CARGO", "link" => "usuario_cargo.php"),
                     "3" => array("nombre" => "DOCUMENTO", "link" => "usuario_documento.php"),
                     "4" => array("nombre" => "ESTADO CIVIL", "link" => "usuario_estado_civil.php"),
                     "5" => array("nombre" => "SEXO", "link" => "usuario_sexo.php"),
+                    "6" => array("nombre" => "TIPO APODERADO", "link" => "usuario_apoderado_tipo.php"),
                 );
                 ?>
                 <table class="table">
