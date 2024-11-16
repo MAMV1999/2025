@@ -43,14 +43,12 @@ switch ($_GET["op"]) {
 
         while ($reg = $rspta->fetch_object()) {
             $data[] = array(
-                "0" => 'N° ' . $reg->id,
-                "1" => $reg->nombre_lectivo.' / '.$reg->nombre_nivel.' / '.$reg->nombre_grado.' / '.$reg->nombre_seccion,
-                "2" => $reg->docente_nombre,
-                "3" => 'S/. '.$reg->preciomatricula,
-                "4" => 'S/. '.$reg->preciomensualidad,
-                "5" => 'S/. '.$reg->preciomantenimiento,
-                "6" => $reg->aforo.' ALUMNOS',
-                "7" => ($reg->estado) ?
+                "0" => $reg->nombre_lectivo.' - '.$reg->nombre_nivel.' - '.$reg->nombre_grado.' - '.$reg->nombre_seccion,
+                "1" => $reg->docente_nombre,
+                "2" => 'S/. '.$reg->preciomatricula,
+                "3" => 'S/. '.$reg->preciomensualidad,
+                "4" => $reg->aforo.' ALUMNOS',
+                "5" => ($reg->estado) ?
                     '<button class="btn btn-warning btn-sm" onclick="mostrar(' . $reg->id . ')">EDITAR</button> <button class="btn btn-danger btn-sm" onclick="desactivar(' . $reg->id . ')">DESACTIVAR</button>' :
                     '<button class="btn btn-warning btn-sm" onclick="mostrar(' . $reg->id . ')">EDITAR</button> <button class="btn btn-primary btn-sm" onclick="activar(' . $reg->id . ')">ACTIVAR</button>'
             );

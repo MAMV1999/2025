@@ -113,6 +113,8 @@
                 "2" => array("nombre" => "USUARIO", "link" => "../../Usuario/Vista/Escritorio.php"),
                 "3" => array("nombre" => "INSTITUCION", "link" => "../../Institucion/Vista/Escritorio.php"),
                 "4" => array("nombre" => "MATRICULA", "link" => "../../Matricula/Vista/Escritorio.php"),
+                "5" => array("nombre" => "MENSUALIDAD", "link" => "../../Mensualidad/Vista/Escritorio.php"),
+                "6" => array("nombre" => "DOCUMENTO", "link" => "../../Documento/Vista/Escritorio.php"),
             );
             ?>
             <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">

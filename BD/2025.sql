@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-11-2024 a las 05:28:10
+-- Tiempo de generación: 16-11-2024 a las 22:06:41
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -139,6 +139,24 @@ CREATE TABLE `matricula_categoria` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `matricula_detalle`
+--
+
+CREATE TABLE `matricula_detalle` (
+  `id` int(11) NOT NULL,
+  `descripcion` varchar(255) NOT NULL,
+  `id_matricula` int(11) NOT NULL,
+  `id_matricula_categoria` int(11) NOT NULL,
+  `id_usuario_apoderado` int(11) NOT NULL,
+  `id_usuario_alumno` int(11) NOT NULL,
+  `observaciones` text,
+  `fechacreado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `estado` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `matricula_documentos`
 --
 
@@ -173,6 +191,97 @@ CREATE TABLE `matricula_documentos_responsable` (
 --
 
 CREATE TABLE `matricula_metodo_pago` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `observaciones` text,
+  `fechacreado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `estado` tinyint(1) DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `matricula_pago`
+--
+
+CREATE TABLE `matricula_pago` (
+  `id` int(11) NOT NULL,
+  `id_matricula_detalle` int(11) NOT NULL,
+  `numeracion` varchar(50) NOT NULL,
+  `fecha` date NOT NULL,
+  `descripcion` text NOT NULL,
+  `monto` decimal(10,2) NOT NULL,
+  `id_matricula_metodo_pago` int(11) NOT NULL,
+  `observaciones` text,
+  `fechacreado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `estado` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mensualidad_mes`
+--
+
+CREATE TABLE `mensualidad_mes` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `descripcion` text,
+  `observaciones` text,
+  `fechacreado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `estado` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuario_alumno`
+--
+
+CREATE TABLE `usuario_alumno` (
+  `id` int(11) NOT NULL,
+  `id_apoderado` int(11) NOT NULL,
+  `id_documento` int(11) NOT NULL,
+  `numerodocumento` varchar(20) NOT NULL,
+  `nombreyapellido` varchar(100) NOT NULL,
+  `telefono` varchar(20) DEFAULT NULL,
+  `id_sexo` int(11) NOT NULL,
+  `usuario` varchar(50) NOT NULL,
+  `clave` varchar(255) NOT NULL,
+  `observaciones` text,
+  `fechacreado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `estado` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuario_apoderado`
+--
+
+CREATE TABLE `usuario_apoderado` (
+  `id` int(11) NOT NULL,
+  `id_apoderado_tipo` int(11) NOT NULL,
+  `id_documento` int(11) NOT NULL,
+  `numerodocumento` varchar(20) NOT NULL,
+  `nombreyapellido` varchar(100) NOT NULL,
+  `telefono` varchar(20) DEFAULT NULL,
+  `id_sexo` int(11) NOT NULL,
+  `id_estado_civil` int(11) NOT NULL,
+  `usuario` varchar(50) NOT NULL,
+  `clave` varchar(255) NOT NULL,
+  `observaciones` text,
+  `fechacreado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `estado` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuario_apoderado_tipo`
+--
+
+CREATE TABLE `usuario_apoderado_tipo` (
   `id` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL,
   `observaciones` text,
@@ -338,6 +447,16 @@ ALTER TABLE `matricula_categoria`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `matricula_detalle`
+--
+ALTER TABLE `matricula_detalle`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_matricula_detalle_matricula` (`id_matricula`),
+  ADD KEY `fk_matricula_detalle_matricula_categoria` (`id_matricula_categoria`),
+  ADD KEY `fk_matricula_detalle_usuario_apoderado` (`id_usuario_apoderado`),
+  ADD KEY `fk_matricula_detalle_usuario_alumno` (`id_usuario_alumno`);
+
+--
 -- Indices de la tabla `matricula_documentos`
 --
 ALTER TABLE `matricula_documentos`
@@ -354,6 +473,45 @@ ALTER TABLE `matricula_documentos_responsable`
 -- Indices de la tabla `matricula_metodo_pago`
 --
 ALTER TABLE `matricula_metodo_pago`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `matricula_pago`
+--
+ALTER TABLE `matricula_pago`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_matricula_pago_matricula_detalle` (`id_matricula_detalle`),
+  ADD KEY `fk_matricula_pago_metodo_pago` (`id_matricula_metodo_pago`);
+
+--
+-- Indices de la tabla `mensualidad_mes`
+--
+ALTER TABLE `mensualidad_mes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `usuario_alumno`
+--
+ALTER TABLE `usuario_alumno`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_apoderado` (`id_apoderado`),
+  ADD KEY `id_documento` (`id_documento`),
+  ADD KEY `id_sexo` (`id_sexo`);
+
+--
+-- Indices de la tabla `usuario_apoderado`
+--
+ALTER TABLE `usuario_apoderado`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_apoderado_tipo` (`id_apoderado_tipo`),
+  ADD KEY `id_documento` (`id_documento`),
+  ADD KEY `id_sexo` (`id_sexo`),
+  ADD KEY `id_estado_civil` (`id_estado_civil`);
+
+--
+-- Indices de la tabla `usuario_apoderado_tipo`
+--
+ALTER TABLE `usuario_apoderado_tipo`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -444,6 +602,12 @@ ALTER TABLE `matricula_categoria`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT de la tabla `matricula_detalle`
+--
+ALTER TABLE `matricula_detalle`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `matricula_documentos`
 --
 ALTER TABLE `matricula_documentos`
@@ -460,6 +624,36 @@ ALTER TABLE `matricula_documentos_responsable`
 --
 ALTER TABLE `matricula_metodo_pago`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `matricula_pago`
+--
+ALTER TABLE `matricula_pago`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `mensualidad_mes`
+--
+ALTER TABLE `mensualidad_mes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT de la tabla `usuario_alumno`
+--
+ALTER TABLE `usuario_alumno`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `usuario_apoderado`
+--
+ALTER TABLE `usuario_apoderado`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `usuario_apoderado_tipo`
+--
+ALTER TABLE `usuario_apoderado_tipo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario_cargo`
@@ -539,10 +733,43 @@ ALTER TABLE `matricula`
   ADD CONSTRAINT `matricula_ibfk_2` FOREIGN KEY (`id_usuario_docente`) REFERENCES `usuario_docente` (`id`);
 
 --
+-- Filtros para la tabla `matricula_detalle`
+--
+ALTER TABLE `matricula_detalle`
+  ADD CONSTRAINT `fk_matricula_detalle_matricula` FOREIGN KEY (`id_matricula`) REFERENCES `matricula` (`id`),
+  ADD CONSTRAINT `fk_matricula_detalle_matricula_categoria` FOREIGN KEY (`id_matricula_categoria`) REFERENCES `matricula_categoria` (`id`),
+  ADD CONSTRAINT `fk_matricula_detalle_usuario_alumno` FOREIGN KEY (`id_usuario_alumno`) REFERENCES `usuario_alumno` (`id`),
+  ADD CONSTRAINT `fk_matricula_detalle_usuario_apoderado` FOREIGN KEY (`id_usuario_apoderado`) REFERENCES `usuario_apoderado` (`id`);
+
+--
 -- Filtros para la tabla `matricula_documentos`
 --
 ALTER TABLE `matricula_documentos`
   ADD CONSTRAINT `matricula_documentos_ibfk_1` FOREIGN KEY (`id_matricula_documentos_responsable`) REFERENCES `matricula_documentos_responsable` (`id`);
+
+--
+-- Filtros para la tabla `matricula_pago`
+--
+ALTER TABLE `matricula_pago`
+  ADD CONSTRAINT `fk_matricula_pago_matricula_detalle` FOREIGN KEY (`id_matricula_detalle`) REFERENCES `matricula_detalle` (`id`),
+  ADD CONSTRAINT `fk_matricula_pago_metodo_pago` FOREIGN KEY (`id_matricula_metodo_pago`) REFERENCES `matricula_metodo_pago` (`id`);
+
+--
+-- Filtros para la tabla `usuario_alumno`
+--
+ALTER TABLE `usuario_alumno`
+  ADD CONSTRAINT `usuario_alumno_ibfk_1` FOREIGN KEY (`id_apoderado`) REFERENCES `usuario_apoderado` (`id`),
+  ADD CONSTRAINT `usuario_alumno_ibfk_2` FOREIGN KEY (`id_documento`) REFERENCES `usuario_documento` (`id`),
+  ADD CONSTRAINT `usuario_alumno_ibfk_3` FOREIGN KEY (`id_sexo`) REFERENCES `usuario_sexo` (`id`);
+
+--
+-- Filtros para la tabla `usuario_apoderado`
+--
+ALTER TABLE `usuario_apoderado`
+  ADD CONSTRAINT `usuario_apoderado_ibfk_1` FOREIGN KEY (`id_apoderado_tipo`) REFERENCES `usuario_apoderado_tipo` (`id`),
+  ADD CONSTRAINT `usuario_apoderado_ibfk_2` FOREIGN KEY (`id_documento`) REFERENCES `usuario_documento` (`id`),
+  ADD CONSTRAINT `usuario_apoderado_ibfk_3` FOREIGN KEY (`id_sexo`) REFERENCES `usuario_sexo` (`id`),
+  ADD CONSTRAINT `usuario_apoderado_ibfk_4` FOREIGN KEY (`id_estado_civil`) REFERENCES `usuario_estado_civil` (`id`);
 
 --
 -- Filtros para la tabla `usuario_docente`

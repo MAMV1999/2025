@@ -13,14 +13,12 @@ if (!isset($_SESSION['nombre'])) {
 
         <!-- CUERPO_INICIO -->
         <div class="my-3 p-3 bg-body rounded shadow-sm" id="listado">
-            <h5 class="border-bottom pb-2 mb-0"><b>USUARIOS</b></h5>
+            <h5 class="border-bottom pb-2 mb-0"><b>MATRICULA</b></h5>
             <div class="d-flex text-body-secondary pt-3">
                 <br>
                 <?php
                 $array = array(
-                    "1" => array("nombre" => "DOCENTES", "link" => "usuario_docente.php"),
-                    "2" => array("nombre" => "APODERADOS", "link" => "Usuario_apoderado.php"),
-                    "3" => array("nombre" => "ALUMNOS", "link" => "Usuario_alumno.php"),
+                    "1" => array("nombre" => "NUEVA MATRICULA", "link" => "Matricula.php"),
                 );
                 ?>
                 <table class="table">
@@ -51,23 +49,19 @@ if (!isset($_SESSION['nombre'])) {
         <hr>
 
         <p class="d-inline-flex gap-1">
-            <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">AJUSTES DE USUARIOS</a>
+            <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">AJUSTES</a>
         </p>
         <div class="collapse" id="collapseExample">
             <div class="card card-body">
+
                 <!-- CUERPO_INICIO -->
                 <div class="my-3 p-3 bg-body rounded shadow-sm" id="listado">
-                    <h5 class="border-bottom pb-2 mb-0"><b>AJUSTES DE USUARIO</b></h5>
+                    <h5 class="border-bottom pb-2 mb-0"><b>AJUSTES DE MENSUALIDAD</b></h5>
                     <div class="d-flex text-body-secondary pt-3">
                         <br>
                         <?php
                         $array = array(
-                            "1" => array("nombre" => "CONTRATO", "link" => "usuario_tipo_contrato.php"),
-                            "2" => array("nombre" => "CARGO", "link" => "usuario_cargo.php"),
-                            "3" => array("nombre" => "DOCUMENTO", "link" => "usuario_documento.php"),
-                            "4" => array("nombre" => "ESTADO CIVIL", "link" => "usuario_estado_civil.php"),
-                            "5" => array("nombre" => "SEXO", "link" => "usuario_sexo.php"),
-                            "6" => array("nombre" => "TIPO APODERADO", "link" => "usuario_apoderado_tipo.php"),
+                            "1" => array("nombre" => "MESES", "link" => "mensualidad_mes.php"),
                         );
                         ?>
                         <table class="table">
@@ -94,6 +88,8 @@ if (!isset($_SESSION['nombre'])) {
                         </table>
                     </div>
                 </div>
+
+
             </div>
         </div>
 
