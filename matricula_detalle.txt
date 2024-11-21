@@ -1,0 +1,5 @@
+usuario_apoderado
+usuario_alumno
+matricula_detalle
+matricula_pago
+mensualidad_detalle

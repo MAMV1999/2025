@@ -8,19 +8,14 @@ class Documento
     }
 
     // Método para guardar un nuevo documento
-    public function guardar(
-        $id_documento_responsable, $nombre, $obligatorio, $observaciones, $estado = 1
-    ) {
-        $sql = "INSERT INTO documento (id_documento_responsable, nombre, obligatorio, observaciones, estado) 
-                VALUES ('$id_documento_responsable', '$nombre', '$obligatorio', '$observaciones', '$estado')";
+    public function guardar($id_documento_responsable, $nombre, $obligatorio, $observaciones, $estado = 1) {
+        $sql = "INSERT INTO documento (id_documento_responsable, nombre, obligatorio, observaciones, estado) VALUES ('$id_documento_responsable', '$nombre', '$obligatorio', '$observaciones', '$estado')";
         return ejecutarConsulta($sql);
     }
 
     // Método para editar un documento existente
-    public function editar(
-        $id, $id_documento_responsable, $nombre, $obligatorio, 
-        $observaciones, $estado
-    ) {
+    public function editar($id, $id_documento_responsable, $nombre, $obligatorio, $observaciones, $estado)
+    {
         $sql = "UPDATE documento 
                 SET id_documento_responsable='$id_documento_responsable', 
                     nombre='$nombre', 
