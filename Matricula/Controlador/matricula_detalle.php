@@ -3,45 +3,104 @@ include_once("../Modelo/matricula_detalle.php");
 
 $matriculaDetalle = new MatriculaDetalle();
 
-$id = isset($_POST["id"]) ? limpiarcadena($_POST["id"]) : "";
-$descripcion = isset($_POST["descripcion"]) ? limpiarcadena($_POST["descripcion"]) : "";
-$id_matricula = isset($_POST["id_matricula"]) ? limpiarcadena($_POST["id_matricula"]) : "";
-$id_matricula_categoria = isset($_POST["id_matricula_categoria"]) ? limpiarcadena($_POST["id_matricula_categoria"]) : "";
-$id_usuario_apoderado = isset($_POST["id_usuario_apoderado"]) ? limpiarcadena($_POST["id_usuario_apoderado"]) : "";
-$id_usuario_alumno = isset($_POST["id_usuario_alumno"]) ? limpiarcadena($_POST["id_usuario_alumno"]) : "";
-$observaciones = isset($_POST["observaciones"]) ? limpiarcadena($_POST["observaciones"]) : "";
-$estado = isset($_POST["estado"]) ? limpiarcadena($_POST["estado"]) : "1";
+// Variables recibidas desde el formulario
+$apoderado_dni = isset($_POST["apoderado_dni"]) ? limpiarcadena($_POST["apoderado_dni"]) : "";
+$apoderado_nombreyapellido = isset($_POST["apoderado_nombreyapellido"]) ? limpiarcadena($_POST["apoderado_nombreyapellido"]) : "";
+$apoderado_telefono = isset($_POST["apoderado_telefono"]) ? limpiarcadena($_POST["apoderado_telefono"]) : "";
+$apoderado_tipo = isset($_POST["apoderado_tipo"]) ? limpiarcadena($_POST["apoderado_tipo"]) : "";
+$apoderado_documento = isset($_POST["apoderado_documento"]) ? limpiarcadena($_POST["apoderado_documento"]) : "";
+$apoderado_sexo = isset($_POST["apoderado_sexo"]) ? limpiarcadena($_POST["apoderado_sexo"]) : "";
+$apoderado_estado_civil = isset($_POST["apoderado_estado_civil"]) ? limpiarcadena($_POST["apoderado_estado_civil"]) : "";
+$apoderado_usuario = isset($_POST["apoderado_usuario"]) ? limpiarcadena($_POST["apoderado_usuario"]) : "";
+$apoderado_clave = isset($_POST["apoderado_clave"]) ? limpiarcadena($_POST["apoderado_clave"]) : "";
+$apoderado_observaciones = isset($_POST["apoderado_observaciones"]) ? limpiarcadena($_POST["apoderado_observaciones"]) : "";
+
+$alumno_dni = isset($_POST["alumno_dni"]) ? limpiarcadena($_POST["alumno_dni"]) : "";
+$alumno_nombreyapellido = isset($_POST["alumno_nombreyapellido"]) ? limpiarcadena($_POST["alumno_nombreyapellido"]) : "";
+$alumno_nacimiento = isset($_POST["alumno_nacimiento"]) ? limpiarcadena($_POST["alumno_nacimiento"]) : "";
+$alumno_sexo = isset($_POST["alumno_sexo"]) ? limpiarcadena($_POST["alumno_sexo"]) : "";
+$alumno_documento = isset($_POST["alumno_documento"]) ? limpiarcadena($_POST["alumno_documento"]) : "";
+$alumno_telefono = isset($_POST["alumno_telefono"]) ? limpiarcadena($_POST["alumno_telefono"]) : "";
+$alumno_usuario = isset($_POST["alumno_usuario"]) ? limpiarcadena($_POST["alumno_usuario"]) : "";
+$alumno_clave = isset($_POST["alumno_clave"]) ? limpiarcadena($_POST["alumno_clave"]) : "";
+$alumno_observaciones = isset($_POST["alumno_observaciones"]) ? limpiarcadena($_POST["alumno_observaciones"]) : "";
+
+$detalle = isset($_POST["detalle"]) ? limpiarcadena($_POST["detalle"]) : "";
+$matricula_id = isset($_POST["matricula_id"]) ? limpiarcadena($_POST["matricula_id"]) : "";
+$matricula_categoria = isset($_POST["matricula_categoria"]) ? limpiarcadena($_POST["matricula_categoria"]) : "";
+$matricula_observaciones = isset($_POST["matricula_observaciones"]) ? limpiarcadena($_POST["matricula_observaciones"]) : "";
+
+$pago_numeracion = isset($_POST["pago_numeracion"]) ? limpiarcadena($_POST["pago_numeracion"]) : "";
+$pago_fecha = isset($_POST["pago_fecha"]) ? limpiarcadena($_POST["pago_fecha"]) : "";
+$pago_descripcion = isset($_POST["pago_descripcion"]) ? limpiarcadena($_POST["pago_descripcion"]) : "";
+$pago_monto = isset($_POST["pago_monto"]) ? limpiarcadena($_POST["pago_monto"]) : "";
+$pago_metodo_id = isset($_POST["pago_metodo_id"]) ? limpiarcadena($_POST["pago_metodo_id"]) : "";
+$pago_observaciones = isset($_POST["pago_observaciones"]) ? limpiarcadena($_POST["pago_observaciones"]) : "";
 
 switch ($_GET["op"]) {
     case 'guardaryeditar':
-        if (empty($id)) {
-            $rspta = $matriculaDetalle->guardar(
-                $descripcion, $id_matricula, $id_matricula_categoria, 
-                $id_usuario_apoderado, $id_usuario_alumno, $observaciones, $estado
-            );
-            echo $rspta ? "Detalle de matrícula registrado correctamente" : "No se pudo registrar el detalle de matrícula";
-        } else {
-            $rspta = $matriculaDetalle->editar(
-                $id, $descripcion, $id_matricula, $id_matricula_categoria, 
-                $id_usuario_apoderado, $id_usuario_alumno, $observaciones, $estado
-            );
-            echo $rspta ? "Detalle de matrícula actualizado correctamente" : "No se pudo actualizar el detalle de matrícula";
+        $rspta = $matriculaDetalle->guardar(
+            $apoderado_dni, $apoderado_nombreyapellido, $apoderado_telefono, $apoderado_tipo, $apoderado_documento, $apoderado_sexo, $apoderado_estado_civil, $apoderado_observaciones,
+            $alumno_dni, $alumno_nombreyapellido, $alumno_nacimiento, $alumno_sexo, $alumno_documento, $alumno_telefono, $alumno_observaciones,
+            $detalle, $matricula_id, $matricula_categoria, $matricula_observaciones,
+            $pago_numeracion, $pago_fecha, $pago_descripcion, $pago_monto, $pago_metodo_id, $pago_observaciones
+        );
+        echo $rspta ? "Matrícula registrada correctamente" : "No se pudo registrar la matrícula";
+        break;
+
+    case 'listar_apoderado_tipos_activos':
+        $rspta = $matriculaDetalle->listarApoderadoTiposActivos();
+        while ($reg = $rspta->fetch_object()) {
+            echo '<option value="' . $reg->id . '">' . $reg->nombre . '</option>';
         }
         break;
 
-    case 'desactivar':
-        $rspta = $matriculaDetalle->desactivar($id);
-        echo $rspta ? "Detalle de matrícula desactivado correctamente" : "No se pudo desactivar el detalle de matrícula";
+        // Listar los documentos activos
+    case 'listar_documentos_activos':
+        $rspta = $matriculaDetalle->listarDocumentosActivos();
+        while ($reg = $rspta->fetch_object()) {
+            echo '<option value="' . $reg->id . '">' . $reg->nombre . '</option>';
+        }
         break;
 
-    case 'activar':
-        $rspta = $matriculaDetalle->activar($id);
-        echo $rspta ? "Detalle de matrícula activado correctamente" : "No se pudo activar el detalle de matrícula";
+        // Listar los sexos activos
+    case 'listar_sexos_activos':
+        $rspta = $matriculaDetalle->listarSexosActivos();
+        while ($reg = $rspta->fetch_object()) {
+            echo '<option value="' . $reg->id . '">' . $reg->nombre . '</option>';
+        }
         break;
 
-    case 'mostrar':
-        $rspta = $matriculaDetalle->mostrar($id);
-        echo json_encode($rspta);
+        // Listar los estados civiles activos
+    case 'listar_estados_civiles_activos':
+        $rspta = $matriculaDetalle->listarEstadosCivilesActivos();
+        while ($reg = $rspta->fetch_object()) {
+            echo '<option value="' . $reg->id . '">' . $reg->nombre . '</option>';
+        }
+        break;
+
+        // Listar las matrículas activas
+    case 'listar_matriculas_activas':
+        $rspta = $matriculaDetalle->listarMatriculasActivas();
+        while ($reg = $rspta->fetch_object()) {
+            echo '<option value="' . $reg->id . '">' . $reg->nombre . '</option>';
+        }
+        break;
+
+        // Listar las categorías de matrícula activas
+    case 'listar_categorias_activas':
+        $rspta = $matriculaDetalle->listarCategoriasActivas();
+        while ($reg = $rspta->fetch_object()) {
+            echo '<option value="' . $reg->id . '">' . $reg->nombre . '</option>';
+        }
+        break;
+
+        // Listar los métodos de pago activos
+    case 'listar_metodos_pago_activos':
+        $rspta = $matriculaDetalle->listarMetodosPagoActivos();
+        while ($reg = $rspta->fetch_object()) {
+            echo '<option value="' . $reg->id . '">' . $reg->nombre . '</option>';
+        }
         break;
 
     case 'listar':
@@ -50,13 +109,12 @@ switch ($_GET["op"]) {
 
         while ($reg = $rspta->fetch_object()) {
             $data[] = array(
-                "0" => $reg->descripcion,
-                "1" => $reg->categoria,
-                "2" => $reg->alumno,
-                "3" => $reg->apoderado,
-                "4" => ($reg->estado) ?
-                    '<button type="button" onclick="mostrar(' . $reg->id . ')" class="btn btn-warning btn-sm">EDITAR</button> <button type="button" onclick="desactivar(' . $reg->id . ')" class="btn btn-danger btn-sm">DESACTIVAR</button>' :
-                    '<button type="button" onclick="mostrar(' . $reg->id . ')" class="btn btn-warning btn-sm">EDITAR</button> <button type="button" onclick="activar(' . $reg->id . ')" class="btn btn-success btn-sm">ACTIVAR</button>'
+                "0" => 'N°. '.$reg->matricula_detalle_id,
+                "1" => $reg->institucion_lectivo_nombre.' - '.$reg->institucion_nivel_nombre.' - '.$reg->institucion_grado_nombre.' - '.$reg->institucion_seccion_nombre,
+                "2" => $reg->apoderado_nombre,
+                "3" => $reg->alumno_nombre,
+                "4" => $reg->alumno_nombre,
+                "5" => $reg->matricula_detalle_estado ? 'Activo' : 'Inactivo'
             );
         }
         $results = array(
@@ -67,34 +125,4 @@ switch ($_GET["op"]) {
         );
         echo json_encode($results);
         break;
-
-    // Listar datos dinámicos para los campos de selección en el formulario
-    case 'listar_matriculas_activas':
-        $rspta = $matriculaDetalle->listarMatriculasActivas();
-        while ($reg = $rspta->fetch_object()) {
-            echo '<option value="' . $reg->id . '">' . $reg->nombre . '</option>';
-        }
-        break;
-
-    case 'listar_categorias_activas':
-        $rspta = $matriculaDetalle->listarCategoriasActivas();
-        while ($reg = $rspta->fetch_object()) {
-            echo '<option value="' . $reg->id . '">' . $reg->nombre . '</option>';
-        }
-        break;
-
-    case 'listar_alumnos_activos':
-        $rspta = $matriculaDetalle->listarAlumnosActivos();
-        while ($reg = $rspta->fetch_object()) {
-            echo '<option value="' . $reg->id . '">' . $reg->nombreyapellido . '</option>';
-        }
-        break;
-
-    case 'listar_apoderados_activos':
-        $rspta = $matriculaDetalle->listarApoderadosActivos();
-        while ($reg = $rspta->fetch_object()) {
-            echo '<option value="' . $reg->id . '">' . $reg->nombreyapellido . '</option>';
-        }
-        break;
 }
-?>
