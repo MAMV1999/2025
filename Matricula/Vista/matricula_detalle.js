@@ -76,11 +76,19 @@ function MostrarListado() {
     $("#formulario").hide();
 }
 
+// Llamar a esta función al mostrar el formulario
 function MostrarFormulario() {
     $("#listado").hide();
     $("#formulario").show();
     cargarSelectores();
     fecha();
+
+    // Cargar la numeración del pago
+    cargarSiguienteNumeracionPago();
+
+    setTimeout(function () {
+        InformacionDetalle();
+    }, 200);
 }
 
 // Cargar datos en los selectores dinámicos
@@ -127,6 +135,32 @@ function cargarMatriculas() {
     $.post(link + "listar_matriculas_activas", function (r) {
         $("#matricula_id").html(r);
     });
+
+    $("#matricula_id").change(function () {
+        InformacionDetalle();
+    });
+}
+
+function InformacionDetalle(){
+    var selectedOption = $("#matricula_id option:selected");
+    var lectivo = selectedOption.data('lectivo');
+    var nivel = selectedOption.data('nivel');
+    var grado = selectedOption.data('grado');
+    var seccion = selectedOption.data('seccion');
+    var preciomatricula = selectedOption.data('preciomatricula');
+    var preciomensualidad = selectedOption.data('preciomensualidad');
+    var preciomantenimiento = selectedOption.data('preciomantenimiento');
+    var observaciones = selectedOption.data('observaciones');
+
+    var info_matricula = 'MATRICULA: ' + lectivo + ' - ' + nivel + ' - ' + grado + ' - ' + seccion + '\n' +
+        'Precio Matricula: S./' + preciomatricula + '\n'+
+        'Precio Mensualidad: S./' + preciomensualidad + '\n'+
+        'Precio Mantenimiento: S./' + preciomantenimiento + '\n\n'+
+        'Observaciones: ' + observaciones + '\n';
+
+    $("#pago_monto").val(preciomatricula);
+    $("#detalle").val(info_matricula);
+    $("#pago_descripcion").val(info_matricula);
 }
 
 // Categorías
@@ -140,6 +174,12 @@ function cargarCategorias() {
 function cargarMetodosPago() {
     $.post(link + "listar_metodos_pago_activos", function (r) {
         $("#pago_metodo_id").html(r);
+    });
+}
+
+function cargarSiguienteNumeracionPago() {
+    $.post(link + "obtener_siguiente_numeracion_pago", function (data) {
+        $("#pago_numeracion").val(data); // Asignar el valor obtenido al campo
     });
 }
 

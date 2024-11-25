@@ -18,7 +18,6 @@ if (!isset($_SESSION['nombre'])) {
                 <table class="table" id="myTable">
                     <thead>
                         <tr>
-                            <th>ID</th>
                             <th>GRADO</th>
                             <th>APODERADO</th>
                             <th>ALUMNO</th>
@@ -51,17 +50,16 @@ if (!isset($_SESSION['nombre'])) {
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="pago-tab" data-bs-toggle="tab" data-bs-target="#pago-tab-pane" type="button" role="tab" aria-controls="pago-tab-pane" aria-selected="false">PAGO</button>
                         </li>
+
                     </ul>
 
                     <div class="tab-content" id="myTabContent">
-
-
 
                         <!-- MATRÍCULA -->
                         <div class="tab-pane fade show active" id="matricula-tab-pane" role="tabpanel" aria-labelledby="matricula-tab">
                             <div class="p-3">
                                 <label for="matricula_id" class="form-label"><b>MATRÍCULA:</b></label>
-                                <select id="matricula_id" name="matricula_id" class="form-control" data-live-search="true"></select>
+                                <select id="matricula_id" name="matricula_id" onmousedown="cargarMatriculas();" class="form-control" data-live-search="true"></select>
                             </div>
                             <div class="p-3">
                                 <label for="matricula_categoria" class="form-label"><b>CATEGORÍA:</b></label>
@@ -69,7 +67,7 @@ if (!isset($_SESSION['nombre'])) {
                             </div>
                             <div class="p-3">
                                 <label for="detalle" class="form-label"><b>DETALLE:</b></label>
-                                <textarea name="detalle" id="detalle" class="form-control" placeholder="Observaciones - (Opcional)"></textarea>
+                                <textarea style="height: 200px;" name="detalle" id="detalle" class="form-control" placeholder="Observaciones - (Opcional)"></textarea>
                             </div>
                             <div class="p-3">
                                 <label for="matricula_observaciones" class="form-label"><b>OBSERVACIONES:</b></label>
@@ -104,7 +102,6 @@ if (!isset($_SESSION['nombre'])) {
                                 <textarea id="alumno_observaciones" name="alumno_observaciones" class="form-control" placeholder="Observaciones - (Opcional)"></textarea>
                             </div>
                         </div>
-
 
                         <!-- APODERADO -->
                         <div class="tab-pane fade" id="apoderado-tab-pane" role="tabpanel" aria-labelledby="apoderado-tab">
@@ -142,8 +139,6 @@ if (!isset($_SESSION['nombre'])) {
                             </div>
                         </div>
 
-
-
                         <!-- PAGO -->
                         <div class="tab-pane fade" id="pago-tab-pane" role="tabpanel" aria-labelledby="pago-tab">
                             <div class="p-3">
@@ -156,7 +151,7 @@ if (!isset($_SESSION['nombre'])) {
                             </div>
                             <div class="p-3">
                                 <label for="pago_descripcion" class="form-label"><b>Descripción:</b></label>
-                                <textarea id="pago_descripcion" name="pago_descripcion" class="form-control" placeholder="Descripción - (Opcional)"></textarea>
+                                <textarea style="height: 200px;" id="pago_descripcion" name="pago_descripcion" class="form-control" placeholder="Descripción - (Opcional)"></textarea>
                             </div>
                             <div class="p-3">
                                 <label for="pago_metodo_id" class="form-label"><b>Método de Pago:</b></label>

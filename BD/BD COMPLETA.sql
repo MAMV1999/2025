@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-11-2024 a las 01:30:25
+-- Tiempo de generación: 25-11-2024 a las 06:36:48
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -43,18 +43,33 @@ CREATE TABLE `documento` (
 --
 
 INSERT INTO `documento` (`id`, `id_documento_responsable`, `nombre`, `obligatorio`, `observaciones`, `fechacreado`, `estado`) VALUES
-(1, 1, 'FICHA UNICA DE MATRICULA', 1, '', '2024-11-16 22:03:19', 1),
-(2, 1, 'CONSTANCIA DE MATRICULA', 1, '', '2024-11-16 22:03:44', 1),
-(3, 1, 'CERTIFICADO DE ESTUDIOS', 1, '', '2024-11-16 22:04:44', 1),
-(4, 1, 'INFORME DE PROGRESO / LIBRETA DE NOTAS', 0, '', '2024-11-16 22:04:54', 1),
-(5, 1, 'CONSTANCIA DE NO ADEUDO', 1, '', '2024-11-16 22:05:11', 1),
-(6, 1, 'RESOLUCIÓN DIRECTORAL', 0, '', '2024-11-16 22:05:20', 1),
-(7, 2, 'CARNE DE VACUNACIÓN (NIÑO SANO / COVID)', 0, '', '2024-11-16 22:05:34', 1),
-(8, 2, 'PARTIDA / ACTA DE NACIMIENTO', 0, '', '2024-11-16 22:05:43', 1),
-(9, 2, 'COPIA DNI ALUMNO', 1, '', '2024-11-16 22:05:56', 1),
-(10, 2, 'COPIA DNI APODERADO', 1, '', '2024-11-16 22:06:21', 1),
-(11, 2, '6 FOTOS (TAMAÑO CARNET)', 0, '', '2024-11-16 22:06:35', 1),
-(12, 2, 'FOTO FAMILIAR (TAMAÑO JUMBO)', 0, '', '2024-11-16 22:06:52', 1);
+(1, 1, 'FICHA UNICA DE MATRICULA', 1, '', '2024-11-24 06:23:32', 1),
+(2, 1, 'CONSTANCIA DE MATRICULA', 1, '', '2024-11-24 06:23:45', 1),
+(3, 1, 'CERTIFICADO DE ESTUDIOS', 1, '', '2024-11-24 06:23:56', 1),
+(4, 1, 'INFORME DE PROGRESO / LIBRETA DE NOTAS', 0, '', '2024-11-24 06:24:07', 1),
+(5, 1, 'CONSTANCIA DE NO ADEUDO', 1, '', '2024-11-24 06:24:19', 1),
+(6, 2, 'CARNE DE VACUNACIÓN (NIÑO SANO / COVID)', 0, '', '2024-11-24 06:26:29', 1),
+(7, 2, 'PARTIDA / ACTA DE NACIMIENTO', 0, '', '2024-11-24 06:26:40', 1),
+(8, 2, 'COPIA DNI ALUMNO', 1, '', '2024-11-24 06:26:51', 1),
+(9, 2, 'COPIA DNI APODERADO', 1, '', '2024-11-24 06:27:02', 1),
+(10, 2, '6 FOTOS (TAMAÑO CARNET)', 0, '', '2024-11-24 06:27:14', 1),
+(11, 2, 'FOTO FAMILIAR (TAMAÑO JUMBO)', 0, '', '2024-11-24 06:27:28', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `documento_detalle`
+--
+
+CREATE TABLE `documento_detalle` (
+  `id` int(11) NOT NULL,
+  `id_matricula_detalle` int(11) NOT NULL,
+  `id_documento` int(11) NOT NULL,
+  `entregado` tinyint(1) NOT NULL DEFAULT '0',
+  `observaciones` text,
+  `fechacreado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `estado` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -75,8 +90,8 @@ CREATE TABLE `documento_responsable` (
 --
 
 INSERT INTO `documento_responsable` (`id`, `nombre`, `observaciones`, `fechacreado`, `estado`) VALUES
-(1, 'COLEGIO DE PROCEDENCIA', '', '2024-11-16 21:37:40', 1),
-(2, 'APODERADO', '', '2024-11-16 21:38:51', 1);
+(1, 'COLEGIO PROCEDENCIA', '', '2024-11-24 06:22:10', 1),
+(2, 'APODERADO', '', '2024-11-24 06:22:16', 1);
 
 -- --------------------------------------------------------
 
@@ -103,7 +118,7 @@ CREATE TABLE `institucion` (
 --
 
 INSERT INTO `institucion` (`id`, `nombre`, `id_usuario_docente`, `telefono`, `correo`, `ruc`, `razon_social`, `direccion`, `observaciones`, `fechacreado`, `estado`) VALUES
-(1, 'CB EBENEZER', 2, '958197047', 'CBEBENEZER0791@GMAIL.COM', '20602116892', 'GAYCE E.I.R.L.', 'CAL.LOS PENSAMIENTOS NRO. 261 P.J. EL ERMITAÑO LIMA - LIMA - INDEPENDENCIA', '', '2024-11-09 16:15:37', 1);
+(1, 'IEP. EBENEZER', 1, '958197047', 'CBEBENEZER0791@GMAIL.COM', '20602116892', 'GAYCE E.I.R.L.', 'CAL.LOS PENSAMIENTOS NRO. 261 P.J. EL ERMITAÑO LIMA - LIMA - INDEPENDENCIA', '', '2024-11-24 05:54:21', 1);
 
 -- --------------------------------------------------------
 
@@ -125,15 +140,15 @@ CREATE TABLE `institucion_grado` (
 --
 
 INSERT INTO `institucion_grado` (`id`, `nombre`, `id_institucion_nivel`, `observaciones`, `fechacreado`, `estado`) VALUES
-(1, '3 AÑOS', 1, '', '2024-11-09 21:25:56', 1),
-(2, '4 AÑOS', 1, '', '2024-11-09 21:32:09', 1),
-(3, '5 AÑOS', 1, '', '2024-11-09 21:32:18', 1),
-(4, '1 GRADO', 2, '', '2024-11-09 21:32:26', 1),
-(5, '2 GRADO', 2, '', '2024-11-09 21:32:36', 1),
-(6, '3 GRADO', 2, '', '2024-11-09 21:32:44', 1),
-(7, '4 GRADO', 2, '', '2024-11-09 21:32:55', 1),
-(8, '5 GRADO', 2, '', '2024-11-09 21:33:04', 1),
-(9, '6 GRADO', 2, '', '2024-11-09 21:33:25', 1);
+(1, '3 AÑOS', 1, '', '2024-11-24 05:55:53', 1),
+(2, '4 AÑOS', 1, '', '2024-11-24 05:56:02', 1),
+(3, '5 AÑOS', 1, '', '2024-11-24 05:56:10', 1),
+(4, '1 GRADO', 2, '', '2024-11-24 05:56:19', 1),
+(5, '2 GRADO', 2, '', '2024-11-24 05:56:27', 1),
+(6, '3 GRADO', 2, '', '2024-11-24 05:57:49', 1),
+(7, '4 GRADO', 2, '', '2024-11-24 05:57:57', 1),
+(8, '5 GRADO', 2, '', '2024-11-24 06:02:28', 1),
+(9, '6 GRADO', 2, '', '2024-11-24 06:02:39', 1);
 
 -- --------------------------------------------------------
 
@@ -156,7 +171,7 @@ CREATE TABLE `institucion_lectivo` (
 --
 
 INSERT INTO `institucion_lectivo` (`id`, `nombre`, `nombre_lectivo`, `id_institucion`, `observaciones`, `fechacreado`, `estado`) VALUES
-(1, '2024', 'ANO DEL BICENTENARIO, DE LA CONSOLIDACION DE NUESTRA INDEPENDENCIA, Y DE LA CONMEMORACION DE LAS HEROICAS BATALLAS DE JUNIN Y AYACUCHO', 1, '', '2024-11-09 20:07:05', 1);
+(1, '2025', 'AñO DEL BICENTENARIO DE JOSé FAUSTINO SáNCHEZ CARRIóN Y DEFENSA DE LA REPúBLICA PERUANA', 1, '', '2024-11-24 05:54:57', 1);
 
 -- --------------------------------------------------------
 
@@ -178,8 +193,8 @@ CREATE TABLE `institucion_nivel` (
 --
 
 INSERT INTO `institucion_nivel` (`id`, `nombre`, `id_institucion_lectivo`, `observaciones`, `fechacreado`, `estado`) VALUES
-(1, 'INICIAL', 1, '', '2024-11-09 21:11:58', 1),
-(2, 'PRIMARIA', 1, '', '2024-11-09 21:12:12', 1);
+(1, 'INICIAL', 1, '', '2024-11-24 05:55:26', 1),
+(2, 'PRIMARIA', 1, '', '2024-11-24 05:55:36', 1);
 
 -- --------------------------------------------------------
 
@@ -201,15 +216,15 @@ CREATE TABLE `institucion_seccion` (
 --
 
 INSERT INTO `institucion_seccion` (`id`, `nombre`, `id_institucion_grado`, `observaciones`, `fechacreado`, `estado`) VALUES
-(1, 'A', 1, '', '2024-11-09 21:43:27', 1),
-(2, 'A', 2, '', '2024-11-09 21:44:01', 1),
-(3, 'A', 3, '', '2024-11-09 21:44:09', 1),
-(4, 'A', 4, '', '2024-11-09 21:44:21', 1),
-(5, 'A', 5, '', '2024-11-09 21:44:28', 1),
-(6, 'A', 6, '', '2024-11-09 21:44:36', 1),
-(7, 'A', 7, '', '2024-11-09 21:44:42', 1),
-(8, 'A', 8, '', '2024-11-09 21:44:49', 1),
-(9, 'A', 9, '', '2024-11-09 21:45:00', 1);
+(1, 'A', 1, '', '2024-11-24 06:03:28', 1),
+(2, 'A', 2, '', '2024-11-24 06:03:34', 1),
+(3, 'A', 3, '', '2024-11-24 06:03:40', 1),
+(4, 'A', 4, '', '2024-11-24 06:03:46', 1),
+(5, 'A', 5, '', '2024-11-24 06:03:50', 1),
+(6, 'A', 6, '', '2024-11-24 06:03:57', 1),
+(7, 'A', 7, '', '2024-11-24 06:04:02', 1),
+(8, 'A', 8, '', '2024-11-24 06:04:08', 1),
+(9, 'A', 9, '', '2024-11-24 06:04:14', 1);
 
 -- --------------------------------------------------------
 
@@ -235,15 +250,15 @@ CREATE TABLE `matricula` (
 --
 
 INSERT INTO `matricula` (`id`, `id_institucion_seccion`, `id_usuario_docente`, `preciomatricula`, `preciomensualidad`, `preciomantenimiento`, `aforo`, `observaciones`, `fechacreado`, `estado`) VALUES
-(1, 1, 2, '200.00', '270.00', '25.00', 20, '(*) Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', '2024-11-15 05:35:11', 1),
-(2, 2, 2, '200.00', '270.00', '25.00', 20, '(*) Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', '2024-11-16 00:37:52', 1),
-(3, 3, 2, '200.00', '280.00', '25.00', 20, '(*) Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', '2024-11-16 00:38:45', 1),
-(4, 4, 2, '200.00', '300.00', '25.00', 18, '(*) Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', '2024-11-16 04:06:10', 1),
-(5, 5, 2, '200.00', '300.00', '25.00', 18, '(*) Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', '2024-11-16 04:08:21', 1),
-(6, 6, 2, '200.00', '300.00', '25.00', 18, '(*) Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', '2024-11-16 04:12:51', 1),
-(7, 7, 2, '200.00', '300.00', '25.00', 18, '(*) Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', '2024-11-16 04:14:52', 1),
-(8, 8, 2, '200.00', '300.00', '25.00', 18, '(*) Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', '2024-11-16 04:16:19', 1),
-(9, 9, 2, '200.00', '300.00', '25.00', 18, '(*) Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', '2024-11-16 04:16:58', 1);
+(1, 1, 1, '200.00', '270.00', '25.00', 20, 'Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', '2024-11-24 06:09:41', 1),
+(2, 2, 1, '200.00', '270.00', '25.00', 20, 'Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', '2024-11-24 06:13:01', 1),
+(3, 3, 1, '200.00', '280.00', '25.00', 20, 'Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', '2024-11-24 06:13:27', 1),
+(4, 4, 1, '200.00', '300.00', '25.00', 18, 'Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', '2024-11-24 06:13:45', 1),
+(5, 5, 1, '200.00', '300.00', '25.00', 18, 'Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', '2024-11-24 06:14:19', 1),
+(6, 6, 1, '200.00', '300.00', '25.00', 18, 'Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', '2024-11-24 06:14:49', 1),
+(7, 7, 1, '200.00', '300.00', '25.00', 18, 'Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', '2024-11-24 06:15:11', 1),
+(8, 8, 1, '200.00', '300.00', '25.00', 18, 'Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', '2024-11-24 06:15:29', 1),
+(9, 9, 1, '200.00', '300.00', '25.00', 18, 'Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', '2024-11-24 06:15:44', 1);
 
 -- --------------------------------------------------------
 
@@ -264,9 +279,9 @@ CREATE TABLE `matricula_categoria` (
 --
 
 INSERT INTO `matricula_categoria` (`id`, `nombre`, `observaciones`, `fechacreado`, `estado`) VALUES
-(1, 'RATIFICACION', '', '2024-11-10 02:41:26', 1),
-(2, 'NUEVO', '', '2024-11-10 02:41:33', 1),
-(3, 'TRASLADO', '', '2024-11-10 02:41:40', 1);
+(1, 'RATIFICACION', '', '2024-11-24 06:06:30', 1),
+(2, 'NUEVO', '', '2024-11-24 06:06:35', 1),
+(3, 'TRASLADO', '', '2024-11-24 06:06:42', 1);
 
 -- --------------------------------------------------------
 
@@ -276,7 +291,7 @@ INSERT INTO `matricula_categoria` (`id`, `nombre`, `observaciones`, `fechacreado
 
 CREATE TABLE `matricula_detalle` (
   `id` int(11) NOT NULL,
-  `descripcion` varchar(255) NOT NULL,
+  `descripcion` text NOT NULL,
   `id_matricula` int(11) NOT NULL,
   `id_matricula_categoria` int(11) NOT NULL,
   `id_usuario_apoderado` int(11) NOT NULL,
@@ -305,10 +320,10 @@ CREATE TABLE `matricula_metodo_pago` (
 --
 
 INSERT INTO `matricula_metodo_pago` (`id`, `nombre`, `observaciones`, `fechacreado`, `estado`) VALUES
-(1, 'EFECTIVO', '', '2024-11-10 02:28:08', 1),
-(2, 'YAPE', '', '2024-11-10 02:28:17', 1),
-(3, 'TRANSFERENCIA', '', '2024-11-10 02:28:25', 1),
-(4, 'INTERBANCARIO', '', '2024-11-10 02:33:00', 1);
+(1, 'EFECTIVO', '', '2024-11-24 06:05:48', 1),
+(2, 'YAPE', '', '2024-11-24 06:05:54', 1),
+(3, 'TRANSFERENCIA', '', '2024-11-24 06:06:02', 1),
+(4, 'INTERBANCARIO', '', '2024-11-24 06:06:11', 1);
 
 -- --------------------------------------------------------
 
@@ -332,11 +347,29 @@ CREATE TABLE `matricula_pago` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `mensualidad_detalle`
+--
+
+CREATE TABLE `mensualidad_detalle` (
+  `id` int(11) NOT NULL,
+  `id_mensualidad_mes` int(11) NOT NULL,
+  `id_matricula_detalle` int(11) NOT NULL,
+  `pagado` tinyint(1) NOT NULL DEFAULT '0',
+  `recibo_emitido` tinyint(1) NOT NULL DEFAULT '0',
+  `observaciones` text,
+  `fechacreado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `estado` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `mensualidad_mes`
 --
 
 CREATE TABLE `mensualidad_mes` (
   `id` int(11) NOT NULL,
+  `id_institucion_lectivo` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `descripcion` text,
   `observaciones` text,
@@ -348,17 +381,17 @@ CREATE TABLE `mensualidad_mes` (
 -- Volcado de datos para la tabla `mensualidad_mes`
 --
 
-INSERT INTO `mensualidad_mes` (`id`, `nombre`, `descripcion`, `observaciones`, `fechacreado`, `estado`) VALUES
-(1, 'MARZO', 'MENSUALIDAD MARZO', '', '2024-11-16 18:01:46', 1),
-(2, 'ABRIL', 'MENSUALIDAD ABRIL', '', '2024-11-16 18:02:06', 1),
-(3, 'MAYO', 'MENSUALIDAD MAYO', '', '2024-11-16 18:05:07', 1),
-(4, 'JUNIO', 'MENSUALIDAD JUNIO', '', '2024-11-16 18:05:26', 1),
-(5, 'JULIO', 'MENSUALIDAD JULIO', '', '2024-11-16 18:05:39', 1),
-(6, 'AGOSTO', 'MENSUALIDAD AGOSTO', '', '2024-11-16 18:05:51', 1),
-(7, 'SETIEMBRE', 'MENSUALIDAD SETIEMBRE', '', '2024-11-16 18:06:05', 1),
-(8, 'OCTUBRE', 'MENSUALIDAD OCTUBRE', '', '2024-11-16 18:06:15', 1),
-(9, 'NOVIEMBRE', 'MENSUALIDAD NOVIEMBRE', '', '2024-11-16 18:06:26', 1),
-(10, 'DICIEMBRE', 'MENSUALIDAD DICIEMBRE', '', '2024-11-16 18:06:39', 1);
+INSERT INTO `mensualidad_mes` (`id`, `id_institucion_lectivo`, `nombre`, `descripcion`, `observaciones`, `fechacreado`, `estado`) VALUES
+(1, 1, 'MARZO', 'MENSUALIDAD MARZO', '', '2024-11-24 06:31:02', 1),
+(2, 1, 'ABRIL', 'MENSUALIDAD ABRIL', '', '2024-11-24 06:31:59', 1),
+(3, 1, 'MAYO', 'MENSUALIDAD MAYO', '', '2024-11-24 06:33:03', 1),
+(4, 1, 'JUNIO', 'MENSUALIDAD JUNIO', '', '2024-11-24 06:33:16', 1),
+(5, 1, 'JULIO', 'MENSUALIDAD JULIO', '', '2024-11-24 06:33:31', 1),
+(6, 1, 'AGOSTO', 'MENSUALIDAD AGOSTO', '', '2024-11-24 06:33:44', 1),
+(7, 1, 'SEPTIEMBRE', 'MENSUALIDAD SEPTIEMBRE', '', '2024-11-24 06:34:06', 1),
+(8, 1, 'OCTUBRE', 'MENSUALIDAD OCTUBRE', '', '2024-11-24 06:34:23', 1),
+(9, 1, 'NOVIEMBRE', 'MENSUALIDAD NOVIEMBRE', '', '2024-11-24 06:34:40', 1),
+(10, 1, 'DICIEMBRE', 'MENSUALIDAD DICIEMBRE', '', '2024-11-24 06:34:52', 1);
 
 -- --------------------------------------------------------
 
@@ -372,6 +405,7 @@ CREATE TABLE `usuario_alumno` (
   `id_documento` int(11) NOT NULL,
   `numerodocumento` varchar(20) NOT NULL,
   `nombreyapellido` varchar(100) NOT NULL,
+  `nacimiento` date DEFAULT NULL,
   `telefono` varchar(20) DEFAULT NULL,
   `id_sexo` int(11) NOT NULL,
   `usuario` varchar(50) NOT NULL,
@@ -422,9 +456,9 @@ CREATE TABLE `usuario_apoderado_tipo` (
 --
 
 INSERT INTO `usuario_apoderado_tipo` (`id`, `nombre`, `observaciones`, `fechacreado`, `estado`) VALUES
-(1, 'MADRE', '', '2024-11-16 04:49:10', 1),
-(2, 'PADRE', '', '2024-11-16 04:49:20', 1),
-(3, 'APODERADO LEGAL', '', '2024-11-16 04:49:29', 1);
+(1, 'MADRE', '', '2024-11-24 05:47:11', 1),
+(2, 'PADRE', '', '2024-11-24 05:47:19', 1),
+(3, 'REPRESENTANTE LEGAL', '', '2024-11-24 05:47:30', 1);
 
 -- --------------------------------------------------------
 
@@ -445,9 +479,9 @@ CREATE TABLE `usuario_cargo` (
 --
 
 INSERT INTO `usuario_cargo` (`id`, `nombre`, `observaciones`, `fechacreado`, `estado`) VALUES
-(1, 'DIRECTOR', '', '2024-11-03 05:25:55', 1),
-(2, 'DOCENTE', '', '2024-11-03 05:26:09', 1),
-(3, 'AUXILIAR', '', '2024-11-03 05:26:19', 1);
+(1, 'DIRECTOR', '', '2024-11-24 05:50:33', 1),
+(2, 'ADMINISTRATIVO', '', '2024-11-24 05:51:00', 1),
+(3, 'DOCENTE', '', '2024-11-24 05:51:06', 1);
 
 -- --------------------------------------------------------
 
@@ -488,8 +522,7 @@ CREATE TABLE `usuario_docente` (
 --
 
 INSERT INTO `usuario_docente` (`id`, `id_documento`, `numerodocumento`, `nombreyapellido`, `nacimiento`, `id_estado_civil`, `id_sexo`, `direccion`, `telefono`, `correo`, `id_cargo`, `id_tipo_contrato`, `fechainicio`, `fechafin`, `sueldo`, `cuentabancaria`, `cuentainterbancaria`, `sunat_ruc`, `sunat_usuario`, `sunat_contraseña`, `usuario`, `clave`, `observaciones`, `fechacreado`, `estado`) VALUES
-(1, 1, '73937543', 'MARCO ANTONIO MANRIQUE VARILLAS', '1999-06-18', 1, 1, 'PROLONG. LAS GLADIOLAS MZ.X LT.12 EL ERMITAÑO', '994947452', 'MMANRIQUEVARILLAS99@GMAIL.COM', 2, 1, '0000-00-00', '0000-00-00', '1400.00', '', '', '', '', '', '73937543', '73937543', '', '2024-11-09 05:39:13', 1),
-(2, 1, '10509059', 'CECILIA ROSARIO MANRIQUE LOPEZ', '1977-01-16', 2, 2, 'PROLONG. LAS GLADIOLAS MZ.X LT.12 EL ERMITAÑO', '976300448', 'TEQUIROSARIO@HOTMAIL.COM', 1, 1, '0000-00-00', '0000-00-00', '0.00', '', '', '', '', '', '10509059', '10509059', '', '2024-11-09 21:51:26', 1);
+(1, 1, '73937543', 'MARCO ANTONIO MANRIQUE VARILLAS', '1999-06-18', 1, 2, 'PROLONG. LAS GLADIOLAS MZ.X LT.12 EL ERMITAÑO', '994947452', 'MMANRIQUEVARILLAS99@GMAIL.COM', 2, 1, '0000-00-00', '0000-00-00', '0.00', '', '', '', '', '', '73937543', '73937543', '', '2024-11-24 05:52:35', 1);
 
 -- --------------------------------------------------------
 
@@ -510,9 +543,8 @@ CREATE TABLE `usuario_documento` (
 --
 
 INSERT INTO `usuario_documento` (`id`, `nombre`, `observaciones`, `fechacreado`, `estado`) VALUES
-(1, 'DNI', '', '2024-11-03 05:33:32', 1),
-(2, 'PASAPORTE', '', '2024-11-03 05:34:20', 1),
-(3, 'CEDULA', '', '2024-11-03 05:34:30', 1);
+(1, 'DNI', '', '2024-11-24 05:49:16', 1),
+(2, 'PASAPORTE', '', '2024-11-24 05:49:35', 1);
 
 -- --------------------------------------------------------
 
@@ -533,9 +565,10 @@ CREATE TABLE `usuario_estado_civil` (
 --
 
 INSERT INTO `usuario_estado_civil` (`id`, `nombre`, `observaciones`, `fechacreado`, `estado`) VALUES
-(1, 'SOLTERO', '', '2024-11-03 05:13:15', 1),
-(2, 'CASADO', '', '2024-11-03 05:26:57', 1),
-(3, 'DIVORCIADO', '', '2024-11-03 05:27:20', 1);
+(1, 'SOLTERO(A)', '', '2024-11-24 05:48:21', 1),
+(2, 'CASADO(A)', '', '2024-11-24 05:48:30', 1),
+(3, 'VIUDO(A)', '', '2024-11-24 05:48:46', 1),
+(4, 'DIVORCIADO(A)', '', '2024-11-24 05:48:58', 1);
 
 -- --------------------------------------------------------
 
@@ -556,9 +589,8 @@ CREATE TABLE `usuario_sexo` (
 --
 
 INSERT INTO `usuario_sexo` (`id`, `nombre`, `observaciones`, `fechacreado`, `estado`) VALUES
-(1, 'MASCULINO', '', '2024-11-03 05:20:58', 1),
-(2, 'FEMENINO', '', '2024-11-03 05:21:07', 1),
-(3, 'OTROS', '', '2024-11-03 05:26:37', 0);
+(1, 'FEMENINO', '', '2024-11-24 05:47:45', 1),
+(2, 'MASCULINO', '', '2024-11-24 05:47:53', 1);
 
 -- --------------------------------------------------------
 
@@ -579,8 +611,8 @@ CREATE TABLE `usuario_tipo_contrato` (
 --
 
 INSERT INTO `usuario_tipo_contrato` (`id`, `nombre`, `observaciones`, `fechacreado`, `estado`) VALUES
-(1, 'PLANILLA', '', '2024-11-03 18:32:30', 1),
-(2, 'RECIBO POR HONORARIOS', '', '2024-11-03 18:32:41', 1);
+(1, 'PLANILLA', '', '2024-11-24 05:51:20', 1),
+(2, 'RECIBO POR HONORARIO', '', '2024-11-24 05:51:32', 1);
 
 --
 -- Índices para tablas volcadas
@@ -592,6 +624,14 @@ INSERT INTO `usuario_tipo_contrato` (`id`, `nombre`, `observaciones`, `fechacrea
 ALTER TABLE `documento`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_documento_responsable` (`id_documento_responsable`);
+
+--
+-- Indices de la tabla `documento_detalle`
+--
+ALTER TABLE `documento_detalle`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_matricula_detalle` (`id_matricula_detalle`),
+  ADD KEY `id_documento` (`id_documento`);
 
 --
 -- Indices de la tabla `documento_responsable`
@@ -673,10 +713,19 @@ ALTER TABLE `matricula_pago`
   ADD KEY `fk_matricula_pago_metodo_pago` (`id_matricula_metodo_pago`);
 
 --
+-- Indices de la tabla `mensualidad_detalle`
+--
+ALTER TABLE `mensualidad_detalle`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_mensualidad_mes` (`id_mensualidad_mes`),
+  ADD KEY `id_matricula_detalle` (`id_matricula_detalle`);
+
+--
 -- Indices de la tabla `mensualidad_mes`
 --
 ALTER TABLE `mensualidad_mes`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_institucion_lectivo` (`id_institucion_lectivo`);
 
 --
 -- Indices de la tabla `usuario_alumno`
@@ -752,7 +801,13 @@ ALTER TABLE `usuario_tipo_contrato`
 -- AUTO_INCREMENT de la tabla `documento`
 --
 ALTER TABLE `documento`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT de la tabla `documento_detalle`
+--
+ALTER TABLE `documento_detalle`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `documento_responsable`
@@ -821,6 +876,12 @@ ALTER TABLE `matricula_pago`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `mensualidad_detalle`
+--
+ALTER TABLE `mensualidad_detalle`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `mensualidad_mes`
 --
 ALTER TABLE `mensualidad_mes`
@@ -854,25 +915,25 @@ ALTER TABLE `usuario_cargo`
 -- AUTO_INCREMENT de la tabla `usuario_docente`
 --
 ALTER TABLE `usuario_docente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario_documento`
 --
 ALTER TABLE `usuario_documento`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario_estado_civil`
 --
 ALTER TABLE `usuario_estado_civil`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario_sexo`
 --
 ALTER TABLE `usuario_sexo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario_tipo_contrato`
@@ -889,6 +950,13 @@ ALTER TABLE `usuario_tipo_contrato`
 --
 ALTER TABLE `documento`
   ADD CONSTRAINT `documento_ibfk_1` FOREIGN KEY (`id_documento_responsable`) REFERENCES `documento_responsable` (`id`);
+
+--
+-- Filtros para la tabla `documento_detalle`
+--
+ALTER TABLE `documento_detalle`
+  ADD CONSTRAINT `documento_detalle_ibfk_1` FOREIGN KEY (`id_matricula_detalle`) REFERENCES `matricula_detalle` (`id`),
+  ADD CONSTRAINT `documento_detalle_ibfk_2` FOREIGN KEY (`id_documento`) REFERENCES `documento` (`id`);
 
 --
 -- Filtros para la tabla `institucion`
@@ -942,6 +1010,19 @@ ALTER TABLE `matricula_detalle`
 ALTER TABLE `matricula_pago`
   ADD CONSTRAINT `fk_matricula_pago_matricula_detalle` FOREIGN KEY (`id_matricula_detalle`) REFERENCES `matricula_detalle` (`id`),
   ADD CONSTRAINT `fk_matricula_pago_metodo_pago` FOREIGN KEY (`id_matricula_metodo_pago`) REFERENCES `matricula_metodo_pago` (`id`);
+
+--
+-- Filtros para la tabla `mensualidad_detalle`
+--
+ALTER TABLE `mensualidad_detalle`
+  ADD CONSTRAINT `mensualidad_detalle_ibfk_1` FOREIGN KEY (`id_mensualidad_mes`) REFERENCES `mensualidad_mes` (`id`),
+  ADD CONSTRAINT `mensualidad_detalle_ibfk_2` FOREIGN KEY (`id_matricula_detalle`) REFERENCES `matricula_detalle` (`id`);
+
+--
+-- Filtros para la tabla `mensualidad_mes`
+--
+ALTER TABLE `mensualidad_mes`
+  ADD CONSTRAINT `mensualidad_mes_ibfk_1` FOREIGN KEY (`id_institucion_lectivo`) REFERENCES `institucion_lectivo` (`id`);
 
 --
 -- Filtros para la tabla `usuario_alumno`

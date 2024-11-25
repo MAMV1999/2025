@@ -40,10 +40,31 @@ $pago_observaciones = isset($_POST["pago_observaciones"]) ? limpiarcadena($_POST
 switch ($_GET["op"]) {
     case 'guardaryeditar':
         $rspta = $matriculaDetalle->guardar(
-            $apoderado_dni, $apoderado_nombreyapellido, $apoderado_telefono, $apoderado_tipo, $apoderado_documento, $apoderado_sexo, $apoderado_estado_civil, $apoderado_observaciones,
-            $alumno_dni, $alumno_nombreyapellido, $alumno_nacimiento, $alumno_sexo, $alumno_documento, $alumno_telefono, $alumno_observaciones,
-            $detalle, $matricula_id, $matricula_categoria, $matricula_observaciones,
-            $pago_numeracion, $pago_fecha, $pago_descripcion, $pago_monto, $pago_metodo_id, $pago_observaciones
+            $apoderado_dni,
+            $apoderado_nombreyapellido,
+            $apoderado_telefono,
+            $apoderado_tipo,
+            $apoderado_documento,
+            $apoderado_sexo,
+            $apoderado_estado_civil,
+            $apoderado_observaciones,
+            $alumno_dni,
+            $alumno_nombreyapellido,
+            $alumno_nacimiento,
+            $alumno_sexo,
+            $alumno_documento,
+            $alumno_telefono,
+            $alumno_observaciones,
+            $detalle,
+            $matricula_id,
+            $matricula_categoria,
+            $matricula_observaciones,
+            $pago_numeracion,
+            $pago_fecha,
+            $pago_descripcion,
+            $pago_monto,
+            $pago_metodo_id,
+            $pago_observaciones
         );
         echo $rspta ? "Matrícula registrada correctamente" : "No se pudo registrar la matrícula";
         break;
@@ -83,7 +104,19 @@ switch ($_GET["op"]) {
     case 'listar_matriculas_activas':
         $rspta = $matriculaDetalle->listarMatriculasActivas();
         while ($reg = $rspta->fetch_object()) {
-            echo '<option value="' . $reg->id . '">' . $reg->nombre . '</option>';
+            echo '<option value="' . $reg->id . '"
+                            data-id="' . $reg->id . '"
+                            data-lectivo="' . $reg->lectivo . '"
+                            data-nivel="' . $reg->nivel . '"
+                            data-grado="' . $reg->grado . '"
+                            data-seccion="' . $reg->seccion . '"
+                            data-aforo="' . $reg->aforo . '"
+                            data-matriculados="' . $reg->matriculados . '"
+                            data-preciomatricula="' . $reg->preciomatricula . '"
+                            data-preciomensualidad="' . $reg->preciomensualidad . '"
+                            data-preciomantenimiento="' . $reg->preciomantenimiento . '"
+                            data-observaciones="' . $reg->observaciones . '"
+                >' . $reg->lectivo . ' - ' . $reg->nivel . ' - ' . $reg->grado . ' - ' . $reg->seccion . ' -->(Aforo: ' . $reg->aforo . ', Matriculados: ' . $reg->matriculados . ')</option>';
         }
         break;
 
@@ -109,12 +142,11 @@ switch ($_GET["op"]) {
 
         while ($reg = $rspta->fetch_object()) {
             $data[] = array(
-                "0" => 'N°. '.$reg->matricula_detalle_id,
-                "1" => $reg->institucion_lectivo_nombre.' - '.$reg->institucion_nivel_nombre.' - '.$reg->institucion_grado_nombre.' - '.$reg->institucion_seccion_nombre,
-                "2" => $reg->apoderado_nombre,
-                "3" => $reg->alumno_nombre,
-                "4" => $reg->alumno_nombre,
-                "5" => $reg->matricula_detalle_estado ? 'Activo' : 'Inactivo'
+                "0" => $reg->lectivo_nombre . ' - ' . $reg->nivel_nombre . ' - ' . $reg->grado_nombre,
+                "1" => $reg->apoderado_nombre,
+                "2" => $reg->alumno_nombre,
+                "3" => $reg->pago_numeracion,
+                "4" => $reg->matricula_detalle_estado ? 'Activo' : 'Inactivo'
             );
         }
         $results = array(
@@ -125,4 +157,10 @@ switch ($_GET["op"]) {
         );
         echo json_encode($results);
         break;
+
+    case 'obtener_siguiente_numeracion_pago':
+        $numeracion = $matriculaDetalle->getNextPagoNumeracion();
+        echo $numeracion;
+        break;
+
 }
