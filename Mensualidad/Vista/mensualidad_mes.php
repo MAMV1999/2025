@@ -22,6 +22,7 @@ if (!isset($_SESSION['nombre'])) {
                             <th>INSTITUCIÓN LECTIVA</th>
                             <th>NOMBRE</th>
                             <th>DESCRIPCIÓN</th>
+                            <th>FECHA VENCIMIENTO</th>
                             <th>ESTADO</th>
                         </tr>
                     </thead>
@@ -57,6 +58,13 @@ if (!isset($_SESSION['nombre'])) {
                     <label for="descripcion" class="form-label"><b>DESCRIPCIÓN:</b></label>
                     <div class="input-group">
                         <textarea id="descripcion" name="descripcion" placeholder="Descripción del Mes" class="form-control"></textarea>
+                    </div>
+                </div>
+
+                <div class="p-3">
+                    <label for="fechavencimiento" class="form-label"><b>FECHA DE VENCIMIENTO:</b></label>
+                    <div class="input-group">
+                        <input type="date" id="fechavencimiento" name="fechavencimiento" class="form-control">
                     </div>
                 </div>
 

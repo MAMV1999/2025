@@ -23,11 +23,7 @@ $(document).ready(function () {
     // Inicialización de DataTable
     tabla = $('#myTable').DataTable({
         "ajax": {
-            "url": link + "listar",
-            "dataSrc": function (json) {
-                console.log(json); // Verifica la estructura de la respuesta aquí
-                return json.aaData; // Asegúrate de que 'aaData' esté correctamente formado en el controlador
-            }
+            "url": link + "listar"
         }
     });
 });
@@ -40,6 +36,7 @@ function limpiar() {
     $("#id_institucion_lectivo").val("");
     $("#nombre").val("");
     $("#descripcion").val("");
+    $("#fechavencimiento").val(""); // Limpia el campo de fecha de vencimiento
     $("#observaciones").val("");
 }
 
@@ -83,6 +80,7 @@ function mostrar(id) {
         $("#id_institucion_lectivo").val(data.id_institucion_lectivo);
         $("#nombre").val(data.nombre);
         $("#descripcion").val(data.descripcion);
+        $("#fechavencimiento").val(data.fechavencimiento);
         $("#observaciones").val(data.observaciones);
 
         // Refrescar selects para que se muestren los valores seleccionados

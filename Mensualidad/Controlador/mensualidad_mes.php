@@ -7,6 +7,7 @@ $id = isset($_POST["id"]) ? limpiarcadena($_POST["id"]) : "";
 $id_institucion_lectivo = isset($_POST["id_institucion_lectivo"]) ? limpiarcadena($_POST["id_institucion_lectivo"]) : "";
 $nombre = isset($_POST["nombre"]) ? limpiarcadena($_POST["nombre"]) : "";
 $descripcion = isset($_POST["descripcion"]) ? limpiarcadena($_POST["descripcion"]) : "";
+$fechavencimiento = isset($_POST["fechavencimiento"]) ? limpiarcadena($_POST["fechavencimiento"]) : "";
 $observaciones = isset($_POST["observaciones"]) ? limpiarcadena($_POST["observaciones"]) : "";
 $estado = isset($_POST["estado"]) ? limpiarcadena($_POST["estado"]) : "1";
 
@@ -15,13 +16,13 @@ switch ($_GET["op"]) {
         if (empty($id)) {
             $rspta = $mensualidadMes->guardar(
                 $id_institucion_lectivo, strtoupper($nombre), 
-                strtoupper($descripcion), $observaciones, $estado
+                strtoupper($descripcion), $fechavencimiento, $observaciones, $estado
             );
             echo $rspta ? "Mensualidad registrada correctamente" : "No se pudo registrar la mensualidad";
         } else {
             $rspta = $mensualidadMes->editar(
                 $id, $id_institucion_lectivo, strtoupper($nombre), 
-                strtoupper($descripcion), $observaciones, $estado
+                strtoupper($descripcion), $fechavencimiento, $observaciones, $estado
             );
             echo $rspta ? "Mensualidad actualizada correctamente" : "No se pudo actualizar la mensualidad";
         }
@@ -38,7 +39,7 @@ switch ($_GET["op"]) {
         break;
 
     case 'mostrar':
-        $rspta = $mensualidadMes->mostrar($id);
+        $rspta = $mensualidadMes->mostrar("1");
         echo json_encode($rspta);
         break;
 
@@ -49,10 +50,11 @@ switch ($_GET["op"]) {
         while ($reg = $rspta->fetch_object()) {
             $data[] = array(
                 "0" => 'N° ' . $reg->id,
-                "1" => 'PERIODO '.$reg->institucion_lectivo,
+                "1" => 'PERIODO ' . $reg->institucion_lectivo,
                 "2" => $reg->nombre,
                 "3" => $reg->descripcion,
-                "4" => ($reg->estado) ? 
+                "4" => $reg->fechavencimiento,
+                "5" => ($reg->estado) ? 
                     '<button type="button" onclick="mostrar(' . $reg->id . ')" class="btn btn-warning btn-sm">EDITAR</button> <button type="button" onclick="desactivar(' . $reg->id . ')" class="btn btn-danger btn-sm">DESACTIVAR</button>' :
                     '<button type="button" onclick="mostrar(' . $reg->id . ')" class="btn btn-warning btn-sm">EDITAR</button> <button type="button" onclick="activar(' . $reg->id . ')" class="btn btn-success btn-sm">ACTIVAR</button>'
             );
