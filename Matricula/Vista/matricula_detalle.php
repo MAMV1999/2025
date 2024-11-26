@@ -50,7 +50,6 @@ if (!isset($_SESSION['nombre'])) {
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="pago-tab" data-bs-toggle="tab" data-bs-target="#pago-tab-pane" type="button" role="tab" aria-controls="pago-tab-pane" aria-selected="false">PAGO</button>
                         </li>
-
                     </ul>
 
                     <div class="tab-content" id="myTabContent">
@@ -166,8 +165,6 @@ if (!isset($_SESSION['nombre'])) {
                                 <textarea id="pago_observaciones" name="pago_observaciones" class="form-control" placeholder="Observaciones - (Opcional)"></textarea>
                             </div>
                         </div>
-
-
 
 
                     </div>

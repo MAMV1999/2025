@@ -39,7 +39,7 @@ switch ($_GET["op"]) {
         break;
 
     case 'mostrar':
-        $rspta = $mensualidadMes->mostrar("1");
+        $rspta = $mensualidadMes->mostrar($id);
         echo json_encode($rspta);
         break;
 

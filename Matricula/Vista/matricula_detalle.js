@@ -141,7 +141,7 @@ function cargarMatriculas() {
     });
 }
 
-function InformacionDetalle(){
+function InformacionDetalle() {
     var selectedOption = $("#matricula_id option:selected");
     var lectivo = selectedOption.data('lectivo');
     var nivel = selectedOption.data('nivel');
@@ -152,10 +152,11 @@ function InformacionDetalle(){
     var preciomantenimiento = selectedOption.data('preciomantenimiento');
     var observaciones = selectedOption.data('observaciones');
 
-    var info_matricula = 'MATRICULA: ' + lectivo + ' - ' + nivel + ' - ' + grado + ' - ' + seccion + '\n' +
-        'Precio Matricula: S./' + preciomatricula + '\n'+
-        'Precio Mensualidad: S./' + preciomensualidad + '\n'+
-        'Precio Mantenimiento: S./' + preciomantenimiento + '\n\n'+
+    var info_matricula = 'MATRICULA ' + lectivo + ' - IEP. EBENEZER\n' +
+        'NIVEL: ' + nivel + ' - GRADO: ' + grado + ' - SECCION: ' + seccion + '\n\n' +
+        'Precio Matricula: S./' + preciomatricula + '\n' +
+        'Precio Mensualidad: S./' + preciomensualidad + '\n' +
+        'Precio Mantenimiento: S./' + preciomantenimiento + '\n\n' +
         'Observaciones: ' + observaciones + '\n';
 
     $("#pago_monto").val(preciomatricula);

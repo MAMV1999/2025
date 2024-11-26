@@ -145,7 +145,7 @@ switch ($_GET["op"]) {
                 "0" => $reg->lectivo_nombre . ' - ' . $reg->nivel_nombre . ' - ' . $reg->grado_nombre,
                 "1" => $reg->apoderado_nombre,
                 "2" => $reg->alumno_nombre,
-                "3" => $reg->pago_numeracion,
+                "3" => $reg->pago_numeracion.' - '.$reg->metodo_pago_nombre,
                 "4" => $reg->matricula_detalle_estado ? 'Activo' : 'Inactivo'
             );
         }
