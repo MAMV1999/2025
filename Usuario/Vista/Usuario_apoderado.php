@@ -22,7 +22,6 @@ if (!isset($_SESSION['nombre'])) {
                         <th>NOMBRE</th>
                         <th>DOCUMENTO</th>
                         <th>TELÉFONO</th>
-                        <th>TIPO</th>
                         <th>ESTADO</th>
                     </tr>
                 </thead>
@@ -99,7 +98,7 @@ if (!isset($_SESSION['nombre'])) {
             <div class="p-3">
                 <label for="clave" class="form-label"><b>CONTRASEÑA:</b></label>
                 <div class="input-group">
-                    <input type="password" id="clave" name="clave" placeholder="Contraseña" class="form-control">
+                    <input type="text" id="clave" name="clave" placeholder="Contraseña" class="form-control">
                 </div>
             </div>
 

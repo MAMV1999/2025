@@ -30,7 +30,10 @@ class MatriculaDetalle
         $pago_descripcion,
         $pago_monto,
         $pago_metodo_id,
-        $pago_observaciones
+        $pago_observaciones,
+
+        $mensualidad_id, // Array con los mensualidad_id de las mensualidades
+        $mensualidad_precio // Array con los mensualidad_precio de las mensualidades
     ) {
         // Guardar usuario_apoderado
         $sql_apoderado = "INSERT INTO usuario_apoderado (numerodocumento, nombreyapellido, telefono, id_apoderado_tipo, id_documento, id_sexo, id_estado_civil, usuario, clave, observaciones, estado) VALUES ('$apoderado_dni', '$apoderado_nombreyapellido', '$apoderado_telefono', '$apoderado_tipo', '$apoderado_documento', '$apoderado_sexo', '$apoderado_estado_civil', '$apoderado_dni', '$apoderado_dni', '$apoderado_observaciones', '1')";
@@ -52,17 +55,38 @@ class MatriculaDetalle
                     $pago_id = ejecutarConsulta_retornarID($sql_matricula_pago);
 
                     if ($pago_id) {
+                        // Guardar varias filas en mensualidad_detalle
+                        foreach ($mensualidad_id as $index => $mensualidad_mes_id) {
+                            $precio = $mensualidad_precio[$index];
+                            $sql_mensualidad_detalle = "INSERT INTO mensualidad_detalle (id_mensualidad_mes, id_matricula_detalle, monto, pagado, observaciones, estado) VALUES ('$mensualidad_mes_id', '$matricula_detalle_id', '$precio', '0', '', '1')";
+
+                            if (!ejecutarConsulta($sql_mensualidad_detalle)) {
+                                // Si falla, eliminar todos los registros creados
+                                $sql_eliminar_pago = "DELETE FROM matricula_pago WHERE id = '$pago_id'";
+                                ejecutarConsulta($sql_eliminar_pago);
+
+                                $sql_eliminar_matricula_detalle = "DELETE FROM matricula_detalle WHERE id = '$matricula_detalle_id'";
+                                ejecutarConsulta($sql_eliminar_matricula_detalle);
+
+                                $sql_eliminar_alumno = "DELETE FROM usuario_alumno WHERE id = '$alumno_id'";
+                                ejecutarConsulta($sql_eliminar_alumno);
+
+                                $sql_eliminar_apoderado = "DELETE FROM usuario_apoderado WHERE id = '$apoderado_id'";
+                                ejecutarConsulta($sql_eliminar_apoderado);
+
+                                return false;
+                            }
+                        }
+
                         return true; // Todo se guardó correctamente
                     } else {
                         // Eliminar matricula_detalle si falla matricula_pago
                         $sql_eliminar_matricula_detalle = "DELETE FROM matricula_detalle WHERE id = '$matricula_detalle_id'";
                         ejecutarConsulta($sql_eliminar_matricula_detalle);
 
-                        // Eliminar usuario_alumno
                         $sql_eliminar_alumno = "DELETE FROM usuario_alumno WHERE id = '$alumno_id'";
                         ejecutarConsulta($sql_eliminar_alumno);
 
-                        // Eliminar usuario_apoderado
                         $sql_eliminar_apoderado = "DELETE FROM usuario_apoderado WHERE id = '$apoderado_id'";
                         ejecutarConsulta($sql_eliminar_apoderado);
                     }
@@ -71,7 +95,6 @@ class MatriculaDetalle
                     $sql_eliminar_alumno = "DELETE FROM usuario_alumno WHERE id = '$alumno_id'";
                     ejecutarConsulta($sql_eliminar_alumno);
 
-                    // Eliminar usuario_apoderado
                     $sql_eliminar_apoderado = "DELETE FROM usuario_apoderado WHERE id = '$apoderado_id'";
                     ejecutarConsulta($sql_eliminar_apoderado);
                 }
@@ -203,4 +226,22 @@ class MatriculaDetalle
         return $result ? $result['numeracion'] : '000001';
     }
 
+    public function listarMensualidadesActivas()
+    {
+        $sql = "SELECT 
+                    mm.id AS id,
+                    mm.nombre AS mensualidad_nombre,
+                    DATE_FORMAT(mm.fechavencimiento, '%d/%m/%Y') AS fechavencimiento_format,
+                    mm.descripcion AS descripcion,
+                    mm.observaciones AS observaciones,
+                    mm.fechacreado AS fechacreado,
+                    mm.estado AS estado,
+                    il.nombre AS lectivo_nombre,
+                    CONCAT(mm.nombre, ' ', il.nombre) AS nombre
+                FROM 
+                    mensualidad_mes mm
+                JOIN 
+                    institucion_lectivo il ON mm.id_institucion_lectivo = il.id;";
+        return ejecutarConsulta($sql);
+    }
 }

@@ -40,31 +40,11 @@ $pago_observaciones = isset($_POST["pago_observaciones"]) ? limpiarcadena($_POST
 switch ($_GET["op"]) {
     case 'guardaryeditar':
         $rspta = $matriculaDetalle->guardar(
-            $apoderado_dni,
-            $apoderado_nombreyapellido,
-            $apoderado_telefono,
-            $apoderado_tipo,
-            $apoderado_documento,
-            $apoderado_sexo,
-            $apoderado_estado_civil,
-            $apoderado_observaciones,
-            $alumno_dni,
-            $alumno_nombreyapellido,
-            $alumno_nacimiento,
-            $alumno_sexo,
-            $alumno_documento,
-            $alumno_telefono,
-            $alumno_observaciones,
-            $detalle,
-            $matricula_id,
-            $matricula_categoria,
-            $matricula_observaciones,
-            $pago_numeracion,
-            $pago_fecha,
-            $pago_descripcion,
-            $pago_monto,
-            $pago_metodo_id,
-            $pago_observaciones
+            $apoderado_dni,$apoderado_nombreyapellido,$apoderado_telefono,$apoderado_tipo,$apoderado_documento,$apoderado_sexo,$apoderado_estado_civil,$apoderado_observaciones,
+            $alumno_dni,$alumno_nombreyapellido,$alumno_nacimiento,$alumno_sexo,$alumno_documento,$alumno_telefono,$alumno_observaciones,
+            $detalle,$matricula_id,$matricula_categoria,$matricula_observaciones,
+            $pago_numeracion,$pago_fecha,$pago_descripcion,$pago_monto,$pago_metodo_id,$pago_observaciones,
+            $_POST["mensualidad_id"],$_POST["mensualidad_precio"]
         );
         echo $rspta ? "Matrícula registrada correctamente" : "No se pudo registrar la matrícula";
         break;
@@ -145,7 +125,7 @@ switch ($_GET["op"]) {
                 "0" => $reg->lectivo_nombre . ' - ' . $reg->nivel_nombre . ' - ' . $reg->grado_nombre,
                 "1" => $reg->apoderado_nombre,
                 "2" => $reg->alumno_nombre,
-                "3" => $reg->pago_numeracion.' - '.$reg->metodo_pago_nombre,
+                "3" => $reg->pago_numeracion . ' - ' . $reg->metodo_pago_nombre,
                 "4" => $reg->matricula_detalle_estado ? 'Activo' : 'Inactivo'
             );
         }
@@ -163,4 +143,19 @@ switch ($_GET["op"]) {
         echo $numeracion;
         break;
 
+    case 'listar_mensualidades_activas':
+        $rspta = $matriculaDetalle->listarMensualidadesActivas();
+        $rows = "";
+        while ($reg = $rspta->fetch_object()) {
+            $rows .= "
+                    <tr>
+                        <td style='width: 10%;'><input type='text' name='mensualidad_id[]' value='{$reg->id}' class='form-control' readonly></td>
+                        <td style='width: 20%;'><input type='text' value='{$reg->nombre}' class='form-control' readonly></td>
+                        <td style='width: 30%;'><input type='text' value='{$reg->descripcion}' class='form-control' readonly></td>
+                        <td style='width: 15%;'><input type='text' name='mensualidad_precio[]' class='form-control precio-mensualidad'></td>
+                        <td style='width: 25%;'><input type='text' value='{$reg->fechavencimiento_format}' class='form-control' readonly></td>
+                    </tr>";
+        }
+        echo $rows;
+        break;
 }

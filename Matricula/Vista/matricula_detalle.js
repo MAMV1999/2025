@@ -138,6 +138,7 @@ function cargarMatriculas() {
 
     $("#matricula_id").change(function () {
         InformacionDetalle();
+        actualizarPreciosMensualidad();
     });
 }
 
@@ -183,5 +184,33 @@ function cargarSiguienteNumeracionPago() {
         $("#pago_numeracion").val(data); // Asignar el valor obtenido al campo
     });
 }
+
+// TABLA MENCUlIDADES - INICIO
+function cargarMensualidades() {
+    $.ajax({
+        url: link + "listar_mensualidades_activas",
+        type: "GET",
+        success: function (response) {
+            // Asegúrate de que la respuesta sea texto con las filas <tr>
+            const tablaMensualidad = document.querySelector("#mensualidadTable tbody");
+            tablaMensualidad.innerHTML = response; // Carga directamente el HTML enviado por el controlador
+
+            // Actualiza los valores de precio mensualidad
+            actualizarPreciosMensualidad();
+        },
+        error: function (xhr, status, error) {
+            console.error("Error al cargar las mensualidades: ", error);
+        }
+    });
+}
+
+function actualizarPreciosMensualidad() {
+    const precioMensualidad = $("#matricula_id").find(":selected").data("preciomensualidad");
+    // Actualiza el valor de todas las celdas con clase .precio-mensualidad
+    document.querySelectorAll(".precio-mensualidad").forEach((input) => {
+        input.value = precioMensualidad;
+    });
+}
+// TABLA MENCUlIDADES - FIN
 
 init();

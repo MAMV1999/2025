@@ -34,7 +34,8 @@ class Usuario_apoderado
     // Método para listar todos los usuarios apoderados
     public function listar()
     {
-        $sql = "SELECT ua.id, ua.numerodocumento, ua.nombreyapellido, ua.telefono, uat.nombre AS tipo_apoderado, ud.nombre AS tipo_documento, us.nombre AS sexo, uec.nombre AS estado_civil, ua.usuario, ua.estado, ua.fechacreado 
+        $sql = "SELECT ua.id, ua.numerodocumento, ua.nombreyapellido, ua.telefono, uat.nombre AS tipo_apoderado, ud.nombre AS tipo_documento, us.nombre AS sexo,
+                uec.nombre AS estado_civil, ua.usuario, ua.estado, ua.fechacreado 
                 FROM usuario_apoderado ua
                 LEFT JOIN usuario_apoderado_tipo uat ON ua.id_apoderado_tipo = uat.id
                 LEFT JOIN usuario_documento ud ON ua.id_documento = ud.id

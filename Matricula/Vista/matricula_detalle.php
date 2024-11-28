@@ -29,7 +29,7 @@ if (!isset($_SESSION['nombre'])) {
                 </table>
             </div>
             <small class="d-block text-end mt-3">
-                <button type="button" onclick="MostrarFormulario();" class="btn btn-success">Agregar</button>
+                <button type="button" onclick="MostrarFormulario();cargarMensualidades();" class="btn btn-success">Agregar</button>
             </small>
         </div>
 
@@ -50,6 +50,10 @@ if (!isset($_SESSION['nombre'])) {
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="pago-tab" data-bs-toggle="tab" data-bs-target="#pago-tab-pane" type="button" role="tab" aria-controls="pago-tab-pane" aria-selected="false">PAGO</button>
                         </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="mensualidad-tab" data-bs-toggle="tab" data-bs-target="#mensualidad-tab-pane" type="button" role="tab" aria-controls="mensualidad-tab-pane" aria-selected="false">MENSUALIDAD</button>
+                        </li>
+
                     </ul>
 
                     <div class="tab-content" id="myTabContent">
@@ -166,6 +170,25 @@ if (!isset($_SESSION['nombre'])) {
                             </div>
                         </div>
 
+                        <!-- MENSUALIDAD -->
+                        <div class="tab-pane fade" id="mensualidad-tab-pane" role="tabpanel" aria-labelledby="mensualidad-tab">
+                            <div class="p-3">
+                                <table class="table table-bordered" id="mensualidadTable">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>MES</th>
+                                            <th>DESCRIPCION</th>
+                                            <th>MONTO</th>
+                                            <th>FECHA VENCIMIENTO</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Las filas se llenarán dinámicamente -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
 
                     </div>
                 </div>

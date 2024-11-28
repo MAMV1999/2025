@@ -47,11 +47,9 @@ switch ($_GET["op"]) {
             $data[] = array(
                 "0" => 'N° ' . $reg->id,
                 "1" => $reg->nombreyapellido,
-                "2" => $reg->numerodocumento,
+                "2" => $reg->tipo_documento . ' - ' . $reg->numerodocumento,
                 "3" => $reg->apoderado,
-                "4" => $reg->tipo_documento,
-                "5" => $reg->sexo,
-                "6" => ($reg->estado) ?
+                "4" => ($reg->estado) ?
                     '<button class="btn btn-warning btn-sm" onclick="mostrar(' . $reg->id . ')">EDITAR</button> <button class="btn btn-danger btn-sm" onclick="desactivar(' . $reg->id . ')">DESACTIVAR</button>' :
                     '<button class="btn btn-warning btn-sm" onclick="mostrar(' . $reg->id . ')">EDITAR</button> <button class="btn btn-primary btn-sm" onclick="activar(' . $reg->id . ')">ACTIVAR</button>'
             );
@@ -68,7 +66,7 @@ switch ($_GET["op"]) {
     case 'listar_apoderados_activos':
         $rspta = $usuarioAlumno->listarApoderadosActivos();
         while ($reg = $rspta->fetch_object()) {
-            echo '<option value=' . $reg->id . '>' . $reg->nombre . '</option>';
+            echo '<option value=' . $reg->id . '>' . $reg->nombreyapellido . '</option>';
         }
         break;
 
@@ -86,4 +84,3 @@ switch ($_GET["op"]) {
         }
         break;
 }
-?>

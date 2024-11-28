@@ -34,7 +34,8 @@ class Usuario_alumno
     // Método para listar todos los usuarios alumnos
     public function listar()
     {
-        $sql = "SELECT ua.id, ua.numerodocumento, ua.nombreyapellido, uap.nombreyapellido AS apoderado, ud.nombre AS tipo_documento, us.nombre AS sexo, ua.usuario, ua.estado, ua.fechacreado 
+        $sql = "SELECT ua.id, ua.numerodocumento, ua.nombreyapellido, uap.nombreyapellido AS apoderado, ud.nombre AS tipo_documento,
+                us.nombre AS sexo, ua.usuario, ua.estado, ua.fechacreado 
                 FROM usuario_alumno ua
                 LEFT JOIN usuario_apoderado uap ON ua.id_apoderado = uap.id
                 LEFT JOIN usuario_documento ud ON ua.id_documento = ud.id
@@ -59,7 +60,7 @@ class Usuario_alumno
     // Método para listar los apoderados activos
     public function listarApoderadosActivos()
     {
-        $sql = "SELECT id, nombre FROM usuario_apoderado WHERE estado = '1'";
+        $sql = "SELECT * FROM usuario_apoderado WHERE estado = '1'";
         return ejecutarConsulta($sql);
     }
 
