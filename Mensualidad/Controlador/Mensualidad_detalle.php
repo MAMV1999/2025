@@ -26,14 +26,54 @@ switch ($_GET["op"]) {
         echo $rspta ? "Mensualidad desactivada correctamente" : "No se pudo desactivar la mensualidad";
         break;
 
-    case 'activar':
-        $rspta = $mensualidadDetalle->activar($id);
-        echo $rspta ? "Mensualidad activada correctamente" : "No se pudo activar la mensualidad";
-        break;
-
     case 'mostrar':
         $rspta = $mensualidadDetalle->mostrar($id);
-        echo json_encode($rspta);
+        $response = array();
+
+        if ($rspta) {
+            $ids = explode(',', $rspta['ids']);
+            $ids_mensualidad_mes = explode(',', $rspta['ids_mensualidad_mes']);
+            $meses = explode(',', $rspta['meses']);
+            $fechas_vencimiento = explode(',', $rspta['fechas_vencimiento']);
+            $montos = explode(',', $rspta['montos']);
+            $estados_pagado = explode(',', $rspta['estados_pagado']);
+            $estados_generales = explode(',', $rspta['estados_generales']);
+            $observaciones = explode(',', $rspta['observaciones']);
+
+            foreach ($montos as $index => $monto) {
+                $response['detalles'][] = array(
+                    "id" => $ids[$index],
+                    "id_mensualidad_mes" => $ids_mensualidad_mes[$index],
+                    "mes" => $meses[$index],
+                    "fechavencimiento" => $fechas_vencimiento[$index],
+                    "monto" => $monto,
+                    "pagado" => $estados_pagado[$index],
+                    "estado" => $estados_generales[$index],
+                    "observaciones" => $observaciones[$index],
+                );
+            }
+
+            $response['general'] = array(
+                "id_matricula_detalle" => $rspta['id_matricula_detalle'],
+                "lectivo" => $rspta['lectivo'],
+                "nivel" => $rspta['nivel'],
+                "grado" => $rspta['grado'],
+                "seccion" => $rspta['seccion'],
+                "apoderado" => array(
+                    "tipo_documento" => $rspta['apoderado_tipo_documento'],
+                    "numerodocumento" => $rspta['apoderado_numerodocumento'],
+                    "nombreyapellido" => $rspta['apoderado_nombreyapellido'],
+                    "telefono" => $rspta['apoderado_telefono'],
+                ),
+                "alumno" => array(
+                    "tipo_documento" => $rspta['alumno_tipo_documento'],
+                    "numerodocumento" => $rspta['alumno_numerodocumento'],
+                    "nombreyapellido" => $rspta['alumno_nombreyapellido'],
+                ),
+            );
+        }
+
+        echo json_encode($response);
         break;
 
     case 'listar':
@@ -74,4 +114,3 @@ switch ($_GET["op"]) {
         }
         break;
 }
-?>
