@@ -205,10 +205,20 @@ function cargarMensualidades() {
 }
 
 function actualizarPreciosMensualidad() {
-    const precioMensualidad = $("#matricula_id").find(":selected").data("preciomensualidad");
-    // Actualiza el valor de todas las celdas con clase .precio-mensualidad
+    const precioMensualidad = parseFloat($("#matricula_id").find(":selected").data("preciomensualidad")) || 0;
+    const precioMantenimiento = parseFloat($("#matricula_id").find(":selected").data("preciomantenimiento")) || 0;
+
     document.querySelectorAll(".precio-mensualidad").forEach((input) => {
-        input.value = precioMensualidad;
+        const mantenimiento = parseInt(input.dataset.mantenimiento, 10); // Obtiene 1 o 0 del atributo data-mantenimiento
+        if (mantenimiento === 1) {
+            input.value = (precioMensualidad + precioMantenimiento).toFixed(2); // Suma mensualidad y mantenimiento
+        } else {
+            input.value = precioMensualidad.toFixed(2); // Campo vacío para mantenimiento = 0
+        }
+    });
+
+    document.querySelectorAll(".mantenimiento").forEach((input) => {
+        input.value = precioMantenimiento.toFixed(2); // Actualiza el precio de mantenimiento
     });
 }
 // TABLA MENCUlIDADES - FIN

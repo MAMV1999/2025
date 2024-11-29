@@ -40,11 +40,33 @@ $pago_observaciones = isset($_POST["pago_observaciones"]) ? limpiarcadena($_POST
 switch ($_GET["op"]) {
     case 'guardaryeditar':
         $rspta = $matriculaDetalle->guardar(
-            $apoderado_dni,$apoderado_nombreyapellido,$apoderado_telefono,$apoderado_tipo,$apoderado_documento,$apoderado_sexo,$apoderado_estado_civil,$apoderado_observaciones,
-            $alumno_dni,$alumno_nombreyapellido,$alumno_nacimiento,$alumno_sexo,$alumno_documento,$alumno_telefono,$alumno_observaciones,
-            $detalle,$matricula_id,$matricula_categoria,$matricula_observaciones,
-            $pago_numeracion,$pago_fecha,$pago_descripcion,$pago_monto,$pago_metodo_id,$pago_observaciones,
-            $_POST["mensualidad_id"],$_POST["mensualidad_precio"]
+            $apoderado_dni,
+            $apoderado_nombreyapellido,
+            $apoderado_telefono,
+            $apoderado_tipo,
+            $apoderado_documento,
+            $apoderado_sexo,
+            $apoderado_estado_civil,
+            $apoderado_observaciones,
+            $alumno_dni,
+            $alumno_nombreyapellido,
+            $alumno_nacimiento,
+            $alumno_sexo,
+            $alumno_documento,
+            $alumno_telefono,
+            $alumno_observaciones,
+            $detalle,
+            $matricula_id,
+            $matricula_categoria,
+            $matricula_observaciones,
+            $pago_numeracion,
+            $pago_fecha,
+            $pago_descripcion,
+            $pago_monto,
+            $pago_metodo_id,
+            $pago_observaciones,
+            $_POST["mensualidad_id"],
+            $_POST["mensualidad_precio"]
         );
         echo $rspta ? "Matrícula registrada correctamente" : "No se pudo registrar la matrícula";
         break;
@@ -150,10 +172,10 @@ switch ($_GET["op"]) {
             $rows .= "
                     <tr>
                         <td style='width: 10%;'><input type='text' name='mensualidad_id[]' value='{$reg->id}' class='form-control' readonly></td>
-                        <td style='width: 20%;'><input type='text' value='{$reg->nombre}' class='form-control' readonly></td>
-                        <td style='width: 30%;'><input type='text' value='{$reg->descripcion}' class='form-control' readonly></td>
-                        <td style='width: 15%;'><input type='text' name='mensualidad_precio[]' class='form-control precio-mensualidad'></td>
-                        <td style='width: 25%;'><input type='text' value='{$reg->fechavencimiento_format}' class='form-control' readonly></td>
+                        <td style='width: 20%;'><input type='text' name='mensualidad_nombre[]' value='{$reg->nombre}' class='form-control' readonly></td>
+                        <td style='width: 30%;'><input type='text' name='descripcion[]' value='{$reg->descripcion}' class='form-control' readonly></td>
+                        <td style='width: 15%;'><input type='text' name='mensualidad_precio[]' class='form-control precio-mensualidad' data-mantenimiento='{$reg->mantenimiento}'></td>
+                        <td style='width: 25%;'><input type='text' name='fechavencimiento_format[]' value='{$reg->fechavencimiento_format}' class='form-control'></td>
                     </tr>";
         }
         echo $rows;

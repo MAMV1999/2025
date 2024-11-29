@@ -233,6 +233,7 @@ class MatriculaDetalle
                     mm.nombre AS mensualidad_nombre,
                     DATE_FORMAT(mm.fechavencimiento, '%d/%m/%Y') AS fechavencimiento_format,
                     mm.descripcion AS descripcion,
+                    mm.pago_mantenimiento AS mantenimiento,
                     mm.observaciones AS observaciones,
                     mm.fechacreado AS fechacreado,
                     mm.estado AS estado,

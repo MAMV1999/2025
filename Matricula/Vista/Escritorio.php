@@ -19,6 +19,7 @@ if (!isset($_SESSION['nombre'])) {
                 <?php
                 $array = array(
                     "1" => array("nombre" => "REGISTRO MATRICULA", "link" => "matricula_detalle.php"),
+                    "2" => array("nombre" => "PAGOS MATRICULA", "link" => "Matricula_pago.php"),
                 );
                 ?>
                 <table class="table">

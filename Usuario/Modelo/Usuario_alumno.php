@@ -10,17 +10,14 @@ class Usuario_alumno
     // Método para guardar un nuevo usuario alumno
     public function guardar($id_apoderado, $id_documento, $numerodocumento, $nombreyapellido, $id_sexo, $usuario, $clave, $observaciones)
     {
-        $sql = "INSERT INTO usuario_alumno (id_apoderado, id_documento, numerodocumento, nombreyapellido, id_sexo, usuario, clave, observaciones) 
-                VALUES ('$id_apoderado', '$id_documento', '$numerodocumento', '$nombreyapellido', '$id_sexo', '$numerodocumento', '$numerodocumento', '$observaciones')";
+        $sql = "INSERT INTO usuario_alumno (id_apoderado, id_documento, numerodocumento, nombreyapellido, id_sexo, usuario, clave, observaciones) VALUES ('$id_apoderado', '$id_documento', '$numerodocumento', '$nombreyapellido', '$id_sexo', '$numerodocumento', '$numerodocumento', '$observaciones')";
         return ejecutarConsulta($sql);
     }
 
     // Método para editar un usuario alumno existente
     public function editar($id, $id_apoderado, $id_documento, $numerodocumento, $nombreyapellido, $id_sexo, $usuario, $clave, $observaciones)
     {
-        $sql = "UPDATE usuario_alumno 
-                SET id_apoderado='$id_apoderado', id_documento='$id_documento', numerodocumento='$numerodocumento', nombreyapellido='$nombreyapellido', id_sexo='$id_sexo', usuario='$usuario', clave='$clave', observaciones='$observaciones' 
-                WHERE id='$id'";
+        $sql = "UPDATE usuario_alumno SET id_apoderado='$id_apoderado', id_documento='$id_documento', numerodocumento='$numerodocumento', nombreyapellido='$nombreyapellido', id_sexo='$id_sexo', usuario='$usuario', clave='$clave', observaciones='$observaciones' WHERE id='$id'";
         return ejecutarConsulta($sql);
     }
 
