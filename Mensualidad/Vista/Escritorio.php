@@ -18,7 +18,7 @@ if (!isset($_SESSION['nombre'])) {
                 <br>
                 <?php
                 $array = array(
-                    "1" => array("nombre" => "REGISTRO MENSUALIDAD", "link" => "Mensualidad_detalle.php"),
+                    "1" => array("nombre" => "REGISTRO MENSUALIDAD X APODERADO", "link" => "Mensualidad_detalle.php"),
                 );
                 ?>
                 <table class="table">

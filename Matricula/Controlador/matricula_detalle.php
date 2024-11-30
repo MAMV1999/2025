@@ -4,6 +4,7 @@ include_once("../Modelo/matricula_detalle.php");
 $matriculaDetalle = new MatriculaDetalle();
 
 // Variables recibidas desde el formulario
+$apoderado_id = isset($_POST["apoderado_id"]) ? limpiarcadena($_POST["apoderado_id"]) : "";
 $apoderado_dni = isset($_POST["apoderado_dni"]) ? limpiarcadena($_POST["apoderado_dni"]) : "";
 $apoderado_nombreyapellido = isset($_POST["apoderado_nombreyapellido"]) ? limpiarcadena($_POST["apoderado_nombreyapellido"]) : "";
 $apoderado_telefono = isset($_POST["apoderado_telefono"]) ? limpiarcadena($_POST["apoderado_telefono"]) : "";
@@ -15,6 +16,7 @@ $apoderado_usuario = isset($_POST["apoderado_usuario"]) ? limpiarcadena($_POST["
 $apoderado_clave = isset($_POST["apoderado_clave"]) ? limpiarcadena($_POST["apoderado_clave"]) : "";
 $apoderado_observaciones = isset($_POST["apoderado_observaciones"]) ? limpiarcadena($_POST["apoderado_observaciones"]) : "";
 
+$alumno_id = isset($_POST["alumno_id"]) ? limpiarcadena($_POST["alumno_id"]) : "";
 $alumno_dni = isset($_POST["alumno_dni"]) ? limpiarcadena($_POST["alumno_dni"]) : "";
 $alumno_nombreyapellido = isset($_POST["alumno_nombreyapellido"]) ? limpiarcadena($_POST["alumno_nombreyapellido"]) : "";
 $alumno_nacimiento = isset($_POST["alumno_nacimiento"]) ? limpiarcadena($_POST["alumno_nacimiento"]) : "";
@@ -70,6 +72,21 @@ switch ($_GET["op"]) {
         );
         echo $rspta ? "Matrícula registrada correctamente" : "No se pudo registrar la matrícula";
         break;
+
+    case 'eliminar_con_validacion':
+        $id_matricula_detalle = isset($_POST["id_matricula_detalle"]) ? limpiarcadena($_POST["id_matricula_detalle"]) : "";
+        $contraseña = isset($_POST["contraseña"]) ? limpiarcadena($_POST["contraseña"]) : "";
+
+        // Validar la contraseña utilizando el modelo
+        if ($matriculaDetalle->validarContraseña($contraseña)) {
+            // Si la contraseña es válida, eliminar el registro
+            $rspta = $matriculaDetalle->eliminar($id_matricula_detalle);
+            echo $rspta ? "Registro eliminado correctamente" : "No se pudo eliminar el registro";
+        } else {
+            echo "Contraseña inválida. No se realizó ninguna acción.";
+        }
+        break;
+
 
     case 'listar_apoderado_tipos_activos':
         $rspta = $matriculaDetalle->listarApoderadoTiposActivos();
@@ -148,9 +165,10 @@ switch ($_GET["op"]) {
                 "1" => $reg->apoderado_nombre,
                 "2" => $reg->alumno_nombre,
                 "3" => $reg->pago_numeracion . ' - ' . $reg->metodo_pago_nombre,
-                "4" => $reg->matricula_detalle_estado ? 'Activo' : 'Inactivo'
+                "4" => '<button type="button" onclick="eliminarConValidacion(' . $reg->matricula_detalle_id . ')" class="btn btn-danger btn-sm">ELIMINAR</button>'
             );
         }
+
         $results = array(
             "sEcho" => 1,
             "iTotalRecords" => count($data),
@@ -165,17 +183,29 @@ switch ($_GET["op"]) {
         echo $numeracion;
         break;
 
+    case 'buscar_apoderado':
+        $dni = isset($_POST['dni']) ? limpiarcadena($_POST['dni']) : '';
+        $rspta = $matriculaDetalle->buscarApoderadoPorDNI($dni);
+        echo json_encode($rspta);
+        break;
+
+    case 'buscar_alumno':
+        $dni = isset($_POST['dni']) ? limpiarcadena($_POST['dni']) : '';
+        $rspta = $matriculaDetalle->buscarAlumnoPorDNI($dni);
+        echo json_encode($rspta);
+        break;
+
     case 'listar_mensualidades_activas':
         $rspta = $matriculaDetalle->listarMensualidadesActivas();
         $rows = "";
         while ($reg = $rspta->fetch_object()) {
             $rows .= "
                     <tr>
-                        <td style='width: 10%;'><input type='text' name='mensualidad_id[]' value='{$reg->id}' class='form-control' readonly></td>
-                        <td style='width: 20%;'><input type='text' name='mensualidad_nombre[]' value='{$reg->nombre}' class='form-control' readonly></td>
-                        <td style='width: 30%;'><input type='text' name='descripcion[]' value='{$reg->descripcion}' class='form-control' readonly></td>
-                        <td style='width: 15%;'><input type='text' name='mensualidad_precio[]' class='form-control precio-mensualidad' data-mantenimiento='{$reg->mantenimiento}'></td>
-                        <td style='width: 25%;'><input type='text' name='fechavencimiento_format[]' value='{$reg->fechavencimiento_format}' class='form-control'></td>
+                        <td style='width: 10%;'><input type='text' name='mensualidad_id[]' value='{$reg->id}' class='form-control-plaintext' readonly></td>
+                        <td style='width: 20%;'><input type='text' name='mensualidad_nombre[]' value='{$reg->nombre}' class='form-control-plaintext' readonly></td>
+                        <td style='width: 30%;'><input type='text' name='descripcion[]' value='{$reg->descripcion}' class='form-control-plaintext' readonly></td>
+                        <td style='width: 15%;'><input type='text' name='mensualidad_precio[]' class='form-control-plaintext precio-mensualidad' data-mantenimiento='{$reg->mantenimiento}'></td>
+                        <td style='width: 25%;'><input type='text' name='fechavencimiento_format[]' value='{$reg->fechavencimiento_format}' class='form-control-plaintext'></td>
                     </tr>";
         }
         echo $rows;

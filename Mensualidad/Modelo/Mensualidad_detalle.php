@@ -14,13 +14,39 @@ class Mensualidad_detalle
     }
 
     // Método para editar un registro de mensualidad existente
-    public function editar($id, $id_mensualidad_mes, $id_matricula_detalle, $monto, $pagado, $observaciones)
+    public function guardarEditarMasivo($detalles)
     {
-        $sql = "UPDATE mensualidad_detalle 
-                SET id_mensualidad_mes='$id_mensualidad_mes', id_matricula_detalle='$id_matricula_detalle', 
-                    monto='$monto', pagado='$pagado', observaciones='$observaciones' 
-                WHERE id='$id'";
-        return ejecutarConsulta($sql);
+        try {
+            foreach ($detalles as $detalle) {
+                $id = $detalle['id'];
+                $monto = $detalle['monto'];
+                $observaciones = $detalle['observaciones'];
+                $pagado = $detalle['pagado'];
+
+                // Si el ID está vacío, es un nuevo registro
+                if (empty($id)) {
+                    $sql = "INSERT INTO mensualidad_detalle 
+                            (id_mensualidad_mes, id_matricula_detalle, monto, pagado, observaciones)
+                            VALUES ('$detalle[id_mensualidad_mes]', '$detalle[id_matricula_detalle]', '$monto', '$pagado', '$observaciones')";
+                } else {
+                    // Actualización de registro existente
+                    $sql = "UPDATE mensualidad_detalle 
+                            SET monto = '$monto', pagado = '$pagado', observaciones = '$observaciones' 
+                            WHERE id = '$id'";
+                }
+
+                if (!ejecutarConsulta($sql)) {
+                    // Manejo simple de error, puedes definir tu propia forma de manejar excepciones si lo deseas.
+                    return false;
+                }
+            }
+
+            return true;
+
+        } catch (Exception $e) {
+            // Devuelve falso si hay algún error
+            return false;
+        }
     }
 
     // Método para mostrar los detalles de una mensualidad específica
@@ -88,21 +114,6 @@ class Mensualidad_detalle
                 LEFT JOIN institucion_lectivo il ON iniv.id_institucion_lectivo = il.id
                 WHERE md.estado = '1'
                 GROUP BY mdet.id, il.nombre, iniv.nombre, ig.nombre, isec.nombre, uap.nombreyapellido, ual.nombreyapellido";
-        return ejecutarConsulta($sql);
-    }
-
-
-    // Método para desactivar un registro de mensualidad
-    public function desactivar($id)
-    {
-        $sql = "UPDATE mensualidad_detalle SET estado='0' WHERE id='$id'";
-        return ejecutarConsulta($sql);
-    }
-
-    // Método para activar un registro de mensualidad
-    public function activar($id)
-    {
-        $sql = "UPDATE mensualidad_detalle SET estado='1' WHERE id='$id'";
         return ejecutarConsulta($sql);
     }
 

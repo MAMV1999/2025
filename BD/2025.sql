@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-11-2024 a las 02:22:50
+-- Tiempo de generación: 30-11-2024 a las 17:32:48
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -144,6 +144,20 @@ CREATE TABLE `institucion_seccion` (
   `id` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `id_institucion_grado` int(11) NOT NULL,
+  `observaciones` text,
+  `fechacreado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `estado` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `institucion_validacion`
+--
+
+CREATE TABLE `institucion_validacion` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
   `observaciones` text,
   `fechacreado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `estado` tinyint(1) NOT NULL DEFAULT '1'
@@ -491,6 +505,12 @@ ALTER TABLE `institucion_seccion`
   ADD KEY `id_institucion_grado` (`id_institucion_grado`);
 
 --
+-- Indices de la tabla `institucion_validacion`
+--
+ALTER TABLE `institucion_validacion`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `matricula`
 --
 ALTER TABLE `matricula`
@@ -660,6 +680,12 @@ ALTER TABLE `institucion_nivel`
 --
 ALTER TABLE `institucion_seccion`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT de la tabla `institucion_validacion`
+--
+ALTER TABLE `institucion_validacion`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `matricula`

@@ -12,18 +12,10 @@ $observaciones = isset($_POST["observaciones"]) ? limpiarcadena($_POST["observac
 
 switch ($_GET["op"]) {
     case 'guardaryeditar':
-        if (empty($id)) {
-            $rspta = $mensualidadDetalle->guardar($id_mensualidad_mes, $id_matricula_detalle, $monto, $pagado, $observaciones);
-            echo $rspta ? "Mensualidad registrada correctamente" : "No se pudo registrar la mensualidad";
-        } else {
-            $rspta = $mensualidadDetalle->editar($id, $id_mensualidad_mes, $id_matricula_detalle, $monto, $pagado, $observaciones);
-            echo $rspta ? "Mensualidad actualizada correctamente" : "No se pudo actualizar la mensualidad";
-        }
-        break;
-
-    case 'desactivar':
-        $rspta = $mensualidadDetalle->desactivar($id);
-        echo $rspta ? "Mensualidad desactivada correctamente" : "No se pudo desactivar la mensualidad";
+        $detalles = isset($_POST['detalles']) ? json_decode($_POST['detalles'], true) : [];
+        $rspta = $mensualidadDetalle->guardarEditarMasivo($detalles);
+    
+        echo $rspta ? "Registros actualizados correctamente" : "No se pudieron actualizar todos los registros";
         break;
 
     case 'mostrar':
@@ -87,8 +79,9 @@ switch ($_GET["op"]) {
                 "2" => $reg->apoderado,
                 "3" => $reg->alumno,
                 "4" => ($reg->estado) ?
-                    '<button class="btn btn-warning btn-sm" onclick="mostrar(' . $reg->id . ')">EDITAR</button> <button class="btn btn-danger btn-sm" onclick="desactivar(' . $reg->id . ')">DESACTIVAR</button>' :
-                    '<button class="btn btn-warning btn-sm" onclick="mostrar(' . $reg->id . ')">EDITAR</button> <button class="btn btn-primary btn-sm" onclick="activar(' . $reg->id . ')">ACTIVAR</button>'
+                    '<button class="btn btn-warning btn-sm" onclick="mostrar(' . $reg->id . ')">EDITAR</button>'
+                    :
+                    '<button class="btn btn-warning btn-sm" onclick="mostrar(' . $reg->id . ')">EDITAR</button>'
             );
         }
         $results = array(

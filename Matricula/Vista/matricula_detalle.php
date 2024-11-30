@@ -80,64 +80,72 @@ if (!isset($_SESSION['nombre'])) {
 
                         <!-- ALUMNO -->
                         <div class="tab-pane fade" id="alumno-tab-pane" role="tabpanel" aria-labelledby="alumno-tab">
+                            <input type="hidden" id="alumno_id" name="alumno_id" class="form-control" placeholder="alumno_id">
                             <div class="p-3">
-                                <label for="alumno_documento" class="form-label"><b>Tipo de Documento:</b></label>
+                                <label for="alumno_documento" class="form-label"><b>TIPO DE DOCUMENTO:</b></label>
                                 <select id="alumno_documento" name="alumno_documento" class="form-control" data-live-search="true"></select>
                             </div>
                             <div class="p-3">
                                 <label for="alumno_dni" class="form-label"><b>DNI:</b></label>
-                                <input type="text" id="alumno_dni" name="alumno_dni" class="form-control" placeholder="DNI">
+                                <div class="input-group">
+                                    <input type="text" id="alumno_dni" name="alumno_dni" class="form-control" placeholder="DNI del alumno">
+                                    <button type="button" class="btn btn-primary" onclick="buscarAlumno()">BUSCAR</button>
+                                </div>
                             </div>
                             <div class="p-3">
-                                <label for="alumno_nombreyapellido" class="form-label"><b>Nombre y Apellido:</b></label>
+                                <label for="alumno_nombreyapellido" class="form-label"><b>NOMBRE Y APELLIDO:</b></label>
                                 <input type="text" id="alumno_nombreyapellido" name="alumno_nombreyapellido" class="form-control" placeholder="Nombre y Apellido">
                             </div>
                             <div class="p-3">
-                                <label for="alumno_sexo" class="form-label"><b>Sexo:</b></label>
+                                <label for="alumno_sexo" class="form-label"><b>SEXO:</b></label>
                                 <select id="alumno_sexo" name="alumno_sexo" class="form-control" data-live-search="true"></select>
                             </div>
                             <div class="p-3">
-                                <label for="alumno_nacimiento" class="form-label"><b>Fecha de Nacimiento:</b></label>
+                                <label for="alumno_nacimiento" class="form-label"><b>FECHA DE NACIMIENTO:</b></label>
                                 <input type="date" id="alumno_nacimiento" name="alumno_nacimiento" class="form-control">
                             </div>
                             <div class="p-3">
-                                <label for="alumno_observaciones" class="form-label"><b>Observaciones:</b></label>
+                                <label for="alumno_observaciones" class="form-label"><b>OBSERVACIONES:</b></label>
                                 <textarea id="alumno_observaciones" name="alumno_observaciones" class="form-control" placeholder="Observaciones - (Opcional)"></textarea>
                             </div>
                         </div>
 
                         <!-- APODERADO -->
                         <div class="tab-pane fade" id="apoderado-tab-pane" role="tabpanel" aria-labelledby="apoderado-tab">
+                            <input type="hidden" id="apoderado_id" name="apoderado_id" class="form-control" placeholder="apoderado_id">
                             <div class="p-3">
-                                <label for="apoderado_tipo" class="form-label"><b>Tipo de Apoderado:</b></label>
+                                <label for="apoderado_tipo" class="form-label"><b>TIPO DE APODERADO:</b></label>
                                 <select id="apoderado_tipo" name="apoderado_tipo" class="form-control" data-live-search="true"></select>
                             </div>
                             <div class="p-3">
-                                <label for="apoderado_documento" class="form-label"><b>Tipo de Documento:</b></label>
+                                <label for="apoderado_documento" class="form-label"><b>TIPO DE DOCUMENTO:</b></label>
                                 <select id="apoderado_documento" name="apoderado_documento" class="form-control" data-live-search="true"></select>
                             </div>
                             <div class="p-3">
-                                <label for="apoderado_dni" class="form-label"><b>Número de Documento:</b></label>
-                                <input type="text" id="apoderado_dni" name="apoderado_dni" class="form-control" placeholder="Número de Documento">
+                                <label for="apoderado_dni" class="form-label"><b>NÚMERO DE DOCUMENTO:</b></label>
+                                <div class="input-group">
+                                    <input type="text" id="apoderado_dni" name="apoderado_dni" class="form-control" placeholder="Número de Documento">
+                                    <button type="button" class="btn btn-primary" onclick="buscarApoderado()">BUSCAR</button>
+                                </div>
                             </div>
                             <div class="p-3">
-                                <label for="apoderado_nombreyapellido" class="form-label"><b>Nombre y Apellido:</b></label>
+                                <label for="apoderado_nombreyapellido" class="form-label"><b>NOMBRE Y APELLIDO:</b></label>
                                 <input type="text" id="apoderado_nombreyapellido" name="apoderado_nombreyapellido" class="form-control" placeholder="Nombre y Apellido">
                             </div>
                             <div class="p-3">
-                                <label for="apoderado_telefono" class="form-label"><b>Teléfono:</b></label>
+                                <label for="apoderado_telefono" class="form-label"><b>TELÉFONO:</b></label>
                                 <input type="text" id="apoderado_telefono" name="apoderado_telefono" class="form-control" placeholder="Teléfono">
                             </div>
                             <div class="p-3">
-                                <label for="apoderado_sexo" class="form-label"><b>Sexo:</b></label>
+                                <label for="apoderado_sexo" class="form-label"><b>SEXO:</b></label>
                                 <select id="apoderado_sexo" name="apoderado_sexo" class="form-control" data-live-search="true"></select>
                             </div>
                             <div class="p-3">
-                                <label for="apoderado_estado_civil" class="form-label"><b>Estado Civil:</b></label>
+                                <label for="apoderado_estado_civil" class="form-label"><b>ESTADO CIVIL:</b></label>
                                 <select id="apoderado_estado_civil" name="apoderado_estado_civil" class="form-control" data-live-search="true"></select>
                             </div>
                             <div class="p-3">
-                                <label for="apoderado_observaciones" class="form-label"><b>Observaciones:</b></label>
+                                <label for="apoderado_observaciones" class="form-label"><b>OBSERVACIONES:</b></label>
                                 <textarea id="apoderado_observaciones" name="apoderado_observaciones" class="form-control" placeholder="Observaciones - (Opcional)"></textarea>
                             </div>
                         </div>
@@ -145,27 +153,27 @@ if (!isset($_SESSION['nombre'])) {
                         <!-- PAGO -->
                         <div class="tab-pane fade" id="pago-tab-pane" role="tabpanel" aria-labelledby="pago-tab">
                             <div class="p-3">
-                                <label for="pago_numeracion" class="form-label"><b>Numeración:</b></label>
+                                <label for="pago_numeracion" class="form-label"><b>NUMERACIÓN:</b></label>
                                 <input type="text" id="pago_numeracion" name="pago_numeracion" class="form-control" placeholder="Numeración">
                             </div>
                             <div class="p-3">
-                                <label for="pago_fecha" class="form-label"><b>Fecha:</b></label>
+                                <label for="pago_fecha" class="form-label"><b>FECHA:</b></label>
                                 <input type="date" id="pago_fecha" name="pago_fecha" class="form-control">
                             </div>
                             <div class="p-3">
-                                <label for="pago_descripcion" class="form-label"><b>Descripción:</b></label>
+                                <label for="pago_descripcion" class="form-label"><b>DESCRIPCIÓN:</b></label>
                                 <textarea style="height: 200px;" id="pago_descripcion" name="pago_descripcion" class="form-control" placeholder="Descripción - (Opcional)"></textarea>
                             </div>
                             <div class="p-3">
-                                <label for="pago_metodo_id" class="form-label"><b>Método de Pago:</b></label>
+                                <label for="pago_metodo_id" class="form-label"><b>MÉTODO DE PAGO:</b></label>
                                 <select id="pago_metodo_id" name="pago_metodo_id" class="form-control" data-live-search="true"></select>
                             </div>
                             <div class="p-3">
-                                <label for="pago_monto" class="form-label"><b>Monto:</b></label>
+                                <label for="pago_monto" class="form-label"><b>MONTO:</b></label>
                                 <input type="text" id="pago_monto" name="pago_monto" class="form-control" placeholder="Monto">
                             </div>
                             <div class="p-3">
-                                <label for="pago_observaciones" class="form-label"><b>Observaciones:</b></label>
+                                <label for="pago_observaciones" class="form-label"><b>OBSERVACIONES:</b></label>
                                 <textarea id="pago_observaciones" name="pago_observaciones" class="form-control" placeholder="Observaciones - (Opcional)"></textarea>
                             </div>
                         </div>

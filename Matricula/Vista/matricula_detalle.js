@@ -223,4 +223,92 @@ function actualizarPreciosMensualidad() {
 }
 // TABLA MENCUlIDADES - FIN
 
+function eliminarConValidacion(id) {
+    let contraseña = prompt("Ingrese la contraseña para validar la eliminación:");
+    if (contraseña !== null && contraseña !== "") {
+        $.ajax({
+            type: "POST",
+            url: link + "eliminar_con_validacion",
+            data: { id_matricula_detalle: id, contraseña: contraseña },
+            success: function (datos) {
+                alert(datos);
+                tabla.ajax.reload();
+            },
+            error: function () {
+                alert("Ocurrió un error al intentar eliminar.");
+            }
+        });
+    } else {
+        alert("Operación cancelada. No se ingresó contraseña.");
+    }
+}
+
+function buscarApoderado() {
+    var dni = $("#apoderado_dni").val();
+    if (!dni) {
+        alert("Por favor, ingrese el número de documento.");
+        return;
+    }
+
+    $.ajax({
+        type: "POST",
+        url: link + "buscar_apoderado",
+        data: { dni: dni },
+        success: function (response) {
+            var data = JSON.parse(response);
+            if (data && data.id) {
+                // Rellenar los campos con la información del apoderado
+                $("#apoderado_id").val(data.id);
+                $("#apoderado_nombreyapellido").val(data.nombreyapellido);
+                $("#apoderado_telefono").val(data.telefono);
+                $("#apoderado_tipo").val(data.id_apoderado_tipo).change();
+                $("#apoderado_documento").val(data.id_documento).change();
+                $("#apoderado_sexo").val(data.id_sexo).change();
+                $("#apoderado_estado_civil").val(data.id_estado_civil).change();
+                $("#apoderado_observaciones").val(data.observaciones);
+            } else {
+                alert("No se encontró un apoderado con ese número de documento.");
+                $("#apoderado_dni").val("");
+            }
+        },
+        error: function () {
+            alert("Ocurrió un error al buscar al apoderado.");
+        }
+    });
+}
+
+function buscarAlumno() {
+    var dni = $("#alumno_dni").val();
+    if (!dni) {
+        alert("Por favor, ingrese el número de documento del alumno.");
+        return;
+    }
+
+    $.ajax({
+        type: "POST",
+        url: link + "buscar_alumno",
+        data: { dni: dni },
+        success: function (response) {
+            var data = JSON.parse(response);
+            if (data && data.id) {
+                // Rellenar los campos con la información del alumno
+                $("#alumno_id").val(data.id);
+                $("#alumno_nombreyapellido").val(data.nombreyapellido);
+                $("#alumno_nacimiento").val(data.nacimiento);
+                $("#alumno_documento").val(data.id_documento).change();
+                $("#alumno_sexo").val(data.id_sexo).change();
+                $("#alumno_telefono").val(data.telefono);
+                $("#alumno_observaciones").val(data.observaciones);
+            } else {
+                alert("No se encontró un alumno con ese número de documento.");
+            }
+        },
+        error: function () {
+            alert("Ocurrió un error al buscar al alumno.");
+        }
+    });
+}
+
+
+
 init();

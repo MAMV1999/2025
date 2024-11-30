@@ -73,19 +73,32 @@ function MostrarFormulario() {
 
 function guardaryeditar(e) {
     e.preventDefault();
+    let detalles = [];
+
+    $("#detallesRelacionados tr").each(function () {
+        let id = $(this).find("input[name^='id']").val();
+        let monto = $(this).find("input[name^='monto']").val();
+        let observaciones = $(this).find("input[name^='observaciones']").val();
+        let pagado = $(this).find("input[name^='pagado']:checked").val();
+
+        detalles.push({
+            id: id,
+            monto: monto,
+            observaciones: observaciones,
+            pagado: pagado
+        });
+    });
 
     $.ajax({
         url: link + "guardaryeditar",
         type: "POST",
-        data: $("#frm_form").serialize(),
-
-        success: function (datos) {
-            alert(datos);
+        data: { detalles: JSON.stringify(detalles) },
+        success: function (response) {
+            alert(response);
             MostrarListado();
             tabla.ajax.reload();
-        },
+        }
     });
-    limpiar();
 }
 
 function mostrar(id) {
@@ -122,7 +135,7 @@ function mostrar(id) {
                 data.detalles.forEach((item, index) => {
                     detalles += `
                         <tr>
-                            <td style='width: 5%;'>${item.id_mensualidad_mes}</td>
+                            <td style='width: 5%;'>${item.id_mensualidad_mes}<input type="hidden" readonly class="form-control" name="id${index}" id="id${index}" value="${item.id}"></td>
                             <td style='width: 15%;'>${item.mes}</td>
                             <td style='width: 15%;'>${item.fechavencimiento}</td>
                             <td style='width: 15%;'><input type="text" readonly class="form-control" name="monto${index}" id="monto${index}" value="${item.monto}"></td>
@@ -147,44 +160,6 @@ function mostrar(id) {
             }
         }
     );
-}
-
-function activar(id) {
-    let condicion = confirm("¿ACTIVAR?");
-    if (condicion === true) {
-        $.ajax({
-            type: "POST",
-            url: link + "activar",
-            data: {
-                id: id,
-            },
-            success: function (datos) {
-                alert(datos);
-                tabla.ajax.reload();
-            },
-        });
-    } else {
-        alert("CANCELADO");
-    }
-}
-
-function desactivar(id) {
-    let condicion = confirm("¿DESACTIVAR?");
-    if (condicion === true) {
-        $.ajax({
-            type: "POST",
-            url: link + "desactivar",
-            data: {
-                id: id,
-            },
-            success: function (datos) {
-                alert(datos);
-                tabla.ajax.reload();
-            },
-        });
-    } else {
-        alert("CANCELADO");
-    }
 }
 
 init();

@@ -108,6 +108,19 @@ class MatriculaDetalle
         return false; // Falló en algún punto
     }
 
+    public function buscarApoderadoPorDNI($dni)
+    {
+        $sql = "SELECT * FROM usuario_apoderado WHERE numerodocumento = '$dni' AND estado = '1'";
+        $result = ejecutarConsultaSimpleFila($sql);
+        return $result ? $result : [];
+    }
+
+    public function buscarAlumnoPorDNI($dni)
+    {
+        $sql = "SELECT * FROM usuario_alumno WHERE numerodocumento = '$dni' AND estado = '1'";
+        $result = ejecutarConsultaSimpleFila($sql);
+        return $result ? $result : [];
+    }
 
     public function listar()
     {
@@ -232,7 +245,10 @@ class MatriculaDetalle
                     mm.id AS id,
                     mm.nombre AS mensualidad_nombre,
                     DATE_FORMAT(mm.fechavencimiento, '%d/%m/%Y') AS fechavencimiento_format,
-                    mm.descripcion AS descripcion,
+                    CASE 
+                        WHEN mm.pago_mantenimiento = 1 THEN CONCAT(mm.descripcion, ' + MANTENIMIENTO')
+                        ELSE mm.descripcion
+                    END AS descripcion,
                     mm.pago_mantenimiento AS mantenimiento,
                     mm.observaciones AS observaciones,
                     mm.fechacreado AS fechacreado,
@@ -244,5 +260,44 @@ class MatriculaDetalle
                 JOIN 
                     institucion_lectivo il ON mm.id_institucion_lectivo = il.id;";
         return ejecutarConsulta($sql);
+    }
+    
+    public function validarContraseña($contraseña)
+    {
+        $sql = "SELECT COUNT(*) AS total FROM institucion_validacion WHERE nombre = '$contraseña' AND estado = '1'";
+        $resultado = ejecutarConsultaSimpleFila($sql);
+        return $resultado['total'] > 0;
+    }
+
+
+    public function eliminar($id_matricula_detalle)
+    {
+        // Obtener los IDs de usuario_apoderado y usuario_alumno desde matricula_detalle
+        $sql_obtener_ids = "SELECT id_usuario_apoderado, id_usuario_alumno FROM matricula_detalle WHERE id = '$id_matricula_detalle'";
+        $resultado = ejecutarConsultaSimpleFila($sql_obtener_ids);
+        $id_apoderado = $resultado['id_usuario_apoderado'];
+        $id_alumno = $resultado['id_usuario_alumno'];
+
+        // Eliminar registros relacionados en mensualidad_detalle
+        $sql_mensualidad_detalle = "DELETE FROM mensualidad_detalle WHERE id_matricula_detalle = '$id_matricula_detalle'";
+        ejecutarConsulta($sql_mensualidad_detalle);
+
+        // Eliminar registros relacionados en matricula_pago
+        $sql_matricula_pago = "DELETE FROM matricula_pago WHERE id_matricula_detalle = '$id_matricula_detalle'";
+        ejecutarConsulta($sql_matricula_pago);
+
+        // Eliminar registro en matricula_detalle
+        $sql_matricula_detalle = "DELETE FROM matricula_detalle WHERE id = '$id_matricula_detalle'";
+        ejecutarConsulta($sql_matricula_detalle);
+
+        // Eliminar registros relacionados en usuario_alumno
+        $sql_alumno = "DELETE FROM usuario_alumno WHERE id = '$id_alumno'";
+        ejecutarConsulta($sql_alumno);
+
+        // Eliminar registros relacionados en usuario_apoderado
+        $sql_apoderado = "DELETE FROM usuario_apoderado WHERE id = '$id_apoderado'";
+        ejecutarConsulta($sql_apoderado);
+
+        return true;
     }
 }
