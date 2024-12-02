@@ -18,13 +18,13 @@ if (!isset($_SESSION['nombre'])) {
             <table class="table" id="myTable">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>NUMERACIÓN</th>
+                        <th>N°</th>
                         <th>FECHA</th>
-                        <th>DESCRIPCIÓN</th>
+                        <th>NUMERACION</th>
+                        <th>APODERADO</th>
                         <th>MONTO</th>
-                        <th>MÉTODO DE PAGO</th>
-                        <th>ESTADO</th>
+                        <th>METODO</th>
+                        <th>ACCIONES</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -65,7 +65,7 @@ if (!isset($_SESSION['nombre'])) {
             <div class="p-3">
                 <label for="descripcion" class="form-label"><b>DESCRIPCIÓN:</b></label>
                 <div class="input-group">
-                    <textarea id="descripcion" name="descripcion" placeholder="Descripción" class="form-control"></textarea>
+                    <textarea style="height: 250px;" id="descripcion" name="descripcion" placeholder="Descripción" class="form-control"></textarea>
                 </div>
             </div>
 

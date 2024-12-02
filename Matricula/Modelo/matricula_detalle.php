@@ -33,54 +33,53 @@ class MatriculaDetalle
         $pago_observaciones,
 
         $mensualidad_id, // Array con los mensualidad_id de las mensualidades
-        $mensualidad_precio // Array con los mensualidad_precio de las mensualidades
+        $mensualidad_precio, // Array con los mensualidad_precio de las mensualidades
+        $apoderado_id = null, // ID de apoderado (si ya existe)
+        $alumno_id = null // ID de alumno (si ya existe)
     ) {
-        // Guardar usuario_apoderado
-        $sql_apoderado = "INSERT INTO usuario_apoderado (numerodocumento, nombreyapellido, telefono, id_apoderado_tipo, id_documento, id_sexo, id_estado_civil, usuario, clave, observaciones, estado) VALUES ('$apoderado_dni', '$apoderado_nombreyapellido', '$apoderado_telefono', '$apoderado_tipo', '$apoderado_documento', '$apoderado_sexo', '$apoderado_estado_civil', '$apoderado_dni', '$apoderado_dni', '$apoderado_observaciones', '1')";
-        $apoderado_id = ejecutarConsulta_retornarID($sql_apoderado);
+        // Validar si ya existe el ID del apoderado
+        if (!$apoderado_id) {
+            $sql_apoderado = "INSERT INTO usuario_apoderado (numerodocumento, nombreyapellido, telefono, id_apoderado_tipo, id_documento, id_sexo, id_estado_civil, usuario, clave, observaciones, estado) VALUES ('$apoderado_dni', '$apoderado_nombreyapellido', '$apoderado_telefono', '$apoderado_tipo', '$apoderado_documento', '$apoderado_sexo', '$apoderado_estado_civil', '$apoderado_dni', '$apoderado_dni', '$apoderado_observaciones', '1')";
+            $apoderado_id = ejecutarConsulta_retornarID($sql_apoderado);
 
-        if ($apoderado_id) {
-            // Guardar usuario_alumno
+            if (!$apoderado_id) {
+                return false; // Falló al guardar apoderado
+            }
+        }
+
+        // Validar si ya existe el ID del alumno
+        if (!$alumno_id) {
             $sql_alumno = "INSERT INTO usuario_alumno (id_apoderado, numerodocumento, nombreyapellido, nacimiento, id_documento, id_sexo, telefono, usuario, clave, observaciones, estado) VALUES ('$apoderado_id', '$alumno_dni', '$alumno_nombreyapellido', '$alumno_nacimiento', '$alumno_documento', '$alumno_sexo', '$alumno_telefono', '$alumno_dni', '$alumno_dni', '$alumno_observaciones', '1')";
             $alumno_id = ejecutarConsulta_retornarID($sql_alumno);
 
-            if ($alumno_id) {
-                // Guardar matricula_detalle
-                $sql_matricula_detalle = "INSERT INTO matricula_detalle (id_usuario_apoderado, id_usuario_alumno, descripcion, id_matricula, id_matricula_categoria, observaciones, estado) VALUES ('$apoderado_id', '$alumno_id', '$detalle', '$matricula_id', '$matricula_categoria', '$matricula_observaciones', '1')";
-                $matricula_detalle_id = ejecutarConsulta_retornarID($sql_matricula_detalle);
+            if (!$alumno_id) {
+                // Eliminar apoderado si falla la creación del alumno
+                $sql_eliminar_apoderado = "DELETE FROM usuario_apoderado WHERE id = '$apoderado_id'";
+                ejecutarConsulta($sql_eliminar_apoderado);
+                return false;
+            }
+        }
 
-                if ($matricula_detalle_id) {
-                    // Guardar matricula_pago
-                    $sql_matricula_pago = "INSERT INTO matricula_pago (id_matricula_detalle, numeracion, fecha, descripcion, monto, id_matricula_metodo_pago, observaciones, estado) VALUES ('$matricula_detalle_id', '$pago_numeracion', '$pago_fecha', '$pago_descripcion', '$pago_monto', '$pago_metodo_id', '$pago_observaciones', '1')";
-                    $pago_id = ejecutarConsulta_retornarID($sql_matricula_pago);
+        // Guardar matricula_detalle
+        $sql_matricula_detalle = "INSERT INTO matricula_detalle (id_usuario_apoderado, id_usuario_alumno, descripcion, id_matricula, id_matricula_categoria, observaciones, estado) VALUES ('$apoderado_id', '$alumno_id', '$detalle', '$matricula_id', '$matricula_categoria', '$matricula_observaciones', '1')";
+        $matricula_detalle_id = ejecutarConsulta_retornarID($sql_matricula_detalle);
 
-                    if ($pago_id) {
-                        // Guardar varias filas en mensualidad_detalle
-                        foreach ($mensualidad_id as $index => $mensualidad_mes_id) {
-                            $precio = $mensualidad_precio[$index];
-                            $sql_mensualidad_detalle = "INSERT INTO mensualidad_detalle (id_mensualidad_mes, id_matricula_detalle, monto, pagado, observaciones, estado) VALUES ('$mensualidad_mes_id', '$matricula_detalle_id', '$precio', '0', '', '1')";
+        if ($matricula_detalle_id) {
+            // Guardar matricula_pago
+            $sql_matricula_pago = "INSERT INTO matricula_pago (id_matricula_detalle, numeracion, fecha, descripcion, monto, id_matricula_metodo_pago, observaciones, estado) VALUES ('$matricula_detalle_id', '$pago_numeracion', '$pago_fecha', '$pago_descripcion', '$pago_monto', '$pago_metodo_id', '$pago_observaciones', '1')";
+            $pago_id = ejecutarConsulta_retornarID($sql_matricula_pago);
 
-                            if (!ejecutarConsulta($sql_mensualidad_detalle)) {
-                                // Si falla, eliminar todos los registros creados
-                                $sql_eliminar_pago = "DELETE FROM matricula_pago WHERE id = '$pago_id'";
-                                ejecutarConsulta($sql_eliminar_pago);
+            if ($pago_id) {
+                // Guardar varias filas en mensualidad_detalle
+                foreach ($mensualidad_id as $index => $mensualidad_mes_id) {
+                    $precio = $mensualidad_precio[$index];
+                    $sql_mensualidad_detalle = "INSERT INTO mensualidad_detalle (id_mensualidad_mes, id_matricula_detalle, monto, pagado, observaciones, estado) VALUES ('$mensualidad_mes_id', '$matricula_detalle_id', '$precio', '0', '', '1')";
 
-                                $sql_eliminar_matricula_detalle = "DELETE FROM matricula_detalle WHERE id = '$matricula_detalle_id'";
-                                ejecutarConsulta($sql_eliminar_matricula_detalle);
+                    if (!ejecutarConsulta($sql_mensualidad_detalle)) {
+                        // Si falla, eliminar todos los registros creados
+                        $sql_eliminar_pago = "DELETE FROM matricula_pago WHERE id = '$pago_id'";
+                        ejecutarConsulta($sql_eliminar_pago);
 
-                                $sql_eliminar_alumno = "DELETE FROM usuario_alumno WHERE id = '$alumno_id'";
-                                ejecutarConsulta($sql_eliminar_alumno);
-
-                                $sql_eliminar_apoderado = "DELETE FROM usuario_apoderado WHERE id = '$apoderado_id'";
-                                ejecutarConsulta($sql_eliminar_apoderado);
-
-                                return false;
-                            }
-                        }
-
-                        return true; // Todo se guardó correctamente
-                    } else {
-                        // Eliminar matricula_detalle si falla matricula_pago
                         $sql_eliminar_matricula_detalle = "DELETE FROM matricula_detalle WHERE id = '$matricula_detalle_id'";
                         ejecutarConsulta($sql_eliminar_matricula_detalle);
 
@@ -89,24 +88,35 @@ class MatriculaDetalle
 
                         $sql_eliminar_apoderado = "DELETE FROM usuario_apoderado WHERE id = '$apoderado_id'";
                         ejecutarConsulta($sql_eliminar_apoderado);
-                    }
-                } else {
-                    // Eliminar usuario_alumno si falla matricula_detalle
-                    $sql_eliminar_alumno = "DELETE FROM usuario_alumno WHERE id = '$alumno_id'";
-                    ejecutarConsulta($sql_eliminar_alumno);
 
-                    $sql_eliminar_apoderado = "DELETE FROM usuario_apoderado WHERE id = '$apoderado_id'";
-                    ejecutarConsulta($sql_eliminar_apoderado);
+                        return false;
+                    }
                 }
+
+                return true; // Todo se guardó correctamente
             } else {
-                // Eliminar usuario_apoderado si falla usuario_alumno
+                // Eliminar matricula_detalle si falla matricula_pago
+                $sql_eliminar_matricula_detalle = "DELETE FROM matricula_detalle WHERE id = '$matricula_detalle_id'";
+                ejecutarConsulta($sql_eliminar_matricula_detalle);
+
+                $sql_eliminar_alumno = "DELETE FROM usuario_alumno WHERE id = '$alumno_id'";
+                ejecutarConsulta($sql_eliminar_alumno);
+
                 $sql_eliminar_apoderado = "DELETE FROM usuario_apoderado WHERE id = '$apoderado_id'";
                 ejecutarConsulta($sql_eliminar_apoderado);
             }
+        } else {
+            // Eliminar usuario_alumno si falla matricula_detalle
+            $sql_eliminar_alumno = "DELETE FROM usuario_alumno WHERE id = '$alumno_id'";
+            ejecutarConsulta($sql_eliminar_alumno);
+
+            $sql_eliminar_apoderado = "DELETE FROM usuario_apoderado WHERE id = '$apoderado_id'";
+            ejecutarConsulta($sql_eliminar_apoderado);
         }
 
         return false; // Falló en algún punto
     }
+
 
     public function buscarApoderadoPorDNI($dni)
     {
@@ -261,7 +271,7 @@ class MatriculaDetalle
                     institucion_lectivo il ON mm.id_institucion_lectivo = il.id;";
         return ejecutarConsulta($sql);
     }
-    
+
     public function validarContraseña($contraseña)
     {
         $sql = "SELECT COUNT(*) AS total FROM institucion_validacion WHERE nombre = '$contraseña' AND estado = '1'";

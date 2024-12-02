@@ -67,7 +67,7 @@ class Mensualidad_detalle
                     ual.nombreyapellido AS alumno_nombreyapellido,
                     GROUP_CONCAT(md.id) AS ids,
                     GROUP_CONCAT(md.id_mensualidad_mes) AS ids_mensualidad_mes,
-                    GROUP_CONCAT(CONCAT(mm.nombre, ' (', il.nombre, ')')) AS meses,
+                    GROUP_CONCAT(CONCAT(mm.nombre, ' ', il.nombre)) AS meses,
                     GROUP_CONCAT(DATE_FORMAT(mm.fechavencimiento, '%d/%m/%Y')) AS fechas_vencimiento,
                     GROUP_CONCAT(md.monto) AS montos,
                     GROUP_CONCAT(md.pagado) AS estados_pagado,

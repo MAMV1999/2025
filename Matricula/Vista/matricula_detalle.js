@@ -153,7 +153,12 @@ function InformacionDetalle() {
     var preciomantenimiento = selectedOption.data('preciomantenimiento');
     var observaciones = selectedOption.data('observaciones');
 
-    var info_matricula = 'MATRICULA ' + lectivo + ' - IEP. EBENEZER\n' +
+    var now = new Date();
+    var day = ("0" + now.getDate()).slice(-2);
+    var month = ("0" + (now.getMonth() + 1)).slice(-2);
+    var today = (day) + "/" + (month) + "/" + now.getFullYear();
+
+    var info_matricula = 'MATRICULA ' + lectivo +' - '+ today+'\n' +
         'NIVEL: ' + nivel + ' - GRADO: ' + grado + ' - SECCION: ' + seccion + '\n\n' +
         'Precio Matricula: S./' + preciomatricula + '\n' +
         'Precio Mensualidad: S./' + preciomensualidad + '\n' +

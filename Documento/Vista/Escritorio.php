@@ -63,6 +63,7 @@ if (!isset($_SESSION['nombre'])) {
                         $array = array(
                             "1" => array("nombre" => "RESPONSABLES DE DOCUMENTOS", "link" => "documento_responsable.php"),
                             "2" => array("nombre" => "DOCUMENTOS", "link" => "documento.php"),
+                            "3" => array("nombre" => "ESTADO DE ENTREGA", "link" => "documento_estado.php"),
                         );
                         ?>
                         <table class="table">

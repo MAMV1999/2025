@@ -70,7 +70,7 @@ if (!isset($_SESSION['nombre'])) {
                             </div>
                             <div class="p-3">
                                 <label for="detalle" class="form-label"><b>DETALLE:</b></label>
-                                <textarea style="height: 200px;" name="detalle" id="detalle" class="form-control" placeholder="Observaciones - (Opcional)"></textarea>
+                                <textarea style="height: 250px;" name="detalle" id="detalle" class="form-control" placeholder="Observaciones - (Opcional)"></textarea>
                             </div>
                             <div class="p-3">
                                 <label for="matricula_observaciones" class="form-label"><b>OBSERVACIONES:</b></label>
@@ -162,7 +162,7 @@ if (!isset($_SESSION['nombre'])) {
                             </div>
                             <div class="p-3">
                                 <label for="pago_descripcion" class="form-label"><b>DESCRIPCIÓN:</b></label>
-                                <textarea style="height: 200px;" id="pago_descripcion" name="pago_descripcion" class="form-control" placeholder="Descripción - (Opcional)"></textarea>
+                                <textarea style="height: 250px;" id="pago_descripcion" name="pago_descripcion" class="form-control" placeholder="Descripción - (Opcional)"></textarea>
                             </div>
                             <div class="p-3">
                                 <label for="pago_metodo_id" class="form-label"><b>MÉTODO DE PAGO:</b></label>

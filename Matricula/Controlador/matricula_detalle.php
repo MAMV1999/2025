@@ -68,7 +68,9 @@ switch ($_GET["op"]) {
             $pago_metodo_id,
             $pago_observaciones,
             $_POST["mensualidad_id"],
-            $_POST["mensualidad_precio"]
+            $_POST["mensualidad_precio"],
+            $apoderado_id,
+            $alumno_id
         );
         echo $rspta ? "Matrícula registrada correctamente" : "No se pudo registrar la matrícula";
         break;
