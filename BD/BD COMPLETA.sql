@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-11-2024 a las 06:36:48
+-- Tiempo de generación: 02-12-2024 a las 21:33:16
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -70,6 +70,29 @@ CREATE TABLE `documento_detalle` (
   `fechacreado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `estado` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `documento_estado`
+--
+
+CREATE TABLE `documento_estado` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `observaciones` text,
+  `fechacreado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `estado` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `documento_estado`
+--
+
+INSERT INTO `documento_estado` (`id`, `nombre`, `observaciones`, `fechacreado`, `estado`) VALUES
+(1, 'NO', '', '2024-12-01 15:22:40', 1),
+(2, 'SI', '', '2024-12-01 15:22:46', 1),
+(3, 'OMITIDO', '', '2024-12-01 15:22:53', 1);
 
 -- --------------------------------------------------------
 
@@ -229,6 +252,27 @@ INSERT INTO `institucion_seccion` (`id`, `nombre`, `id_institucion_grado`, `obse
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `institucion_validacion`
+--
+
+CREATE TABLE `institucion_validacion` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `observaciones` text,
+  `fechacreado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `estado` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `institucion_validacion`
+--
+
+INSERT INTO `institucion_validacion` (`id`, `nombre`, `observaciones`, `fechacreado`, `estado`) VALUES
+(1, '73937543', '', '2024-11-30 14:59:55', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `matricula`
 --
 
@@ -301,6 +345,15 @@ CREATE TABLE `matricula_detalle` (
   `estado` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `matricula_detalle`
+--
+
+INSERT INTO `matricula_detalle` (`id`, `descripcion`, `id_matricula`, `id_matricula_categoria`, `id_usuario_apoderado`, `id_usuario_alumno`, `observaciones`, `fechacreado`, `estado`) VALUES
+(1, 'MATRICULA 2025 - IEP. EBENEZER\r\nNIVEL: INICIAL - GRADO: 5 AÑOS - SECCION: A\r\n\r\nPrecio Matricula: S./200.00\r\nPrecio Mensualidad: S./280.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones: Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', 3, 1, 1, 1, '', '2024-12-01 05:46:02', 1),
+(2, 'MATRICULA 2025 - IEP. EBENEZER\r\nNIVEL: INICIAL - GRADO: 5 AÑOS - SECCION: A\r\n\r\nPrecio Matricula: S./200.00\r\nPrecio Mensualidad: S./280.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones: Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', 3, 1, 2, 2, '', '2024-12-01 05:47:30', 1),
+(3, 'MATRICULA 2025 - IEP. EBENEZER\r\nNIVEL: INICIAL - GRADO: 5 AÑOS - SECCION: A\r\n\r\nPrecio Matricula: S./200.00\r\nPrecio Mensualidad: S./280.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones: Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', 3, 1, 3, 3, '', '2024-12-01 05:48:55', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -323,7 +376,9 @@ INSERT INTO `matricula_metodo_pago` (`id`, `nombre`, `observaciones`, `fechacrea
 (1, 'EFECTIVO', '', '2024-11-24 06:05:48', 1),
 (2, 'YAPE', '', '2024-11-24 06:05:54', 1),
 (3, 'TRANSFERENCIA', '', '2024-11-24 06:06:02', 1),
-(4, 'INTERBANCARIO', '', '2024-11-24 06:06:11', 1);
+(4, 'INTERBANCARIO', '', '2024-11-24 06:06:11', 1),
+(5, 'PAGO PENDIENTE', '', '2024-11-25 05:41:01', 1),
+(6, 'MATRICULA GRATIS', '', '2024-12-01 06:17:48', 1);
 
 -- --------------------------------------------------------
 
@@ -344,6 +399,15 @@ CREATE TABLE `matricula_pago` (
   `estado` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `matricula_pago`
+--
+
+INSERT INTO `matricula_pago` (`id`, `id_matricula_detalle`, `numeracion`, `fecha`, `descripcion`, `monto`, `id_matricula_metodo_pago`, `observaciones`, `fechacreado`, `estado`) VALUES
+(1, 1, '000001', '2024-12-01', 'MATRICULA 2025 - IEP. EBENEZER\r\nNIVEL: INICIAL - GRADO: 5 AÑOS - SECCION: A\r\n\r\nPrecio Matricula: S./200.00\r\nPrecio Mensualidad: S./280.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones: Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', '0.00', 5, '', '2024-12-01 05:46:02', 1),
+(2, 2, '000002', '2024-12-01', 'MATRICULA 2025 - IEP. EBENEZER\r\nNIVEL: INICIAL - GRADO: 5 AÑOS - SECCION: A\r\n\r\nPrecio Matricula: S./200.00\r\nPrecio Mensualidad: S./280.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones: Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', '0.00', 5, '', '2024-12-01 05:47:30', 1),
+(3, 3, '000003', '2024-12-01', 'MATRICULA 2025 - IEP. EBENEZER\r\nNIVEL: INICIAL - GRADO: 5 AÑOS - SECCION: A\r\n\r\nPrecio Matricula: S./200.00\r\nPrecio Mensualidad: S./280.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones: Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', '0.00', 5, '', '2024-12-01 05:48:55', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -354,12 +418,48 @@ CREATE TABLE `mensualidad_detalle` (
   `id` int(11) NOT NULL,
   `id_mensualidad_mes` int(11) NOT NULL,
   `id_matricula_detalle` int(11) NOT NULL,
+  `monto` decimal(10,2) NOT NULL,
   `pagado` tinyint(1) NOT NULL DEFAULT '0',
-  `recibo_emitido` tinyint(1) NOT NULL DEFAULT '0',
   `observaciones` text,
   `fechacreado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `estado` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `mensualidad_detalle`
+--
+
+INSERT INTO `mensualidad_detalle` (`id`, `id_mensualidad_mes`, `id_matricula_detalle`, `monto`, `pagado`, `observaciones`, `fechacreado`, `estado`) VALUES
+(1, 1, 1, '280.00', 0, '', '2024-12-01 05:46:02', 1),
+(2, 2, 1, '280.00', 0, '', '2024-12-01 05:46:02', 1),
+(3, 3, 1, '280.00', 0, '', '2024-12-01 05:46:02', 1),
+(4, 4, 1, '280.00', 0, '', '2024-12-01 05:46:02', 1),
+(5, 5, 1, '305.00', 0, '', '2024-12-01 05:46:02', 1),
+(6, 6, 1, '280.00', 0, '', '2024-12-01 05:46:02', 1),
+(7, 7, 1, '280.00', 0, '', '2024-12-01 05:46:02', 1),
+(8, 8, 1, '280.00', 0, '', '2024-12-01 05:46:02', 1),
+(9, 9, 1, '280.00', 0, '', '2024-12-01 05:46:02', 1),
+(10, 10, 1, '305.00', 0, '', '2024-12-01 05:46:02', 1),
+(11, 1, 2, '280.00', 0, '', '2024-12-01 05:47:30', 1),
+(12, 2, 2, '280.00', 0, '', '2024-12-01 05:47:30', 1),
+(13, 3, 2, '280.00', 0, '', '2024-12-01 05:47:30', 1),
+(14, 4, 2, '280.00', 0, '', '2024-12-01 05:47:30', 1),
+(15, 5, 2, '305.00', 0, '', '2024-12-01 05:47:30', 1),
+(16, 6, 2, '280.00', 0, '', '2024-12-01 05:47:30', 1),
+(17, 7, 2, '280.00', 0, '', '2024-12-01 05:47:30', 1),
+(18, 8, 2, '280.00', 0, '', '2024-12-01 05:47:30', 1),
+(19, 9, 2, '280.00', 0, '', '2024-12-01 05:47:30', 1),
+(20, 10, 2, '305.00', 0, '', '2024-12-01 05:47:30', 1),
+(21, 1, 3, '280.00', 0, '', '2024-12-01 05:48:55', 1),
+(22, 2, 3, '280.00', 0, '', '2024-12-01 05:48:55', 1),
+(23, 3, 3, '280.00', 0, '', '2024-12-01 05:48:55', 1),
+(24, 4, 3, '280.00', 0, '', '2024-12-01 05:48:55', 1),
+(25, 5, 3, '305.00', 0, '', '2024-12-01 05:48:55', 1),
+(26, 6, 3, '280.00', 0, '', '2024-12-01 05:48:55', 1),
+(27, 7, 3, '280.00', 0, '', '2024-12-01 05:48:55', 1),
+(28, 8, 3, '280.00', 0, '', '2024-12-01 05:48:55', 1),
+(29, 9, 3, '280.00', 0, '', '2024-12-01 05:48:55', 1),
+(30, 10, 3, '305.00', 0, '', '2024-12-01 05:48:55', 1);
 
 -- --------------------------------------------------------
 
@@ -372,6 +472,8 @@ CREATE TABLE `mensualidad_mes` (
   `id_institucion_lectivo` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `descripcion` text,
+  `pago_mantenimiento` tinyint(1) NOT NULL DEFAULT '0',
+  `fechavencimiento` date DEFAULT NULL,
   `observaciones` text,
   `fechacreado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `estado` tinyint(1) NOT NULL DEFAULT '1'
@@ -381,17 +483,17 @@ CREATE TABLE `mensualidad_mes` (
 -- Volcado de datos para la tabla `mensualidad_mes`
 --
 
-INSERT INTO `mensualidad_mes` (`id`, `id_institucion_lectivo`, `nombre`, `descripcion`, `observaciones`, `fechacreado`, `estado`) VALUES
-(1, 1, 'MARZO', 'MENSUALIDAD MARZO', '', '2024-11-24 06:31:02', 1),
-(2, 1, 'ABRIL', 'MENSUALIDAD ABRIL', '', '2024-11-24 06:31:59', 1),
-(3, 1, 'MAYO', 'MENSUALIDAD MAYO', '', '2024-11-24 06:33:03', 1),
-(4, 1, 'JUNIO', 'MENSUALIDAD JUNIO', '', '2024-11-24 06:33:16', 1),
-(5, 1, 'JULIO', 'MENSUALIDAD JULIO', '', '2024-11-24 06:33:31', 1),
-(6, 1, 'AGOSTO', 'MENSUALIDAD AGOSTO', '', '2024-11-24 06:33:44', 1),
-(7, 1, 'SEPTIEMBRE', 'MENSUALIDAD SEPTIEMBRE', '', '2024-11-24 06:34:06', 1),
-(8, 1, 'OCTUBRE', 'MENSUALIDAD OCTUBRE', '', '2024-11-24 06:34:23', 1),
-(9, 1, 'NOVIEMBRE', 'MENSUALIDAD NOVIEMBRE', '', '2024-11-24 06:34:40', 1),
-(10, 1, 'DICIEMBRE', 'MENSUALIDAD DICIEMBRE', '', '2024-11-24 06:34:52', 1);
+INSERT INTO `mensualidad_mes` (`id`, `id_institucion_lectivo`, `nombre`, `descripcion`, `pago_mantenimiento`, `fechavencimiento`, `observaciones`, `fechacreado`, `estado`) VALUES
+(1, 1, 'MARZO', 'MENSUALIDAD MARZO', 0, '2025-04-01', '', '2024-11-24 06:31:02', 1),
+(2, 1, 'ABRIL', 'MENSUALIDAD ABRIL', 0, '2025-05-01', '', '2024-11-24 06:31:59', 1),
+(3, 1, 'MAYO', 'MENSUALIDAD MAYO', 0, '2025-06-01', '', '2024-11-24 06:33:03', 1),
+(4, 1, 'JUNIO', 'MENSUALIDAD JUNIO', 0, '2025-07-01', '', '2024-11-24 06:33:16', 1),
+(5, 1, 'JULIO', 'MENSUALIDAD JULIO', 1, '2025-08-01', '', '2024-11-24 06:33:31', 1),
+(6, 1, 'AGOSTO', 'MENSUALIDAD AGOSTO', 0, '2025-09-01', '', '2024-11-24 06:33:44', 1),
+(7, 1, 'SEPTIEMBRE', 'MENSUALIDAD SEPTIEMBRE', 0, '2025-10-01', '', '2024-11-24 06:34:06', 1),
+(8, 1, 'OCTUBRE', 'MENSUALIDAD OCTUBRE', 0, '2025-11-01', '', '2024-11-24 06:34:23', 1),
+(9, 1, 'NOVIEMBRE', 'MENSUALIDAD NOVIEMBRE', 0, '2025-12-01', '', '2024-11-24 06:34:40', 1),
+(10, 1, 'DICIEMBRE', 'MENSUALIDAD DICIEMBRE', 1, '2025-12-31', '', '2024-11-24 06:34:52', 1);
 
 -- --------------------------------------------------------
 
@@ -415,6 +517,15 @@ CREATE TABLE `usuario_alumno` (
   `estado` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `usuario_alumno`
+--
+
+INSERT INTO `usuario_alumno` (`id`, `id_apoderado`, `id_documento`, `numerodocumento`, `nombreyapellido`, `nacimiento`, `telefono`, `id_sexo`, `usuario`, `clave`, `observaciones`, `fechacreado`, `estado`) VALUES
+(1, 1, 1, '91490868', 'BRAVO LAVI AINHOA LORENA', '2019-09-03', '', 1, '91490868', '91490868', '', '2024-12-01 05:46:02', 1),
+(2, 2, 1, '91339973', 'PAREDES SAYO LUCIANA ALESSANDRA', '2019-05-20', '', 1, '91339973', '91339973', '', '2024-12-01 05:47:30', 1),
+(3, 3, 1, '91418340', 'CASTILLO CHERO LIAM ALEXANDER', '2019-07-16', '', 2, '91418340', '91418340', '', '2024-12-01 05:48:55', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -436,6 +547,15 @@ CREATE TABLE `usuario_apoderado` (
   `fechacreado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `estado` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `usuario_apoderado`
+--
+
+INSERT INTO `usuario_apoderado` (`id`, `id_apoderado_tipo`, `id_documento`, `numerodocumento`, `nombreyapellido`, `telefono`, `id_sexo`, `id_estado_civil`, `usuario`, `clave`, `observaciones`, `fechacreado`, `estado`) VALUES
+(1, 2, 1, '44589835', 'GIAN CARLO ANTONIO BRAVO VELASQUEZ', '914778086', 2, 2, '44589835', '44589835', '', '2024-12-01 05:46:02', 1),
+(2, 1, 1, '10161788', 'INES SAYO ANAYA', '996627688', 1, 2, '10161788', '10161788', '', '2024-12-01 05:47:30', 1),
+(3, 1, 1, '75656377', 'MARCIA JANELLI CHERO MONTES', '994070866', 1, 1, '75656377', '75656377', '', '2024-12-01 05:48:55', 1);
 
 -- --------------------------------------------------------
 
@@ -634,6 +754,12 @@ ALTER TABLE `documento_detalle`
   ADD KEY `id_documento` (`id_documento`);
 
 --
+-- Indices de la tabla `documento_estado`
+--
+ALTER TABLE `documento_estado`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `documento_responsable`
 --
 ALTER TABLE `documento_responsable`
@@ -673,6 +799,12 @@ ALTER TABLE `institucion_nivel`
 ALTER TABLE `institucion_seccion`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_institucion_grado` (`id_institucion_grado`);
+
+--
+-- Indices de la tabla `institucion_validacion`
+--
+ALTER TABLE `institucion_validacion`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `matricula`
@@ -810,6 +942,12 @@ ALTER TABLE `documento_detalle`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `documento_estado`
+--
+ALTER TABLE `documento_estado`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT de la tabla `documento_responsable`
 --
 ALTER TABLE `documento_responsable`
@@ -846,6 +984,12 @@ ALTER TABLE `institucion_seccion`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
+-- AUTO_INCREMENT de la tabla `institucion_validacion`
+--
+ALTER TABLE `institucion_validacion`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT de la tabla `matricula`
 --
 ALTER TABLE `matricula`
@@ -861,25 +1005,25 @@ ALTER TABLE `matricula_categoria`
 -- AUTO_INCREMENT de la tabla `matricula_detalle`
 --
 ALTER TABLE `matricula_detalle`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `matricula_metodo_pago`
 --
 ALTER TABLE `matricula_metodo_pago`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `matricula_pago`
 --
 ALTER TABLE `matricula_pago`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `mensualidad_detalle`
 --
 ALTER TABLE `mensualidad_detalle`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT de la tabla `mensualidad_mes`
@@ -891,13 +1035,13 @@ ALTER TABLE `mensualidad_mes`
 -- AUTO_INCREMENT de la tabla `usuario_alumno`
 --
 ALTER TABLE `usuario_alumno`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario_apoderado`
 --
 ALTER TABLE `usuario_apoderado`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario_apoderado_tipo`
