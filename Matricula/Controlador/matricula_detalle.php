@@ -60,6 +60,7 @@ switch ($_GET["op"]) {
             $detalle,
             $matricula_id,
             $matricula_categoria,
+            $id_apoderado_referido,
             $matricula_observaciones,
             $pago_numeracion,
             $pago_fecha,
@@ -140,6 +141,15 @@ switch ($_GET["op"]) {
                 >' . $reg->lectivo . ' - ' . $reg->nivel . ' - ' . $reg->grado . ' - ' . $reg->seccion . ' -->(Aforo: ' . $reg->aforo . ', Matriculados: ' . $reg->matriculados . ')</option>';
         }
         break;
+
+    case 'listar_apoderados_referido_activo':
+        $rspta = $matriculaDetalle->listarApoderadosReferidoActivo();
+        echo '<option value="">NO TIENE REFERENCIA</option>';
+        while ($reg = $rspta->fetch_object()) {
+            echo '<option value="' . $reg->id . '">' . $reg->nombreyapellido . '</option>';
+        }
+        break;
+
 
         // Listar las categorías de matrícula activas
     case 'listar_categorias_activas':

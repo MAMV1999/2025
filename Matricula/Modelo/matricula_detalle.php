@@ -24,6 +24,7 @@ class MatriculaDetalle
         $detalle,
         $matricula_id,
         $matricula_categoria,
+        $id_apoderado_referido,
         $matricula_observaciones,
         $pago_numeracion,
         $pago_fecha,
@@ -61,7 +62,7 @@ class MatriculaDetalle
         }
 
         // Guardar matricula_detalle
-        $sql_matricula_detalle = "INSERT INTO matricula_detalle (id_usuario_apoderado, id_usuario_alumno, descripcion, id_matricula, id_matricula_categoria, observaciones, estado) VALUES ('$apoderado_id', '$alumno_id', '$detalle', '$matricula_id', '$matricula_categoria', '$matricula_observaciones', '1')";
+        $sql_matricula_detalle = "INSERT INTO matricula_detalle (id_usuario_apoderado, id_usuario_alumno, descripcion, id_matricula, id_matricula_categoria, id_usuario_apoderado_referido, observaciones, estado) VALUES ('$apoderado_id', '$alumno_id', '$detalle', '$matricula_id', '$matricula_categoria', '$id_apoderado_referido', '$matricula_observaciones', '1')";
         $matricula_detalle_id = ejecutarConsulta_retornarID($sql_matricula_detalle);
 
         if ($matricula_detalle_id) {
@@ -225,6 +226,13 @@ class MatriculaDetalle
                 INNER JOIN institucion_nivel iniv ON ig.id_institucion_nivel = iniv.id
                 INNER JOIN institucion_lectivo il ON iniv.id_institucion_lectivo = il.id
                 WHERE m.estado = '1'";
+        return ejecutarConsulta($sql);
+    }
+
+    // Método para listar los apoderados activos referidos
+    public function listarApoderadosReferidoActivo()
+    {
+        $sql = "SELECT id, nombreyapellido FROM usuario_apoderado WHERE estado = '1'";
         return ejecutarConsulta($sql);
     }
 

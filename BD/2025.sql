@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-12-2024 a las 16:40:46
+-- Tiempo de generación: 03-12-2024 a las 07:27:24
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -221,6 +221,7 @@ CREATE TABLE `matricula_detalle` (
   `descripcion` text NOT NULL,
   `id_matricula` int(11) NOT NULL,
   `id_matricula_categoria` int(11) NOT NULL,
+  `id_usuario_apoderado_referido` int(11) DEFAULT NULL,
   `id_usuario_apoderado` int(11) NOT NULL,
   `id_usuario_alumno` int(11) NOT NULL,
   `observaciones` text,

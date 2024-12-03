@@ -3,9 +3,7 @@ require_once("../../database.php");
 
 class Matricula_pago
 {
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     // Método para guardar un nuevo registro de pago de matrícula
     public function guardar($id_matricula_detalle, $numeracion, $fecha, $descripcion, $monto, $id_matricula_metodo_pago, $observaciones)
@@ -62,8 +60,8 @@ class Matricula_pago
                 WHERE mp.estado = '1'";
         return ejecutarConsulta($sql);
     }
-    
-    
+
+
 
     // Método para desactivar un registro de pago
     public function desactivar($id)
@@ -107,6 +105,4 @@ class Matricula_pago
                 WHERE md.estado = '1'";
         return ejecutarConsulta($sql);
     }
-    
 }
-?>
