@@ -73,12 +73,6 @@ if (!isset($_SESSION['nombre'])) {
                                 <textarea style="height: 250px;" name="detalle" id="detalle" class="form-control" placeholder="Observaciones - (Opcional)"></textarea>
                             </div>
                             <div class="p-3">
-                                <label for="id_apoderado_referido" class="form-label"><b>APODERADO REFERIDO:</b></label>
-                                <div class="input-group">
-                                    <select id="id_apoderado_referido" name="id_apoderado_referido" class="form-control selectpicker" data-live-search="true"></select>
-                                </div>
-                            </div>
-                            <div class="p-3">
                                 <label for="matricula_observaciones" class="form-label"><b>OBSERVACIONES:</b></label>
                                 <textarea name="matricula_observaciones" id="matricula_observaciones" class="form-control" placeholder="Observaciones - (Opcional)"></textarea>
                             </div>

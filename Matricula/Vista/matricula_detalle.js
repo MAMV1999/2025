@@ -96,17 +96,10 @@ function cargarSelectores() {
     cargarApoderadoTipos();
     cargarDocumentos();
     cargarSexos();
-    cargar_apoderados_referidos();
     cargarEstadosCiviles();
     cargarMatriculas();
     cargarCategorias();
     cargarMetodosPago();
-}
-
-function cargar_apoderados_referidos() {
-    $.post(link + "listar_apoderados_referido_activo", function (r) {
-        $("#id_apoderado_referido").html(r);
-    });
 }
 
 // Apoderado - Tipos

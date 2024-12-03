@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-12-2024 a las 13:45:01
+-- Tiempo de generación: 03-12-2024 a las 21:38:37
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -338,7 +338,6 @@ CREATE TABLE `matricula_detalle` (
   `descripcion` text NOT NULL,
   `id_matricula` int(11) NOT NULL,
   `id_matricula_categoria` int(11) NOT NULL,
-  `id_usuario_apoderado_referido` int(11) DEFAULT NULL,
   `id_usuario_apoderado` int(11) NOT NULL,
   `id_usuario_alumno` int(11) NOT NULL,
   `observaciones` text,
@@ -350,10 +349,20 @@ CREATE TABLE `matricula_detalle` (
 -- Volcado de datos para la tabla `matricula_detalle`
 --
 
-INSERT INTO `matricula_detalle` (`id`, `descripcion`, `id_matricula`, `id_matricula_categoria`, `id_usuario_apoderado_referido`, `id_usuario_apoderado`, `id_usuario_alumno`, `observaciones`, `fechacreado`, `estado`) VALUES
-(1, 'MATRICULA 2025 - IEP. EBENEZER\r\nNIVEL: INICIAL - GRADO: 5 AÑOS - SECCION: A\r\n\r\nPrecio Matricula: S./200.00\r\nPrecio Mensualidad: S./280.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones: Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', 3, 1, NULL, 1, 1, '', '2024-12-01 05:46:02', 1),
-(2, 'MATRICULA 2025 - IEP. EBENEZER\r\nNIVEL: INICIAL - GRADO: 5 AÑOS - SECCION: A\r\n\r\nPrecio Matricula: S./200.00\r\nPrecio Mensualidad: S./280.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones: Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', 3, 1, NULL, 2, 2, '', '2024-12-01 05:47:30', 1),
-(3, 'MATRICULA 2025 - IEP. EBENEZER\r\nNIVEL: INICIAL - GRADO: 5 AÑOS - SECCION: A\r\n\r\nPrecio Matricula: S./200.00\r\nPrecio Mensualidad: S./280.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones: Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', 3, 1, NULL, 3, 3, '', '2024-12-01 05:48:55', 1);
+INSERT INTO `matricula_detalle` (`id`, `descripcion`, `id_matricula`, `id_matricula_categoria`, `id_usuario_apoderado`, `id_usuario_alumno`, `observaciones`, `fechacreado`, `estado`) VALUES
+(1, 'MATRICULA 2025 - IEP. EBENEZER\r\nNIVEL: INICIAL - GRADO: 5 AÑOS - SECCION: A\r\n\r\nPrecio Matricula: S./200.00\r\nPrecio Mensualidad: S./280.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones: Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', 3, 1, 1, 1, '', '2024-12-01 05:46:02', 1),
+(2, 'MATRICULA 2025 - IEP. EBENEZER\r\nNIVEL: INICIAL - GRADO: 5 AÑOS - SECCION: A\r\n\r\nPrecio Matricula: S./200.00\r\nPrecio Mensualidad: S./280.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones: Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', 3, 1, 2, 2, '', '2024-12-01 05:47:30', 1),
+(3, 'MATRICULA 2025 - IEP. EBENEZER\r\nNIVEL: INICIAL - GRADO: 5 AÑOS - SECCION: A\r\n\r\nPrecio Matricula: S./200.00\r\nPrecio Mensualidad: S./280.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones: Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', 3, 1, 3, 3, '', '2024-12-01 05:48:55', 1),
+(7, 'MATRICULA 2025 - 03/12/2024\r\nNIVEL: PRIMARIA - GRADO: 6 GRADO - SECCION: A\r\n\r\nPrecio Matricula: S./200.00\r\nPrecio Mensualidad: S./300.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones: Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', 9, 1, 7, 7, '', '2024-12-03 15:52:48', 1),
+(8, 'MATRICULA 2025 - 03/12/2024\r\nNIVEL: PRIMARIA - GRADO: 3 GRADO - SECCION: A\r\n\r\nPrecio Matricula: S./200.00\r\nPrecio Mensualidad: S./300.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones: Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', 6, 1, 7, 8, '', '2024-12-03 15:54:19', 1),
+(9, 'MATRICULA 2025 - 03/12/2024\r\nNIVEL: PRIMARIA - GRADO: 4 GRADO - SECCION: A\r\n\r\nPrecio Matricula: S./200.00\r\nPrecio Mensualidad: S./300.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones: Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', 7, 1, 8, 9, '', '2024-12-03 19:26:44', 1),
+(10, 'MATRICULA 2025 - 03/12/2024\r\nNIVEL: PRIMARIA - GRADO: 2 GRADO - SECCION: A\r\n\r\nPrecio Matricula: S./200.00\r\nPrecio Mensualidad: S./300.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones: Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', 5, 1, 8, 10, '', '2024-12-03 19:35:37', 1),
+(11, 'MATRICULA 2025 - 03/12/2024\r\nNIVEL: PRIMARIA - GRADO: 2 GRADO - SECCION: A\r\n\r\nPrecio Matricula: S./200.00\r\nPrecio Mensualidad: S./300.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones: Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', 5, 1, 9, 11, '', '2024-12-03 20:05:47', 1),
+(13, 'MATRICULA 2025 - 03/12/2024\r\nNIVEL: PRIMARIA - GRADO: 2 GRADO - SECCION: A\r\n\r\nPrecio Matricula: S./200.00\r\nPrecio Mensualidad: S./300.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones: Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', 5, 1, 11, 13, '', '2024-12-03 20:15:53', 1),
+(14, 'MATRICULA 2025 - 03/12/2024\r\nNIVEL: PRIMARIA - GRADO: 3 GRADO - SECCION: A\r\n\r\nPrecio Matricula: S./200.00\r\nPrecio Mensualidad: S./300.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones: Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', 6, 1, 12, 14, '', '2024-12-03 20:17:20', 1),
+(15, 'MATRICULA 2025 - 03/12/2024\r\nNIVEL: PRIMARIA - GRADO: 5 GRADO - SECCION: A\r\n\r\nPrecio Matricula: S./200.00\r\nPrecio Mensualidad: S./300.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones: Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', 8, 1, 13, 15, '', '2024-12-03 20:18:52', 1),
+(16, 'MATRICULA 2025 - 03/12/2024\r\nNIVEL: PRIMARIA - GRADO: 6 GRADO - SECCION: A\r\n\r\nPrecio Matricula: S./200.00\r\nPrecio Mensualidad: S./300.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones: Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', 9, 1, 14, 16, '', '2024-12-03 20:20:32', 1),
+(17, 'MATRICULA 2025 - 03/12/2024\r\nNIVEL: PRIMARIA - GRADO: 6 GRADO - SECCION: A\r\n\r\nPrecio Matricula: S./200.00\r\nPrecio Mensualidad: S./300.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones: Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', 9, 1, 15, 17, '', '2024-12-03 20:25:54', 1);
 
 -- --------------------------------------------------------
 
@@ -407,7 +416,17 @@ CREATE TABLE `matricula_pago` (
 INSERT INTO `matricula_pago` (`id`, `id_matricula_detalle`, `numeracion`, `fecha`, `descripcion`, `monto`, `id_matricula_metodo_pago`, `observaciones`, `fechacreado`, `estado`) VALUES
 (1, 1, '000001', '2024-12-01', 'MATRICULA 2025 - IEP. EBENEZER\r\nNIVEL: INICIAL - GRADO: 5 AÑOS - SECCION: A\r\n\r\nPrecio Matricula: S./200.00\r\nPrecio Mensualidad: S./280.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones: Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', '0.00', 5, '', '2024-12-01 05:46:02', 1),
 (2, 2, '000002', '2024-12-01', 'MATRICULA 2025 - IEP. EBENEZER\r\nNIVEL: INICIAL - GRADO: 5 AÑOS - SECCION: A\r\n\r\nPrecio Matricula: S./200.00\r\nPrecio Mensualidad: S./280.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones: Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', '0.00', 5, '', '2024-12-01 05:47:30', 1),
-(3, 3, '000003', '2024-12-01', 'MATRICULA 2025 - IEP. EBENEZER\r\nNIVEL: INICIAL - GRADO: 5 AÑOS - SECCION: A\r\n\r\nPrecio Matricula: S./200.00\r\nPrecio Mensualidad: S./280.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones: Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', '0.00', 5, '', '2024-12-01 05:48:55', 1);
+(3, 3, '000003', '2024-12-01', 'MATRICULA 2025 - IEP. EBENEZER\r\nNIVEL: INICIAL - GRADO: 5 AÑOS - SECCION: A\r\n\r\nPrecio Matricula: S./200.00\r\nPrecio Mensualidad: S./280.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones: Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', '0.00', 5, '', '2024-12-01 05:48:55', 1),
+(7, 7, '000004', '2024-12-03', 'MATRICULA 2025 - 03/12/2024\r\nNIVEL: PRIMARIA - GRADO: 6 GRADO - SECCION: A\r\n\r\nPrecio Matricula: S./200.00\r\nPrecio Mensualidad: S./300.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones: Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', '0.00', 5, '', '2024-12-03 15:52:48', 1),
+(8, 8, '000005', '2024-12-03', 'MATRICULA 2025 - 03/12/2024\r\nNIVEL: PRIMARIA - GRADO: 3 GRADO - SECCION: A\r\n\r\nPrecio Matricula: S./200.00\r\nPrecio Mensualidad: S./300.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones: Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', '0.00', 5, '', '2024-12-03 15:54:19', 1),
+(9, 9, '000006', '2024-12-03', 'MATRICULA 2025 - 03/12/2024\r\nNIVEL: PRIMARIA - GRADO: 4 GRADO - SECCION: A\r\n\r\nPrecio Matricula: S./200.00\r\nPrecio Mensualidad: S./300.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones: Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', '0.00', 5, '', '2024-12-03 19:26:44', 1),
+(10, 10, '000007', '2024-12-03', 'MATRICULA 2025 - 03/12/2024\r\nNIVEL: PRIMARIA - GRADO: 2 GRADO - SECCION: A\r\n\r\nPrecio Matricula: S./200.00\r\nPrecio Mensualidad: S./300.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones: Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', '0.00', 5, '', '2024-12-03 19:35:37', 1),
+(11, 11, '000008', '2024-12-03', 'MATRICULA 2025 - 03/12/2024\r\nNIVEL: PRIMARIA - GRADO: 2 GRADO - SECCION: A\r\n\r\nPrecio Matricula: S./200.00\r\nPrecio Mensualidad: S./300.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones: Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', '200.00', 1, '', '2024-12-03 20:05:47', 1),
+(13, 13, '000009', '2024-12-03', 'MATRICULA 2025 - 03/12/2024\r\nNIVEL: PRIMARIA - GRADO: 2 GRADO - SECCION: A\r\n\r\nPrecio Matricula: S./200.00\r\nPrecio Mensualidad: S./300.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones: Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', '0.00', 5, '', '2024-12-03 20:15:53', 1),
+(14, 14, '000010', '2024-12-03', 'MATRICULA 2025 - 03/12/2024\r\nNIVEL: PRIMARIA - GRADO: 3 GRADO - SECCION: A\r\n\r\nPrecio Matricula: S./200.00\r\nPrecio Mensualidad: S./300.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones: Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', '0.00', 5, '', '2024-12-03 20:17:20', 1),
+(15, 15, '000011', '2024-12-03', 'MATRICULA 2025 - 03/12/2024\r\nNIVEL: PRIMARIA - GRADO: 5 GRADO - SECCION: A\r\n\r\nPrecio Matricula: S./200.00\r\nPrecio Mensualidad: S./300.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones: Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', '0.00', 5, '', '2024-12-03 20:18:52', 1),
+(16, 16, '000012', '2024-12-03', 'MATRICULA 2025 - 03/12/2024\r\nNIVEL: PRIMARIA - GRADO: 6 GRADO - SECCION: A\r\n\r\nPrecio Matricula: S./200.00\r\nPrecio Mensualidad: S./300.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones: Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', '200.00', 1, '', '2024-12-03 20:20:32', 1),
+(17, 17, '000013', '2024-12-03', 'MATRICULA 2025 - 03/12/2024\r\nNIVEL: PRIMARIA - GRADO: 6 GRADO - SECCION: A\r\n\r\nPrecio Matricula: S./200.00\r\nPrecio Mensualidad: S./300.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones: Los alumnos que ratifiquen su matrícula, HACIENDO EL PAGO COMPLETO HASTA EL 15 DE DICIEMBRE. Pagaran 200 SOLES en la matricula y descuento de 10 SOLES en la mensualidad.', '200.00', 1, '', '2024-12-03 20:25:54', 1);
 
 -- --------------------------------------------------------
 
@@ -460,7 +479,107 @@ INSERT INTO `mensualidad_detalle` (`id`, `id_mensualidad_mes`, `id_matricula_det
 (27, 7, 3, '280.00', 0, '', '2024-12-01 05:48:55', 1),
 (28, 8, 3, '280.00', 0, '', '2024-12-01 05:48:55', 1),
 (29, 9, 3, '280.00', 0, '', '2024-12-01 05:48:55', 1),
-(30, 10, 3, '305.00', 0, '', '2024-12-01 05:48:55', 1);
+(30, 10, 3, '305.00', 0, '', '2024-12-01 05:48:55', 1),
+(34, 1, 7, '300.00', 0, '', '2024-12-03 15:52:48', 1),
+(35, 2, 7, '300.00', 0, '', '2024-12-03 15:52:48', 1),
+(36, 3, 7, '300.00', 0, '', '2024-12-03 15:52:48', 1),
+(37, 4, 7, '300.00', 0, '', '2024-12-03 15:52:48', 1),
+(38, 5, 7, '325.00', 0, '', '2024-12-03 15:52:48', 1),
+(39, 6, 7, '300.00', 0, '', '2024-12-03 15:52:48', 1),
+(40, 7, 7, '300.00', 0, '', '2024-12-03 15:52:48', 1),
+(41, 8, 7, '300.00', 0, '', '2024-12-03 15:52:48', 1),
+(42, 9, 7, '300.00', 0, '', '2024-12-03 15:52:48', 1),
+(43, 10, 7, '325.00', 0, '', '2024-12-03 15:52:48', 1),
+(44, 1, 8, '300.00', 0, '', '2024-12-03 15:54:19', 1),
+(45, 2, 8, '300.00', 0, '', '2024-12-03 15:54:19', 1),
+(46, 3, 8, '300.00', 0, '', '2024-12-03 15:54:19', 1),
+(47, 4, 8, '300.00', 0, '', '2024-12-03 15:54:19', 1),
+(48, 5, 8, '325.00', 0, '', '2024-12-03 15:54:19', 1),
+(49, 6, 8, '300.00', 0, '', '2024-12-03 15:54:19', 1),
+(50, 7, 8, '300.00', 0, '', '2024-12-03 15:54:19', 1),
+(51, 8, 8, '300.00', 0, '', '2024-12-03 15:54:19', 1),
+(52, 9, 8, '300.00', 0, '', '2024-12-03 15:54:19', 1),
+(53, 10, 8, '325.00', 0, '', '2024-12-03 15:54:19', 1),
+(54, 1, 9, '300.00', 0, '', '2024-12-03 19:26:44', 1),
+(55, 2, 9, '300.00', 0, '', '2024-12-03 19:26:44', 1),
+(56, 3, 9, '300.00', 0, '', '2024-12-03 19:26:44', 1),
+(57, 4, 9, '300.00', 0, '', '2024-12-03 19:26:44', 1),
+(58, 5, 9, '325.00', 0, '', '2024-12-03 19:26:44', 1),
+(59, 6, 9, '300.00', 0, '', '2024-12-03 19:26:44', 1),
+(60, 7, 9, '300.00', 0, '', '2024-12-03 19:26:44', 1),
+(61, 8, 9, '300.00', 0, '', '2024-12-03 19:26:44', 1),
+(62, 9, 9, '300.00', 0, '', '2024-12-03 19:26:44', 1),
+(63, 10, 9, '325.00', 0, '', '2024-12-03 19:26:44', 1),
+(64, 1, 10, '300.00', 0, '', '2024-12-03 19:35:37', 1),
+(65, 2, 10, '300.00', 0, '', '2024-12-03 19:35:37', 1),
+(66, 3, 10, '300.00', 0, '', '2024-12-03 19:35:37', 1),
+(67, 4, 10, '300.00', 0, '', '2024-12-03 19:35:37', 1),
+(68, 5, 10, '325.00', 0, '', '2024-12-03 19:35:37', 1),
+(69, 6, 10, '300.00', 0, '', '2024-12-03 19:35:37', 1),
+(70, 7, 10, '300.00', 0, '', '2024-12-03 19:35:37', 1),
+(71, 8, 10, '300.00', 0, '', '2024-12-03 19:35:37', 1),
+(72, 9, 10, '300.00', 0, '', '2024-12-03 19:35:37', 1),
+(73, 10, 10, '325.00', 0, '', '2024-12-03 19:35:37', 1),
+(74, 1, 11, '300.00', 0, '', '2024-12-03 20:05:47', 1),
+(75, 2, 11, '300.00', 0, '', '2024-12-03 20:05:47', 1),
+(76, 3, 11, '300.00', 0, '', '2024-12-03 20:05:47', 1),
+(77, 4, 11, '300.00', 0, '', '2024-12-03 20:05:47', 1),
+(78, 5, 11, '325.00', 0, '', '2024-12-03 20:05:47', 1),
+(79, 6, 11, '300.00', 0, '', '2024-12-03 20:05:47', 1),
+(80, 7, 11, '300.00', 0, '', '2024-12-03 20:05:47', 1),
+(81, 8, 11, '300.00', 0, '', '2024-12-03 20:05:47', 1),
+(82, 9, 11, '300.00', 0, '', '2024-12-03 20:05:47', 1),
+(83, 10, 11, '325.00', 0, '', '2024-12-03 20:05:47', 1),
+(94, 1, 13, '300.00', 0, '', '2024-12-03 20:15:53', 1),
+(95, 2, 13, '300.00', 0, '', '2024-12-03 20:15:53', 1),
+(96, 3, 13, '300.00', 0, '', '2024-12-03 20:15:53', 1),
+(97, 4, 13, '300.00', 0, '', '2024-12-03 20:15:53', 1),
+(98, 5, 13, '325.00', 0, '', '2024-12-03 20:15:53', 1),
+(99, 6, 13, '300.00', 0, '', '2024-12-03 20:15:53', 1),
+(100, 7, 13, '300.00', 0, '', '2024-12-03 20:15:53', 1),
+(101, 8, 13, '300.00', 0, '', '2024-12-03 20:15:53', 1),
+(102, 9, 13, '300.00', 0, '', '2024-12-03 20:15:53', 1),
+(103, 10, 13, '325.00', 0, '', '2024-12-03 20:15:53', 1),
+(104, 1, 14, '300.00', 0, '', '2024-12-03 20:17:20', 1),
+(105, 2, 14, '300.00', 0, '', '2024-12-03 20:17:20', 1),
+(106, 3, 14, '300.00', 0, '', '2024-12-03 20:17:20', 1),
+(107, 4, 14, '300.00', 0, '', '2024-12-03 20:17:20', 1),
+(108, 5, 14, '325.00', 0, '', '2024-12-03 20:17:20', 1),
+(109, 6, 14, '300.00', 0, '', '2024-12-03 20:17:20', 1),
+(110, 7, 14, '300.00', 0, '', '2024-12-03 20:17:20', 1),
+(111, 8, 14, '300.00', 0, '', '2024-12-03 20:17:20', 1),
+(112, 9, 14, '300.00', 0, '', '2024-12-03 20:17:20', 1),
+(113, 10, 14, '325.00', 0, '', '2024-12-03 20:17:20', 1),
+(114, 1, 15, '300.00', 0, '', '2024-12-03 20:18:52', 1),
+(115, 2, 15, '300.00', 0, '', '2024-12-03 20:18:52', 1),
+(116, 3, 15, '300.00', 0, '', '2024-12-03 20:18:52', 1),
+(117, 4, 15, '300.00', 0, '', '2024-12-03 20:18:52', 1),
+(118, 5, 15, '325.00', 0, '', '2024-12-03 20:18:52', 1),
+(119, 6, 15, '300.00', 0, '', '2024-12-03 20:18:52', 1),
+(120, 7, 15, '300.00', 0, '', '2024-12-03 20:18:52', 1),
+(121, 8, 15, '300.00', 0, '', '2024-12-03 20:18:52', 1),
+(122, 9, 15, '300.00', 0, '', '2024-12-03 20:18:52', 1),
+(123, 10, 15, '325.00', 0, '', '2024-12-03 20:18:52', 1),
+(124, 1, 16, '300.00', 0, '', '2024-12-03 20:20:32', 1),
+(125, 2, 16, '300.00', 0, '', '2024-12-03 20:20:32', 1),
+(126, 3, 16, '300.00', 0, '', '2024-12-03 20:20:32', 1),
+(127, 4, 16, '300.00', 0, '', '2024-12-03 20:20:32', 1),
+(128, 5, 16, '325.00', 0, '', '2024-12-03 20:20:32', 1),
+(129, 6, 16, '300.00', 0, '', '2024-12-03 20:20:32', 1),
+(130, 7, 16, '300.00', 0, '', '2024-12-03 20:20:32', 1),
+(131, 8, 16, '300.00', 0, '', '2024-12-03 20:20:32', 1),
+(132, 9, 16, '300.00', 0, '', '2024-12-03 20:20:32', 1),
+(133, 10, 16, '325.00', 0, '', '2024-12-03 20:20:32', 1),
+(134, 1, 17, '300.00', 0, '', '2024-12-03 20:25:54', 1),
+(135, 2, 17, '300.00', 0, '', '2024-12-03 20:25:54', 1),
+(136, 3, 17, '300.00', 0, '', '2024-12-03 20:25:54', 1),
+(137, 4, 17, '300.00', 0, '', '2024-12-03 20:25:54', 1),
+(138, 5, 17, '325.00', 0, '', '2024-12-03 20:25:54', 1),
+(139, 6, 17, '300.00', 0, '', '2024-12-03 20:25:54', 1),
+(140, 7, 17, '300.00', 0, '', '2024-12-03 20:25:54', 1),
+(141, 8, 17, '300.00', 0, '', '2024-12-03 20:25:54', 1),
+(142, 9, 17, '300.00', 0, '', '2024-12-03 20:25:54', 1),
+(143, 10, 17, '325.00', 0, '', '2024-12-03 20:25:54', 1);
 
 -- --------------------------------------------------------
 
@@ -525,7 +644,17 @@ CREATE TABLE `usuario_alumno` (
 INSERT INTO `usuario_alumno` (`id`, `id_apoderado`, `id_documento`, `numerodocumento`, `nombreyapellido`, `nacimiento`, `telefono`, `id_sexo`, `usuario`, `clave`, `observaciones`, `fechacreado`, `estado`) VALUES
 (1, 1, 1, '91490868', 'BRAVO LAVI AINHOA LORENA', '2019-09-03', '', 1, '91490868', '91490868', '', '2024-12-01 05:46:02', 1),
 (2, 2, 1, '91339973', 'PAREDES SAYO LUCIANA ALESSANDRA', '2019-05-20', '', 1, '91339973', '91339973', '', '2024-12-01 05:47:30', 1),
-(3, 3, 1, '91418340', 'CASTILLO CHERO LIAM ALEXANDER', '2019-07-16', '', 2, '91418340', '91418340', '', '2024-12-01 05:48:55', 1);
+(3, 3, 1, '91418340', 'CASTILLO CHERO LIAM ALEXANDER', '2019-07-16', '', 2, '91418340', '91418340', '', '2024-12-01 05:48:55', 1),
+(7, 7, 1, '78193503', 'ROJAS SANCHO ABRAHAM KEILEB', '2013-07-27', '', 2, '78193503', '78193503', '', '2024-12-03 15:52:48', 1),
+(8, 7, 1, '79738641', 'ROJAS SANCHO PABLO JEREMIAS', '2016-06-30', '', 2, '79738641', '79738641', '', '2024-12-03 15:54:19', 1),
+(9, 8, 1, '79469636', 'PALOMINO MENDEZ ALMENDRA JAZMIN', '2015-12-27', '', 1, '79469636', '79469636', '', '2024-12-03 19:26:44', 1),
+(10, 8, 1, '90412868', 'PALOMINO MENDEZ AXEL JOSUÉ', '2017-07-09', '', 2, '90412868', '90412868', '', '2024-12-03 19:35:37', 1),
+(11, 9, 1, '90391163', 'SIFUENTES CORREA SOFIA NICOLE', '2017-09-01', '', 1, '90391163', '90391163', '', '2024-12-03 20:05:47', 1),
+(13, 11, 1, '90495561', 'QUINTANA VARGAS MARIANO ESTIVEN', '2017-11-03', '', 2, '90495561', '90495561', '', '2024-12-03 20:15:53', 1),
+(14, 12, 1, '79878771', 'ESPINOZA GARCIA ANGELO CAMILO', '2016-10-01', '', 2, '79878771', '79878771', '', '2024-12-03 20:17:20', 1),
+(15, 13, 1, '78915280', 'RIOS PEREIRA VICTORIA ARIANA', '2015-01-08', '', 1, '78915280', '78915280', '', '2024-12-03 20:18:52', 1),
+(16, 14, 1, '78309084', 'DAMASO TITO DILAN MISAEL', '2013-10-10', '', 2, '78309084', '78309084', '', '2024-12-03 20:20:32', 1),
+(17, 15, 1, '78226136', 'INFANZON CARDENAS MATHIAS AARON', '2013-08-28', '', 2, '78226136', '78226136', '', '2024-12-03 20:25:54', 1);
 
 -- --------------------------------------------------------
 
@@ -556,7 +685,15 @@ CREATE TABLE `usuario_apoderado` (
 INSERT INTO `usuario_apoderado` (`id`, `id_apoderado_tipo`, `id_documento`, `numerodocumento`, `nombreyapellido`, `telefono`, `id_sexo`, `id_estado_civil`, `usuario`, `clave`, `observaciones`, `fechacreado`, `estado`) VALUES
 (1, 2, 1, '44589835', 'GIAN CARLO ANTONIO BRAVO VELASQUEZ', '914778086', 2, 2, '44589835', '44589835', '', '2024-12-01 05:46:02', 1),
 (2, 1, 1, '10161788', 'INES SAYO ANAYA', '996627688', 1, 2, '10161788', '10161788', '', '2024-12-01 05:47:30', 1),
-(3, 1, 1, '75656377', 'MARCIA JANELLI CHERO MONTES', '994070866', 1, 1, '75656377', '75656377', '', '2024-12-01 05:48:55', 1);
+(3, 1, 1, '75656377', 'MARCIA JANELLI CHERO MONTES', '994070866', 1, 1, '75656377', '75656377', '', '2024-12-01 05:48:55', 1),
+(7, 1, 1, '47708402', 'LAURA ANGELICA SANCHO ALCANTARA', '978673981', 1, 1, '47708402', '47708402', '', '2024-12-03 15:52:48', 1),
+(8, 1, 1, '47169725', 'SINTHIA KATERINE MENDEZ ZAVALETA', '943215408', 1, 2, '47169725', '47169725', '', '2024-12-03 19:26:44', 1),
+(9, 1, 1, '47875566', 'ERICKA EDITH CORREA ROJAS', '935168567', 1, 1, '47875566', '47875566', '', '2024-12-03 20:05:47', 1),
+(11, 2, 1, '09616813', 'JUVENAL QUINTANA ALVAREZ', '991179293', 2, 1, '09616813', '09616813', '', '2024-12-03 20:15:53', 1),
+(12, 1, 1, '40148474', 'MELINDA GARCIA OLIVAS', '935928398', 1, 2, '40148474', '40148474', '', '2024-12-03 20:17:20', 1),
+(13, 1, 1, '43289465', 'PEREIRA LOPEZ DAYSY BELGICA', '982525851', 1, 2, '43289465', '43289465', '', '2024-12-03 20:18:52', 1),
+(14, 1, 1, '42817048', 'MARIA ELENA TITO QUISPE', '984034603', 1, 2, '42817048', '42817048', '', '2024-12-03 20:20:32', 1),
+(15, 1, 1, '40908831', 'WUENDY KAREN CARDENAS MATOS', '993436180', 1, 2, '40908831', '40908831', '', '2024-12-03 20:25:54', 1);
 
 -- --------------------------------------------------------
 
@@ -829,8 +966,7 @@ ALTER TABLE `matricula_detalle`
   ADD KEY `fk_matricula_detalle_matricula` (`id_matricula`),
   ADD KEY `fk_matricula_detalle_matricula_categoria` (`id_matricula_categoria`),
   ADD KEY `fk_matricula_detalle_usuario_apoderado` (`id_usuario_apoderado`),
-  ADD KEY `fk_matricula_detalle_usuario_alumno` (`id_usuario_alumno`),
-  ADD KEY `fk_matricula_detalle_usuario_apoderado_referido` (`id_usuario_apoderado_referido`);
+  ADD KEY `fk_matricula_detalle_usuario_alumno` (`id_usuario_alumno`);
 
 --
 -- Indices de la tabla `matricula_metodo_pago`
@@ -1007,7 +1143,7 @@ ALTER TABLE `matricula_categoria`
 -- AUTO_INCREMENT de la tabla `matricula_detalle`
 --
 ALTER TABLE `matricula_detalle`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `matricula_metodo_pago`
@@ -1019,13 +1155,13 @@ ALTER TABLE `matricula_metodo_pago`
 -- AUTO_INCREMENT de la tabla `matricula_pago`
 --
 ALTER TABLE `matricula_pago`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `mensualidad_detalle`
 --
 ALTER TABLE `mensualidad_detalle`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=144;
 
 --
 -- AUTO_INCREMENT de la tabla `mensualidad_mes`
@@ -1037,13 +1173,13 @@ ALTER TABLE `mensualidad_mes`
 -- AUTO_INCREMENT de la tabla `usuario_alumno`
 --
 ALTER TABLE `usuario_alumno`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario_apoderado`
 --
 ALTER TABLE `usuario_apoderado`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario_apoderado_tipo`
@@ -1148,8 +1284,7 @@ ALTER TABLE `matricula_detalle`
   ADD CONSTRAINT `fk_matricula_detalle_matricula` FOREIGN KEY (`id_matricula`) REFERENCES `matricula` (`id`),
   ADD CONSTRAINT `fk_matricula_detalle_matricula_categoria` FOREIGN KEY (`id_matricula_categoria`) REFERENCES `matricula_categoria` (`id`),
   ADD CONSTRAINT `fk_matricula_detalle_usuario_alumno` FOREIGN KEY (`id_usuario_alumno`) REFERENCES `usuario_alumno` (`id`),
-  ADD CONSTRAINT `fk_matricula_detalle_usuario_apoderado` FOREIGN KEY (`id_usuario_apoderado`) REFERENCES `usuario_apoderado` (`id`),
-  ADD CONSTRAINT `fk_matricula_detalle_usuario_apoderado_referido` FOREIGN KEY (`id_usuario_apoderado_referido`) REFERENCES `usuario_apoderado` (`id`);
+  ADD CONSTRAINT `fk_matricula_detalle_usuario_apoderado` FOREIGN KEY (`id_usuario_apoderado`) REFERENCES `usuario_apoderado` (`id`);
 
 --
 -- Filtros para la tabla `matricula_pago`
