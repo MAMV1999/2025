@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-12-2024 a las 07:27:24
+-- Tiempo de generación: 04-12-2024 a las 05:07:45
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -221,7 +221,6 @@ CREATE TABLE `matricula_detalle` (
   `descripcion` text NOT NULL,
   `id_matricula` int(11) NOT NULL,
   `id_matricula_categoria` int(11) NOT NULL,
-  `id_usuario_apoderado_referido` int(11) DEFAULT NULL,
   `id_usuario_apoderado` int(11) NOT NULL,
   `id_usuario_alumno` int(11) NOT NULL,
   `observaciones` text,
@@ -730,7 +729,7 @@ ALTER TABLE `matricula_categoria`
 -- AUTO_INCREMENT de la tabla `matricula_detalle`
 --
 ALTER TABLE `matricula_detalle`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `matricula_metodo_pago`
@@ -742,13 +741,13 @@ ALTER TABLE `matricula_metodo_pago`
 -- AUTO_INCREMENT de la tabla `matricula_pago`
 --
 ALTER TABLE `matricula_pago`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `mensualidad_detalle`
 --
 ALTER TABLE `mensualidad_detalle`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=144;
 
 --
 -- AUTO_INCREMENT de la tabla `mensualidad_mes`
@@ -760,13 +759,13 @@ ALTER TABLE `mensualidad_mes`
 -- AUTO_INCREMENT de la tabla `usuario_alumno`
 --
 ALTER TABLE `usuario_alumno`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario_apoderado`
 --
 ALTER TABLE `usuario_apoderado`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario_apoderado_tipo`
