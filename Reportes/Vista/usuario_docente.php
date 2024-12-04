@@ -81,8 +81,7 @@ class PDF extends FPDF
 }
 
 // Obtener el ID del usuario docente desde la URL o por defecto
-//$id = $_GET['id'];
-$id = "1";
+$id = $_GET['id'];
 
 // Crear instancia del modelo y obtener datos
 $modelo = new UsuarioDocente();
