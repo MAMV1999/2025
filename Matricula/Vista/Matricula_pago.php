@@ -18,11 +18,10 @@ if (!isset($_SESSION['nombre'])) {
             <table class="table" id="myTable">
                 <thead>
                     <tr>
-                        <th>N°</th>
-                        <th>FECHA</th>
                         <th>NUMERACION</th>
+                        <th>FECHA</th>
                         <th>APODERADO</th>
-                        <th>MONTO</th>
+                        <th>ALUMNO</th>
                         <th>METODO</th>
                         <th>ACCIONES</th>
                     </tr>
