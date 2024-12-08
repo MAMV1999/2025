@@ -22,6 +22,7 @@ if (!isset($_SESSION['nombre'])) {
                             <th>NOMBRE Y APELLIDO</th>
                             <th>EDAD</th>
                             <th>CARGO</th>
+                            <th>INFORMACION</th>
                             <th>ACCIONES</th>
                         </tr>
                     </thead>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-12-2024 a las 21:07:49
+-- Tiempo de generación: 08-12-2024 a las 17:03:23
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -221,6 +221,7 @@ CREATE TABLE `matricula_detalle` (
   `descripcion` text NOT NULL,
   `id_matricula` int(11) NOT NULL,
   `id_matricula_categoria` int(11) NOT NULL,
+  `id_usuario_apoderado_referido` int(11) DEFAULT NULL,
   `id_usuario_apoderado` int(11) NOT NULL,
   `id_usuario_alumno` int(11) NOT NULL,
   `observaciones` text,
@@ -552,7 +553,8 @@ ALTER TABLE `matricula_detalle`
   ADD KEY `fk_matricula_detalle_matricula` (`id_matricula`),
   ADD KEY `fk_matricula_detalle_matricula_categoria` (`id_matricula_categoria`),
   ADD KEY `fk_matricula_detalle_usuario_apoderado` (`id_usuario_apoderado`),
-  ADD KEY `fk_matricula_detalle_usuario_alumno` (`id_usuario_alumno`);
+  ADD KEY `fk_matricula_detalle_usuario_alumno` (`id_usuario_alumno`),
+  ADD KEY `fk_matricula_detalle_usuario_apoderado_referido` (`id_usuario_apoderado_referido`);
 
 --
 -- Indices de la tabla `matricula_metodo_pago`
@@ -870,7 +872,8 @@ ALTER TABLE `matricula_detalle`
   ADD CONSTRAINT `fk_matricula_detalle_matricula` FOREIGN KEY (`id_matricula`) REFERENCES `matricula` (`id`),
   ADD CONSTRAINT `fk_matricula_detalle_matricula_categoria` FOREIGN KEY (`id_matricula_categoria`) REFERENCES `matricula_categoria` (`id`),
   ADD CONSTRAINT `fk_matricula_detalle_usuario_alumno` FOREIGN KEY (`id_usuario_alumno`) REFERENCES `usuario_alumno` (`id`),
-  ADD CONSTRAINT `fk_matricula_detalle_usuario_apoderado` FOREIGN KEY (`id_usuario_apoderado`) REFERENCES `usuario_apoderado` (`id`);
+  ADD CONSTRAINT `fk_matricula_detalle_usuario_apoderado` FOREIGN KEY (`id_usuario_apoderado`) REFERENCES `usuario_apoderado` (`id`),
+  ADD CONSTRAINT `fk_matricula_detalle_usuario_apoderado_referido` FOREIGN KEY (`id_usuario_apoderado_referido`) REFERENCES `usuario_apoderado` (`id`) ON DELETE SET NULL;
 
 --
 -- Filtros para la tabla `matricula_pago`

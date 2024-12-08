@@ -30,6 +30,7 @@ $alumno_observaciones = isset($_POST["alumno_observaciones"]) ? limpiarcadena($_
 $detalle = isset($_POST["detalle"]) ? limpiarcadena($_POST["detalle"]) : "";
 $matricula_id = isset($_POST["matricula_id"]) ? limpiarcadena($_POST["matricula_id"]) : "";
 $matricula_categoria = isset($_POST["matricula_categoria"]) ? limpiarcadena($_POST["matricula_categoria"]) : "";
+$referido_id = isset($_POST["referido_id"]) ? limpiarcadena($_POST["referido_id"]) : "";
 $matricula_observaciones = isset($_POST["matricula_observaciones"]) ? limpiarcadena($_POST["matricula_observaciones"]) : "";
 
 $pago_numeracion = isset($_POST["pago_numeracion"]) ? limpiarcadena($_POST["pago_numeracion"]) : "";
@@ -42,12 +43,36 @@ $pago_observaciones = isset($_POST["pago_observaciones"]) ? limpiarcadena($_POST
 switch ($_GET["op"]) {
     case 'guardaryeditar':
         $rspta = $matriculaDetalle->guardar(
-            $apoderado_dni, $apoderado_nombreyapellido, $apoderado_telefono, $apoderado_tipo, $apoderado_documento, $apoderado_sexo, $apoderado_estado_civil, $apoderado_observaciones,
-            $alumno_dni, $alumno_nombreyapellido, $alumno_nacimiento, $alumno_sexo, $alumno_documento, $alumno_telefono, $alumno_observaciones,
-            $detalle, $matricula_id, $matricula_categoria, $matricula_observaciones,
-            $pago_numeracion, $pago_fecha, $pago_descripcion, $pago_monto, $pago_metodo_id, $pago_observaciones,
-            $_POST["mensualidad_id"], $_POST["mensualidad_precio"],
-            $apoderado_id, $alumno_id
+            $apoderado_dni,
+            $apoderado_nombreyapellido,
+            $apoderado_telefono,
+            $apoderado_tipo,
+            $apoderado_documento,
+            $apoderado_sexo,
+            $apoderado_estado_civil,
+            $apoderado_observaciones,
+            $alumno_dni,
+            $alumno_nombreyapellido,
+            $alumno_nacimiento,
+            $alumno_sexo,
+            $alumno_documento,
+            $alumno_telefono,
+            $alumno_observaciones,
+            $detalle,
+            $matricula_id,
+            $matricula_categoria,
+            $referido_id,
+            $matricula_observaciones,
+            $pago_numeracion,
+            $pago_fecha,
+            $pago_descripcion,
+            $pago_monto,
+            $pago_metodo_id,
+            $pago_observaciones,
+            $_POST["mensualidad_id"],
+            $_POST["mensualidad_precio"],
+            $apoderado_id,
+            $alumno_id
         );
         echo $rspta ? "Matrícula registrada correctamente" : "No se pudo registrar la matrícula";
         break;
@@ -197,5 +222,13 @@ switch ($_GET["op"]) {
                     </tr>";
         }
         echo $rows;
+        break;
+
+    case 'listar_apoderados_referidos_activos':
+        $rspta = $matriculaDetalle->listarApoderadosReferidosActivos();
+        echo '<option value="">NO TIENE REFERENCIA</option>'; // Primera opción vacía
+        while ($reg = $rspta->fetch_object()) {
+            echo '<option value="' . $reg->id . '">' . $reg->nombreyapellido . '</option>';
+        }
         break;
 }

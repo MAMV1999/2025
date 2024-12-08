@@ -100,6 +100,13 @@ function cargarSelectores() {
     cargarMatriculas();
     cargarCategorias();
     cargarMetodosPago();
+    cargarApoderadosReferidos();
+}
+
+function cargarApoderadosReferidos() {
+    $.post(link + "listar_apoderados_referidos_activos", function (r) {
+        $("#apoderado_referido").html(r); // ID del nuevo select
+    });
 }
 
 // Apoderado - Tipos
@@ -158,7 +165,7 @@ function InformacionDetalle() {
     var month = ("0" + (now.getMonth() + 1)).slice(-2);
     var today = (day) + "/" + (month) + "/" + now.getFullYear();
 
-    var info_matricula = 'MATRICULA ' + lectivo +' - '+ today+'\n' +
+    var info_matricula = 'MATRICULA ' + lectivo + ' - ' + today + '\n' +
         'NIVEL: ' + nivel + ' - GRADO: ' + grado + ' - SECCION: ' + seccion + '\n\n' +
         'Precio Matricula: S./' + preciomatricula + '\n' +
         'Precio Mensualidad: S./' + preciomensualidad + '\n' +

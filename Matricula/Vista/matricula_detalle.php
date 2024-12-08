@@ -61,12 +61,15 @@ if (!isset($_SESSION['nombre'])) {
                         <!-- MATRÍCULA -->
                         <div class="tab-pane fade show active" id="matricula-tab-pane" role="tabpanel" aria-labelledby="matricula-tab">
                             <div class="p-3">
-                                <label for="matricula_id" class="form-label"><b>MATRÍCULA:</b></label>
-                                <select id="matricula_id" name="matricula_id" onmousedown="cargarMatriculas();" class="form-control" data-live-search="true"></select>
+                                <label for="apoderado_dni" class="form-label"><b>MATRICULA:</b></label>
+                                <div class="input-group">
+                                    <select id="matricula_id" name="matricula_id" onmousedown="cargarMatriculas();" class="form-control" data-live-search="true"></select>
+                                    <select id="matricula_categoria" name="matricula_categoria" class="form-control" data-live-search="true"></select>
+                                </div>
                             </div>
                             <div class="p-3">
-                                <label for="matricula_categoria" class="form-label"><b>CATEGORÍA:</b></label>
-                                <select id="matricula_categoria" name="matricula_categoria" class="form-control" data-live-search="true"></select>
+                                <label for="apoderado_referido" class="form-label"><b>APODERADO REFERIDO:</b></label>
+                                <select id="apoderado_referido" name="apoderado_referido" class="form-control" data-live-search="true"></select>
                             </div>
                             <div class="p-3">
                                 <label for="detalle" class="form-label"><b>DETALLE:</b></label>
@@ -149,7 +152,7 @@ if (!isset($_SESSION['nombre'])) {
                             <div class="p-3">
                                 <label for="apoderado_dni" class="form-label"><b>FECHA - NUMERACION:</b></label>
                                 <div class="input-group">
-                                <input type="date" id="pago_fecha" name="pago_fecha" class="form-control">
+                                    <input type="date" id="pago_fecha" name="pago_fecha" class="form-control">
                                     <input type="text" id="pago_numeracion" name="pago_numeracion" class="form-control" placeholder="Numeración">
                                 </div>
                             </div>

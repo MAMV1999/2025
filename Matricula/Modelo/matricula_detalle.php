@@ -24,6 +24,7 @@ class MatriculaDetalle
         $detalle,
         $matricula_id,
         $matricula_categoria,
+        $referido_id,
         $matricula_observaciones,
         $pago_numeracion,
         $pago_fecha,
@@ -61,7 +62,10 @@ class MatriculaDetalle
         }
 
         // Guardar matricula_detalle
-        $sql_matricula_detalle = "INSERT INTO matricula_detalle (id_usuario_apoderado, id_usuario_alumno, descripcion, id_matricula, id_matricula_categoria, observaciones, estado) VALUES ('$apoderado_id', '$alumno_id', '$detalle', '$matricula_id', '$matricula_categoria', '$matricula_observaciones', '1')";
+        //$sql_matricula_detalle = "INSERT INTO matricula_detalle (id_usuario_apoderado, id_usuario_alumno, descripcion, id_matricula, id_matricula_categoria, observaciones, estado) VALUES ('$apoderado_id', '$alumno_id', '$detalle', '$matricula_id', '$matricula_categoria', '$matricula_observaciones', '1')";
+        //$matricula_detalle_id = ejecutarConsulta_retornarID($sql_matricula_detalle);
+
+        $sql_matricula_detalle = "INSERT INTO matricula_detalle (id_usuario_apoderado, id_usuario_alumno, descripcion, id_matricula, id_matricula_categoria, id_usuario_apoderado_referido, observaciones, estado) VALUES ('$apoderado_id', '$alumno_id', '$detalle', '$matricula_id', '$matricula_categoria', " . ($referido_id ? "'$referido_id'" : "NULL") . ", '$matricula_observaciones', '1')";
         $matricula_detalle_id = ejecutarConsulta_retornarID($sql_matricula_detalle);
 
         if ($matricula_detalle_id) {
@@ -316,5 +320,11 @@ class MatriculaDetalle
         ejecutarConsulta($sql_apoderado);
 
         return true;
+    }
+
+    public function listarApoderadosReferidosActivos()
+    {
+        $sql = "SELECT * FROM usuario_apoderado WHERE estado = '1'";
+        return ejecutarConsulta($sql);
     }
 }

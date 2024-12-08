@@ -76,11 +76,7 @@ switch ($_GET["op"]) {
                 "1" => $reg->nombreyapellido,
                 "2" => $reg->edad . " AÑOS",
                 "3" => $reg->cargo,
-                "4" => ($reg->estado) ?
-                    '   <button type="button" onclick="mostrar(' . $reg->id . ')" class="btn btn-warning btn-sm">EDITAR</button>
-                        <button type="button" onclick="desactivar(' . $reg->id . ')" class="btn btn-danger btn-sm">DESACTIVAR</button>
-                        
-                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#' . $reg->numerodocumento . '">REPORTE</button>
+                "4" => '<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#' . $reg->numerodocumento . '">REPORTE</button>
 
                         <div class="modal fade" id="' . $reg->numerodocumento . '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-xl">
@@ -93,14 +89,12 @@ switch ($_GET["op"]) {
                                 <iframe src="../../Reportes/Vista/usuario_docente.php?id=' . $reg->id . '" type="application/pdf" width="100%" height="600px"></iframe>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">SALIR</button>
                             </div>
                             </div>
                         </div>
-                        </div>
-                    ' :
-                    '<button type="button" onclick="mostrar(' . $reg->id . ')" class="btn btn-warning btn-sm">EDITAR</button> <button type="button" onclick="activar(' . $reg->id . ')" class="btn btn-success btn-sm">ACTIVAR</button>'
+                        </div>',
+                "5" => ($reg->estado) ? '<button type="button" onclick="mostrar(' . $reg->id . ')" class="btn btn-warning btn-sm">EDITAR</button> <button type="button" onclick="desactivar(' . $reg->id . ')" class="btn btn-danger btn-sm">DESACTIVAR</button>':'<button type="button" onclick="mostrar(' . $reg->id . ')" class="btn btn-warning btn-sm">EDITAR</button> <button type="button" onclick="activar(' . $reg->id . ')" class="btn btn-success btn-sm">ACTIVAR</button>'
             );
         }
         $results = array(
