@@ -30,7 +30,7 @@ $alumno_observaciones = isset($_POST["alumno_observaciones"]) ? limpiarcadena($_
 $detalle = isset($_POST["detalle"]) ? limpiarcadena($_POST["detalle"]) : "";
 $matricula_id = isset($_POST["matricula_id"]) ? limpiarcadena($_POST["matricula_id"]) : "";
 $matricula_categoria = isset($_POST["matricula_categoria"]) ? limpiarcadena($_POST["matricula_categoria"]) : "";
-$referido_id = isset($_POST["referido_id"]) ? limpiarcadena($_POST["referido_id"]) : "";
+$referido_id = isset($_POST["apoderado_referido"]) ? limpiarcadena($_POST["apoderado_referido"]) : "0";
 $matricula_observaciones = isset($_POST["matricula_observaciones"]) ? limpiarcadena($_POST["matricula_observaciones"]) : "";
 
 $pago_numeracion = isset($_POST["pago_numeracion"]) ? limpiarcadena($_POST["pago_numeracion"]) : "";
@@ -228,7 +228,7 @@ switch ($_GET["op"]) {
         $rspta = $matriculaDetalle->listarApoderadosReferidosActivos();
         echo '<option value="">NO TIENE REFERENCIA</option>'; // Primera opción vacía
         while ($reg = $rspta->fetch_object()) {
-            echo '<option value="' . $reg->id . '">' . $reg->nombreyapellido . '</option>';
+            echo '<option value="' . $reg->id . '">' . $reg->tipo_documento . ' : ' . $reg->numerodocumento . ' - ' . $reg->nombreyapellido . ' (' . $reg->repeticiones . ')</option>';
         }
         break;
 }

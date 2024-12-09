@@ -324,7 +324,22 @@ class MatriculaDetalle
 
     public function listarApoderadosReferidosActivos()
     {
-        $sql = "SELECT * FROM usuario_apoderado WHERE estado = '1'";
+        $sql = "SELECT 
+                    ua.*,
+                    uat.nombre AS tipo_apoderado,
+                    ud.nombre AS tipo_documento,
+                    us.nombre AS sexo,
+                    uec.nombre AS estado_civil,
+                    COUNT(md.id_usuario_apoderado_referido) AS repeticiones
+                FROM usuario_apoderado ua
+                INNER JOIN usuario_apoderado_tipo uat ON ua.id_apoderado_tipo = uat.id
+                INNER JOIN usuario_documento ud ON ua.id_documento = ud.id
+                INNER JOIN usuario_sexo us ON ua.id_sexo = us.id
+                INNER JOIN usuario_estado_civil uec ON ua.id_estado_civil = uec.id
+                LEFT JOIN matricula_detalle md ON ua.id = md.id_usuario_apoderado_referido
+                WHERE ua.estado = '1'
+                GROUP BY ua.id
+                ORDER BY COUNT(md.id_usuario_apoderado_referido) DESC, ua.id ASC";
         return ejecutarConsulta($sql);
     }
 }

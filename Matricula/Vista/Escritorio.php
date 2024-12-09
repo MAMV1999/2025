@@ -54,7 +54,8 @@ if (!isset($_SESSION['nombre'])) {
                 <br>
                 <?php
                 $array = array(
-                    "1" => array("nombre" => "LISTADO MATRICULADOS", "link" => "../../Reportes/Vista/ReciboMatriculaTotal.php"),
+                    "1" => array("nombre" => "CANTIDAD MATRICULADOS", "link" => "../../Reportes/Vista/Matriculados_cantidad.php"),
+                    "2" => array("nombre" => "LISTADO MATRICULADOS", "link" => "../../Reportes/Vista/ReciboMatriculaTotal.php"),
                 );
                 ?>
                 <table class="table">
@@ -115,10 +116,10 @@ if (!isset($_SESSION['nombre'])) {
                                 $a = 1;
                                 while ($a <= count($array)) {
                                     echo '<tr>
-                                <th scope="row">' . $a . '</th>
-                                <td>' . $array[$a]["nombre"] . '</td>
-                                <td><a class="btn btn-primary" href="' . $array[$a]["link"] . '" role="button">Ir a ' . $array[$a]["nombre"] . '</a></td>
-                            </tr>';
+                                            <th scope="row">' . $a . '</th>
+                                            <td>' . $array[$a]["nombre"] . '</td>
+                                            <td><a class="btn btn-primary" href="' . $array[$a]["link"] . '" role="button">Ir a ' . $array[$a]["nombre"] . '</a></td>
+                                        </tr>';
                                     $a++;
                                 }
                                 ?>

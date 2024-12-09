@@ -68,7 +68,7 @@ if (!isset($_SESSION['nombre'])) {
                                 </div>
                             </div>
                             <div class="p-3">
-                                <label for="apoderado_referido" class="form-label"><b>APODERADO REFERIDO:</b></label>
+                                <label for="apoderado_referido" class="form-label"><b>REFERIDO:</b></label>
                                 <select id="apoderado_referido" name="apoderado_referido" class="form-control" data-live-search="true"></select>
                             </div>
                             <div class="p-3">
@@ -97,12 +97,12 @@ if (!isset($_SESSION['nombre'])) {
                                 <input type="text" id="alumno_nombreyapellido" name="alumno_nombreyapellido" class="form-control" placeholder="Nombre y Apellido">
                             </div>
                             <div class="p-3">
-                                <label for="alumno_sexo" class="form-label"><b>SEXO:</b></label>
-                                <select id="alumno_sexo" name="alumno_sexo" class="form-control" data-live-search="true"></select>
-                            </div>
-                            <div class="p-3">
                                 <label for="alumno_nacimiento" class="form-label"><b>FECHA DE NACIMIENTO:</b></label>
                                 <input type="date" id="alumno_nacimiento" name="alumno_nacimiento" class="form-control">
+                            </div>
+                            <div class="p-3">
+                                <label for="alumno_sexo" class="form-label"><b>SEXO:</b></label>
+                                <select id="alumno_sexo" name="alumno_sexo" class="form-control" data-live-search="true"></select>
                             </div>
                             <div class="p-3">
                                 <label for="alumno_observaciones" class="form-label"><b>OBSERVACIONES:</b></label>
