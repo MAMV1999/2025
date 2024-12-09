@@ -178,9 +178,19 @@ switch ($_GET["op"]) {
                 "1" => $reg->nombre_apoderado,
                 "2" => $reg->nombre_alumno,
                 "3" => $reg->numeracion_pago . ' - ' . $reg->metodo_pago,
-                "4" => '<!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#' . $reg->numeracion_pago . '">REPORTE</button>
-
+                "4" => '
+                        <div class="btn-group">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#' . $reg->numeracion_pago . '">INFO.</button>
+                        <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="../../Reportes/Vista/ReciboMatricula.php?id=' . $reg->matricula_detalle_id . '" Target="_blank">RECIBO ' . $reg->numeracion_pago . ' - ' . $reg->fecha_pago . '</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Separated link</a></li>
+                        </ul>
+                        </div>
+                        
                         <!-- Modal -->
                         <div class="modal fade" id="' . $reg->numeracion_pago . '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-xl">
@@ -193,13 +203,11 @@ switch ($_GET["op"]) {
                             <!-- body -->
                                 <nav>
                                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                        <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">INFORMACION GENERAL</button>
-                                        <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">RECIBO DE PAGO</button>
-                                        <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</button>
+                                        <button class="nav-link active" id="0001-tab" data-bs-toggle="tab" data-bs-target="#0001" type="button" role="tab" aria-controls="0001" aria-selected="true">INFORMACION</button>
                                     </div>
                                 </nav>
                                 <div class="tab-content" id="nav-tabContent">
-                                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                    <div class="tab-pane fade show active" id="0001" role="tabpanel" aria-labelledby="0001-tab">
                                         <div class="p-3">
                                             <table class="table table-bordered">
                                                 <thead>
@@ -280,18 +288,13 @@ switch ($_GET["op"]) {
                                             <center>
                                             <button type="button" onclick="eliminarConValidacion(' . $reg->matricula_detalle_id . ')" class="btn btn-danger  btn-sm">ELIMINAR</button>
                                             </center>
-                                        </div>
+                                        </div>
                                     </div>
-                                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                                        <iframe src="../../Reportes/Vista/ReciboMatricula.php?id=' . $reg->matricula_detalle_id . '" type="application/pdf" width="100%" height="600px"></iframe>
-                                    </div>
-                                    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
                                 </div>
                             <!-- fin-body -->
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">SALIR</button>
                             </div>
                             </div>
                         </div>

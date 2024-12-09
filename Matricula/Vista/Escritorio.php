@@ -54,8 +54,10 @@ if (!isset($_SESSION['nombre'])) {
                 <br>
                 <?php
                 $array = array(
-                    "1" => array("nombre" => "CANTIDAD MATRICULADOS", "link" => "../../Reportes/Vista/Matriculados_cantidad.php"),
-                    "2" => array("nombre" => "LISTADO MATRICULADOS", "link" => "../../Reportes/Vista/ReciboMatriculaTotal.php"),
+                    "1" => array("nombre" => "CANTIDAD DE ALUMNOS", "link" => "../../Reportes/Vista/Matriculados_cantidad.php"),
+                    "2" => array("nombre" => "LISTADO DE ALUMNOS", "link" => "../../Reportes/Vista/ReporteMatricula.php"),
+                    "3" => array("nombre" => "LISTADO DETALLE MATRICULADOS", "link" => "../../Reportes/Vista/ReciboMatriculaTotal.php"),
+                    "4" => array("nombre" => "PAGOS AGRUPADOS POR FECHA", "link" => "../../Reportes/Vista/ReporteMatriculaXFecha.php"),
                 );
                 ?>
                 <table class="table">
