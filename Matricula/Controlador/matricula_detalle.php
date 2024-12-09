@@ -186,6 +186,7 @@ switch ($_GET["op"]) {
                         </button>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="../../Reportes/Vista/ReciboMatricula.php?id=' . $reg->matricula_detalle_id . '" Target="_blank">RECIBO ' . $reg->numeracion_pago . ' - ' . $reg->fecha_pago . '</a></li>
+                            <li><a class="dropdown-item" href="../../Reportes/Vista/ReciboMatricula_copy.php?id=' . $reg->matricula_detalle_id . '" Target="_blank">FIRMA CONTRATO</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="#">Separated link</a></li>
                         </ul>
