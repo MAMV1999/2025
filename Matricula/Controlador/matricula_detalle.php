@@ -174,11 +174,128 @@ switch ($_GET["op"]) {
 
         while ($reg = $rspta->fetch_object()) {
             $data[] = array(
-                "0" => $reg->lectivo_nombre . ' - ' . $reg->nivel_nombre . ' - ' . $reg->grado_nombre,
-                "1" => $reg->apoderado_nombre,
-                "2" => $reg->alumno_nombre,
-                "3" => $reg->pago_numeracion . ' - ' . $reg->metodo_pago_nombre,
-                "4" => '<button type="button" onclick="eliminarConValidacion(' . $reg->matricula_detalle_id . ')" class="btn btn-danger btn-sm">ELIMINAR</button>'
+                "0" => $reg->lectivo . ' - ' . $reg->nivel . ' - ' . $reg->grado,
+                "1" => $reg->nombre_apoderado,
+                "2" => $reg->nombre_alumno,
+                "3" => $reg->numeracion_pago . ' - ' . $reg->metodo_pago,
+                "4" => '<!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#' . $reg->numeracion_pago . '">REPORTE</button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="' . $reg->numeracion_pago . '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-xl">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">' . $reg->nombre_apoderado . ' - ' . $reg->nombre_alumno . '</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                            <!-- body -->
+                                <nav>
+                                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                        <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">INFORMACION GENERAL</button>
+                                        <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">RECIBO DE PAGO</button>
+                                        <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</button>
+                                    </div>
+                                </nav>
+                                <div class="tab-content" id="nav-tabContent">
+                                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                                        <div class="p-3">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col" colspan="2" class="table-secondary">MATRICULA</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>INSTITUCION</td><td>' . $reg->institucion . '</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>MATRICULA</td><td>' . $reg->lectivo . ' - ' . $reg->nivel . ' - ' . $reg->grado . ' - ' . $reg->seccion . '</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>TIPO DE MATRICULA</td><td>' . $reg->categoria . '</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <hr>
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col" colspan="2" class="table-secondary">APODERADO(A)</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>DOCUMENTO</td><td>' . $reg->documento_apoderado . ' - ' . $reg->numero_documento_apoderado . '</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>NOMBRE</td><td>' . $reg->tipo_apoderado . ' - ' . $reg->nombre_apoderado . '</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>TELEFONO</td><td>' . $reg->telefono_apoderado . '</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <hr>
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col" colspan="2" class="table-secondary">ALUMNO(A)</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>DOCUMENTO</td><td>' . $reg->documento_alumno . ' - ' . $reg->numero_documento_alumno . '</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>NOMBRE</td><td>' . $reg->nombre_alumno . '</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>NACIMIENTO</td><td>' . $reg->fecha_nacimiento . ' - ' . $reg->edad_alumno . ' AÑOS</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <hr>
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col" colspan="2" class="table-secondary">PAGO</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>N° RECIBO</td><td>N° ' . $reg->numeracion_pago . '</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>FECHA</td><td>' . $reg->fecha_pago . '</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>MONTO</td><td>S/. ' . $reg->monto_pago . ' - ' . $reg->metodo_pago . '</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <hr>
+                                            <center>
+                                            <button type="button" onclick="eliminarConValidacion(' . $reg->matricula_detalle_id . ')" class="btn btn-danger  btn-sm">ELIMINAR</button>
+                                            </center>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                                        <iframe src="../../Reportes/Vista/ReciboMatricula.php?id=' . $reg->matricula_detalle_id . '" type="application/pdf" width="100%" height="600px"></iframe>
+                                    </div>
+                                    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
+                                </div>
+                            <!-- fin-body -->
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                
+                            </div>
+                            </div>
+                        </div>
+                        </div>'
             );
         }
 

@@ -139,44 +139,57 @@ class MatriculaDetalle
     public function listar()
     {
         $sql = "SELECT
-            md.id AS matricula_detalle_id,
-            i.nombre AS institucion_nombre,
-            il.nombre AS lectivo_nombre,
-            iniv.nombre AS nivel_nombre,
-            ig.nombre AS grado_nombre,
-            isec.nombre AS seccion_nombre,
-            ua.nombreyapellido AS alumno_nombre,
-            uap.nombreyapellido AS apoderado_nombre,
-            mp.numeracion AS pago_numeracion,
-            mp.fecha AS pago_fecha,
-            mp.descripcion AS pago_descripcion,
-            mp.monto AS pago_monto,
-            mtp.nombre AS metodo_pago_nombre,
-            mp.observaciones AS pago_observaciones,
-            md.estado AS matricula_detalle_estado
-            FROM matricula_detalle md
-            INNER JOIN matricula m ON md.id_matricula = m.id
-            INNER JOIN institucion_seccion isec ON m.id_institucion_seccion = isec.id
-            INNER JOIN institucion_grado ig ON isec.id_institucion_grado = ig.id
-            INNER JOIN institucion_nivel iniv ON ig.id_institucion_nivel = iniv.id
-            INNER JOIN institucion_lectivo il ON iniv.id_institucion_lectivo = il.id
-            INNER JOIN institucion i ON il.id_institucion = i.id
-            INNER JOIN matricula_categoria mc ON md.id_matricula_categoria = mc.id
-            INNER JOIN matricula_pago mp ON md.id = mp.id_matricula_detalle
-            INNER JOIN matricula_metodo_pago mtp ON mp.id_matricula_metodo_pago = mtp.id
-            INNER JOIN usuario_alumno ua ON md.id_usuario_alumno = ua.id
-            INNER JOIN usuario_apoderado uap ON md.id_usuario_apoderado = uap.id
-            WHERE md.estado = '1'
-              AND m.estado = '1'
-              AND isec.estado = '1'
-              AND ig.estado = '1'
-              AND iniv.estado = '1'
-              AND il.estado = '1'
-              AND i.estado = '1'
-              AND mc.estado = '1'
-              AND mp.estado = '1'
-              AND ua.estado = '1'
-              AND uap.estado = '1'";
+                    md.id AS matricula_detalle_id,
+                    
+                    -- Institución, lectivo, nivel, grado, seccion
+                    i.nombre AS institucion,
+                    il.nombre AS lectivo,
+                    iniv.nombre AS nivel,
+                    ig.nombre AS grado,
+                    isec.nombre AS seccion,
+                    
+                    -- Categoría de matrícula
+                    mc.nombre AS categoria,
+                    
+                    -- Información del apoderado
+                    uat.nombre AS tipo_apoderado,
+                    ud_ap.nombre AS documento_apoderado,
+                    ua.numerodocumento AS numero_documento_apoderado,
+                    ua.nombreyapellido AS nombre_apoderado,
+                    ua.telefono AS telefono_apoderado,
+                    
+                    -- Información del alumno
+                    ud_al.nombre AS documento_alumno,
+                    ual.numerodocumento AS numero_documento_alumno,
+                    ual.nombreyapellido AS nombre_alumno,
+                    DATE_FORMAT(ual.nacimiento, '%d/%m/%Y') AS fecha_nacimiento,
+                    TIMESTAMPDIFF(YEAR, ual.nacimiento, CURDATE()) AS edad_alumno,
+                    
+                    -- Información de pagos
+                    mp.numeracion AS numeracion_pago,
+                    DATE_FORMAT(mp.fecha, '%d/%m/%Y') AS fecha_pago,
+                    mp.descripcion AS descripcion_pago,
+                    mp.monto AS monto_pago,
+                    mmp.nombre AS metodo_pago
+                FROM
+                    matricula_detalle md
+                -- Relaciones hacia las tablas relacionadas
+                INNER JOIN matricula m ON md.id_matricula = m.id AND m.estado = 1
+                INNER JOIN institucion_seccion isec ON m.id_institucion_seccion = isec.id AND isec.estado = 1
+                INNER JOIN institucion_grado ig ON isec.id_institucion_grado = ig.id AND ig.estado = 1
+                INNER JOIN institucion_nivel iniv ON ig.id_institucion_nivel = iniv.id AND iniv.estado = 1
+                INNER JOIN institucion_lectivo il ON iniv.id_institucion_lectivo = il.id AND il.estado = 1
+                INNER JOIN institucion i ON il.id_institucion = i.id AND i.estado = 1
+                INNER JOIN matricula_categoria mc ON md.id_matricula_categoria = mc.id AND mc.estado = 1
+                INNER JOIN usuario_apoderado ua ON md.id_usuario_apoderado = ua.id AND ua.estado = 1
+                INNER JOIN usuario_apoderado_tipo uat ON ua.id_apoderado_tipo = uat.id AND uat.estado = 1
+                INNER JOIN usuario_documento ud_ap ON ua.id_documento = ud_ap.id AND ud_ap.estado = 1
+                INNER JOIN usuario_alumno ual ON md.id_usuario_alumno = ual.id AND ual.estado = 1
+                INNER JOIN usuario_documento ud_al ON ual.id_documento = ud_al.id AND ud_al.estado = 1
+                LEFT JOIN matricula_pago mp ON md.id = mp.id_matricula_detalle AND mp.estado = 1
+                LEFT JOIN matricula_metodo_pago mmp ON mp.id_matricula_metodo_pago = mmp.id AND mmp.estado = 1
+                WHERE
+                    md.estado = 1";
         return ejecutarConsulta($sql);
     }
 

@@ -153,7 +153,7 @@ if (!isset($_SESSION['nombre'])) {
                                 <label for="apoderado_dni" class="form-label"><b>FECHA - NUMERACION:</b></label>
                                 <div class="input-group">
                                     <input type="date" id="pago_fecha" name="pago_fecha" class="form-control">
-                                    <input type="text" id="pago_numeracion" name="pago_numeracion" class="form-control" placeholder="Numeración">
+                                    <input type="text" id="pago_numeracion" name="pago_numeracion" class="form-control" placeholder="Numeración" readonly>
                                 </div>
                             </div>
                             <div class="p-3">

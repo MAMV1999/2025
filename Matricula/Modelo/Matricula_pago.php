@@ -8,18 +8,14 @@ class Matricula_pago
     // Método para guardar un nuevo registro de pago de matrícula
     public function guardar($id_matricula_detalle, $numeracion, $fecha, $descripcion, $monto, $id_matricula_metodo_pago, $observaciones)
     {
-        $sql = "INSERT INTO matricula_pago (id_matricula_detalle, numeracion, fecha, descripcion, monto, id_matricula_metodo_pago, observaciones) 
-                VALUES ('$id_matricula_detalle', '$numeracion', '$fecha', '$descripcion', '$monto', '$id_matricula_metodo_pago', '$observaciones')";
+        $sql = "INSERT INTO matricula_pago (id_matricula_detalle, numeracion, fecha, descripcion, monto, id_matricula_metodo_pago, observaciones) VALUES ('$id_matricula_detalle', '$numeracion', '$fecha', '$descripcion', '$monto', '$id_matricula_metodo_pago', '$observaciones')";
         return ejecutarConsulta($sql);
     }
 
     // Método para editar un registro de pago de matrícula existente
     public function editar($id, $id_matricula_detalle, $numeracion, $fecha, $descripcion, $monto, $id_matricula_metodo_pago, $observaciones)
     {
-        $sql = "UPDATE matricula_pago 
-                SET id_matricula_detalle='$id_matricula_detalle', numeracion='$numeracion', fecha='$fecha', descripcion='$descripcion', 
-                    monto='$monto', id_matricula_metodo_pago='$id_matricula_metodo_pago', observaciones='$observaciones' 
-                WHERE id='$id'";
+        $sql = "UPDATE matricula_pago SET id_matricula_detalle='$id_matricula_detalle', numeracion='$numeracion', fecha='$fecha', descripcion='$descripcion', monto='$monto', id_matricula_metodo_pago='$id_matricula_metodo_pago', observaciones='$observaciones' WHERE id='$id'";
         return ejecutarConsulta($sql);
     }
 
