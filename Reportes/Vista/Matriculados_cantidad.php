@@ -26,7 +26,7 @@ class PDF extends FPDF
         $this->AddPage();
 
         $this->SetFont('Arial', 'B', 20);
-        $this->Cell(0, 10, utf8_decode('CANTIDAD ALUMNOS'), 0, 1, 'C');
+        $this->Cell(0, 10, utf8_decode('CANTIDAD DE ALUMNOS'), 0, 1, 'C');
         $this->Ln(5);
 
         // Ancho de cada columna calculado para ocupar todo el margen
