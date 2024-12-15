@@ -58,6 +58,8 @@ if (!isset($_SESSION['nombre'])) {
                     "2" => array("nombre" => "LISTADO DE ALUMNOS", "link" => "../../Reportes/Vista/ReporteMatricula.php"),
                     "3" => array("nombre" => "LISTADO DETALLE MATRICULADOS", "link" => "../../Reportes/Vista/ReciboMatriculaTotal.php"),
                     "4" => array("nombre" => "PAGOS AGRUPADOS POR FECHA", "link" => "../../Reportes/Vista/ReporteMatriculaXFecha.php"),
+                    "5" => array("nombre" => "PAGOS AGRUPADOS POR APODERADO", "link" => "../../Reportes/Vista/ReporteMatriculaXApoderado.php"),
+                    "6" => array("nombre" => "CUMPLEAÑOS", "link" => "../../Reportes/Vista/Nacimiento.php"),
                 );
                 ?>
                 <table class="table">

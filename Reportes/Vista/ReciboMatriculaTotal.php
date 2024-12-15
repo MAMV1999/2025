@@ -14,18 +14,25 @@ class PDF extends FPDF
         $this->SetMargins(5, 5, 5); // Márgenes estrictos de 5 mm
     }
 
+    function Header()
+    {
+        $this->SetFont('Arial', 'B', 15);
+        $this->Cell(0, 10, 'LISTADO DETALLE MATRICULADOS - AGRUPADO X NIVEL Y GRADO', 0, 1, 'C');
+        $this->Ln(3);
+    }
+
     function Footer()
     {
         $this->SetY(-15);
         $this->SetFont('Arial', 'I', 8);
-        $this->Cell(0, 10, utf8_decode('Fecha y Hora de generación: ' . $this->fecha_hora_actual), 0, 0, 'C');
-        $this->Cell(0, 10, utf8_decode('Página') . $this->PageNo() . '/{nb}', 0, 0, 'R');
+        $this->Cell(0, 10, utf8_decode('FECHA Y HORA DE GENERACIÓN: ' . $this->fecha_hora_actual), 0, 0, 'C');
+        $this->Cell(0, 10, utf8_decode('PÁGINA ') . $this->PageNo() . '/{nb}', 0, 0, 'R');
     }
 
     function HeaderTable()
     {
         $this->SetFont('Arial', 'B', 7);
-        $this->SetFillColor(220, 220, 220); // Color de fondo para encabezados
+        $this->SetFillColor(188, 188, 188);
         $this->Cell(15, 10, utf8_decode('LECTIVO'), 1, 0, 'C', true);
         $this->Cell(15, 10, utf8_decode('NIVEL'), 1, 0, 'C', true);
         $this->Cell(15, 10, utf8_decode('GRADO'), 1, 0, 'C', true);
@@ -34,7 +41,7 @@ class PDF extends FPDF
         $this->Cell(60, 10, utf8_decode('APODERADO'), 1, 0, 'C', true);
         $this->Cell(20, 10, utf8_decode('TELEFONO'), 1, 0, 'C', true);
         $this->Cell(20, 10, utf8_decode('FECHA'), 1, 0, 'C', true);
-        $this->Cell(20, 10, utf8_decode('NUMERACION'), 1, 0, 'C', true);
+        $this->Cell(20, 10, utf8_decode('N° RECIBO'), 1, 0, 'C', true);
         $this->Cell(15, 10, utf8_decode('MONTO'), 1, 0, 'C', true);
         $this->Cell(30, 10, utf8_decode('MÉTODO'), 1, 1, 'C', true);
     }
@@ -43,32 +50,67 @@ class PDF extends FPDF
     {
         $this->SetFont('Arial', '', 7);
         foreach ($results as $row) {
-            $this->Cell(15, 8, utf8_decode($row['lectivo']), 1, 0, 'C');
-            $this->Cell(15, 8, utf8_decode($row['nivel']), 1, 0, 'C');
-            $this->Cell(15, 8, utf8_decode($row['grado']), 1, 0, 'C');
-            $this->Cell(15, 8, utf8_decode($row['seccion']), 1, 0, 'C');
-            $this->Cell(60, 8, utf8_decode($row['nombre_alumno']), 1, 0, 'C');
-            $this->Cell(60, 8, utf8_decode($row['nombre_apoderado']), 1, 0, 'C');
-            $this->Cell(20, 8, utf8_decode($row['telefono_apoderado']), 1, 0, 'C');
-            $this->Cell(20, 8, utf8_decode($row['fecha']), 1, 0, 'C');
-            $this->Cell(20, 8, utf8_decode('N° '.$row['numeracion']), 1, 0, 'C');
-            $this->Cell(15, 8, 'S/.'.number_format($row['monto'], 2), 1, 0, 'C');
-            $this->Cell(30, 8, utf8_decode($row['metodo_pago']), 1, 1, 'C');
+            $this->Cell(15, 6, utf8_decode($row['lectivo']), 1, 0, 'C');
+            $this->Cell(15, 6, utf8_decode($row['nivel']), 1, 0, 'C');
+            $this->Cell(15, 6, utf8_decode($row['grado']), 1, 0, 'C');
+            $this->Cell(15, 6, utf8_decode($row['seccion']), 1, 0, 'C');
+            $this->Cell(60, 6, utf8_decode($row['nombre_alumno']), 1, 0, 'C');
+            $this->Cell(60, 6, utf8_decode($row['nombre_apoderado']), 1, 0, 'C');
+            $this->Cell(20, 6, utf8_decode($row['telefono_apoderado']), 1, 0, 'C');
+            $this->Cell(20, 6, utf8_decode($row['fecha']), 1, 0, 'C');
+            $this->Cell(20, 6, utf8_decode('N° ' . $row['numeracion']), 1, 0, 'C');
+            $this->Cell(15, 6, 'S/.' . number_format($row['monto'], 2), 1, 0, 'C');
+            $this->Cell(30, 6, utf8_decode($row['metodo_pago']), 1, 1, 'C');
         }
+    }
+
+    function FillGroupedTableFromArray($totalesPorMetodo, $sumaGeneral)
+    {
+        $this->SetFont('Arial', 'B', 9);
+        $this->SetFillColor(188, 188, 188);
+        $this->Cell(90, 10, utf8_decode('MÉTODO DE PAGO'), 1, 0, 'C', true);
+        $this->Cell(50, 10, utf8_decode('MONTO TOTAL (S/.)'), 1, 1, 'C', true);
+
+        $this->SetFont('Arial', '', 9);
+
+        foreach ($totalesPorMetodo as $metodo => $montoTotal) {
+            $this->Cell(90, 7, utf8_decode($metodo), 1, 0, 'C');
+            $this->Cell(50, 7, 'S/.' . number_format($montoTotal, 2), 1, 1, 'C');
+        }
+
+        $this->SetFont('Arial', 'B', 9);
+        $this->SetFillColor(188, 188, 188);
+        $this->Cell(90, 10, 'TOTAL GENERAL', 1, 0, 'C', true);
+        $this->Cell(50, 10, 'S/.' . number_format($sumaGeneral, 2), 1, 1, 'C', true);
     }
 }
 
-
+// Obtener los datos
 $modelo = new ReciboMatriculaTotal();
-$result = $modelo->listarReciboMatriculaTotal();
-if (!$result) {
-    die("Error al obtener los datos.");
+$resultDetalle = $modelo->listarReciboMatriculaTotal();
+
+if (!$resultDetalle) {
+    die("Error al obtener los datos del detalle.");
 }
 
-// Transformar el resultado en un array
-$rows = [];
-while ($row = $result->fetch_assoc()) {
-    $rows[] = $row;
+$rowsDetalle = [];
+while ($row = $resultDetalle->fetch_assoc()) {
+    $rowsDetalle[] = $row;
+}
+
+// Calcular totales por método de pago y suma general
+$totalesPorMetodo = [];
+$sumaGeneral = 0;
+
+foreach ($rowsDetalle as $row) {
+    $metodo = $row['metodo_pago'];
+    $monto = floatval($row['monto']);
+    $sumaGeneral += $monto;
+
+    if (!isset($totalesPorMetodo[$metodo])) {
+        $totalesPorMetodo[$metodo] = 0;
+    }
+    $totalesPorMetodo[$metodo] += $monto;
 }
 
 // Generar el PDF
@@ -79,11 +121,13 @@ $pdf = new PDF('L', 'mm', 'A4', $fecha_hora_actual);
 $pdf->AliasNbPages();
 $pdf->AddPage();
 
-// Encabezados de la tabla
 $pdf->HeaderTable();
+// Primera tabla: Detalle
+$pdf->FillTable($rowsDetalle);
 
-// Llenar la tabla con datos
-$pdf->FillTable($rows);
+// Segunda tabla: Resumen por método de pago
+$pdf->AddPage();
+$pdf->FillGroupedTableFromArray($totalesPorMetodo, $sumaGeneral);
 
 // Salida del archivo
 $filename = 'Recibo_Matricula.pdf';

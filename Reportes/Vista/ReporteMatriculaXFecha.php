@@ -17,7 +17,14 @@ class PDF extends FPDF
     function Header()
     {
         $this->SetFont('Arial', 'B', 15);
-        $this->Cell(277, 7, strtoupper('PAGOS AGRUPADOS POR FECHA'), 0, 1, 'C');
+
+        // Concatenar el título con la fecha actual
+        $titulo = 'PAGOS AGRUPADOS POR FECHA';
+        if (!empty($this->currentFecha)) {
+            $titulo .= ' - ' . $this->currentFecha;
+        }
+
+        $this->Cell(277, 7, strtoupper($titulo), 0, 1, 'C');
         $this->SetFont('Arial', 'I', 8);
         $this->Cell(0, 5, utf8_decode('FECHA Y HORA DE GENERACIÓN: ' . $this->fecha_hora_actual), 0, 1, 'C');
         $this->Ln(5);
@@ -37,7 +44,7 @@ class PDF extends FPDF
         $this->SetFillColor(188, 188, 188);
         $this->Cell(74.79, 10, strtoupper('APODERADO'), 1, 0, 'C', true);
         $this->Cell(97, 10, strtoupper('ALUMNO'), 1, 0, 'C', true);
-        $this->Cell(25.2, 10, utf8_decode(strtoupper('N°')), 1, 0, 'C', true);
+        $this->Cell(25.2, 10, utf8_decode(strtoupper('TELEF.')), 1, 0, 'C', true);
         $this->Cell(25.2, 10, strtoupper('FECHA'), 1, 0, 'C', true);
         $this->Cell(16.94, 10, strtoupper('MONTO'), 1, 0, 'C', true);
         $this->Cell(37.5, 10, strtoupper('METODO'), 1, 0, 'C', true);
@@ -51,9 +58,9 @@ class PDF extends FPDF
         $maxHeight = max(
             $this->NbLines(74.79, utf8_decode($row['apoderado'])),
             $this->NbLines(97, utf8_decode($row['alumno'])),
-            $this->NbLines(25.2, utf8_decode($row['numeracion'])),
+            $this->NbLines(25.2, utf8_decode($row['apoderado_telefono'])),
             $this->NbLines(25.2, $row['pago_fecha']),
-            $this->NbLines(16.94,$row['pago_monto']),
+            $this->NbLines(16.94, $row['pago_monto']),
             $this->NbLines(37.5, utf8_decode($row['metodo_pago']))
         ) * 5;
 
@@ -65,13 +72,13 @@ class PDF extends FPDF
         $this->MultiCell(97, 5, utf8_decode($row['alumno']), 1, 'C', false);
         $this->SetXY($x + 171.79, $y);
 
-        $this->MultiCell(25.2, 5, utf8_decode($row['numeracion']), 1, 'C', false);
+        $this->MultiCell(25.2, 5, utf8_decode($row['apoderado_telefono']), 1, 'C', false);
         $this->SetXY($x + 196.99, $y);
 
         $this->MultiCell(25.2, 5, $row['pago_fecha'], 1, 'C', false);
         $this->SetXY($x + 222.19, $y);
 
-        $this->MultiCell(16.94, 5, 'S/. '.$row['pago_monto'], 1, 'C', false);
+        $this->MultiCell(16.94, 5, 'S/. ' . $row['pago_monto'], 1, 'C', false);
         $this->SetXY($x + 239.13, $y);
 
         $this->MultiCell(37.5, 5, utf8_decode($row['metodo_pago']), 1, 'C', false);
@@ -100,7 +107,7 @@ class PDF extends FPDF
         if (isset($this->totalesMetodosPorDia[$this->currentFecha])) {
             foreach ($this->totalesMetodosPorDia[$this->currentFecha] as $metodo => $total) {
                 $this->Cell(101.5, 7, utf8_decode($metodo), 1, 0, 'L');
-                $this->Cell(37, 7, 'S/. '.number_format($total, 2), 1, 1, 'R');
+                $this->Cell(37, 7, 'S/. ' . number_format($total, 2), 1, 1, 'R');
                 $totalGeneral += $total;
             }
         }
@@ -108,7 +115,7 @@ class PDF extends FPDF
         $this->SetFont('Arial', 'B', 9);
         $this->SetFillColor(188, 188, 188);
         $this->Cell(101.5, 10, strtoupper('Total'), 1, 0, 'L', true);
-        $this->Cell(37, 10, 'S/. '.number_format($totalGeneral, 2), 1, 1, 'R', true);
+        $this->Cell(37, 10, 'S/. ' . number_format($totalGeneral, 2), 1, 1, 'R', true);
     }
 
     function NbLines($w, $txt)
@@ -170,19 +177,22 @@ $fechaActual = '';
 
 while ($row = $datos->fetch_assoc()) {
     if ($pdf->PageNo() == 0) {
+        $pdf->currentFecha = $row['pago_fecha']; // Inicializa la fecha para la primera página
         $pdf->AddPage();
         $pdf->TableHeader();
     }
 
     if ($row['pago_fecha'] !== $fechaActual && $fechaActual !== '') {
         $pdf->TotalesMetodosPago();
+
+        // Actualizar la fecha antes de agregar una nueva página
+        $pdf->currentFecha = $row['pago_fecha'];
         $pdf->totalesMetodosPorDia = [];
         $pdf->AddPage();
         $pdf->TableHeader();
     }
 
     $pdf->TableRow($row);
-
     $fechaActual = $row['pago_fecha'];
 }
 

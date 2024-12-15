@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-12-2024 a las 21:30:32
+-- Tiempo de generación: 13-12-2024 a las 14:05:45
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -194,7 +194,7 @@ CREATE TABLE `institucion_lectivo` (
 --
 
 INSERT INTO `institucion_lectivo` (`id`, `nombre`, `nombre_lectivo`, `id_institucion`, `observaciones`, `fechacreado`, `estado`) VALUES
-(1, '2025', 'AñO DEL BICENTENARIO DE JOSé FAUSTINO SáNCHEZ CARRIóN Y DEFENSA DE LA REPúBLICA PERUANA', 1, '', '2024-11-24 05:54:57', 1);
+(1, '2025', 'AÑO DEL BICENTENARIO DE JOSE FAUSTINO SANCHEZ CARRION Y DEFENSA DE LA REPUBLICA PERUANA', 1, '', '2024-11-24 05:54:57', 1);
 
 -- --------------------------------------------------------
 
@@ -393,7 +393,7 @@ INSERT INTO `matricula_metodo_pago` (`id`, `nombre`, `observaciones`, `fechacrea
 (2, 'YAPE', '', '2024-11-24 06:05:54', 1),
 (3, 'TRANSFERENCIA', '', '2024-11-24 06:06:02', 1),
 (4, 'INTERBANCARIO', '', '2024-11-24 06:06:11', 1),
-(5, 'PAGO PENDIENTE', '', '2024-11-25 05:41:01', 1),
+(5, 'PENDIENTE', '', '2024-11-25 05:41:01', 1),
 (6, 'MATRICULA GRATIS', '', '2024-12-01 06:17:48', 1);
 
 -- --------------------------------------------------------

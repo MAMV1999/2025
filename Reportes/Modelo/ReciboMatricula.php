@@ -30,6 +30,7 @@ class Recibomatricula
 
                     -- Información del ciclo lectivo, nivel, grado y sección
                     il.nombre AS lectivo_nombre,
+                    il.nombre_lectivo AS lectivo_nombre_ano,
                     inl.nombre AS nivel_nombre,
                     ig.nombre AS grado_nombre,
                     isec.nombre AS seccion_nombre,
@@ -84,6 +85,34 @@ class Recibomatricula
                     
                 WHERE 
                     md.id = '$id'";
+        return ejecutarConsulta($sql);
+    }
+
+    public function listarDocumentosDeMatricula()
+    {
+        $sql = "SELECT 
+                    d.*,
+                    dr.nombre AS documento_responsable_nombre,
+                    CONCAT(
+                        UPPER(LEFT(SUBSTRING_INDEX(dr.nombre, ' ', 1), 1)), '.',
+                        IF(LENGTH(SUBSTRING_INDEX(SUBSTRING_INDEX(dr.nombre, ' ', 2), ' ', -1)) > 0,
+                        CONCAT(UPPER(LEFT(SUBSTRING_INDEX(SUBSTRING_INDEX(dr.nombre, ' ', 2), ' ', -1), 1)), '.'),
+                        '')
+                    ) AS documento_responsable_iniciales,
+                    CASE 
+                        WHEN d.obligatorio = 1 THEN '(*)'
+                        ELSE ''
+                    END AS obligatorio_marcado
+                FROM 
+                    documento d
+                LEFT JOIN 
+                    documento_responsable dr 
+                ON 
+                    d.id_documento_responsable = dr.id
+                WHERE 
+                    d.estado = 1
+                ORDER BY 
+                    d.id ASC";
         return ejecutarConsulta($sql);
     }
 }
