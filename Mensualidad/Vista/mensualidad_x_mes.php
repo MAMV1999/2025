@@ -15,33 +15,43 @@ if (!isset($_SESSION['nombre'])) {
         <div class="my-3 p-3 bg-body rounded shadow-sm" id="listado">
             <h5 class="border-bottom pb-2 mb-0"><b>DETALLE DE MENSUALIDADES - LISTADO</b></h5>
             <div class="p-3">
-                <table class="table table-hover" id="myTable">
+                <table class="table table-hover text-center" id="myTable">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>MES</th>
-                            <th>DEUDORES</th>
-                            <th>MONTO DEUDA</th>
-                            <th>CANCELADO</th>
-                            <th>MONTO PAGADO</th>
-                            <th>ACCIONES</th>
+                            <th style="text-align: center;">ID</th>
+                            <th style="text-align: center;">MES</th>
+                            <th style="text-align: center;">DEUDORES</th>
+                            <th style="text-align: center;">CANCELADO</th>
+                            <th style="text-align: center;">ACCIONES</th>
                         </tr>
                     </thead>
                     <tbody></tbody>
                 </table>
             </div>
-
-            <small class="d-block text-end mt-3">
-                <button type="button" onclick="MostrarFormulario();limpiar();" class="btn btn-success">Agregar</button>
-            </small>
         </div>
 
         <div class="my-3 p-3 bg-body rounded shadow-sm" id="formulario">
             <h5 class="border-bottom pb-2 mb-0"><b>DETALLE DE MENSUALIDADES - FORMULARIO</b></h5>
             <form id="frm_form" name="frm_form" method="post">
-                <input type="hidden" id="id" name="id" placeholder="id" class="form-control">
-
-
+                <br>
+                <div class="table-responsive">
+                    <table class="table table-hover" id="formulario-detalles">
+                        <thead>
+                            <tr>
+                                <th>MATRICULA</th>
+                                <th>APODERADO</th>
+                                <th>TELEFONO</th>
+                                <th>ALUMNO</th>
+                                <th>CODIGO</th>
+                                <th>MONTO</th>
+                                <th>ESTADO</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Aquí se insertarán dinámicamente las filas -->
+                        </tbody>
+                    </table>
+                </div>
 
                 <div class="p-3">
                     <button type="submit" class="btn btn-primary">Guardar</button>
@@ -49,6 +59,7 @@ if (!isset($_SESSION['nombre'])) {
                 </div>
             </form>
         </div>
+
         <!-- CUERPO_FIN -->
 
     </main>

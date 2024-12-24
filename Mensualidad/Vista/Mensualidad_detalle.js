@@ -138,7 +138,7 @@ function mostrar(id) {
                             <td style='width: 5%;'>${item.id_mensualidad_mes}<input type="hidden" readonly class="form-control" name="id${index}" id="id${index}" value="${item.id}"></td>
                             <td style='width: 15%;'>${item.mes}</td>
                             <td style='width: 15%;'>${item.fechavencimiento}</td>
-                            <td style='width: 15%;'><input type="text" readonly class="form-control" name="monto${index}" id="monto${index}" value="${item.monto}"></td>
+                            <td style='width: 15%;'><input type="text" class="form-control" name="monto${index}" id="monto${index}" value="${item.monto}"></td>
                             <td style='width: 20%;'>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="pagado${index}" value="1" ${item.pagado == 1 ? "checked" : ""}>

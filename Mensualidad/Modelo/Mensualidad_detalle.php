@@ -5,14 +5,6 @@ class Mensualidad_detalle
 {
     public function __construct() {}
 
-    // Método para guardar un nuevo registro de mensualidad
-    public function guardar($id_mensualidad_mes, $id_matricula_detalle, $monto, $pagado, $observaciones)
-    {
-        $sql = "INSERT INTO mensualidad_detalle (id_mensualidad_mes, id_matricula_detalle, monto, pagado, observaciones) 
-                VALUES ('$id_mensualidad_mes', '$id_matricula_detalle', '$monto', '$pagado', '$observaciones')";
-        return ejecutarConsulta($sql);
-    }
-
     // Método para editar un registro de mensualidad existente
     public function guardarEditarMasivo($detalles)
     {
@@ -25,14 +17,10 @@ class Mensualidad_detalle
 
                 // Si el ID está vacío, es un nuevo registro
                 if (empty($id)) {
-                    $sql = "INSERT INTO mensualidad_detalle 
-                            (id_mensualidad_mes, id_matricula_detalle, monto, pagado, observaciones)
-                            VALUES ('$detalle[id_mensualidad_mes]', '$detalle[id_matricula_detalle]', '$monto', '$pagado', '$observaciones')";
+                    $sql = "INSERT INTO mensualidad_detalle (id_mensualidad_mes, id_matricula_detalle, monto, pagado, observaciones) VALUES ('$detalle[id_mensualidad_mes]', '$detalle[id_matricula_detalle]', '$monto', '$pagado', '$observaciones')";
                 } else {
                     // Actualización de registro existente
-                    $sql = "UPDATE mensualidad_detalle 
-                            SET monto = '$monto', pagado = '$pagado', observaciones = '$observaciones' 
-                            WHERE id = '$id'";
+                    $sql = "UPDATE mensualidad_detalle SET monto = '$monto', pagado = '$pagado', observaciones = '$observaciones' WHERE id = '$id'";
                 }
 
                 if (!ejecutarConsulta($sql)) {
@@ -93,16 +81,14 @@ class Mensualidad_detalle
     public function listar()
     {
         $sql = "SELECT 
-                    md.id_matricula_detalle AS id, 
-                    il.nombre AS lectivo, 
-                    iniv.nombre AS nivel, 
-                    ig.nombre AS grado, 
-                    isec.nombre AS seccion, 
-                    uap.nombreyapellido AS apoderado, 
-                    ual.nombreyapellido AS alumno,
-                    SUM(md.monto) AS total_monto, 
-                    COUNT(md.id) AS num_mensualidades,
-                    md.estado AS estado
+                md.id_matricula_detalle AS id, 
+                il.nombre AS lectivo, 
+                iniv.nombre AS nivel, 
+                ig.nombre AS grado, 
+                isec.nombre AS seccion, 
+                uap.nombreyapellido AS apoderado, 
+                ual.nombreyapellido AS alumno, SUM(md.monto) AS total_monto, COUNT(md.id) AS num_mensualidades,
+                md.estado AS estado
                 FROM mensualidad_detalle md
                 LEFT JOIN mensualidad_mes mm ON md.id_mensualidad_mes = mm.id
                 LEFT JOIN matricula_detalle mdet ON md.id_matricula_detalle = mdet.id

@@ -28,10 +28,6 @@ if (!isset($_SESSION['nombre'])) {
                     <tbody></tbody>
                 </table>
             </div>
-
-            <small class="d-block text-end mt-3">
-                <button type="button" onclick="MostrarFormulario();limpiar();" class="btn btn-success">Agregar</button>
-            </small>
         </div>
 
         <div class="my-3 p-3 bg-body rounded shadow-sm" id="formulario">

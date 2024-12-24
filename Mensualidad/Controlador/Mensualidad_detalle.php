@@ -78,10 +78,7 @@ switch ($_GET["op"]) {
                 "1" => $reg->lectivo . ' - ' . $reg->nivel . ' - ' . $reg->grado . ' - ' . $reg->seccion,
                 "2" => $reg->apoderado,
                 "3" => $reg->alumno,
-                "4" => ($reg->estado) ?
-                    '<button class="btn btn-warning btn-sm" onclick="mostrar(' . $reg->id . ')">EDITAR</button>'
-                    :
-                    '<button class="btn btn-warning btn-sm" onclick="mostrar(' . $reg->id . ')">EDITAR</button>'
+                "4" => '<button class="btn btn-warning btn-sm" onclick="mostrar(' . $reg->id . ')">EDITAR</button>'
             );
         }
         $results = array(
