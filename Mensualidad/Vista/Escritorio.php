@@ -18,8 +18,9 @@ if (!isset($_SESSION['nombre'])) {
                 <br>
                 <?php
                 $array = array(
-                    "1" => array("nombre" => "REGISTRO MENSUALIDAD X ALUMNO", "link" => "Mensualidad_detalle.php"),
-                    "2" => array("nombre" => "REGISTRO MENSUALIDAD X MES", "link" => "mensualidad_x_mes.php"),
+                    "1" => array("nombre" => "REGISTRO MENSUALIDAD X MES", "link" => "mensualidad_x_mes.php"),
+                    "2" => array("nombre" => "REGISTRO MENSUALIDAD X ALUMNO", "link" => "Mensualidad_detalle.php"),
+                    "3" => array("nombre" => "REGISTRO MENSUALIDAD X APODERADO", "link" => "mensualidad_x_apoderado.php"),
                 );
                 ?>
                 <table class="table">
