@@ -38,11 +38,13 @@ function guardaryeditar(e) {
             let id = $(this).find("input[name^='id-']").val(); // Verifica este selector
             let monto = $(this).find("input[name^='monto-']").val(); // Verifica este selector
             let pagado = $(this).find("input[name^='pagado-']:checked").val(); // Verifica este selector
+            let observaciones = $(this).find("input[name^='observaciones-']").val(); // Verifica este selector
 
             detalles.push({
                 id: id,
                 monto: monto,
-                pagado: pagado
+                pagado: pagado,
+                observaciones: observaciones
             });
         });
     });
@@ -74,6 +76,7 @@ function mostrar(id_apoderado) {
             let idsMeses = detalle.ids_mes.split(", ");
             let meses = detalle.meses.split(", ");
             let montos = detalle.montos.split(", ");
+            let observaciones = detalle.observaciones.split(", ");
             let estadosPago = detalle.estados_pago.split(", ");
 
             // Asegurarse de que `estadosPago` tenga un valor para cada mes
@@ -85,11 +88,9 @@ function mostrar(id_apoderado) {
 
                 return `
                     <tr>
-                        <td>${meses[i]}</td>
-                        <td>
-                            <input type="text" style="width: 150px; height: auto;" class="form-control" name="monto-${idMes}" value="${montos[i]}" />
-                        </td>
-                        <td>
+                        <td style="width: 25%; height: auto;">${meses[i]}</td>
+                        <td style="width: 25%; height: auto;"><input type="text" class="form-control" name="monto-${idMes}" value="${montos[i]}" /></td>
+                        <td style="width: 25%; height: auto;">
                             <div class="form-check form-check-inline">
                                 <input type="radio" name="pagado-${index}-${idMes}" value="1" ${estadosPago[i] === "1" ? "checked" : ""} class="form-check-input estado-pago-radio" data-id="${idMes}">
                                 <label class="form-check-label">PAGADO</label>
@@ -100,6 +101,7 @@ function mostrar(id_apoderado) {
                             </div>
                             <input type="hidden" name="id-${idMes}" value="${idsmd[i]}" />
                         </td>
+                        <td style="width: 25%; height: auto;"><input type="text" class="form-control" placeholder="OBSERVACIONES" name="observaciones-${idMes}" value="${observaciones[i]}" /></td>
                     </tr>
                 `;
             }).join("");
@@ -149,6 +151,7 @@ function mostrar(id_apoderado) {
                                         <th>MES</th>
                                         <th>MONTO</th>
                                         <th>ESTADO</th>
+                                        <th>OBSERVACIONES</th>
                                     </tr>
                                 </thead>
                                 <tbody>

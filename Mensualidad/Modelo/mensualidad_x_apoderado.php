@@ -12,9 +12,10 @@ class Mensualidadxapoderado
                 $id = isset($detalle['id']) ? $detalle['id'] : null;
                 $monto = isset($detalle['monto']) ? $detalle['monto'] : null;
                 $pagado = isset($detalle['pagado']) ? $detalle['pagado'] : null;
+                $observaciones = isset($detalle['observaciones']) ? $detalle['observaciones'] : null;
 
                 // Actualizar el registro con el ID correspondiente
-                $sql = "UPDATE mensualidad_detalle SET monto = '$monto', pagado = '$pagado' WHERE id = '$id'";
+                $sql = "UPDATE mensualidad_detalle SET monto = '$monto', pagado = '$pagado', observaciones = '$observaciones' WHERE id = '$id'";
                 if (!ejecutarConsulta($sql)) {
                     return false;
                 }
@@ -65,7 +66,8 @@ class Mensualidadxapoderado
                 GROUP_CONCAT(mm.id ORDER BY mm.id ASC SEPARATOR ', ') AS ids_mes, 
                 GROUP_CONCAT(mm.nombre ORDER BY mm.id ASC SEPARATOR ', ') AS meses, 
                 GROUP_CONCAT(md.monto ORDER BY mm.id ASC SEPARATOR ', ') AS montos, 
-                GROUP_CONCAT(md.pagado ORDER BY mm.id ASC SEPARATOR ', ') AS estados_pago
+                GROUP_CONCAT(md.pagado ORDER BY mm.id ASC SEPARATOR ', ') AS estados_pago,
+                GROUP_CONCAT(md.observaciones ORDER BY mm.id ASC SEPARATOR ', ') AS observaciones
                 FROM mensualidad_detalle md
                 JOIN matricula_detalle mtd ON md.id_matricula_detalle = mtd.id
                 JOIN usuario_alumno ual ON mtd.id_usuario_alumno = ual.id
