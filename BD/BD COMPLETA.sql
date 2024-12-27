@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-12-2024 a las 17:41:11
+-- Tiempo de generación: 27-12-2024 a las 11:05:40
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -21,6 +21,138 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `2025`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `almacen_categoria`
+--
+
+CREATE TABLE `almacen_categoria` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(255) NOT NULL,
+  `observaciones` text,
+  `fechacreado` datetime DEFAULT CURRENT_TIMESTAMP,
+  `estado` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `almacen_categoria`
+--
+
+INSERT INTO `almacen_categoria` (`id`, `nombre`, `observaciones`, `fechacreado`, `estado`) VALUES
+(1, 'DOCUMENTOS', '', '2024-12-27 02:26:34', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `almacen_comprobante`
+--
+
+CREATE TABLE `almacen_comprobante` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(255) NOT NULL,
+  `observaciones` text,
+  `fechacreado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `estado` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `almacen_comprobante`
+--
+
+INSERT INTO `almacen_comprobante` (`id`, `nombre`, `observaciones`, `fechacreado`, `estado`) VALUES
+(1, 'RECIBO', '', '2024-12-27 09:15:33', 1),
+(2, 'BOLETA', '', '2024-12-27 09:15:58', 1),
+(3, 'FACTURA', '', '2024-12-27 09:16:07', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `almacen_ingreso`
+--
+
+CREATE TABLE `almacen_ingreso` (
+  `id` int(11) NOT NULL,
+  `usuario_apoderado_id` int(11) NOT NULL,
+  `almacen_comprobante_id` int(11) NOT NULL,
+  `numeracion` varchar(50) NOT NULL,
+  `fecha` date NOT NULL,
+  `impuesto` decimal(10,2) NOT NULL,
+  `almacen_metodo_pago_id` int(11) NOT NULL,
+  `total` decimal(10,2) NOT NULL,
+  `observaciones` text,
+  `fechacreado` datetime DEFAULT CURRENT_TIMESTAMP,
+  `estado` tinyint(1) DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `almacen_ingreso_detalle`
+--
+
+CREATE TABLE `almacen_ingreso_detalle` (
+  `id` int(11) NOT NULL,
+  `almacen_ingreso_id` int(11) NOT NULL,
+  `almacen_producto_id` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `observaciones` text
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `almacen_metodo_pago`
+--
+
+CREATE TABLE `almacen_metodo_pago` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(255) NOT NULL,
+  `observaciones` text,
+  `fechacreado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `estado` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `almacen_metodo_pago`
+--
+
+INSERT INTO `almacen_metodo_pago` (`id`, `nombre`, `observaciones`, `fechacreado`, `estado`) VALUES
+(1, 'EFECTIVO', '', '2024-12-27 09:21:08', 1),
+(2, 'YAPE', '', '2024-12-27 09:21:17', 1),
+(3, 'TRANSFERENCIA', '', '2024-12-27 09:21:24', 1),
+(4, 'INTERBANCARIO', '', '2024-12-27 09:21:42', 1),
+(5, 'PENDIENTE', '', '2024-12-27 09:21:50', 1),
+(6, 'REGALO', '', '2024-12-27 09:22:35', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `almacen_producto`
+--
+
+CREATE TABLE `almacen_producto` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `descripcion` text,
+  `categoria_id` int(11) NOT NULL,
+  `precio_compra` decimal(10,2) NOT NULL,
+  `precio_venta` decimal(10,2) NOT NULL,
+  `stock` int(11) DEFAULT '0',
+  `fechacreado` datetime DEFAULT CURRENT_TIMESTAMP,
+  `estado` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `almacen_producto`
+--
+
+INSERT INTO `almacen_producto` (`id`, `nombre`, `descripcion`, `categoria_id`, `precio_compra`, `precio_venta`, `stock`, `fechacreado`, `estado`) VALUES
+(1, 'DOCUMENTOS DE SALIDA (TODOS)', 'CONSTANCIA DE NO ADEUDO - CONSTANCIA DE MATRICULA - CERTIFICADO DE ESTUDIO', 1, '0.00', '100.00', 0, '2024-12-27 03:38:03', 1),
+(2, 'CONSTANCIA DE NO ADEUDO', '', 1, '0.00', '10.00', 0, '2024-12-27 03:42:56', 1),
+(3, 'CONSTANCIA DE MATRICULA', '', 1, '0.00', '10.00', 0, '2024-12-27 03:48:08', 1),
+(4, 'CERTIFICADO DE ESTUDIOS', '', 1, '0.00', '80.00', 0, '2024-12-27 03:48:33', 1);
 
 -- --------------------------------------------------------
 
@@ -1070,6 +1202,48 @@ INSERT INTO `usuario_tipo_contrato` (`id`, `nombre`, `observaciones`, `fechacrea
 --
 
 --
+-- Indices de la tabla `almacen_categoria`
+--
+ALTER TABLE `almacen_categoria`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `almacen_comprobante`
+--
+ALTER TABLE `almacen_comprobante`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `almacen_ingreso`
+--
+ALTER TABLE `almacen_ingreso`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `usuario_apoderado_id` (`usuario_apoderado_id`),
+  ADD KEY `almacen_comprobante_id` (`almacen_comprobante_id`),
+  ADD KEY `almacen_metodo_pago_id` (`almacen_metodo_pago_id`);
+
+--
+-- Indices de la tabla `almacen_ingreso_detalle`
+--
+ALTER TABLE `almacen_ingreso_detalle`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_almacen_ingreso` (`almacen_ingreso_id`),
+  ADD KEY `fk_almacen_producto` (`almacen_producto_id`);
+
+--
+-- Indices de la tabla `almacen_metodo_pago`
+--
+ALTER TABLE `almacen_metodo_pago`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `almacen_producto`
+--
+ALTER TABLE `almacen_producto`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `categoria_id` (`categoria_id`);
+
+--
 -- Indices de la tabla `documento`
 --
 ALTER TABLE `documento`
@@ -1262,6 +1436,42 @@ ALTER TABLE `usuario_tipo_contrato`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `almacen_categoria`
+--
+ALTER TABLE `almacen_categoria`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `almacen_comprobante`
+--
+ALTER TABLE `almacen_comprobante`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `almacen_ingreso`
+--
+ALTER TABLE `almacen_ingreso`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `almacen_ingreso_detalle`
+--
+ALTER TABLE `almacen_ingreso_detalle`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `almacen_metodo_pago`
+--
+ALTER TABLE `almacen_metodo_pago`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de la tabla `almacen_producto`
+--
+ALTER TABLE `almacen_producto`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT de la tabla `documento`
 --
 ALTER TABLE `documento`
@@ -1420,6 +1630,27 @@ ALTER TABLE `usuario_tipo_contrato`
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `almacen_ingreso`
+--
+ALTER TABLE `almacen_ingreso`
+  ADD CONSTRAINT `almacen_ingreso_ibfk_1` FOREIGN KEY (`usuario_apoderado_id`) REFERENCES `usuario_apoderado` (`id`),
+  ADD CONSTRAINT `almacen_ingreso_ibfk_2` FOREIGN KEY (`almacen_comprobante_id`) REFERENCES `almacen_comprobante` (`id`),
+  ADD CONSTRAINT `almacen_ingreso_ibfk_3` FOREIGN KEY (`almacen_metodo_pago_id`) REFERENCES `almacen_metodo_pago` (`id`);
+
+--
+-- Filtros para la tabla `almacen_ingreso_detalle`
+--
+ALTER TABLE `almacen_ingreso_detalle`
+  ADD CONSTRAINT `fk_almacen_ingreso` FOREIGN KEY (`almacen_ingreso_id`) REFERENCES `almacen_ingreso` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_almacen_producto` FOREIGN KEY (`almacen_producto_id`) REFERENCES `almacen_producto` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `almacen_producto`
+--
+ALTER TABLE `almacen_producto`
+  ADD CONSTRAINT `almacen_producto_ibfk_1` FOREIGN KEY (`categoria_id`) REFERENCES `almacen_categoria` (`id`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `documento`
