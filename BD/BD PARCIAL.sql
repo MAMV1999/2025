@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-12-2024 a las 10:48:26
+-- Tiempo de generación: 30-12-2024 a las 14:43:16
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -80,7 +80,7 @@ CREATE TABLE `almacen_ingreso_detalle` (
   `id` int(11) NOT NULL,
   `almacen_ingreso_id` int(11) NOT NULL,
   `almacen_producto_id` int(11) NOT NULL,
-  `cantidad` int(11) NOT NULL,
+  `stock` int(11) NOT NULL,
   `observaciones` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -583,8 +583,8 @@ ALTER TABLE `almacen_ingreso`
 --
 ALTER TABLE `almacen_ingreso_detalle`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_almacen_ingreso` (`almacen_ingreso_id`),
-  ADD KEY `fk_almacen_producto` (`almacen_producto_id`);
+  ADD KEY `almacen_ingreso_id` (`almacen_ingreso_id`),
+  ADD KEY `almacen_producto_id` (`almacen_producto_id`);
 
 --
 -- Indices de la tabla `almacen_metodo_pago`
@@ -999,8 +999,8 @@ ALTER TABLE `almacen_ingreso`
 -- Filtros para la tabla `almacen_ingreso_detalle`
 --
 ALTER TABLE `almacen_ingreso_detalle`
-  ADD CONSTRAINT `fk_almacen_ingreso` FOREIGN KEY (`almacen_ingreso_id`) REFERENCES `almacen_ingreso` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_almacen_producto` FOREIGN KEY (`almacen_producto_id`) REFERENCES `almacen_producto` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `almacen_ingreso_detalle_ibfk_1` FOREIGN KEY (`almacen_ingreso_id`) REFERENCES `almacen_ingreso` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `almacen_ingreso_detalle_ibfk_2` FOREIGN KEY (`almacen_producto_id`) REFERENCES `almacen_producto` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `almacen_producto`
