@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-12-2024 a las 14:43:05
+-- Tiempo de generación: 02-01-2025 a las 20:56:16
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -52,6 +52,7 @@ INSERT INTO `almacen_categoria` (`id`, `nombre`, `observaciones`, `fechacreado`,
 CREATE TABLE `almacen_comprobante` (
   `id` int(11) NOT NULL,
   `nombre` varchar(255) NOT NULL,
+  `impuesto` decimal(10,2) NOT NULL DEFAULT '0.00',
   `observaciones` text,
   `fechacreado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `estado` tinyint(1) NOT NULL
@@ -61,10 +62,10 @@ CREATE TABLE `almacen_comprobante` (
 -- Volcado de datos para la tabla `almacen_comprobante`
 --
 
-INSERT INTO `almacen_comprobante` (`id`, `nombre`, `observaciones`, `fechacreado`, `estado`) VALUES
-(1, 'RECIBO', '', '2024-12-27 09:15:33', 1),
-(2, 'BOLETA', '', '2024-12-27 09:15:58', 0),
-(3, 'FACTURA', '', '2024-12-27 09:16:07', 0);
+INSERT INTO `almacen_comprobante` (`id`, `nombre`, `impuesto`, `observaciones`, `fechacreado`, `estado`) VALUES
+(1, 'RECIBO', '0.00', '', '2024-12-27 09:15:33', 1),
+(2, 'BOLETA', '0.00', '', '2024-12-27 09:15:58', 0),
+(3, 'FACTURA', '0.00', '', '2024-12-27 09:16:07', 0);
 
 -- --------------------------------------------------------
 
@@ -78,13 +79,43 @@ CREATE TABLE `almacen_ingreso` (
   `almacen_comprobante_id` int(11) NOT NULL,
   `numeracion` varchar(50) NOT NULL,
   `fecha` date NOT NULL,
-  `impuesto` decimal(10,2) NOT NULL,
   `almacen_metodo_pago_id` int(11) NOT NULL,
   `total` decimal(10,2) NOT NULL,
   `observaciones` text,
   `fechacreado` datetime DEFAULT CURRENT_TIMESTAMP,
   `estado` tinyint(1) DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `almacen_ingreso`
+--
+
+INSERT INTO `almacen_ingreso` (`id`, `usuario_apoderado_id`, `almacen_comprobante_id`, `numeracion`, `fecha`, `almacen_metodo_pago_id`, `total`, `observaciones`, `fechacreado`, `estado`) VALUES
+(1, 26, 1, '000001', '2025-01-02', 7, '0.00', '', '2025-01-02 10:55:32', 1);
+
+--
+-- Disparadores `almacen_ingreso`
+--
+DELIMITER $$
+CREATE TRIGGER `manejar_stock_cambio_estado` AFTER UPDATE ON `almacen_ingreso` FOR EACH ROW BEGIN
+    -- Si el estado cambia de 1 a 0, restar stock
+    IF OLD.estado = 1 AND NEW.estado = 0 THEN
+        UPDATE almacen_producto p
+        JOIN almacen_ingreso_detalle d ON p.id = d.almacen_producto_id
+        SET p.stock = p.stock - d.stock
+        WHERE d.almacen_ingreso_id = NEW.id;
+    END IF;
+
+    -- Si el estado cambia de 0 a 1, restaurar stock
+    IF OLD.estado = 0 AND NEW.estado = 1 THEN
+        UPDATE almacen_producto p
+        JOIN almacen_ingreso_detalle d ON p.id = d.almacen_producto_id
+        SET p.stock = p.stock + d.stock
+        WHERE d.almacen_ingreso_id = NEW.id;
+    END IF;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -97,8 +128,31 @@ CREATE TABLE `almacen_ingreso_detalle` (
   `almacen_ingreso_id` int(11) NOT NULL,
   `almacen_producto_id` int(11) NOT NULL,
   `stock` int(11) NOT NULL,
+  `precio_unitario` decimal(10,2) NOT NULL,
   `observaciones` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `almacen_ingreso_detalle`
+--
+
+INSERT INTO `almacen_ingreso_detalle` (`id`, `almacen_ingreso_id`, `almacen_producto_id`, `stock`, `precio_unitario`, `observaciones`) VALUES
+(1, 1, 4, 10, '0.00', ''),
+(2, 1, 3, 10, '0.00', ''),
+(3, 1, 2, 10, '0.00', '');
+
+--
+-- Disparadores `almacen_ingreso_detalle`
+--
+DELIMITER $$
+CREATE TRIGGER `actualizar_stock_ingreso` AFTER INSERT ON `almacen_ingreso_detalle` FOR EACH ROW BEGIN
+    -- Incrementar el stock del producto correspondiente
+    UPDATE almacen_producto
+    SET stock = stock + NEW.stock
+    WHERE id = NEW.almacen_producto_id;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -124,7 +178,8 @@ INSERT INTO `almacen_metodo_pago` (`id`, `nombre`, `observaciones`, `fechacreado
 (3, 'TRANSFERENCIA', '', '2024-12-27 09:21:24', 1),
 (4, 'INTERBANCARIO', '', '2024-12-27 09:21:42', 1),
 (5, 'PENDIENTE', '', '2024-12-27 09:21:50', 1),
-(6, 'REGALO', '', '2024-12-27 09:22:35', 1);
+(6, 'REGALO', '', '2024-12-27 09:22:35', 1),
+(7, 'EMISION DIRECTA', '', '2025-01-02 15:55:04', 1);
 
 -- --------------------------------------------------------
 
@@ -149,10 +204,10 @@ CREATE TABLE `almacen_producto` (
 --
 
 INSERT INTO `almacen_producto` (`id`, `nombre`, `descripcion`, `categoria_id`, `precio_compra`, `precio_venta`, `stock`, `fechacreado`, `estado`) VALUES
-(1, 'DOCUMENTOS DE SALIDA (TODOS)', 'CONSTANCIA DE NO ADEUDO - CONSTANCIA DE MATRICULA - CERTIFICADO DE ESTUDIO', 1, '0.00', '100.00', 0, '2024-12-27 03:38:03', 1),
-(2, 'CONSTANCIA DE NO ADEUDO', '', 1, '0.00', '10.00', 0, '2024-12-27 03:42:56', 1),
-(3, 'CONSTANCIA DE MATRICULA', '', 1, '0.00', '10.00', 0, '2024-12-27 03:48:08', 1),
-(4, 'CERTIFICADO DE ESTUDIOS', '', 1, '0.00', '80.00', 0, '2024-12-27 03:48:33', 1);
+(1, 'DOCUMENTOS DE SALIDA (TODOS)', 'CONSTANCIA DE NO ADEUDO - CONSTANCIA DE MATRICULA - CERTIFICADO DE ESTUDIO', 1, '0.00', '100.00', 0, '2024-12-27 03:38:03', 0),
+(2, 'CONSTANCIA DE NO ADEUDO', '', 1, '0.00', '10.00', 10, '2024-12-27 03:42:56', 1),
+(3, 'CONSTANCIA DE MATRICULA', '', 1, '0.00', '10.00', 10, '2024-12-27 03:48:08', 1),
+(4, 'CERTIFICADO DE ESTUDIOS', '', 1, '0.00', '80.00', 10, '2024-12-27 03:48:33', 1);
 
 -- --------------------------------------------------------
 
@@ -1018,7 +1073,8 @@ INSERT INTO `usuario_apoderado` (`id`, `id_apoderado_tipo`, `id_documento`, `num
 (22, 1, 1, '41102080', 'MARIA ADELINDA MESTANZA SUAREZ', '990477169', 1, 2, '41102080', '41102080', '', '2024-12-15 20:41:28', 1),
 (23, 1, 1, '41281051', 'MARIA DE LOS ANGELES CARHUAS YJUMA', '932262539', 1, 1, '41281051', '41281051', '', '2024-12-16 14:02:35', 1),
 (24, 1, 1, '46936573', 'LISETH KATHERINE PALACIOS BERMUDEZ', '977164577', 1, 2, '46936573', '46936573', '', '2024-12-19 19:02:35', 1),
-(25, 1, 1, '43733426', 'BEATRIZ VERONICA CRUZ MESTANZA', '982868532', 1, 2, '43733426', '43733426', '', '2024-12-20 16:34:44', 1);
+(25, 1, 1, '43733426', 'BEATRIZ VERONICA CRUZ MESTANZA', '982868532', 1, 2, '43733426', '43733426', '', '2024-12-20 16:34:44', 1),
+(26, 3, 1, '10509059', 'CECILIA ROSARIO MANRIQUE LOPEZ', '976300448', 1, 2, '10509059', '10509059', '', '2025-01-02 15:44:41', 1);
 
 -- --------------------------------------------------------
 
@@ -1451,19 +1507,19 @@ ALTER TABLE `almacen_comprobante`
 -- AUTO_INCREMENT de la tabla `almacen_ingreso`
 --
 ALTER TABLE `almacen_ingreso`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `almacen_ingreso_detalle`
 --
 ALTER TABLE `almacen_ingreso_detalle`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `almacen_metodo_pago`
 --
 ALTER TABLE `almacen_metodo_pago`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `almacen_producto`
@@ -1583,7 +1639,7 @@ ALTER TABLE `usuario_alumno`
 -- AUTO_INCREMENT de la tabla `usuario_apoderado`
 --
 ALTER TABLE `usuario_apoderado`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario_apoderado_tipo`

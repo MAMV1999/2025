@@ -19,7 +19,7 @@ if (!isset($_SESSION['nombre'])) {
                 <?php
                 $array = array(
                     "1" => array("nombre" => "REGISTRO COMPRA", "link" => "almacen_ingreso.php"),
-                    "2" => array("nombre" => "REGISTRO VENTA", "link" => "salida.php"),
+                    "2" => array("nombre" => "REGISTRO VENTA", "link" => "almacen_salida.php"),
                 );
                 ?>
                 <table class="table">

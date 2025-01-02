@@ -13,7 +13,7 @@ if (!isset($_SESSION['nombre'])) {
 
         <!-- CUERPO_INICIO -->
         <div class="my-3 p-3 bg-body rounded shadow-sm" id="listado">
-            <h5 class="border-bottom pb-2 mb-0"><b>COMPRAS - LISTADO</b></h5>
+            <h5 class="border-bottom pb-2 mb-0"><b>VENTAS - LISTADO</b></h5>
             <div class="p-3">
                 <table class="table table-hover" id="myTable">
                     <thead>
@@ -36,10 +36,10 @@ if (!isset($_SESSION['nombre'])) {
         </div>
 
         <div class="my-3 p-3 bg-body rounded shadow-sm" id="formulario" style="display: none;">
-            <h5 class="border-bottom pb-2 mb-0"><b>COMPRAS - FORMULARIO</b></h5>
+            <h5 class="border-bottom pb-2 mb-0"><b>VENTAS - FORMULARIO</b></h5>
 
             <form id="frm_form" name="frm_form" method="post">
-                <input type="hidden" id="almacen_ingreso_id" name="almacen_ingreso_id" placeholder="almacen_ingreso_id" class="form-control">
+                <input type="hidden" id="almacen_salida_id" name="almacen_salida_id" placeholder="almacen_salida_id" class="form-control">
 
                 <div class="p-3">
                     <label for="apoderado_dni" class="form-label"><b>COMPROBANTE / NUMERACIÓN / FECHA:</b></label>
@@ -75,7 +75,7 @@ if (!isset($_SESSION['nombre'])) {
                                             <tr>
                                                 <th style="text-align: center; width: 45%;">PRODUCTO</th>
                                                 <th style="text-align: center; width: 25%;">CATEGORIA</th>
-                                                <th style="text-align: center; width: 10%;">COMPRA</th>
+                                                <th style="text-align: center; width: 10%;">VENTA</th>
                                                 <th style="text-align: center; width: 10%;">STOCK</th>
                                                 <th style="text-align: center; width: 10%;">ACCIONES</th>
                                             </tr>
@@ -95,7 +95,7 @@ if (!isset($_SESSION['nombre'])) {
                             <tr>
                                 <td style="width: 30%;">PRODUCTO</td>
                                 <td style="width: 20%;">CANTIDAD</td>
-                                <td style="width: 20%;">COSTO UNITARIO</td>
+                                <td style="width: 20%;">PRECIO UNITARIO</td>
                                 <td style="width: 20%;">OBSERVACIONES</td>
                                 <td style="width: 10%;">ELIMINAR</td>
                             </tr>
@@ -106,7 +106,7 @@ if (!isset($_SESSION['nombre'])) {
                 </div>
 
                 <div class="p-3">
-                    <label for="apoderado_dni" class="form-label"><b>COMPROBANTE / NUMERACION / FECHA:</b></label>
+                    <label for="apoderado_dni" class="form-label"><b>METODO DE PAGO / TOTAL:</b></label>
                     <div class="input-group">
                         <select id="almacen_metodo_pago_id" name="almacen_metodo_pago_id" class="form-control selectpicker" data-live-search="true"></select>
                         <input type="text" id="total" name="total" placeholder="TOTAL" class="form-control" readonly>
@@ -133,7 +133,7 @@ if (!isset($_SESSION['nombre'])) {
 
     </main>
     <?php include "../../General/Include/2_footer.php"; ?>
-    <script src="almacen_ingreso.js"></script>
+    <script src="almacen_salida.js"></script>
 <?php
 }
 ob_end_flush();

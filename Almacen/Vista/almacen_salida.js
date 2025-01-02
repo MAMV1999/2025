@@ -1,4 +1,4 @@
-var link = "../Controlador/almacen_ingreso.php?op=";
+var link = "../Controlador/almacen_salida.php?op=";
 var tabla;
 var tabla2;
 
@@ -57,7 +57,7 @@ $(document).ready(function () {
 });
 
 function limpiar() {
-
+    // Implementación personalizada si es necesario
 }
 
 function MostrarListado() {
@@ -108,8 +108,7 @@ function calcularTotal() {
     document.getElementById('total').value = total.toFixed(2); // Asignar el total al input con 2 decimales
 }
 
-
-function agregardetalle(id_producto, producto, descripcion, stock, precio_compra) {
+function agregardetalle(id_producto, producto, descripcion, stock, precio_venta) {
     event.preventDefault();
 
     // Seleccionar el tbody de la tabla con id específico
@@ -122,8 +121,8 @@ function agregardetalle(id_producto, producto, descripcion, stock, precio_compra
     });
 
     if (productoExistente) {
-        alert('El producto ya fue agregado.'); // Mostrar alerta o manejar el caso
-        return; // Salir de la función para no duplicar el producto
+        alert('El producto ya fue agregado.');
+        return;
     }
 
     // Crear una nueva fila
@@ -132,8 +131,8 @@ function agregardetalle(id_producto, producto, descripcion, stock, precio_compra
     // Crear celdas con los datos del producto
     tr.innerHTML = `
         <td data-id_producto="${id_producto}"><input type="hidden" name="productos[${id_producto}][almacen_producto_id]" value="${id_producto}" class="form-control">${producto}</td>
-        <td><input type="number" class="form-control" name="productos[${id_producto}][stock]" min="1" value="1" oninput="calcularTotal()"></td>
-        <td><input type="text" class="form-control" name="productos[${id_producto}][precio_unitario]" value="${precio_compra}" oninput="calcularTotal()"></td>
+        <td><input type="number" class="form-control" name="productos[${id_producto}][stock]" min="1" max="${stock}" value="1" oninput="calcularTotal()"></td>
+        <td><input type="text" class="form-control" name="productos[${id_producto}][precio_unitario]" value="${precio_venta}" oninput="calcularTotal()"></td>
         <td><input type="text" class="form-control" name="productos[${id_producto}][observaciones]" placeholder="OBSERVACIONES"></td>
         <td><button class="btn btn-danger btn-sm" onclick="eliminarProducto(this)">ELIMINAR</button></td>
     `;
@@ -145,14 +144,11 @@ function agregardetalle(id_producto, producto, descripcion, stock, precio_compra
     calcularTotal();
 }
 
-
 function eliminarProducto(btn) {
-    // Eliminar la fila asociada al botón
     let row = btn.parentElement.parentElement; // Fila actual
     row.remove();
 
-    // Recalcular el total después de eliminar
-    calcularTotal();
+    calcularTotal(); // Recalcular el total después de eliminar
 }
 
 function activar(id) {
@@ -164,7 +160,7 @@ function activar(id) {
             data: { id: id },
             success: function (response) {
                 alert(response);
-                tabla.ajax.reload(); // Recargar la tabla
+                tabla.ajax.reload();
             },
             error: function () {
                 alert("Error al intentar activar el registro.");
@@ -184,7 +180,7 @@ function desactivar(id) {
             data: { id: id },
             success: function (response) {
                 alert(response);
-                tabla.ajax.reload(); // Recargar la tabla
+                tabla.ajax.reload();
             },
             error: function () {
                 alert("Error al intentar desactivar el registro.");

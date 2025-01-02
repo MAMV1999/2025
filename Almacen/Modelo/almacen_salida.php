@@ -1,7 +1,7 @@
 <?php
 require_once("../../database.php");
 
-class AlmacenIngreso
+class AlmacenSalida
 {
     public function __construct() {}
 
@@ -17,18 +17,18 @@ class AlmacenIngreso
             $total = limpiarcadena($total);
             $observaciones = limpiarcadena($observaciones);
 
-            // Insertar el registro en almacen_ingreso
-            $sqlIngreso = "INSERT INTO almacen_ingreso (usuario_apoderado_id, almacen_comprobante_id, numeracion, fecha, almacen_metodo_pago_id, total, observaciones) VALUES ('$usuario_apoderado_id', '$almacen_comprobante_id', '$numeracion', '$fecha', '$almacen_metodo_pago_id', '$total', '$observaciones')";
-            $almacen_ingreso_id = ejecutarConsulta_retornarID($sqlIngreso);
+            // Insertar el registro en almacen_salida
+            $sqlSalida = "INSERT INTO almacen_salida (usuario_apoderado_id, almacen_comprobante_id, numeracion, fecha, almacen_metodo_pago_id, total, observaciones) VALUES ('$usuario_apoderado_id', '$almacen_comprobante_id', '$numeracion', '$fecha', '$almacen_metodo_pago_id', '$total', '$observaciones')";
+            $almacen_salida_id = ejecutarConsulta_retornarID($sqlSalida);
 
-            // Insertar los detalles en almacen_ingreso_detalle
+            // Insertar los detalles en almacen_salida_detalle
             foreach ($productos as $producto) {
                 $almacen_producto_id = limpiarcadena($producto['almacen_producto_id']);
                 $stock = limpiarcadena($producto['stock']);
                 $precio_unitario = limpiarcadena($producto['precio_unitario']);
                 $observaciones_producto = limpiarcadena($producto['observaciones']);
 
-                $sqlDetalle = "INSERT INTO almacen_ingreso_detalle (almacen_ingreso_id, almacen_producto_id, stock, precio_unitario, observaciones) VALUES ('$almacen_ingreso_id', '$almacen_producto_id', '$stock', '$precio_unitario', '$observaciones_producto')";
+                $sqlDetalle = "INSERT INTO almacen_salida_detalle (almacen_salida_id, almacen_producto_id, stock, precio_unitario, observaciones) VALUES ('$almacen_salida_id', '$almacen_producto_id', '$stock', '$precio_unitario', '$observaciones_producto')";
                 ejecutarConsulta($sqlDetalle);
             }
 
@@ -38,25 +38,24 @@ class AlmacenIngreso
         }
     }
 
-
     public function listar()
     {
         $sql = "SELECT 
-                    ai.id,
+                    asd.id,
                     ua.nombreyapellido AS nombre_apoderado,
                     ac.nombre AS nombre_comprobante,
-                    ai.numeracion,
-                    DATE_FORMAT(ai.fecha, '%d/%m/%Y') AS fecha, -- Formato día/mes/año
+                    asd.numeracion,
+                    DATE_FORMAT(asd.fecha, '%d/%m/%Y') AS fecha,
                     amp.nombre AS metodo_pago,
-                    ai.total,
-                    ai.observaciones,
-                    ai.fechacreado,
-                    ai.estado
-                FROM almacen_ingreso ai
-                LEFT JOIN usuario_apoderado ua ON ai.usuario_apoderado_id = ua.id
-                LEFT JOIN almacen_comprobante ac ON ai.almacen_comprobante_id = ac.id
-                LEFT JOIN almacen_metodo_pago amp ON ai.almacen_metodo_pago_id = amp.id
-                ORDER BY ai.fecha ASC";
+                    asd.total,
+                    asd.observaciones,
+                    asd.fechacreado,
+                    asd.estado
+                FROM almacen_salida asd
+                LEFT JOIN usuario_apoderado ua ON asd.usuario_apoderado_id = ua.id
+                LEFT JOIN almacen_comprobante ac ON asd.almacen_comprobante_id = ac.id
+                LEFT JOIN almacen_metodo_pago amp ON asd.almacen_metodo_pago_id = amp.id
+                ORDER BY asd.fecha ASC";
         return ejecutarConsulta($sql);
     }
 
@@ -121,16 +120,16 @@ class AlmacenIngreso
     public function listar_almacen_producto()
     {
         $sql = "SELECT 
-                ap.id AS id_producto,
-                ap.nombre AS producto,
-                ap.descripcion,
-                ap.categoria_id,
-                ac.nombre AS categoria,
-                ap.precio_compra,
-                ap.precio_venta,
-                ap.stock,
-                ap.fechacreado,
-                ap.estado
+                    ap.id AS id_producto,
+                    ap.nombre AS producto,
+                    ap.descripcion,
+                    ap.categoria_id,
+                    ac.nombre AS categoria,
+                    ap.precio_compra,
+                    ap.precio_venta,
+                    ap.stock,
+                    ap.fechacreado,
+                    ap.estado
                 FROM almacen_producto ap
                 INNER JOIN almacen_categoria ac ON ap.categoria_id = ac.id AND ac.estado = 1
                 WHERE ap.estado = 1
@@ -140,20 +139,20 @@ class AlmacenIngreso
 
     public function numeracion()
     {
-        $sql = "SELECT LPAD(IFNULL(MAX(CAST(numeracion AS UNSIGNED)) + 1, 1), 6, '0') AS numeracion FROM almacen_ingreso";
+        $sql = "SELECT LPAD(IFNULL(MAX(CAST(numeracion AS UNSIGNED)) + 1, 1), 6, '0') AS numeracion FROM almacen_salida";
         $result = ejecutarConsultaSimpleFila($sql);
         return $result ? $result['numeracion'] : '000001';
     }
 
     public function activar($id)
     {
-        $sql = "UPDATE almacen_ingreso SET estado = 1 WHERE id = '$id'";
+        $sql = "UPDATE almacen_salida SET estado = 1 WHERE id = '$id'";
         return ejecutarConsulta($sql);
     }
 
     public function desactivar($id)
     {
-        $sql = "UPDATE almacen_ingreso SET estado = 0 WHERE id = '$id'";
+        $sql = "UPDATE almacen_salida SET estado = 0 WHERE id = '$id'";
         return ejecutarConsulta($sql);
     }
 }

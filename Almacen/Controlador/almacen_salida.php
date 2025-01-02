@@ -1,7 +1,7 @@
 <?php
-include_once("../Modelo/almacen_ingreso.php");
+include_once("../Modelo/almacen_salida.php");
 
-$almaceningreso = new AlmacenIngreso();
+$almacensalida = new AlmacenSalida();
 
 switch ($_GET["op"]) {
 
@@ -16,16 +16,15 @@ switch ($_GET["op"]) {
         $productos = $_POST['productos'] ?? [];
 
         if ($usuario_apoderado_id && $almacen_comprobante_id && $numeracion && $fecha && $almacen_metodo_pago_id && $total && !empty($productos)) {
-            $resultado = $almaceningreso->guardar($usuario_apoderado_id, $almacen_comprobante_id, $numeracion, $fecha, $almacen_metodo_pago_id, $total, $observaciones, $productos);
+            $resultado = $almacensalida->guardar($usuario_apoderado_id, $almacen_comprobante_id, $numeracion, $fecha, $almacen_metodo_pago_id, $total, $observaciones, $productos);
             echo $resultado ? "Registro guardado correctamente" : "Error al guardar el registro";
         } else {
             echo "Datos incompletos. Verifique e intente nuevamente.";
         }
         break;
 
-
     case 'listar':
-        $rspta = $almaceningreso->listar();
+        $rspta = $almacensalida->listar();
         $data = [];
 
         while ($reg = $rspta->fetch_object()) {
@@ -34,7 +33,7 @@ switch ($_GET["op"]) {
                 "1" => $reg->nombre_apoderado,
                 "2" => $reg->nombre_comprobante . ' - ' . $reg->numeracion,
                 "3" => $reg->fecha,
-                "4" => 'S/. ' . $reg->total,
+                "4" => $reg->metodo_pago . ' - S/. ' . $reg->total,
                 "5" => $reg->estado == 1 ? '<button class="btn btn-danger btn-sm" onclick="desactivar(' . $reg->id . ')">DESACTIVAR</button>' : '<button class="btn btn-primary btn-sm" onclick="activar(' . $reg->id . ')">ACTIVAR</button>'
             );
         }
@@ -48,16 +47,16 @@ switch ($_GET["op"]) {
         break;
 
     case 'listar_almacen_producto':
-        $rspta = $almaceningreso->listar_almacen_producto();
+        $rspta = $almacensalida->listar_almacen_producto();
         $data = [];
 
         while ($reg = $rspta->fetch_object()) {
             $data[] = array(
                 "0" => $reg->producto,
                 "1" => $reg->categoria,
-                "2" => 'S./ ' . $reg->precio_compra,
+                "2" => 'S./ ' . $reg->precio_venta,
                 "3" => '" ' . $reg->stock . ' "',
-                "4" => '<button class="btn btn-warning btn-sm" onclick="agregardetalle(\'' . $reg->id_producto . '\',\'' . $reg->producto . '\',\'' . $reg->descripcion . '\',\'' . $reg->stock . '\',\'' . $reg->precio_compra . '\')">AGREGAR</button>'
+                "4" => '<button class="btn btn-warning btn-sm" onclick="agregardetalle(\'' . $reg->id_producto . '\',\'' . $reg->producto . '\',\'' . $reg->descripcion . '\',\'' . $reg->stock . '\',\'' . $reg->precio_venta . '\')">AGREGAR</button>'
             );
         }
 
@@ -70,35 +69,35 @@ switch ($_GET["op"]) {
         break;
 
     case 'listar_usuario_apoderado':
-        $rspta = $almaceningreso->listar_usuario_apoderado();
+        $rspta = $almacensalida->listar_usuario_apoderado();
         while ($reg = $rspta->fetch_object()) {
             echo '<option value="' . $reg->id_apoderado . '">' . $reg->nombreyapellido . '</option>';
         }
         break;
 
     case 'listar_almacen_comprobante':
-        $rspta = $almaceningreso->listar_almacen_comprobante();
+        $rspta = $almacensalida->listar_almacen_comprobante();
         while ($reg = $rspta->fetch_object()) {
             echo '<option value="' . $reg->id_comprobante . '">' . $reg->nombre_comprobante . '</option>';
         }
         break;
 
     case 'listar_almacen_metodo_pago':
-        $rspta = $almaceningreso->listar_almacen_metodo_pago();
+        $rspta = $almacensalida->listar_almacen_metodo_pago();
         while ($reg = $rspta->fetch_object()) {
             echo '<option value="' . $reg->id_metodo_pago . '">' . $reg->metodo_pago . '</option>';
         }
         break;
 
     case 'numeracion':
-        $rspta = $almaceningreso->numeracion();
+        $rspta = $almacensalida->numeracion();
         echo $rspta;
         break;
 
     case 'activar':
         $id = $_POST['id'] ?? null;
         if ($id) {
-            $rspta = $almaceningreso->activar($id);
+            $rspta = $almacensalida->activar($id);
             echo $rspta ? "Registro activado correctamente" : "No se pudo activar el registro";
         } else {
             echo "ID no proporcionado.";
@@ -108,7 +107,7 @@ switch ($_GET["op"]) {
     case 'desactivar':
         $id = $_POST['id'] ?? null;
         if ($id) {
-            $rspta = $almaceningreso->desactivar($id);
+            $rspta = $almacensalida->desactivar($id);
             echo $rspta ? "Registro desactivado correctamente" : "No se pudo desactivar el registro";
         } else {
             echo "ID no proporcionado.";

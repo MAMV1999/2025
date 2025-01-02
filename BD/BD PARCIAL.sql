@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-12-2024 a las 14:43:16
+-- Tiempo de generación: 02-01-2025 a las 20:56:27
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -45,6 +45,7 @@ CREATE TABLE `almacen_categoria` (
 CREATE TABLE `almacen_comprobante` (
   `id` int(11) NOT NULL,
   `nombre` varchar(255) NOT NULL,
+  `impuesto` decimal(10,2) NOT NULL DEFAULT '0.00',
   `observaciones` text,
   `fechacreado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `estado` tinyint(1) NOT NULL
@@ -62,13 +63,36 @@ CREATE TABLE `almacen_ingreso` (
   `almacen_comprobante_id` int(11) NOT NULL,
   `numeracion` varchar(50) NOT NULL,
   `fecha` date NOT NULL,
-  `impuesto` decimal(10,2) NOT NULL,
   `almacen_metodo_pago_id` int(11) NOT NULL,
   `total` decimal(10,2) NOT NULL,
   `observaciones` text,
   `fechacreado` datetime DEFAULT CURRENT_TIMESTAMP,
   `estado` tinyint(1) DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Disparadores `almacen_ingreso`
+--
+DELIMITER $$
+CREATE TRIGGER `manejar_stock_cambio_estado` AFTER UPDATE ON `almacen_ingreso` FOR EACH ROW BEGIN
+    -- Si el estado cambia de 1 a 0, restar stock
+    IF OLD.estado = 1 AND NEW.estado = 0 THEN
+        UPDATE almacen_producto p
+        JOIN almacen_ingreso_detalle d ON p.id = d.almacen_producto_id
+        SET p.stock = p.stock - d.stock
+        WHERE d.almacen_ingreso_id = NEW.id;
+    END IF;
+
+    -- Si el estado cambia de 0 a 1, restaurar stock
+    IF OLD.estado = 0 AND NEW.estado = 1 THEN
+        UPDATE almacen_producto p
+        JOIN almacen_ingreso_detalle d ON p.id = d.almacen_producto_id
+        SET p.stock = p.stock + d.stock
+        WHERE d.almacen_ingreso_id = NEW.id;
+    END IF;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -81,8 +105,22 @@ CREATE TABLE `almacen_ingreso_detalle` (
   `almacen_ingreso_id` int(11) NOT NULL,
   `almacen_producto_id` int(11) NOT NULL,
   `stock` int(11) NOT NULL,
+  `precio_unitario` decimal(10,2) NOT NULL,
   `observaciones` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Disparadores `almacen_ingreso_detalle`
+--
+DELIMITER $$
+CREATE TRIGGER `actualizar_stock_ingreso` AFTER INSERT ON `almacen_ingreso_detalle` FOR EACH ROW BEGIN
+    -- Incrementar el stock del producto correspondiente
+    UPDATE almacen_producto
+    SET stock = stock + NEW.stock
+    WHERE id = NEW.almacen_producto_id;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -807,19 +845,19 @@ ALTER TABLE `almacen_comprobante`
 -- AUTO_INCREMENT de la tabla `almacen_ingreso`
 --
 ALTER TABLE `almacen_ingreso`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `almacen_ingreso_detalle`
 --
 ALTER TABLE `almacen_ingreso_detalle`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `almacen_metodo_pago`
 --
 ALTER TABLE `almacen_metodo_pago`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `almacen_producto`
@@ -939,7 +977,7 @@ ALTER TABLE `usuario_alumno`
 -- AUTO_INCREMENT de la tabla `usuario_apoderado`
 --
 ALTER TABLE `usuario_apoderado`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario_apoderado_tipo`
