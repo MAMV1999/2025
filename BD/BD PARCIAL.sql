@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-01-2025 a las 20:56:27
+-- Tiempo de generación: 02-01-2025 a las 22:29:38
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -153,6 +153,77 @@ CREATE TABLE `almacen_producto` (
   `fechacreado` datetime DEFAULT CURRENT_TIMESTAMP,
   `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `almacen_salida`
+--
+
+CREATE TABLE `almacen_salida` (
+  `id` int(11) NOT NULL,
+  `usuario_apoderado_id` int(11) NOT NULL,
+  `almacen_comprobante_id` int(11) NOT NULL,
+  `numeracion` varchar(50) NOT NULL,
+  `fecha` date NOT NULL,
+  `almacen_metodo_pago_id` int(11) NOT NULL,
+  `total` decimal(10,2) NOT NULL,
+  `observaciones` text,
+  `fechacreado` datetime DEFAULT CURRENT_TIMESTAMP,
+  `estado` tinyint(1) DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Disparadores `almacen_salida`
+--
+DELIMITER $$
+CREATE TRIGGER `manejar_stock_cambio_estado_salida` AFTER UPDATE ON `almacen_salida` FOR EACH ROW BEGIN
+    -- Si el estado cambia de 1 a 0, restaurar stock
+    IF OLD.estado = 1 AND NEW.estado = 0 THEN
+        UPDATE almacen_producto p
+        JOIN almacen_salida_detalle d ON p.id = d.almacen_producto_id
+        SET p.stock = p.stock + d.stock
+        WHERE d.almacen_salida_id = NEW.id;
+    END IF;
+
+    -- Si el estado cambia de 0 a 1, reducir stock
+    IF OLD.estado = 0 AND NEW.estado = 1 THEN
+        UPDATE almacen_producto p
+        JOIN almacen_salida_detalle d ON p.id = d.almacen_producto_id
+        SET p.stock = p.stock - d.stock
+        WHERE d.almacen_salida_id = NEW.id;
+    END IF;
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `almacen_salida_detalle`
+--
+
+CREATE TABLE `almacen_salida_detalle` (
+  `id` int(11) NOT NULL,
+  `almacen_salida_id` int(11) NOT NULL,
+  `almacen_producto_id` int(11) NOT NULL,
+  `stock` int(11) NOT NULL,
+  `precio_unitario` decimal(10,2) NOT NULL,
+  `observaciones` text
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Disparadores `almacen_salida_detalle`
+--
+DELIMITER $$
+CREATE TRIGGER `actualizar_stock_salida` AFTER INSERT ON `almacen_salida_detalle` FOR EACH ROW BEGIN
+    -- Reducir el stock del producto correspondiente
+    UPDATE almacen_producto
+    SET stock = stock - NEW.stock
+    WHERE id = NEW.almacen_producto_id;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -638,6 +709,23 @@ ALTER TABLE `almacen_producto`
   ADD KEY `categoria_id` (`categoria_id`);
 
 --
+-- Indices de la tabla `almacen_salida`
+--
+ALTER TABLE `almacen_salida`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `usuario_apoderado_id` (`usuario_apoderado_id`),
+  ADD KEY `almacen_comprobante_id` (`almacen_comprobante_id`),
+  ADD KEY `almacen_metodo_pago_id` (`almacen_metodo_pago_id`);
+
+--
+-- Indices de la tabla `almacen_salida_detalle`
+--
+ALTER TABLE `almacen_salida_detalle`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `almacen_salida_id` (`almacen_salida_id`),
+  ADD KEY `almacen_producto_id` (`almacen_producto_id`);
+
+--
 -- Indices de la tabla `documento`
 --
 ALTER TABLE `documento`
@@ -866,6 +954,18 @@ ALTER TABLE `almacen_producto`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT de la tabla `almacen_salida`
+--
+ALTER TABLE `almacen_salida`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `almacen_salida_detalle`
+--
+ALTER TABLE `almacen_salida_detalle`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT de la tabla `documento`
 --
 ALTER TABLE `documento`
@@ -977,7 +1077,7 @@ ALTER TABLE `usuario_alumno`
 -- AUTO_INCREMENT de la tabla `usuario_apoderado`
 --
 ALTER TABLE `usuario_apoderado`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario_apoderado_tipo`
@@ -1045,6 +1145,21 @@ ALTER TABLE `almacen_ingreso_detalle`
 --
 ALTER TABLE `almacen_producto`
   ADD CONSTRAINT `almacen_producto_ibfk_1` FOREIGN KEY (`categoria_id`) REFERENCES `almacen_categoria` (`id`) ON DELETE CASCADE;
+
+--
+-- Filtros para la tabla `almacen_salida`
+--
+ALTER TABLE `almacen_salida`
+  ADD CONSTRAINT `almacen_salida_ibfk_1` FOREIGN KEY (`usuario_apoderado_id`) REFERENCES `usuario_apoderado` (`id`),
+  ADD CONSTRAINT `almacen_salida_ibfk_2` FOREIGN KEY (`almacen_comprobante_id`) REFERENCES `almacen_comprobante` (`id`),
+  ADD CONSTRAINT `almacen_salida_ibfk_3` FOREIGN KEY (`almacen_metodo_pago_id`) REFERENCES `almacen_metodo_pago` (`id`);
+
+--
+-- Filtros para la tabla `almacen_salida_detalle`
+--
+ALTER TABLE `almacen_salida_detalle`
+  ADD CONSTRAINT `almacen_salida_detalle_ibfk_1` FOREIGN KEY (`almacen_salida_id`) REFERENCES `almacen_salida` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `almacen_salida_detalle_ibfk_2` FOREIGN KEY (`almacen_producto_id`) REFERENCES `almacen_producto` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `documento`

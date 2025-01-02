@@ -55,7 +55,7 @@ class AlmacenSalida
                 LEFT JOIN usuario_apoderado ua ON asd.usuario_apoderado_id = ua.id
                 LEFT JOIN almacen_comprobante ac ON asd.almacen_comprobante_id = ac.id
                 LEFT JOIN almacen_metodo_pago amp ON asd.almacen_metodo_pago_id = amp.id
-                ORDER BY asd.fecha ASC";
+                ORDER BY asd.fecha DESC, asd.numeracion DESC";
         return ejecutarConsulta($sql);
     }
 
