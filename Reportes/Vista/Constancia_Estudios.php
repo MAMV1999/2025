@@ -15,7 +15,7 @@ class PDF extends FPDF
         $this->background_image = $background_image;
     
         // Ajustar los márgenes
-        $this->SetMargins(20, 60, 20); // Márgenes izquierdo, superior y derecho
+        $this->SetMargins(20, 80, 20); // Márgenes izquierdo, superior y derecho
         $this->SetAutoPageBreak(true, 5); // Márgen inferior
     }
     
@@ -34,37 +34,24 @@ class PDF extends FPDF
     
         $this->SetFont('Arial', 'B', 11);
         $this->MultiCell(0, 5, utf8_decode('"' . $data['lectivo_nombre_ano'] . '"'), 0, 'C');
-        $this->Ln(8);
+        $this->Ln(20);
     
         $this->SetFont('Arial', 'BU', 18);
-        $this->Cell(0, 5, utf8_decode('CONSTANCIA DE VACANTE'), 0, 1, 'C');
-        $this->Ln(8);
+        $this->Cell(0, 5, utf8_decode('CONSTANCIA DE ESTUDIOS'), 0, 1, 'C');
+        $this->Ln(15);
     
         $this->SetFont('Arial', '', 11);
-        $this->MultiCell(0, 5, utf8_decode('La directora encargada de la '.$data['institucion_nombre'].', en pleno uso de sus facultades y debidamente autorizada por las normativas vigentes, hace constar lo siguiente:'), 0, 'J');
-        $this->Ln(5);
-    
-        $this->SetFont('Arial', '', 11);
-        $this->MultiCell(0, 5, utf8_decode('Que se ha otorgado una vacante al(la) alumno(a) '.$data['alumno_nombre_completo'].', identificado(a) con '.$data['alumno_tipo_documento'].' N.º '.$data['alumno_numero_documento'].', para '.$data['grado_nombre'].', correspondiente al nivel educativo '.$data['nivel_nombre'].', en el marco del año académico '.$data['lectivo_nombre'].'.'), 0, 'J');
+        $this->MultiCell(0, 5, utf8_decode('La directora encargada de la ' . $data['institucion_nombre'] . ', en pleno uso de sus facultades y debidamente autorizada por las normativas vigentes, deja constancia de lo siguiente:'), 0, 'J');
         $this->Ln(5);
     
         $this->SetFont('Arial', '', 11);
-        $this->MultiCell(0, 5, utf8_decode('Este documento tiene por finalidad acreditar la asignación de la vacante y se entrega al(la) apoderado(a) del menor, Sr./Sra. '.$data['apoderado_nombre_completo'].', identificado(a) con '.$data['apoderado_tipo_documento'].' N.º '.$data['apoderado_numero_documento'].', para que proceda con las gestiones correspondientes dentro de los plazos establecidos por la institución.'), 0, 'J');
+        $this->MultiCell(0, 5, utf8_decode('Que el/la alumno(a) ' . $data['alumno_nombre_completo'] . ', identificado(a) con ' . $data['alumno_tipo_documento'] . ' N.º ' . $data['alumno_numero_documento'] . ', se encuentra estudiando en nuestra institución en el aula de ' . $data['grado_nombre'] . ', correspondiente al nivel educativo ' . $data['nivel_nombre'] . ', dentro del marco del año académico ' . $data['lectivo_nombre'] . '.'), 0, 'J');
         $this->Ln(5);
     
-        $this->SetFont('Arial', 'B', 11);
-        $this->MultiCell(0, 5, utf8_decode('REQUISITOS PARA FORMALIZAR LA MATRÍCULA:'), 0, 'L');
-    
-        // Listar documentos de matrícula
-        $modelo = new ReciboMatricula();
-        $documentos = $modelo->listarDocumentosDeMatricula();
-        $this->SetFont('Arial', '', 10);
-    
-        while ($doc = $documentos->fetch_assoc()) {
-            $this->MultiCell(0, 5, utf8_decode($doc['obligatorio_marcado'] . $doc['nombre'].' - '.$doc['documento_responsable_iniciales']), 0, 'L');
-        }
-    
+        $this->SetFont('Arial', '', 11);
+        $this->MultiCell(0, 5, utf8_decode('Se expide el presente documento para los fines legales y administrativos que correspondan.'), 0, 'J');
         $this->Ln(5);
+    
     }
     
 
@@ -99,7 +86,7 @@ $pdf = new PDF('P', 'mm', 'A4', $fecha_hora_actual, $background_image);
 $pdf->AliasNbPages();
 $pdf->Recibo($data);
 
-$filename = utf8_decode('CONSTANCIA DE VACANTE - '.$data['alumno_nombre_completo']) . '.pdf';
+$filename = utf8_decode('ESTUDIOS_'.$data['alumno_nombre_completo']) . '.pdf';
 
 header('Content-Type: application/pdf');
 header('Content-Disposition: inline; filename="' . $filename . '"');

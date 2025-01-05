@@ -34,30 +34,28 @@ switch ($_GET["op"]) {
                 "2" => $reg->nombre_comprobante . ' - ' . $reg->numeracion,
                 "3" => $reg->fecha,
                 "4" => $reg->metodo_pago . ' - S/. ' . $reg->total,
-                "5" => $reg->estado == 1 ? '
-                    <button class="btn btn-danger btn-sm" onclick="desactivar(' . $reg->id . ')">DESACTIVAR</button>
-                    
-                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#' . $reg->numeracion . '">RECIBO</button>
+                "5" => $reg->estado == 1 ? '<button class="btn btn-danger btn-sm" onclick="desactivar(' . $reg->id . ')">DESAC.</button>
+                                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#' . $reg->numeracion . '">PDF</button>
 
-                        <!-- Modal -->
-                        <div class="modal fade" id="' . $reg->numeracion . '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-xl">
-                                <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">' . $reg->nombre_apoderado . '</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <iframe src="../../Reportes/Vista/Recibo_salida.php?id=' . $reg->id . '" type="application/pdf" width="100%" height="600px"></iframe>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">SALIR</button>
-                                </div>
-                                </div>
-                            </div>
-                        </div>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="' . $reg->numeracion . '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-xl">
+                                                    <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">' . $reg->nombre_apoderado . '</h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <iframe src="../../Reportes/Vista/Recibo_salida.php?id=' . $reg->id . '" type="application/pdf" width="100%" height="600px"></iframe>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">SALIR</button>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                 
-                ' : '<button class="btn btn-primary btn-sm" onclick="activar(' . $reg->id . ')">ACTIVAR</button>'
+                ' : '<button class="btn btn-primary btn-sm" onclick="activar(' . $reg->id . ')">ACT.</button>'
             );
         }
 

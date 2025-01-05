@@ -47,10 +47,10 @@ switch ($_GET["op"]) {
 
         while ($reg = $rspta->fetch_object()) {
             $data[] = array(
-                "0" => 'N° ' . $reg->id,
+                "0" => $reg->id,
                 "1" => $reg->tipo_apoderado.' - '.$reg->nombreyapellido,
                 "2" => $reg->tipo_documento.' - '.$reg->numerodocumento,
-                "3" => $reg->telefono,
+                "3" => 'Telf. '.$reg->telefono,
                 "4" => ($reg->estado) ?
                     '<button class="btn btn-warning btn-sm" onclick="mostrar(' . $reg->id . ')">EDITAR</button> <button class="btn btn-danger btn-sm" onclick="desactivar(' . $reg->id . ')">DESACTIVAR</button>' :
                     '<button class="btn btn-warning btn-sm" onclick="mostrar(' . $reg->id . ')">EDITAR</button> <button class="btn btn-primary btn-sm" onclick="activar(' . $reg->id . ')">ACTIVAR</button>'

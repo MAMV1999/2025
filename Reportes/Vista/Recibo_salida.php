@@ -21,43 +21,50 @@ class PDF extends FPDF
         $this->Cell(0, 10, utf8_decode('PÁGINA ' . $this->PageNo() . '/{nb}'), 0, 0, 'C');
     }
 
-    function ReciboSalida($data, $productos)
+    function ReciboSalida($info, $data, $productos)
     {
         $this->AddPage();
 
         // Título
-        $this->SetFont('Arial', 'B', 25);
-        $this->Cell(0, 13, utf8_decode($data['comprobante_nombre']), 0, 1, 'C');
-        $this->SetFont('Arial', 'B', 20);
-        $this->Cell(0, 10, utf8_decode('N° ' . $data['salida_numeracion'].' - ' . $data['salida_fecha']), 0, 1, 'C');
-        $this->Ln(10);
+        $this->SetFont('Arial', 'B', 30);
+        $this->Cell(0, 13, utf8_decode($info['institucion_nombre']), 0, 1, 'C');
+        $this->Ln(3);
+        $this->SetFont('Arial', '', 11);
+        $this->Cell(0, 5, utf8_decode($info['institucion_razon_social'] . ' ' . $info['institucion_ruc']), 0, 1, 'C');
+        $this->Cell(0, 5, utf8_decode($info['institucion_direccion']), 0, 1, 'C');
+        $this->Cell(0, 5, utf8_decode('TELEFONO: ' . $info['institucion_telefono']), 0, 1, 'C');
+        $this->Cell(0, 5, utf8_decode('CORREO: ' . $info['institucion_correo']), 0, 1, 'C');
+        $this->Ln(3);
+        $this->SetFont('Arial', 'B', 16);
+        $this->Cell(0, 8, utf8_decode($data['comprobante_nombre'].' N° ' . $data['salida_numeracion']), 0, 1, 'C');
+        $this->Ln(5);
 
         // Información general
         $this->SectionTitle('INFORMACIÓN GENERAL');
         $this->SectionData('APODERADO', $data['apoderado_nombre']);
-        $this->SectionData('TIPO DE COMPROBANTE', $data['comprobante_nombre']);
-        $this->SectionData('NÚMERO DE COMPROBANTE', $data['salida_numeracion']);
+        $this->SectionData('TELEFONO', $data['apoderado_telefono']);
+        $this->SectionData('COMPROBANTE', $data['comprobante_nombre'].' - N° '.$data['salida_numeracion']);
         $this->SectionData('FECHA', $data['salida_fecha']);
         $this->Ln(5);
 
         // Detalles de productos
-        $this->SectionTitle('DETALLES DE LOS PRODUCTOS');
+        $this->SectionTitle('DETALLES DE PRODUCTOS');
         $this->SetFont('Arial', 'B', 10);
-        $this->Cell(8, 8, utf8_decode('N°'), 1);
-        $this->Cell(95, 8, utf8_decode('PRODUCTO'), 1);
-        $this->Cell(29, 8, utf8_decode('CANTIDAD'), 1, 0, 'C');
-        $this->Cell(29, 8, utf8_decode('PRE. UNITARIO'), 1, 0, 'C');
+        $this->Cell(8, 8, utf8_decode('N°'), 1, 0, 'C');
+        $this->Cell(110, 8, utf8_decode('PRODUCTO'), 1, 0, 'C');
+        $this->Cell(20, 8, utf8_decode('CANT.'), 1, 0, 'C');
+        $this->Cell(23, 8, utf8_decode('PRE. UNIT.'), 1, 0, 'C');
         $this->Cell(29, 8, utf8_decode('SUBTOTAL'), 1, 1, 'C');
 
         $this->SetFont('Arial', '', 10);
         $contador = 1;
         foreach ($productos as $producto) {
             $subtotal = $producto['detalle_stock'] * $producto['detalle_precio_unitario'];
-            $this->Cell(8, 8, $contador++, 1);
-            $this->Cell(95, 8, utf8_decode($producto['producto_nombre']), 1);
-            $this->Cell(29, 8, $producto['detalle_stock'], 1, 0, 'C');
-            $this->Cell(29, 8, 'S/ ' . number_format($producto['detalle_precio_unitario'], 2), 1, 0, 'C');
-            $this->Cell(29, 8, 'S/ ' . number_format($subtotal, 2), 1, 1, 'C');
+            $this->Cell(8, 7, $contador++, 1, 0, 'C');
+            $this->Cell(110, 7, utf8_decode($producto['producto_nombre']), 1, 0, 'C');
+            $this->Cell(20, 7, $producto['detalle_stock'], 1, 0, 'C');
+            $this->Cell(23, 7, 'S/ ' . number_format($producto['detalle_precio_unitario'], 2), 1, 0, 'C');
+            $this->Cell(29, 7, 'S/ ' . number_format($subtotal, 2), 1, 1, 'C');
         }
         $this->Ln(5);
 
@@ -65,6 +72,12 @@ class PDF extends FPDF
         $this->SectionTitle('INFORMACIÓN DE PAGO');
         $this->SectionData('TOTAL', 'S/ ' . number_format($data['salida_total'], 2));
         $this->SectionData('MÉTODO DE PAGO', $data['metodo_pago_nombre']);
+        $this->SectionData('ESTADO', $data['salida_estado_observaciones']);
+        $this->Ln(5);
+
+        $this->SectionTitle('OBSERVACIONES');
+        $this->SetFont('Arial', '', 10);
+        $this->MultiCell(0, 8, utf8_decode($data['salida_observaciones']), 1);
         $this->Ln(5);
     }
 
@@ -79,8 +92,8 @@ class PDF extends FPDF
     function SectionData($label, $data)
     {
         $this->SetFont('Arial', '', 10);
-        $this->Cell(80, 8, utf8_decode($label), 1);
-        $this->Cell(0, 8, utf8_decode($data), 1, 1);
+        $this->Cell(80, 7, utf8_decode($label), 1);
+        $this->Cell(0, 7, utf8_decode($data), 1, 1);
     }
 }
 
@@ -89,6 +102,7 @@ $id = $_GET['id'];
 
 // Crear instancia del modelo y obtener datos
 $modelo = new Recibosalida();
+$info = $modelo->listar_institucion()->fetch_assoc();
 $data = $modelo->listar_almacen_salida($id)->fetch_assoc();
 $productos = $modelo->listar_almacen_salida_detalle($id);
 
@@ -98,9 +112,9 @@ $fecha_hora_actual = date('d/m/Y H:i:s');
 
 $pdf = new PDF('P', 'mm', 'A4', $fecha_hora_actual);
 $pdf->AliasNbPages();
-$pdf->ReciboSalida($data, $productos);
+$pdf->ReciboSalida($info, $data, $productos);
 
-$filename = 'RECIBO_SALIDA_' . $data['apoderado_nombre'] . '_' . $data['salida_numeracion'] . '.pdf';
+$filename = '' . $data['comprobante_nombre'] . '_' . $data['salida_numeracion'] . '_' . $data['apoderado_nombre'] . '.pdf';
 
 header('Content-Type: application/pdf');
 header('Content-Disposition: inline; filename="' . $filename . '"');

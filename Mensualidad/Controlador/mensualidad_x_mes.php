@@ -18,7 +18,7 @@ switch ($_GET["op"]) {
 
         while ($reg = $rspta->fetch_object()) {
             $data[] = array(
-                "0" => 'N° ' . $reg->id_mensualidad_mes,
+                "0" => $reg->id_mensualidad_mes,
                 "1" => $reg->nombre_mes,
                 "2" => $reg->deudor . ' DEUDORES',
                 "3" => $reg->cancelado . ' CANCELADOS',

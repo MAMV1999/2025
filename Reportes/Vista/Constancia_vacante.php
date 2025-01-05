@@ -99,7 +99,7 @@ $pdf = new PDF('P', 'mm', 'A4', $fecha_hora_actual, $background_image);
 $pdf->AliasNbPages();
 $pdf->Recibo($data);
 
-$filename = utf8_decode('CONSTANCIA DE VACANTE - '.$data['alumno_nombre_completo']) . '.pdf';
+$filename = utf8_decode('VACANTE_'.$data['alumno_nombre_completo']) . '.pdf';
 
 header('Content-Type: application/pdf');
 header('Content-Disposition: inline; filename="' . $filename . '"');

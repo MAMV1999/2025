@@ -21,7 +21,7 @@ if (!isset($_SESSION['nombre'])) {
                     </div>
                     <div class="card-body">
                         <h5 class="card-title"><?php echo $_SESSION['nombre']; ?></h5>
-                        <p class="card-text"><?php echo $_SESSION['cargo']; ?></p>
+                        <p class="card-text"><?php echo $_SESSION['docente_cargo']; ?></p>
                     </div>
                     <div class="card-footer text-body-secondary">
                         <br>

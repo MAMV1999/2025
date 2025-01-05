@@ -188,9 +188,9 @@ switch ($_GET["op"]) {
                             <li><a class="dropdown-item" href="../../Reportes/Vista/ReciboMatricula.php?id=' . $reg->matricula_detalle_id . '" Target="_blank">RECIBO ' . $reg->numeracion_pago . ' - ' . $reg->fecha_pago . '</a></li>
                             <li><a class="dropdown-item" href="../../Reportes/Vista/ReciboMatricula_copy.php?id=' . $reg->matricula_detalle_id . '" Target="_blank">FIRMA CONTRATO</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="../../Reportes/Vista/Constancia_vacante.php?id=' . $reg->matricula_detalle_id . '" Target="_blank">CONSTANCIA DE VACANTE</a></li>
-                            <li><a class="dropdown-item" href="../../Reportes/Vista/Constancia_Matricula.php?id=' . $reg->matricula_detalle_id . '" Target="_blank">CONSTANCIA DE MATRICULA</a></li>
-                            <li><a class="dropdown-item" href="../../Reportes/Vista/Constancia_vacante.php?id=' . $reg->matricula_detalle_id . '" Target="_blank">CONSTANCIA DE ESTUDIOS</a></li>
+                            <li><a class="dropdown-item" href="../../Reportes/Vista/Constancia_vacante.php?id=' . $reg->matricula_detalle_id . '" Target="_blank">CONST. DE VACANTE</a></li>
+                            <li><a class="dropdown-item" href="../../Reportes/Vista/Constancia_Matricula.php?id=' . $reg->matricula_detalle_id . '" Target="_blank">CONST. DE MATRICULA</a></li>
+                            <li><a class="dropdown-item" href="../../Reportes/Vista/Constancia_Estudios.php?id=' . $reg->matricula_detalle_id . '" Target="_blank">CONST. DE ESTUDIOS</a></li>
                             <li><hr class="dropdown-divider"></li>
                         </ul>
                         </div>
