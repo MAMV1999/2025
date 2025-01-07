@@ -2,12 +2,13 @@ DELIMITER $$
 
 CREATE PROCEDURE ObtenerDetallesMatricula(p_id INT)
 BEGIN
+    -- Declaraciones para manejar el cursor y los datos
     DECLARE done INT DEFAULT FALSE;
     DECLARE documentoNombre VARCHAR(255);
     DECLARE documentosCursor CURSOR FOR SELECT nombre FROM documento;
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
 
-    -- Inicializa la consulta SQL base
+    -- Construcción inicial del SQL dinámico
     SET @sql = 'SELECT 
             md.id AS matricula_detalle_id,
             ins.nombre AS institucion_nombre,
@@ -31,27 +32,32 @@ BEGIN
             al.numerodocumento AS alumno_numerodocumento,
             al.nombreyapellido AS alumno_nombre';
 
-    -- Abre el cursor para recorrer los nombres de los documentos
+    -- Abrir el cursor para recorrer los nombres de los documentos
     OPEN documentosCursor;
-    
-    -- Bucle para recorrer los resultados del cursor
+
+    -- Bucle para agregar las columnas dinámicas al SQL
     read_loop: LOOP
         FETCH documentosCursor INTO documentoNombre;
         IF done THEN
             LEAVE read_loop;
         END IF;
 
-        -- Añade al SQL dinámico las columnas correspondientes a cada documento
+        -- Añadir columnas dinámicas para los documentos
         SET @sql = CONCAT(@sql, 
-            ', MAX(CASE WHEN d.nombre = ''', documentoNombre, ''' THEN dd.entregado ELSE ''NO'' END) AS `', documentoNombre, '`,
-            MAX(CASE WHEN d.nombre = ''', documentoNombre, ''' THEN dd.observaciones ELSE \'\' END) AS `', documentoNombre, '_observaciones`'
+            ', MAX(CASE WHEN d.nombre = ''', documentoNombre, ''' THEN 
+                CASE 
+                    WHEN IFNULL(dd.entregado, 0) = 1 THEN ''SI'' 
+                    ELSE ''NO'' 
+                END 
+            ELSE ''NO'' END) AS `', documentoNombre, '`',
+            ', MAX(CASE WHEN d.nombre = ''', documentoNombre, ''' THEN dd.observaciones ELSE \'\' END) AS `', documentoNombre, '_observaciones`'
         );
     END LOOP;
 
-    -- Cierra el cursor
+    -- Cerrar el cursor
     CLOSE documentosCursor;
 
-    -- Completa el SQL dinámico con las cláusulas FROM, WHERE, GROUP BY y ORDER BY
+    -- Completar el SQL dinámico con las cláusulas FROM, WHERE, GROUP BY y ORDER BY
     SET @sql = CONCAT(@sql, '
         FROM 
             matricula_detalle md
@@ -91,7 +97,7 @@ BEGIN
             ins.nombre ASC, niv.nombre ASC, ig.nombre ASC, isec.nombre ASC, al.nombreyapellido ASC
     ');
 
-    -- Prepara y ejecuta la declaración SQL dinámica
+    -- Preparar y ejecutar la consulta dinámica
     PREPARE stmt FROM @sql;
     EXECUTE stmt;
     DEALLOCATE PREPARE stmt;
