@@ -71,15 +71,16 @@ switch ($_GET["op"]) {
     case 'listar':
         $rspta = $mensualidadDetalle->listar();
         $data = array();
-
+        $cont = 1;
         while ($reg = $rspta->fetch_object()) {
             $data[] = array(
-                "0" => 'N° ' . $reg->id,
+                "0" => $cont,
                 "1" => $reg->lectivo . ' - ' . $reg->nivel . ' - ' . $reg->grado . ' - ' . $reg->seccion,
                 "2" => $reg->apoderado,
                 "3" => $reg->alumno,
                 "4" => '<button class="btn btn-warning btn-sm" onclick="mostrar(' . $reg->id . ')">EDITAR</button>'
             );
+            $cont++;
         }
         $results = array(
             "sEcho" => 1,

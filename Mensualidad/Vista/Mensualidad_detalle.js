@@ -150,7 +150,7 @@ function mostrar(id) {
                                 </div>
                             </td>
                             <td style='width: 30%;'>
-                                <input type="text" class="form-control" placeholder="OBSERVACIONES - (OPCIONAL)" name="observaciones${index}" id="observaciones${index}" value="${item.observaciones}">
+                                <input type="text" class="form-control" placeholder="OBSERVACIONES" name="observaciones${index}" id="observaciones${index}" value="${item.observaciones}">
                             </td>
                         </tr>
                     `;

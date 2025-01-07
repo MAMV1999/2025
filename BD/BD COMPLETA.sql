@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-01-2025 a las 05:34:31
+-- Tiempo de generación: 07-01-2025 a las 15:25:56
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -532,7 +532,8 @@ INSERT INTO `documento` (`id`, `id_documento_responsable`, `nombre`, `obligatori
 (8, 2, 'COPIA DNI ALUMNO', 1, '', '2024-11-24 06:26:51', 1),
 (9, 2, 'COPIA DNI APODERADO', 1, '', '2024-11-24 06:27:02', 1),
 (10, 2, '6 FOTOS (TAMAÑO CARNET)', 0, '', '2024-11-24 06:27:14', 1),
-(11, 2, 'FOTO FAMILIAR (TAMAÑO JUMBO)', 0, '', '2024-11-24 06:27:28', 1);
+(11, 2, 'FOTO FAMILIAR (TAMAÑO JUMBO)', 0, '', '2024-11-24 06:27:28', 1),
+(12, 2, 'OTROS DOCUMENTOS', 0, '', '2025-01-07 05:04:30', 1);
 
 -- --------------------------------------------------------
 
@@ -1887,7 +1888,7 @@ ALTER TABLE `almacen_salida_detalle`
 -- AUTO_INCREMENT de la tabla `documento`
 --
 ALTER TABLE `documento`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `documento_detalle`
