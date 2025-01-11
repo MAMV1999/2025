@@ -66,6 +66,7 @@ class PDF extends FPDF
 
     function FillGroupedTableFromArray($totalesPorMetodo, $sumaGeneral)
     {
+        $this->Ln(5);
         $this->SetFont('Arial', 'B', 9);
         $this->SetFillColor(188, 188, 188);
         $this->Cell(90, 10, utf8_decode('MÉTODO DE PAGO'), 1, 0, 'C', true);
@@ -126,7 +127,6 @@ $pdf->HeaderTable();
 $pdf->FillTable($rowsDetalle);
 
 // Segunda tabla: Resumen por método de pago
-$pdf->AddPage();
 $pdf->FillGroupedTableFromArray($totalesPorMetodo, $sumaGeneral);
 
 // Salida del archivo

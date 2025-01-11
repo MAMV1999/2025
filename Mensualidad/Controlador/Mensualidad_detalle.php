@@ -75,10 +75,33 @@ switch ($_GET["op"]) {
         while ($reg = $rspta->fetch_object()) {
             $data[] = array(
                 "0" => $cont,
-                "1" => $reg->lectivo . ' - ' . $reg->nivel . ' - ' . $reg->grado . ' - ' . $reg->seccion,
-                "2" => $reg->apoderado,
-                "3" => $reg->alumno,
-                "4" => '<button class="btn btn-warning btn-sm" onclick="mostrar(' . $reg->id . ')">EDITAR</button>'
+                "1" => $reg->lectivo . ' - ' . $reg->nivel . ' - ' . $reg->grado,
+                "2" => $reg->categoria,
+                "3" => $reg->apoderado,
+                "4" => $reg->alumno,
+                "5" => '<button class="btn btn-warning btn-sm" onclick="mostrar(' . $reg->id . ')">EDITAR</button>
+
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#' . $reg->id . '">REPORTE</button>
+                        
+                        <!-- Modal -->
+                        <div class="modal fade" id="' . $reg->id . '" tabindex="-1" aria-labelledby="' . $reg->id . 'Label" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="' . $reg->id . 'Label">' . $reg->alumno . '</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <iframe src="../../Reportes/Vista/Mensualidad_reporte_x_alumno.php?id=' . $reg->id . '" type="application/pdf" width="100%" height="600px"></iframe>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CERRAR</button>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                '
             );
             $cont++;
         }

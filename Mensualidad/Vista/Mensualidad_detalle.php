@@ -20,6 +20,7 @@ if (!isset($_SESSION['nombre'])) {
                         <tr>
                             <th>ID</th>
                             <th>MATRICULA</th>
+                            <th>CATEGORIA</th>
                             <th>APODERADO</th>
                             <th>ALUMNO</th>
                             <th>ACCIONES</th>

@@ -77,34 +77,36 @@ class Mensualidad_detalle
         return ejecutarConsultaSimpleFila($sql);
     }
     
-    // Método para listar todas las mensualidades
-    public function listar()
-    {
-        $sql = "SELECT 
-                md.id_matricula_detalle AS id, 
-                il.nombre AS lectivo, 
-                iniv.nombre AS nivel, 
-                ig.nombre AS grado, 
-                isec.nombre AS seccion, 
-                uap.nombreyapellido AS apoderado, 
-                ual.nombreyapellido AS alumno, 
-                SUM(md.monto) AS total_monto, 
-                COUNT(md.id) AS num_mensualidades,
-                md.estado AS estado
-                FROM mensualidad_detalle md
-                LEFT JOIN mensualidad_mes mm ON md.id_mensualidad_mes = mm.id AND mm.estado = '1'
-                LEFT JOIN matricula_detalle mdet ON md.id_matricula_detalle = mdet.id AND mdet.estado = '1'
-                LEFT JOIN usuario_apoderado uap ON mdet.id_usuario_apoderado = uap.id AND uap.estado = '1'
-                LEFT JOIN usuario_alumno ual ON mdet.id_usuario_alumno = ual.id AND ual.estado = '1'
-                LEFT JOIN institucion_seccion isec ON mdet.id_matricula = isec.id AND isec.estado = '1'
-                LEFT JOIN institucion_grado ig ON isec.id_institucion_grado = ig.id AND ig.estado = '1'
-                LEFT JOIN institucion_nivel iniv ON ig.id_institucion_nivel = iniv.id AND iniv.estado = '1'
-                LEFT JOIN institucion_lectivo il ON iniv.id_institucion_lectivo = il.id AND il.estado = '1'
-                WHERE md.estado = '1'
-                GROUP BY mdet.id, il.nombre, iniv.nombre, ig.nombre, isec.nombre, uap.nombreyapellido, ual.nombreyapellido
-                ORDER BY il.nombre ASC, iniv.nombre ASC, ig.nombre ASC, isec.nombre ASC, ual.nombreyapellido ASC";
-        return ejecutarConsulta($sql);
-    }    
+// Método para listar todas las mensualidades
+public function listar()
+{
+    $sql = "SELECT 
+            md.id_matricula_detalle AS id, 
+            il.nombre AS lectivo, 
+            iniv.nombre AS nivel, 
+            ig.nombre AS grado, 
+            isec.nombre AS seccion, 
+            mc.nombre AS categoria,
+            uap.nombreyapellido AS apoderado, 
+            ual.nombreyapellido AS alumno, 
+            SUM(md.monto) AS total_monto, 
+            COUNT(md.id) AS num_mensualidades,
+            md.estado AS estado
+            FROM mensualidad_detalle md
+            LEFT JOIN mensualidad_mes mm ON md.id_mensualidad_mes = mm.id AND mm.estado = '1'
+            LEFT JOIN matricula_detalle mdet ON md.id_matricula_detalle = mdet.id AND mdet.estado = '1'
+            LEFT JOIN matricula_categoria mc ON mdet.id_matricula_categoria = mc.id AND mc.estado = '1'
+            LEFT JOIN usuario_apoderado uap ON mdet.id_usuario_apoderado = uap.id AND uap.estado = '1'
+            LEFT JOIN usuario_alumno ual ON mdet.id_usuario_alumno = ual.id AND ual.estado = '1'
+            LEFT JOIN institucion_seccion isec ON mdet.id_matricula = isec.id AND isec.estado = '1'
+            LEFT JOIN institucion_grado ig ON isec.id_institucion_grado = ig.id AND ig.estado = '1'
+            LEFT JOIN institucion_nivel iniv ON ig.id_institucion_nivel = iniv.id AND iniv.estado = '1'
+            LEFT JOIN institucion_lectivo il ON iniv.id_institucion_lectivo = il.id AND il.estado = '1'
+            WHERE md.estado = '1'
+            GROUP BY mdet.id, il.nombre, iniv.nombre, ig.nombre, isec.nombre, mc.nombre, uap.nombreyapellido, ual.nombreyapellido
+            ORDER BY il.nombre ASC, iniv.nombre ASC, ig.nombre ASC, isec.nombre ASC, mc.nombre ASC, ual.nombreyapellido ASC";
+    return ejecutarConsulta($sql);
+}
 
     // Método para listar los meses activos
     public function listarMesesActivos()

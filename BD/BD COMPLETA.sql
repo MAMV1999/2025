@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-01-2025 a las 23:06:37
+-- Tiempo de generación: 11-01-2025 a las 23:47:38
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -433,10 +433,10 @@ CREATE TABLE `almacen_salida` (
 
 INSERT INTO `almacen_salida` (`id`, `usuario_apoderado_id`, `almacen_comprobante_id`, `numeracion`, `fecha`, `almacen_metodo_pago_id`, `total`, `observaciones`, `fechacreado`, `estado`) VALUES
 (1, 23, 1, '000001', '2025-01-02', 2, '10.00', '', '2025-01-02 15:35:29', 1),
-(2, 27, 1, '000002', '2025-01-02', 1, '100.00', '', '2025-01-02 16:03:10', 1),
-(3, 29, 1, '000003', '2025-01-06', 2, '100.00', '', '2025-01-06 10:59:43', 1),
-(4, 28, 1, '000004', '2025-01-07', 3, '100.00', '', '2025-01-07 10:59:24', 1),
-(5, 32, 1, '000005', '2025-01-07', 1, '100.00', '', '2025-01-07 11:27:44', 1),
+(2, 27, 1, '000002', '2025-01-02', 1, '100.00', 'SOLO FALTA CERTIFICADO DE ESTUDIOS', '2025-01-02 16:03:10', 1),
+(3, 29, 1, '000003', '2025-01-06', 2, '100.00', 'PENDIENTE ENTREGA DE TODOS LOS DOCUMENTOS', '2025-01-06 10:59:43', 1),
+(4, 28, 1, '000004', '2025-01-07', 3, '100.00', 'PENDIENTE ENTREGA DE TODOS LOS DOCUMENTOS', '2025-01-07 10:59:24', 1),
+(5, 32, 1, '000005', '2025-01-07', 1, '100.00', 'PENDIENTE ENTREGA DE TODOS LOS DOCUMENTOS', '2025-01-07 11:27:44', 1),
 (6, 30, 1, '000006', '2025-01-07', 2, '100.00', 'PENDIENTE ENTREGA DE TODOS LOS DOCUMENTOS', '2025-01-07 12:18:10', 1);
 
 --
@@ -702,7 +702,7 @@ CREATE TABLE `institucion_lectivo` (
 --
 
 INSERT INTO `institucion_lectivo` (`id`, `nombre`, `nombre_lectivo`, `id_institucion`, `observaciones`, `fechacreado`, `estado`) VALUES
-(1, '2025', 'AÑO DEL BICENTENARIO DE JOSE FAUSTINO SANCHEZ CARRION Y DEFENSA DE LA REPUBLICA PERUANA', 1, '', '2024-11-24 05:54:57', 1);
+(1, '2025', 'AÑO DE LA RECUPERACION Y CONSOLIDACION DE LA ECONOMIA PERUANA', 1, '', '2024-11-24 05:54:57', 1);
 
 -- --------------------------------------------------------
 
@@ -890,7 +890,8 @@ INSERT INTO `matricula_detalle` (`id`, `descripcion`, `id_matricula`, `id_matric
 (33, 'MATRICULA 2025 - 08/01/2025\r\nNIVEL: PRIMARIA - GRADO: 5 GRADO - SECCION: A\r\n\r\nPrecio Matricula: S./220.00\r\nPrecio Mensualidad: S./310.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones:', 8, 2, NULL, 33, 33, '', '2025-01-08 21:13:07', 1),
 (34, 'MATRICULA 2025 - 08/01/2025\r\nNIVEL: PRIMARIA - GRADO: 3 GRADO - SECCION: A\r\n\r\nPrecio Matricula: S./220.00\r\nPrecio Mensualidad: S./310.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones:', 6, 2, NULL, 34, 34, '', '2025-01-08 21:18:04', 1),
 (35, 'MATRICULA 2025 - 08/01/2025\r\nNIVEL: PRIMARIA - GRADO: 5 GRADO - SECCION: A\r\n\r\nPrecio Matricula: S./220.00\r\nPrecio Mensualidad: S./310.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones:', 8, 2, NULL, 35, 35, '', '2025-01-08 21:21:40', 1),
-(36, 'MATRICULA 2025 - 08/01/2025\r\nNIVEL: PRIMARIA - GRADO: 5 GRADO - SECCION: A\r\n\r\nPrecio Matricula: S./220.00\r\nPrecio Mensualidad: S./310.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones:', 8, 2, NULL, 36, 36, '', '2025-01-08 21:25:19', 1);
+(36, 'MATRICULA 2025 - 08/01/2025\r\nNIVEL: PRIMARIA - GRADO: 5 GRADO - SECCION: A\r\n\r\nPrecio Matricula: S./220.00\r\nPrecio Mensualidad: S./310.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones:', 8, 2, NULL, 36, 36, '', '2025-01-08 21:25:19', 1),
+(37, 'MATRICULA 2025 - 09/01/2025\r\nNIVEL: INICIAL - GRADO: 3 AÑOS - SECCION: A\r\n\r\nPrecio Matricula: S./220.00\r\nPrecio Mensualidad: S./280.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones:', 1, 2, NULL, 37, 37, '', '2025-01-09 20:08:25', 1);
 
 -- --------------------------------------------------------
 
@@ -973,7 +974,8 @@ INSERT INTO `matricula_pago` (`id`, `id_matricula_detalle`, `numeracion`, `fecha
 (33, 33, '000029', '2025-01-08', 'MATRICULA 2025 - 08/01/2025\r\nNIVEL: PRIMARIA - GRADO: 5 GRADO - SECCION: A\r\n\r\nPrecio Matricula: S./220.00\r\nPrecio Mensualidad: S./310.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones:', '220.00', 1, '', '2025-01-08 21:13:07', 1),
 (34, 34, '000030', '2025-01-08', 'MATRICULA 2025 - 08/01/2025\r\nNIVEL: PRIMARIA - GRADO: 3 GRADO - SECCION: A\r\n\r\nPrecio Matricula: S./220.00\r\nPrecio Mensualidad: S./310.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones:', '220.00', 1, '', '2025-01-08 21:18:04', 1),
 (35, 35, '000031', '2025-01-08', 'MATRICULA 2025 - 08/01/2025\r\nNIVEL: PRIMARIA - GRADO: 5 GRADO - SECCION: A\r\n\r\nPrecio Matricula: S./220.00\r\nPrecio Mensualidad: S./310.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones:', '220.00', 1, '', '2025-01-08 21:21:40', 1),
-(36, 36, '000032', '2025-01-08', 'MATRICULA 2025 - 08/01/2025\r\nNIVEL: PRIMARIA - GRADO: 5 GRADO - SECCION: A\r\n\r\nPrecio Matricula: S./220.00\r\nPrecio Mensualidad: S./310.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones:', '220.00', 1, '', '2025-01-08 21:25:19', 1);
+(36, 36, '000032', '2025-01-08', 'MATRICULA 2025 - 08/01/2025\r\nNIVEL: PRIMARIA - GRADO: 5 GRADO - SECCION: A\r\n\r\nPrecio Matricula: S./220.00\r\nPrecio Mensualidad: S./310.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones:', '220.00', 1, '', '2025-01-08 21:25:19', 1),
+(37, 37, '000033', '2025-01-09', 'MATRICULA 2025 - 09/01/2025\r\nNIVEL: INICIAL - GRADO: 3 AÑOS - SECCION: A\r\n\r\nPrecio Matricula: S./220.00\r\nPrecio Mensualidad: S./280.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones:', '220.00', 1, '', '2025-01-09 20:08:25', 1);
 
 -- --------------------------------------------------------
 
@@ -997,7 +999,7 @@ CREATE TABLE `mensualidad_detalle` (
 --
 
 INSERT INTO `mensualidad_detalle` (`id`, `id_mensualidad_mes`, `id_matricula_detalle`, `monto`, `pagado`, `observaciones`, `fechacreado`, `estado`) VALUES
-(1, 1, 1, '280.00', 0, '', '2024-12-01 05:46:02', 1),
+(1, 1, 1, '280.00', 0, 'DSCTO. MATRICULA 15 DIC -10', '2024-12-01 05:46:02', 1),
 (2, 2, 1, '280.00', 0, '', '2024-12-01 05:46:02', 1),
 (3, 3, 1, '280.00', 0, '', '2024-12-01 05:46:02', 1),
 (4, 4, 1, '280.00', 0, '', '2024-12-01 05:46:02', 1),
@@ -1007,7 +1009,7 @@ INSERT INTO `mensualidad_detalle` (`id`, `id_mensualidad_mes`, `id_matricula_det
 (8, 8, 1, '280.00', 0, '', '2024-12-01 05:46:02', 1),
 (9, 9, 1, '280.00', 0, '', '2024-12-01 05:46:02', 1),
 (10, 10, 1, '305.00', 0, '', '2024-12-01 05:46:02', 1),
-(11, 1, 2, '280.00', 0, '', '2024-12-01 05:47:30', 1),
+(11, 1, 2, '280.00', 0, 'DSCTO. MATRICULA 15 DIC -10', '2024-12-01 05:47:30', 1),
 (12, 2, 2, '280.00', 0, '', '2024-12-01 05:47:30', 1),
 (13, 3, 2, '280.00', 0, '', '2024-12-01 05:47:30', 1),
 (14, 4, 2, '280.00', 0, '', '2024-12-01 05:47:30', 1),
@@ -1017,7 +1019,7 @@ INSERT INTO `mensualidad_detalle` (`id`, `id_mensualidad_mes`, `id_matricula_det
 (18, 8, 2, '280.00', 0, '', '2024-12-01 05:47:30', 1),
 (19, 9, 2, '280.00', 0, '', '2024-12-01 05:47:30', 1),
 (20, 10, 2, '305.00', 0, '', '2024-12-01 05:47:30', 1),
-(21, 1, 3, '280.00', 0, '', '2024-12-01 05:48:55', 1),
+(21, 1, 3, '280.00', 0, 'DSCTO. MATRICULA 15 DIC -10', '2024-12-01 05:48:55', 1),
 (22, 2, 3, '280.00', 0, '', '2024-12-01 05:48:55', 1),
 (23, 3, 3, '280.00', 0, '', '2024-12-01 05:48:55', 1),
 (24, 4, 3, '280.00', 0, '', '2024-12-01 05:48:55', 1),
@@ -1077,7 +1079,7 @@ INSERT INTO `mensualidad_detalle` (`id`, `id_mensualidad_mes`, `id_matricula_det
 (81, 8, 11, '300.00', 0, '', '2024-12-03 20:05:47', 1),
 (82, 9, 11, '300.00', 0, '', '2024-12-03 20:05:47', 1),
 (83, 10, 11, '325.00', 0, '', '2024-12-03 20:05:47', 1),
-(94, 1, 13, '300.00', 0, '', '2024-12-03 20:15:53', 1),
+(94, 1, 13, '300.00', 0, 'DSCTO. MATRICULA 15 DIC -10', '2024-12-03 20:15:53', 1),
 (95, 2, 13, '300.00', 0, '', '2024-12-03 20:15:53', 1),
 (96, 3, 13, '300.00', 0, '', '2024-12-03 20:15:53', 1),
 (97, 4, 13, '300.00', 0, '', '2024-12-03 20:15:53', 1),
@@ -1157,7 +1159,7 @@ INSERT INTO `mensualidad_detalle` (`id`, `id_mensualidad_mes`, `id_matricula_det
 (171, 8, 20, '290.00', 0, '', '2024-12-12 15:16:37', 1),
 (172, 9, 20, '290.00', 0, '', '2024-12-12 15:16:37', 1),
 (173, 10, 20, '315.00', 0, '', '2024-12-12 15:16:37', 1),
-(174, 1, 21, '280.00', 0, '', '2024-12-12 18:36:09', 1),
+(174, 1, 21, '280.00', 0, 'DSCTO. MATRICULA 15 DIC -10', '2024-12-12 18:36:09', 1),
 (175, 2, 21, '280.00', 0, '', '2024-12-12 18:36:09', 1),
 (176, 3, 21, '280.00', 0, '', '2024-12-12 18:36:09', 1),
 (177, 4, 21, '280.00', 0, '', '2024-12-12 18:36:09', 1),
@@ -1167,8 +1169,8 @@ INSERT INTO `mensualidad_detalle` (`id`, `id_mensualidad_mes`, `id_matricula_det
 (181, 8, 21, '280.00', 0, '', '2024-12-12 18:36:09', 1),
 (182, 9, 21, '280.00', 0, '', '2024-12-12 18:36:09', 1),
 (183, 10, 21, '305.00', 0, '', '2024-12-12 18:36:09', 1),
-(184, 1, 22, '290.00', 0, 'DSCTO. HERMANO -10 SOLES', '2024-12-12 18:38:35', 1),
-(185, 2, 22, '290.00', 0, '', '2024-12-12 18:38:35', 1),
+(184, 1, 22, '290.00', 0, 'DSCTO. MATRICULA 15 DIC -10', '2024-12-12 18:38:35', 1),
+(185, 2, 22, '290.00', 0, 'DSCTO. HERMANO -10 SOLES', '2024-12-12 18:38:35', 1),
 (186, 3, 22, '290.00', 0, '', '2024-12-12 18:38:35', 1),
 (187, 4, 22, '290.00', 0, '', '2024-12-12 18:38:35', 1),
 (188, 5, 22, '315.00', 0, '', '2024-12-12 18:38:35', 1),
@@ -1177,7 +1179,7 @@ INSERT INTO `mensualidad_detalle` (`id`, `id_mensualidad_mes`, `id_matricula_det
 (191, 8, 22, '290.00', 0, '', '2024-12-12 18:38:35', 1),
 (192, 9, 22, '290.00', 0, '', '2024-12-12 18:38:35', 1),
 (193, 10, 22, '315.00', 0, '', '2024-12-12 18:38:35', 1),
-(194, 1, 23, '300.00', 0, '', '2024-12-13 17:07:40', 1),
+(194, 1, 23, '300.00', 0, 'DSCTO. MATRICULA 15 DIC -10', '2024-12-13 17:07:40', 1),
 (195, 2, 23, '300.00', 0, '', '2024-12-13 17:07:40', 1),
 (196, 3, 23, '300.00', 0, '', '2024-12-13 17:07:40', 1),
 (197, 4, 23, '300.00', 0, '', '2024-12-13 17:07:40', 1),
@@ -1217,7 +1219,7 @@ INSERT INTO `mensualidad_detalle` (`id`, `id_mensualidad_mes`, `id_matricula_det
 (231, 8, 26, '300.00', 0, '', '2024-12-14 17:47:38', 1),
 (232, 9, 26, '300.00', 0, '', '2024-12-14 17:47:38', 1),
 (233, 10, 26, '325.00', 0, '', '2024-12-14 17:47:38', 1),
-(234, 1, 27, '280.00', 0, '', '2024-12-15 20:41:28', 1),
+(234, 1, 27, '280.00', 0, 'DSCTO. MATRICULA 15 DIC -10', '2024-12-15 20:41:28', 1),
 (235, 2, 27, '280.00', 0, '', '2024-12-15 20:41:28', 1),
 (236, 3, 27, '280.00', 0, '', '2024-12-15 20:41:28', 1),
 (237, 4, 27, '280.00', 0, '', '2024-12-15 20:41:28', 1),
@@ -1277,7 +1279,7 @@ INSERT INTO `mensualidad_detalle` (`id`, `id_mensualidad_mes`, `id_matricula_det
 (291, 8, 32, '280.00', 0, '', '2025-01-06 16:57:21', 1),
 (292, 9, 32, '280.00', 0, '', '2025-01-06 16:57:21', 1),
 (293, 10, 32, '305.00', 0, '', '2025-01-06 16:57:21', 1),
-(294, 1, 33, '300.00', 0, '', '2025-01-08 21:13:07', 1),
+(294, 1, 33, '300.00', 0, 'DSCTO. REFERIDOS X1 -10 SOLES', '2025-01-08 21:13:07', 1),
 (295, 2, 33, '300.00', 0, '', '2025-01-08 21:13:07', 1),
 (296, 3, 33, '300.00', 0, '', '2025-01-08 21:13:07', 1),
 (297, 4, 33, '300.00', 0, '', '2025-01-08 21:13:07', 1),
@@ -1287,16 +1289,16 @@ INSERT INTO `mensualidad_detalle` (`id`, `id_mensualidad_mes`, `id_matricula_det
 (301, 8, 33, '300.00', 0, '', '2025-01-08 21:13:07', 1),
 (302, 9, 33, '300.00', 0, '', '2025-01-08 21:13:07', 1),
 (303, 10, 33, '325.00', 0, '', '2025-01-08 21:13:07', 1),
-(304, 1, 34, '300.00', 0, '', '2025-01-08 21:18:04', 1),
-(305, 2, 34, '300.00', 0, '', '2025-01-08 21:18:04', 1),
-(306, 3, 34, '300.00', 0, '', '2025-01-08 21:18:04', 1),
-(307, 4, 34, '300.00', 0, '', '2025-01-08 21:18:04', 1),
-(308, 5, 34, '325.00', 0, '', '2025-01-08 21:18:04', 1),
-(309, 6, 34, '300.00', 0, '', '2025-01-08 21:18:04', 1),
-(310, 7, 34, '300.00', 0, '', '2025-01-08 21:18:04', 1),
-(311, 8, 34, '300.00', 0, '', '2025-01-08 21:18:04', 1),
-(312, 9, 34, '300.00', 0, '', '2025-01-08 21:18:04', 1),
-(313, 10, 34, '325.00', 0, '', '2025-01-08 21:18:04', 1),
+(304, 1, 34, '260.00', 0, 'DSCTO. REFERIDOS X2 -50 SOLES', '2025-01-08 21:18:04', 1),
+(305, 2, 34, '260.00', 0, '', '2025-01-08 21:18:04', 1),
+(306, 3, 34, '260.00', 0, '', '2025-01-08 21:18:04', 1),
+(307, 4, 34, '260.00', 0, '', '2025-01-08 21:18:04', 1),
+(308, 5, 34, '285.00', 0, '', '2025-01-08 21:18:04', 1),
+(309, 6, 34, '260.00', 0, '', '2025-01-08 21:18:04', 1),
+(310, 7, 34, '260.00', 0, '', '2025-01-08 21:18:04', 1),
+(311, 8, 34, '260.00', 0, '', '2025-01-08 21:18:04', 1),
+(312, 9, 34, '260.00', 0, '', '2025-01-08 21:18:04', 1),
+(313, 10, 34, '285.00', 0, '', '2025-01-08 21:18:04', 1),
 (314, 1, 35, '300.00', 0, '', '2025-01-08 21:21:40', 1),
 (315, 2, 35, '300.00', 0, '', '2025-01-08 21:21:40', 1),
 (316, 3, 35, '300.00', 0, '', '2025-01-08 21:21:40', 1),
@@ -1316,7 +1318,17 @@ INSERT INTO `mensualidad_detalle` (`id`, `id_mensualidad_mes`, `id_matricula_det
 (330, 7, 36, '300.00', 0, '', '2025-01-08 21:25:19', 1),
 (331, 8, 36, '300.00', 0, '', '2025-01-08 21:25:19', 1),
 (332, 9, 36, '300.00', 0, '', '2025-01-08 21:25:19', 1),
-(333, 10, 36, '325.00', 0, '', '2025-01-08 21:25:19', 1);
+(333, 10, 36, '325.00', 0, '', '2025-01-08 21:25:19', 1),
+(334, 1, 37, '280.00', 0, '', '2025-01-09 20:08:25', 1),
+(335, 2, 37, '280.00', 0, '', '2025-01-09 20:08:25', 1),
+(336, 3, 37, '280.00', 0, '', '2025-01-09 20:08:25', 1),
+(337, 4, 37, '280.00', 0, '', '2025-01-09 20:08:25', 1),
+(338, 5, 37, '305.00', 0, '', '2025-01-09 20:08:25', 1),
+(339, 6, 37, '280.00', 0, '', '2025-01-09 20:08:25', 1),
+(340, 7, 37, '280.00', 0, '', '2025-01-09 20:08:25', 1),
+(341, 8, 37, '280.00', 0, '', '2025-01-09 20:08:25', 1),
+(342, 9, 37, '280.00', 0, '', '2025-01-09 20:08:25', 1),
+(343, 10, 37, '305.00', 0, '', '2025-01-09 20:08:25', 1);
 
 -- --------------------------------------------------------
 
@@ -1410,7 +1422,8 @@ INSERT INTO `usuario_alumno` (`id`, `id_apoderado`, `id_documento`, `numerodocum
 (33, 33, 1, '78911962', 'COTRINA TORIBIO ZOE LUCIANA', '2014-12-28', '', 1, '78911962', '78911962', '', '2025-01-08 21:13:07', 1),
 (34, 34, 1, '90064704', 'TUPIÑO TORIBIO ANGELY CATALEYA', '2017-02-04', '', 1, '90064704', '90064704', '', '2025-01-08 21:18:04', 1),
 (35, 35, 1, '78905918', 'OSORIO VALDIVIA ARHIAN ALEJANDRO', '2014-12-18', '', 2, '78905918', '78905918', '', '2025-01-08 21:21:40', 1),
-(36, 36, 1, '79038891', 'TELLO TORIBIO ORLANDO SAMIR', '2015-03-26', '', 2, '79038891', '79038891', '', '2025-01-08 21:25:19', 1);
+(36, 36, 1, '79038891', 'TELLO TORIBIO ORLANDO SAMIR', '2015-03-26', '', 2, '79038891', '79038891', '', '2025-01-08 21:25:19', 1),
+(37, 37, 1, '92821407', 'FLORES SHUPINGAHUA LUCIA SOFIA AURELIA', '2022-09-28', '', 1, '92821407', '92821407', '', '2025-01-09 20:08:25', 1);
 
 -- --------------------------------------------------------
 
@@ -1470,7 +1483,8 @@ INSERT INTO `usuario_apoderado` (`id`, `id_apoderado_tipo`, `id_documento`, `num
 (33, 1, 1, '41478915', 'DORIS TORIBIO DOMINGUEZ', '924609727', 1, 2, '41478915', '41478915', '', '2025-01-08 21:13:07', 1),
 (34, 1, 1, '43303791', 'MARITZA TORIBIO DOMINGUEZ', '916391565', 1, 2, '43303791', '43303791', '', '2025-01-08 21:18:04', 1),
 (35, 1, 1, '45977821', 'ERLINDA MARIBEL VALDIVIA LOPEZ', '945535265', 1, 1, '45977821', '45977821', '', '2025-01-08 21:21:40', 1),
-(36, 1, 1, '10508169', 'GENOVEVA TORIBIO DOMINGUEZ', '930502729', 1, 1, '', '', '', '2025-01-08 21:25:19', 1);
+(36, 1, 1, '10508169', 'GENOVEVA TORIBIO DOMINGUEZ', '930502729', 1, 1, '10508169', '10508169', '', '2025-01-08 21:25:19', 1),
+(37, 2, 1, '07150535', 'TEOFANES ONOFRE FLORES DIAZ', '931300936', 2, 2, '07150535', '07150535', '', '2025-01-09 20:08:25', 1);
 
 -- --------------------------------------------------------
 
@@ -2029,7 +2043,7 @@ ALTER TABLE `matricula_categoria`
 -- AUTO_INCREMENT de la tabla `matricula_detalle`
 --
 ALTER TABLE `matricula_detalle`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT de la tabla `matricula_metodo_pago`
@@ -2041,13 +2055,13 @@ ALTER TABLE `matricula_metodo_pago`
 -- AUTO_INCREMENT de la tabla `matricula_pago`
 --
 ALTER TABLE `matricula_pago`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT de la tabla `mensualidad_detalle`
 --
 ALTER TABLE `mensualidad_detalle`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=334;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=344;
 
 --
 -- AUTO_INCREMENT de la tabla `mensualidad_mes`
@@ -2059,13 +2073,13 @@ ALTER TABLE `mensualidad_mes`
 -- AUTO_INCREMENT de la tabla `usuario_alumno`
 --
 ALTER TABLE `usuario_alumno`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario_apoderado`
 --
 ALTER TABLE `usuario_apoderado`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario_apoderado_tipo`
