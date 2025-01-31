@@ -112,7 +112,7 @@
                 "1" => array("nombre" => "INICIO", "link" => "../../Inicio/Vista/Escritorio.php"),
                 "2" => array("nombre" => "USUARIO", "link" => "../../Usuario/Vista/Escritorio.php"),
                 "3" => array("nombre" => "INSTITUCION", "link" => "../../Institucion/Vista/Escritorio.php"),
-                "4" => array("nombre" => "MATRICULA", "link" => "../../Matricula/Vista/Escritorio.php"),
+                "4" => array("nombre" => "MATRICULA 2025", "link" => "../../Matricula/Vista/Escritorio.php"),
                 "5" => array("nombre" => "MENSUALIDAD", "link" => "../../Mensualidad/Vista/Escritorio.php"),
                 "6" => array("nombre" => "DOCUMENTO", "link" => "../../Documento/Vista/Escritorio.php"),
                 "7" => array("nombre" => "ALMACEN", "link" => "../../Almacen/Vista/Escritorio.php"),
@@ -142,7 +142,6 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <!-- <li><a class="dropdown-item" href="#">Separated link</a></li> -->
                         </ul>
                         <a class="btn btn-outline-danger" href="../../Inicio/Controlador/Acceso.php?op=salir" role="button">CERRAR SESIÓN</a>
                     </div>

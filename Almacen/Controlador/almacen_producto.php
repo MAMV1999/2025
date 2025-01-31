@@ -44,12 +44,13 @@ switch ($_GET["op"]) {
 
         while ($reg = $rspta->fetch_object()) {
             $data[] = array(
-                "0" => $reg->nombre,
-                "1" => $reg->categoria,
-                "2" => "S/. " . number_format($reg->precio_compra, 2),
-                "3" => "S/. " . number_format($reg->precio_venta, 2),
-                "4" => $reg->stock,
-                "5" => ($reg->estado)
+                "0" => count($data) + 1,
+                "1" => $reg->nombre,
+                "2" => $reg->categoria,
+                "3" => "S/. " . number_format($reg->precio_compra, 2),
+                "4" => "S/. " . number_format($reg->precio_venta, 2),
+                "5" => $reg->stock,
+                "6" => ($reg->estado)
                     ? '<button class="btn btn-warning btn-sm" onclick="mostrar(' . $reg->id . ')">EDITAR</button> <button class="btn btn-danger btn-sm" onclick="desactivar(' . $reg->id . ')">DESACTIVAR</button>'
                     : '<button class="btn btn-warning btn-sm" onclick="mostrar(' . $reg->id . ')">EDITAR</button> <button class="btn btn-success btn-sm" onclick="activar(' . $reg->id . ')">ACTIVAR</button>'
             );

@@ -72,9 +72,9 @@ switch ($_GET["op"]) {
 
         while ($reg = $rspta->fetch_object()) {
             $data[] = array(
-                "0" => $reg->tipo_documento . " - " . $reg->numerodocumento,
-                "1" => $reg->nombreyapellido,
-                "2" => $reg->edad . " AÑOS",
+                "0" => count($data) + 1,
+                "1" => $reg->tipo_documento . " - " . $reg->numerodocumento,
+                "2" => $reg->nombreyapellido,
                 "3" => $reg->cargo,
                 "4" => '<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#' . $reg->numerodocumento . '">REPORTE</button>
 

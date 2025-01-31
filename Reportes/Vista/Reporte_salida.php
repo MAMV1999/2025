@@ -1,13 +1,13 @@
 <?php
 
 require('../../General/fpdf/fpdf.php');
-require_once("../Modelo/ReciboMatriculaTotal.php");
+require_once("../Modelo/Reporte_salida.php");
 
 class PDF extends FPDF
 {
     protected $fecha_hora_actual;
 
-    function __construct($orientation = 'L', $unit = 'mm', $size = 'A4', $fecha_hora_actual = null)
+    function __construct($orientation = 'P', $unit = 'mm', $size = 'A4', $fecha_hora_actual = null)
     {
         parent::__construct($orientation, $unit, $size);
         $this->fecha_hora_actual = $fecha_hora_actual;
@@ -17,7 +17,7 @@ class PDF extends FPDF
     function Header()
     {
         $this->SetFont('Arial', 'B', 15);
-        $this->Cell(0, 10, 'LISTADO DETALLE MATRICULADOS', 0, 1, 'C');
+        $this->Cell(0, 10, 'REPORTE DE VENTAS', 0, 1, 'C');
         $this->Ln(3);
     }
 
@@ -31,19 +31,15 @@ class PDF extends FPDF
 
     function HeaderTable()
     {
-        $this->SetFont('Arial', 'B', 7);
+        $this->SetFont('Arial', 'B', 9);
         $this->SetFillColor(188, 188, 188);
-        $this->Cell(8, 10, utf8_decode('N°'), 1, 0, 'C', true);
-        $this->Cell(15, 10, utf8_decode('LECTIVO'), 1, 0, 'C', true);
-        $this->Cell(15, 10, utf8_decode('NIVEL'), 1, 0, 'C', true);
-        $this->Cell(15, 10, utf8_decode('GRADO'), 1, 0, 'C', true);
-        $this->Cell(67, 10, utf8_decode('ALUMNO'), 1, 0, 'C', true);
-        $this->Cell(67, 10, utf8_decode('APODERADO'), 1, 0, 'C', true);
-        $this->Cell(20, 10, utf8_decode('TELEFONO'), 1, 0, 'C', true);
-        $this->Cell(20, 10, utf8_decode('FECHA'), 1, 0, 'C', true);
-        $this->Cell(20, 10, utf8_decode('N° RECIBO'), 1, 0, 'C', true);
-        $this->Cell(15, 10, utf8_decode('MONTO'), 1, 0, 'C', true);
-        $this->Cell(0, 10, utf8_decode('MÉTODO'), 1, 1, 'C', true);
+        $this->Cell(10, 10, utf8_decode('N°'), 1, 0, 'C', true);
+        $this->Cell(90, 10, utf8_decode('APODERADO'), 1, 0, 'C', true);
+        $this->Cell(18, 10, utf8_decode('COMPR.'), 1, 0, 'C', true);
+        $this->Cell(18, 10, utf8_decode('N°'), 1, 0, 'C', true);
+        $this->Cell(18, 10, utf8_decode('FECHA'), 1, 0, 'C', true);
+        $this->Cell(18, 10, utf8_decode('MONTO'), 1, 0, 'C', true);
+        $this->Cell(0, 10, utf8_decode('METODO'), 1, 1, 'C', true);
     }
 
     function FillTable($results)
@@ -51,18 +47,13 @@ class PDF extends FPDF
         $this->SetFont('Arial', '', 7);
         $contador = 1;
         foreach ($results as $row) {
-            $this->Cell(8, 6, $contador, 1, 0, 'C');
-            $this->Cell(15, 6, utf8_decode($row['lectivo']), 1, 0, 'C');
-            $this->Cell(15, 6, utf8_decode($row['nivel']), 1, 0, 'C');
-            $this->Cell(15, 6, utf8_decode($row['grado']), 1, 0, 'C');
-            $this->Cell(67, 6, utf8_decode($row['nombre_alumno']), 1, 0, 'C');
-            $this->Cell(67, 6, utf8_decode($row['nombre_apoderado']), 1, 0, 'C');
-            $this->Cell(20, 6, utf8_decode($row['telefono_apoderado']), 1, 0, 'C');
-            $this->Cell(20, 6, utf8_decode($row['fecha']), 1, 0, 'C');
-            $this->Cell(20, 6, utf8_decode('N° ' . $row['numeracion']), 1, 0, 'C');
-            $this->Cell(15, 6, 'S/.' . number_format($row['monto'], 2), 1, 0, 'C');
+            $this->Cell(10, 6, $contador, 1, 0, 'C');
+            $this->Cell(90, 6, utf8_decode($row['nombre_apoderado']), 1, 0, 'C');
+            $this->Cell(18, 6, utf8_decode($row['nombre_comprobante']), 1, 0, 'C');
+            $this->Cell(18, 6, utf8_decode($row['numeracion']), 1, 0, 'C');
+            $this->Cell(18, 6, utf8_decode($row['fecha']), 1, 0, 'C');
+            $this->Cell(18, 6, 'S/.' . number_format($row['monto'], 2), 1, 0, 'C');
             $this->Cell(0, 6, utf8_decode($row['metodo_pago']), 1, 1, 'C');
-
             $contador++;
         }
     }
@@ -90,8 +81,8 @@ class PDF extends FPDF
 }
 
 // Obtener los datos
-$modelo = new ReciboMatriculaTotal();
-$resultDetalle = $modelo->listarReciboMatriculaTotal();
+$modelo = new Reportesalida();
+$resultDetalle = $modelo->listar();
 
 if (!$resultDetalle) {
     die("Error al obtener los datos del detalle.");
@@ -121,7 +112,7 @@ foreach ($rowsDetalle as $row) {
 date_default_timezone_set('America/Lima');
 $fecha_hora_actual = date('d/m/Y H:i:s');
 
-$pdf = new PDF('L', 'mm', 'A4', $fecha_hora_actual);
+$pdf = new PDF('P', 'mm', 'A4', $fecha_hora_actual);
 $pdf->AliasNbPages();
 $pdf->AddPage();
 

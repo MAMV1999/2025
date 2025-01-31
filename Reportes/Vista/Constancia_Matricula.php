@@ -50,7 +50,12 @@ class PDF extends FPDF
     
         $this->SetFont('Arial', '', 11);
         $this->MultiCell(0, 5, utf8_decode('Se expide el presente documento para los fines legales y administrativos que correspondan.'), 0, 'J');
-        $this->Ln(5);
+        
+        $this->Ln(30);
+        $this->SetFont('Arial', 'B', 11);
+        $this->MultiCell(0, 5, utf8_decode('__________________________________'), 0, 'C');
+        $this->MultiCell(0, 5, utf8_decode($data['usuario_docente_nombre']), 0, 'C');
+        $this->MultiCell(0, 5, utf8_decode($data['usuario_docente_cargo']), 0, 'C');
     
     }
     

@@ -21,7 +21,7 @@ switch ($_GET["op"]) {
 
         while ($reg = $rspta->fetch_object()) {
             $data[] = array(
-                "0" => 'N° ' . $cont,
+                "0" => count($data) + 1,
                 "1" => 'PERIODO LECTIVO '.$reg->lectivo_nombre,
                 "2" => '<button class="btn btn-warning btn-sm" onclick="mostrar(' . $reg->lectivo_id . ')">EDITAR</button>'
             );

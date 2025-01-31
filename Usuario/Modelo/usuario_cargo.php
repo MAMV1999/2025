@@ -9,8 +9,7 @@ class UsuarioCargo
 
     public function guardar($nombre, $observaciones, $estado)
     {
-        $sql = "INSERT INTO usuario_cargo (nombre, observaciones, estado) 
-                VALUES ('$nombre', '$observaciones', '$estado')";
+        $sql = "INSERT INTO usuario_cargo (nombre, observaciones, estado) VALUES ('$nombre', '$observaciones', '$estado')";
         return ejecutarConsulta($sql);
     }
 

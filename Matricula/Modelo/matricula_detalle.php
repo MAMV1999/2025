@@ -188,8 +188,8 @@ class MatriculaDetalle
                 INNER JOIN usuario_documento ud_al ON ual.id_documento = ud_al.id AND ud_al.estado = 1
                 LEFT JOIN matricula_pago mp ON md.id = mp.id_matricula_detalle AND mp.estado = 1
                 LEFT JOIN matricula_metodo_pago mmp ON mp.id_matricula_metodo_pago = mmp.id AND mmp.estado = 1
-                WHERE
-                    md.estado = 1";
+                WHERE md.estado = 1
+                ORDER BY il.nombre ASC, iniv.nombre ASC, ig.nombre ASC, isec.nombre ASC, mc.nombre ASC, ual.nombreyapellido ASC";
         return ejecutarConsulta($sql);
     }
 

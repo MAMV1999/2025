@@ -64,7 +64,11 @@ class PDF extends FPDF
             $this->MultiCell(0, 5, utf8_decode($doc['obligatorio_marcado'] . $doc['nombre'].' - '.$doc['documento_responsable_iniciales']), 0, 'L');
         }
     
-        $this->Ln(5);
+        $this->Ln(30);
+        $this->SetFont('Arial', 'B', 11);
+        $this->MultiCell(0, 5, utf8_decode('__________________________________'), 0, 'C');
+        $this->MultiCell(0, 5, utf8_decode($data['usuario_docente_nombre']), 0, 'C');
+        $this->MultiCell(0, 5, utf8_decode($data['usuario_docente_cargo']), 0, 'C');
     }
     
 

@@ -18,9 +18,9 @@ if (!isset($_SESSION['nombre'])) {
                 <table class="table" id="myTable">
                     <thead>
                         <tr>
+                            <th>N°</th>
                             <th>DOCUMENTO</th>
                             <th>NOMBRE Y APELLIDO</th>
-                            <th>EDAD</th>
                             <th>CARGO</th>
                             <th>INFORMACION</th>
                             <th>ACCIONES</th>
@@ -44,34 +44,24 @@ if (!isset($_SESSION['nombre'])) {
                 <!-- Pestañas para organización de campos -->
                 <div class="p-3">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="personal-tab" data-bs-toggle="tab" data-bs-target="#personal-tab-pane" type="button" role="tab" aria-controls="personal-tab-pane" aria-selected="true">DATOS PERSONALES</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="laboral-tab" data-bs-toggle="tab" data-bs-target="#laboral-tab-pane" type="button" role="tab" aria-controls="laboral-tab-pane" aria-selected="false">INFORMACIÓN LABORAL</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="usuario-tab" data-bs-toggle="tab" data-bs-target="#usuario-tab-pane" type="button" role="tab" aria-controls="usuario-tab-pane" aria-selected="false">DATOS DE USUARIO</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="financiero-tab" data-bs-toggle="tab" data-bs-target="#financiero-tab-pane" type="button" role="tab" aria-controls="financiero-tab-pane" aria-selected="false">DATOS FINANCIEROS</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="sunat-tab" data-bs-toggle="tab" data-bs-target="#sunat-tab-pane" type="button" role="tab" aria-controls="sunat-tab-pane" aria-selected="false">DATOS SUNAT</button>
-                        </li>
+                        <li class="nav-item" role="presentation"><button class="nav-link active" id="personal-tab" data-bs-toggle="tab" data-bs-target="#personal-tab-pane" type="button" role="tab" aria-controls="personal-tab-pane" aria-selected="true">DATOS PERSONALES</button></li>
+                        <li class="nav-item" role="presentation"><button class="nav-link" id="ubicacion-tab" data-bs-toggle="tab" data-bs-target="#ubicacion-tab-pane" type="button" role="tab" aria-controls="ubicacion-tab-pane" aria-selected="false">UBICACION Y CONTACTO</button></li>
+                        <li class="nav-item" role="presentation"><button class="nav-link" id="laboral-tab" data-bs-toggle="tab" data-bs-target="#laboral-tab-pane" type="button" role="tab" aria-controls="laboral-tab-pane" aria-selected="false">INFORMACIÓN LABORAL</button></li>
+                        <li class="nav-item" role="presentation"><button class="nav-link" id="usuario-tab" data-bs-toggle="tab" data-bs-target="#usuario-tab-pane" type="button" role="tab" aria-controls="usuario-tab-pane" aria-selected="false">DATOS DE USUARIO</button></li>
+                        <li class="nav-item" role="presentation"><button class="nav-link" id="financiero-tab" data-bs-toggle="tab" data-bs-target="#financiero-tab-pane" type="button" role="tab" aria-controls="financiero-tab-pane" aria-selected="false">DATOS FINANCIEROS</button></li>
+                        <li class="nav-item" role="presentation"><button class="nav-link" id="sunat-tab" data-bs-toggle="tab" data-bs-target="#sunat-tab-pane" type="button" role="tab" aria-controls="sunat-tab-pane" aria-selected="false">DATOS SUNAT</button></li>
                     </ul>
 
                     <div class="tab-content" id="myTabContent">
                         <!-- TAB: DATOS PERSONALES -->
                         <div class="tab-pane fade show active" id="personal-tab-pane" role="tabpanel" aria-labelledby="personal-tab">
-                            <div class="p-3">
-                                <label for="id_documento" class="form-label"><b>TIPO DE DOCUMENTO:</b></label>
-                                <select id="id_documento" name="id_documento" class="form-control" data-live-search="true"></select>
-                            </div>
 
                             <div class="p-3">
-                                <label for="numerodocumento" class="form-label"><b>NÚMERO DE DOCUMENTO:</b></label>
-                                <input type="text" id="numerodocumento" name="numerodocumento" class="form-control" placeholder="Número de Documento">
+                                <label for="id_documento" class="form-label"><b>DOCUMENTO:</b></label>
+                                <div class="input-group">
+                                    <select id="id_documento" name="id_documento" class="form-control" data-live-search="true"></select>
+                                    <input type="text" id="numerodocumento" name="numerodocumento" class="form-control" placeholder="Número de Documento">
+                                </div>
                             </div>
 
                             <div class="p-3">
@@ -85,28 +75,29 @@ if (!isset($_SESSION['nombre'])) {
                             </div>
 
                             <div class="p-3">
-                                <label for="id_estado_civil" class="form-label"><b>ESTADO CIVIL:</b></label>
-                                <select id="id_estado_civil" name="id_estado_civil" class="form-control" data-live-search="true"></select>
+                                <label for="id_documento" class="form-label"><b>ESTADO CIVIL / SEXO:</b></label>
+                                <div class="input-group">
+                                    <select id="id_estado_civil" name="id_estado_civil" class="form-control" data-live-search="true"></select>
+                                    <select id="id_sexo" name="id_sexo" class="form-control" data-live-search="true"></select>
+                                </div>
                             </div>
+                        </div>
 
-                            <div class="p-3">
-                                <label for="id_sexo" class="form-label"><b>SEXO:</b></label>
-                                <select id="id_sexo" name="id_sexo" class="form-control" data-live-search="true"></select>
-                            </div>
-
+                        <!-- TAB: DATOS PERSONALES -->
+                        <div class="tab-pane fade" id="ubicacion-tab-pane" role="tabpanel" aria-labelledby="ubicacion-tab">
                             <div class="p-3">
                                 <label for="direccion" class="form-label"><b>DIRECCIÓN:</b></label>
                                 <input type="text" id="direccion" name="direccion" class="form-control" placeholder="Dirección">
                             </div>
 
                             <div class="p-3">
-                                <label for="telefono" class="form-label"><b>TELÉFONO:</b></label>
-                                <input type="text" id="telefono" name="telefono" class="form-control" placeholder="Teléfono">
+                                <label for="correo" class="form-label"><b>CORREO ELECTRÓNICO:</b></label>
+                                <input type="email" id="correo" name="correo" class="form-control" placeholder="Correo Electrónico">
                             </div>
 
                             <div class="p-3">
-                                <label for="correo" class="form-label"><b>CORREO ELECTRÓNICO:</b></label>
-                                <input type="email" id="correo" name="correo" class="form-control" placeholder="Correo Electrónico">
+                                <label for="telefono" class="form-label"><b>TELÉFONO:</b></label>
+                                <input type="text" id="telefono" name="telefono" class="form-control" placeholder="Teléfono">
                             </div>
                         </div>
 
@@ -123,26 +114,22 @@ if (!isset($_SESSION['nombre'])) {
                             </div>
 
                             <div class="p-3">
-                                <label for="fechainicio" class="form-label"><b>FECHA DE INICIO:</b></label>
-                                <input type="date" id="fechainicio" name="fechainicio" class="form-control">
-                            </div>
-
-                            <div class="p-3">
-                                <label for="fechafin" class="form-label"><b>FECHA DE FIN:</b></label>
-                                <input type="date" id="fechafin" name="fechafin" class="form-control">
+                                <label for="id_documento" class="form-label"><b>FECHA INICIO / FIN:</b></label>
+                                <div class="input-group">
+                                    <input type="date" id="fechainicio" name="fechainicio" class="form-control">
+                                    <input type="date" id="fechafin" name="fechafin" class="form-control">
+                                </div>
                             </div>
                         </div>
 
                         <!-- TAB: DATOS DE USUARIO -->
                         <div class="tab-pane fade" id="usuario-tab-pane" role="tabpanel" aria-labelledby="usuario-tab">
                             <div class="p-3">
-                                <label for="usuario" class="form-label"><b>USUARIO:</b></label>
-                                <input type="text" id="usuario" name="usuario" class="form-control" placeholder="Usuario">
-                            </div>
-
-                            <div class="p-3">
-                                <label for="clave" class="form-label"><b>CLAVE:</b></label>
-                                <input type="text" id="clave" name="clave" class="form-control" placeholder="Clave">
+                                <label for="id_documento" class="form-label"><b>USUARIO / CLAVE:</b></label>
+                                <div class="input-group">
+                                    <input type="text" id="usuario" name="usuario" class="form-control" placeholder="Usuario">
+                                    <input type="text" id="clave" name="clave" class="form-control" placeholder="Clave">
+                                </div>
                             </div>
                         </div>
 

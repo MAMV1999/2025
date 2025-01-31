@@ -174,14 +174,15 @@ switch ($_GET["op"]) {
 
         while ($reg = $rspta->fetch_object()) {
             $data[] = array(
-                "0" => $reg->lectivo . ' - ' . $reg->nivel . ' - ' . $reg->grado,
-                "1" => $reg->nombre_apoderado,
+                "0" => count($data) + 1,
+                "1" => $reg->lectivo . ' - ' . $reg->nivel . ' - ' . $reg->grado,
                 "2" => $reg->nombre_alumno,
-                "3" => $reg->numeracion_pago . ' - ' . $reg->metodo_pago,
-                "4" => '
+                "3" => $reg->nombre_apoderado,
+                "4" => 'N° '.$reg->numeracion_pago,
+                "5" => '
                         <div class="btn-group">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#' . $reg->numeracion_pago . '">INFO.</button>
-                        <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#' . $reg->numeracion_pago . '">DATOS</button>
+                        <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split btn-sm" data-bs-toggle="dropdown" aria-expanded="false">
                             <span class="visually-hidden">Toggle Dropdown</span>
                         </button>
                         <ul class="dropdown-menu">

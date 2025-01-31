@@ -15,14 +15,14 @@ if (!isset($_SESSION['nombre'])) {
         <div class="my-3 p-3 bg-body rounded shadow-sm" id="listado">
             <h5 class="border-bottom pb-2 mb-0"><b>DETALLE DE MENSUALIDADES - LISTADO</b></h5>
             <div class="p-3">
-                <table class="table table-hover text-center" id="myTable">
+                <table class="table table-hover" id="myTable">
                     <thead>
                         <tr>
-                            <th style="text-align: center;">ID</th>
-                            <th style="text-align: center;">MES</th>
-                            <th style="text-align: center;">DEUDORES</th>
-                            <th style="text-align: center;">CANCELADO</th>
-                            <th style="text-align: center;">ACCIONES</th>
+                            <th>ID</th>
+                            <th>MES</th>
+                            <th>DEUDORES</th>
+                            <th>CANCELADO</th>
+                            <th>ACCIONES</th>
                         </tr>
                     </thead>
                     <tbody></tbody>

@@ -45,7 +45,7 @@ switch ($_GET["op"]) {
 
         while ($reg = $rspta->fetch_object()) {
             $data[] = array(
-                "0" => 'N° ' . $reg->id,
+                "0" => count($data) + 1,
                 "1" => $reg->nombreyapellido,
                 "2" => $reg->tipo_documento . ' - ' . $reg->numerodocumento,
                 "3" => $reg->apoderado,

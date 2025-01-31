@@ -45,7 +45,5 @@ class Perfil
                 WHERE id='$this->id'";
         return ejecutarConsulta($sql);
     }
-
-    // Otras funciones necesarias para gestionar los datos del trabajador actual
 }
 ?>

@@ -49,7 +49,7 @@ switch ($_GET["op"]) {
 
         while ($reg = $rspta->fetch_object()) {
             $data[] = array(
-                "0" => 'N° '.$reg->id,
+                "0" => count($data) + 1,
                 "1" => $reg->responsable,
                 "2" => $reg->nombre,
                 "3" => $reg->obligatorio ? 'SI' : 'NO',

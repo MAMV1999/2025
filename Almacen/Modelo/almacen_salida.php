@@ -132,7 +132,7 @@ class AlmacenSalida
                     ap.estado
                 FROM almacen_producto ap
                 INNER JOIN almacen_categoria ac ON ap.categoria_id = ac.id AND ac.estado = 1
-                WHERE ap.estado = 1
+                WHERE ap.estado = 1 AND ap.stock > 0
                 ORDER BY ap.nombre ASC";
         return ejecutarConsulta($sql);
     }

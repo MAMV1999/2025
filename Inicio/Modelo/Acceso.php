@@ -48,6 +48,8 @@ class Acceso
                 WHERE 
                     usuario_docente.usuario = '$usuario'
                     AND usuario_docente.clave = '$clave'
+                    AND usuario_docente.fechainicio <= CURDATE()
+                    AND usuario_docente.fechafin >= CURDATE()
                     AND usuario_docente.estado = 1";
         return ejecutarConsulta($sql);
     }

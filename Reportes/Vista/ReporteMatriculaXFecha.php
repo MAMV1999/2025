@@ -47,7 +47,7 @@ class PDF extends FPDF
         $this->Cell(25.2, 10, utf8_decode(strtoupper('TELEF.')), 1, 0, 'C', true);
         $this->Cell(25.2, 10, strtoupper('FECHA'), 1, 0, 'C', true);
         $this->Cell(16.94, 10, strtoupper('MONTO'), 1, 0, 'C', true);
-        $this->Cell(37.5, 10, strtoupper('METODO'), 1, 0, 'C', true);
+        $this->Cell(0, 10, strtoupper('METODO'), 1, 0, 'C', true);
         $this->Ln();
     }
 
@@ -81,7 +81,7 @@ class PDF extends FPDF
         $this->MultiCell(16.94, 5, 'S/. ' . $row['pago_monto'], 1, 'C', false);
         $this->SetXY($x + 239.13, $y);
 
-        $this->MultiCell(37.5, 5, utf8_decode($row['metodo_pago']), 1, 'C', false);
+        $this->MultiCell(0, 5, utf8_decode($row['metodo_pago']), 1, 'C', false);
         $this->SetXY($x + 276.63, $y);
 
         $this->Ln(max($y + $maxHeight - $this->GetY(), 5));

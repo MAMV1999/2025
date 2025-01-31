@@ -15,12 +15,13 @@ if (!isset($_SESSION['nombre'])) {
         <div class="my-3 p-3 bg-body rounded shadow-sm" id="listado">
             <h5 class="border-bottom pb-2 mb-0"><b>MATRÍCULA DETALLE - LISTADO</b></h5>
             <div class="p-3">
-                <table class="table" id="myTable">
+                <table class="table table-hover" id="myTable">
                     <thead>
                         <tr>
+                            <th>N°</th>
                             <th>GRADO</th>
-                            <th>APODERADO</th>
                             <th>ALUMNO</th>
+                            <th>APODERADO</th>
                             <th>RECIBO</th>
                             <th>ACCIONES</th>
                         </tr>
@@ -29,7 +30,7 @@ if (!isset($_SESSION['nombre'])) {
                 </table>
             </div>
             <small class="d-block text-end mt-3">
-                <button type="button" onclick="MostrarFormulario();cargarMensualidades();" class="btn btn-success">Agregar</button>
+                <button type="button" onclick="MostrarFormulario();cargarMensualidades();" class="btn btn-success">NUEVA MATRICULA</button>
             </small>
         </div>
 

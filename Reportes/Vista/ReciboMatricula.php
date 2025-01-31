@@ -41,19 +41,18 @@ class PDF extends FPDF
 
         $this->SectionTitle('INFORMACIÓN DE MATRICULA');
         $this->SectionData('INSTITUCION', $data['institucion_nombre']);
-        $this->SectionData('PERIODO LECTIVO', $data['lectivo_nombre']);
-        $this->SectionData('MATRICULA', $data['nivel_nombre'].' / '.$data['grado_nombre'].' / '.$data['seccion_nombre']);
-        $this->Ln(5);
-
-        $this->SectionTitle('DATOS DEL ALUMNO');
-        $this->SectionData('DOCUMENTO', $data['alumno_tipo_documento'].' - '.$data['alumno_numero_documento']);
-        $this->SectionData('APELLIDOS Y NOMBRES', $data['alumno_nombre_completo']);
+        $this->SectionData('MATRICULA', $data['lectivo_nombre'].' / '.$data['nivel_nombre'].' / '.$data['grado_nombre'].' / '.$data['seccion_nombre']);
         $this->Ln(5);
 
         $this->SectionTitle('DATOS DEL APODERADO');
         $this->SectionData('DOCUMENTO', $data['apoderado_tipo_documento'].' - '.$data['apoderado_numero_documento']);
         $this->SectionData('NOMBRE', $data['apoderado_nombre_completo']);
         $this->SectionData('TELEFONO', $data['apoderado_telefono']);
+        $this->Ln(5);
+
+        $this->SectionTitle('DATOS DEL ALUMNO');
+        $this->SectionData('DOCUMENTO', $data['alumno_tipo_documento'].' - '.$data['alumno_numero_documento']);
+        $this->SectionData('APELLIDOS Y NOMBRES', $data['alumno_nombre_completo']);
         $this->Ln(5);
 
         $this->SectionTitle('INFORMACIÓN DE PAGO');

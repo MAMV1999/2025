@@ -55,19 +55,19 @@ if (!isset($_SESSION['nombre'])) {
         </p>
         <div class="collapse" id="collapseExample">
             <div class="card card-body">
+
                 <!-- CUERPO_INICIO -->
                 <div class="my-3 p-3 bg-body rounded shadow-sm" id="listado">
-                    <h5 class="border-bottom pb-2 mb-0"><b>AJUSTES DE USUARIO</b></h5>
+                    <h5 class="border-bottom pb-2 mb-0"><b>OPCIONES DE USUARIO</b></h5>
                     <div class="d-flex text-body-secondary pt-3">
                         <br>
                         <?php
                         $array = array(
-                            "1" => array("nombre" => "CONTRATO", "link" => "usuario_tipo_contrato.php"),
-                            "2" => array("nombre" => "CARGO", "link" => "usuario_cargo.php"),
-                            "3" => array("nombre" => "DOCUMENTO", "link" => "usuario_documento.php"),
-                            "4" => array("nombre" => "ESTADO CIVIL", "link" => "usuario_estado_civil.php"),
-                            "5" => array("nombre" => "SEXO", "link" => "usuario_sexo.php"),
-                            "6" => array("nombre" => "TIPO APODERADO", "link" => "usuario_apoderado_tipo.php"),
+                            "1" => array("nombre" => "DOCUMENTO", "link" => "usuario_documento.php"),
+                            "2" => array("nombre" => "ESTADO CIVIL", "link" => "usuario_estado_civil.php"),
+                            "3" => array("nombre" => "SEXO", "link" => "usuario_sexo.php"),
+                            "4" => array("nombre" => "CONTRATO", "link" => "usuario_tipo_contrato.php"),
+                            "5" => array("nombre" => "TIPO APODERADO", "link" => "usuario_apoderado_tipo.php"),
                         );
                         ?>
                         <table class="table">
@@ -83,10 +83,10 @@ if (!isset($_SESSION['nombre'])) {
                                 $a = 1;
                                 while ($a <= count($array)) {
                                     echo '<tr>
-                                <th scope="row">' . $a . '</th>
-                                <td>' . $array[$a]["nombre"] . '</td>
-                                <td><a class="btn btn-primary" href="' . $array[$a]["link"] . '" role="button">Ir a ' . $array[$a]["nombre"] . '</a></td>
-                            </tr>';
+                                            <th scope="row">' . $a . '</th>
+                                            <td>' . $array[$a]["nombre"] . '</td>
+                                            <td><a class="btn btn-primary" href="' . $array[$a]["link"] . '" role="button">Ir a ' . $array[$a]["nombre"] . '</a></td>
+                                        </tr>';
                                     $a++;
                                 }
                                 ?>
@@ -94,6 +94,44 @@ if (!isset($_SESSION['nombre'])) {
                         </table>
                     </div>
                 </div>
+
+                <!-- CUERPO_INICIO -->
+                <div class="my-3 p-3 bg-body rounded shadow-sm" id="listado">
+                    <h5 class="border-bottom pb-2 mb-0"><b>PERMISOS DE USUARIO</b></h5>
+                    <div class="d-flex text-body-secondary pt-3">
+                        <br>
+                        <?php
+                        $array = array(
+                            "1" => array("nombre" => "PERMISOS", "link" => "usuario_cargo.php"),
+                            "2" => array("nombre" => "MENU", "link" => "usuario_menu.php"),
+                            "3" => array("nombre" => "CARGO", "link" => "usuario_cargo.php"),
+                        );
+                        ?>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">NOMBRE</th>
+                                    <th scope="col">PAGUINA</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $a = 1;
+                                while ($a <= count($array)) {
+                                    echo '<tr>
+                                            <th scope="row">' . $a . '</th>
+                                            <td>' . $array[$a]["nombre"] . '</td>
+                                            <td><a class="btn btn-primary" href="' . $array[$a]["link"] . '" role="button">Ir a ' . $array[$a]["nombre"] . '</a></td>
+                                        </tr>';
+                                    $a++;
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
             </div>
         </div>
 

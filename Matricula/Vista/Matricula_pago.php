@@ -15,7 +15,7 @@ if (!isset($_SESSION['nombre'])) {
         <div class="my-3 p-3 bg-body rounded shadow-sm" id="listado">
             <h5 class="border-bottom pb-2 mb-0"><b>PAGOS DE MATRÍCULA - LISTADO</b></h5>
             <div class="p-3">
-                <table class="table" id="myTable">
+                <table class="table table-hover" id="myTable">
                     <thead>
                         <tr>
                             <th>NUMERACION</th>

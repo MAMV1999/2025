@@ -32,36 +32,21 @@ class ReporteMatricula
                 DATE_FORMAT(mp.fecha, '%d/%m/%Y') AS pago_fecha,
                 mp.monto AS pago_monto,
                 mm.nombre AS metodo_pago
-            FROM 
-                matricula_detalle md
-            JOIN 
-                matricula m ON md.id_matricula = m.id AND m.estado = 1
-            JOIN 
-                institucion_seccion isec ON m.id_institucion_seccion = isec.id AND isec.estado = 1
-            JOIN 
-                institucion_grado ig ON isec.id_institucion_grado = ig.id AND ig.estado = 1
-            JOIN 
-                institucion_nivel niv ON ig.id_institucion_nivel = niv.id AND niv.estado = 1
-            JOIN 
-                institucion_lectivo il ON niv.id_institucion_lectivo = il.id AND il.estado = 1
-            JOIN 
-                usuario_apoderado ua ON md.id_usuario_apoderado = ua.id AND ua.estado = 1
-            JOIN 
-                usuario_apoderado_tipo uat ON ua.id_apoderado_tipo = uat.id AND uat.estado = 1
-            JOIN 
-                usuario_documento ud ON ua.id_documento = ud.id AND ud.estado = 1
-            JOIN 
-                usuario_alumno ua2 ON md.id_usuario_alumno = ua2.id AND ua2.estado = 1
-            JOIN 
-                usuario_documento ud2 ON ua2.id_documento = ud2.id AND ud2.estado = 1
-            JOIN 
-                matricula_pago mp ON md.id = mp.id_matricula_detalle AND mp.estado = 1
-            JOIN 
-                matricula_metodo_pago mm ON mp.id_matricula_metodo_pago = mm.id AND mm.estado = 1
-            WHERE 
-                md.estado = 1
-            ORDER BY 
-                ua.nombreyapellido ASC";
+            FROM matricula_detalle md
+            JOIN matricula m ON md.id_matricula = m.id AND m.estado = 1
+            JOIN institucion_seccion isec ON m.id_institucion_seccion = isec.id AND isec.estado = 1
+            JOIN institucion_grado ig ON isec.id_institucion_grado = ig.id AND ig.estado = 1
+            JOIN institucion_nivel niv ON ig.id_institucion_nivel = niv.id AND niv.estado = 1
+            JOIN institucion_lectivo il ON niv.id_institucion_lectivo = il.id AND il.estado = 1
+            JOIN usuario_apoderado ua ON md.id_usuario_apoderado = ua.id AND ua.estado = 1
+            JOIN usuario_apoderado_tipo uat ON ua.id_apoderado_tipo = uat.id AND uat.estado = 1
+            JOIN usuario_documento ud ON ua.id_documento = ud.id AND ud.estado = 1
+            JOIN usuario_alumno ua2 ON md.id_usuario_alumno = ua2.id AND ua2.estado = 1
+            JOIN usuario_documento ud2 ON ua2.id_documento = ud2.id AND ud2.estado = 1
+            JOIN matricula_pago mp ON md.id = mp.id_matricula_detalle AND mp.estado = 1
+            JOIN matricula_metodo_pago mm ON mp.id_matricula_metodo_pago = mm.id AND mm.estado = 1
+            WHERE md.estado = 1
+            ORDER BY ua.nombreyapellido ASC";
         return ejecutarConsulta($sql);
     }
 }

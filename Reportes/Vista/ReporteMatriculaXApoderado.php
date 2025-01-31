@@ -11,7 +11,7 @@ class PDF extends FPDF
     {
         $this->SetFont('Arial', 'B', 12);
         $this->Cell(277, 10, utf8_decode(strtoupper('PAGOS AGRUPADOS POR APODERADO')), 0, 1, 'C');
-        $this->Ln(3);
+        $this->Ln(5);
         $this->SetFont('Arial', '', 9);
     }
 
@@ -29,14 +29,14 @@ class PDF extends FPDF
         $ancho_celda = 44.25;
         $this->SetFont('Arial', 'B', 8);
         $this->SetFillColor(188, 188, 188);
-        $this->Cell(277, 10, utf8_decode(strtoupper('DATOS DEL APODERADO')), 1, 0, 'C', true);
+        $this->Cell(0, 8, utf8_decode(strtoupper('DATOS DEL APODERADO')), 1, 0, 'C', true);
         $this->Ln();
         $this->SetFillColor(188, 188, 188);
-        $this->Cell($ancho_celda, 10, utf8_decode(strtoupper('PARENTESCO')), 1, 0, 'C', true);
-        $this->Cell($ancho_celda, 10, utf8_decode(strtoupper('DOCUMENTO')), 1, 0, 'C', true);
-        $this->Cell($ancho_celda, 10, utf8_decode(strtoupper('N° DOCUMENTO')), 1, 0, 'C', true);
-        $this->Cell(100, 10, utf8_decode(strtoupper('NOMBRE Y APELLIDO')), 1, 0, 'C', true);
-        $this->Cell($ancho_celda, 10, utf8_decode(strtoupper('TELEFONO')), 1, 0, 'C', true);
+        $this->Cell($ancho_celda, 8, utf8_decode(strtoupper('PARENTESCO')), 1, 0, 'C', true);
+        $this->Cell($ancho_celda, 8, utf8_decode(strtoupper('DOCUMENTO')), 1, 0, 'C', true);
+        $this->Cell($ancho_celda, 8, utf8_decode(strtoupper('N° DOCUMENTO')), 1, 0, 'C', true);
+        $this->Cell(100, 8, utf8_decode(strtoupper('NOMBRE Y APELLIDO')), 1, 0, 'C', true);
+        $this->Cell($ancho_celda, 8, utf8_decode(strtoupper('TELEFONO')), 1, 0, 'C', true);
         $this->Ln();
     }
 
@@ -46,16 +46,16 @@ class PDF extends FPDF
         $ancho_celda = 25.285;
         $this->SetFont('Arial', 'B', 8);
         $this->SetFillColor(188, 188, 188);
-        $this->Cell(277, 10, utf8_decode(strtoupper('DATOS DEL ALUMNO')), 1, 0, 'C', true);
+        $this->Cell(0, 8, utf8_decode(strtoupper('DATOS DEL ALUMNO')), 1, 0, 'C', true);
         $this->Ln();
-        $this->Cell($ancho_celda, 10, utf8_decode(strtoupper('LECTIVO')), 1, 0, 'C', true);
-        $this->Cell($ancho_celda, 10, utf8_decode(strtoupper('NIVEL')), 1, 0, 'C', true);
-        $this->Cell($ancho_celda, 10, utf8_decode(strtoupper('GRADO')), 1, 0, 'C', true);
-        $this->Cell(100, 10, utf8_decode(strtoupper('NOMBRE Y APELLIDO')), 1, 0, 'C', true);
-        $this->Cell($ancho_celda, 10, utf8_decode(strtoupper('N° RECIBO')), 1, 0, 'C', true);
-        $this->Cell($ancho_celda, 10, utf8_decode(strtoupper('FECHA')), 1, 0, 'C', true);
-        $this->Cell($ancho_celda, 10, utf8_decode(strtoupper('MONTO')), 1, 0, 'C', true);
-        $this->Cell($ancho_celda, 10, utf8_decode(strtoupper('METODO')), 1, 0, 'C', true);
+        $this->Cell($ancho_celda, 8, utf8_decode(strtoupper('LECTIVO')), 1, 0, 'C', true);
+        $this->Cell($ancho_celda, 8, utf8_decode(strtoupper('NIVEL')), 1, 0, 'C', true);
+        $this->Cell($ancho_celda, 8, utf8_decode(strtoupper('GRADO')), 1, 0, 'C', true);
+        $this->Cell(100, 8, utf8_decode(strtoupper('NOMBRE Y APELLIDO')), 1, 0, 'C', true);
+        $this->Cell($ancho_celda, 8, utf8_decode(strtoupper('N° RECIBO')), 1, 0, 'C', true);
+        $this->Cell($ancho_celda, 8, utf8_decode(strtoupper('FECHA')), 1, 0, 'C', true);
+        $this->Cell($ancho_celda, 8, utf8_decode(strtoupper('MONTO')), 1, 0, 'C', true);
+        $this->Cell($ancho_celda, 8, utf8_decode(strtoupper('METODO')), 1, 0, 'C', true);
         $this->Ln();
     }
 
@@ -64,19 +64,19 @@ class PDF extends FPDF
     {
         $this->SetFont('Arial', 'B', 8);
         $this->SetFillColor(188, 188, 188);
-        $ancho_celda = 69.25;
-        $this->Cell($ancho_celda, 10, utf8_decode(strtoupper('METODO DE PAGO')), 1, 0, 'C', true);
-        $this->Cell($ancho_celda, 10, utf8_decode(strtoupper('TOTAL PAGADO')), 1, 0, 'C', true);
+        $ancho_celda = 40;
+        $this->Cell($ancho_celda, 8, utf8_decode(strtoupper('METODO DE PAGO')), 1, 0, 'C', true);
+        $this->Cell($ancho_celda, 8, utf8_decode(strtoupper('TOTAL PAGADO')), 1, 0, 'C', true);
         $this->Ln();
     }
 
     // Fila para totales por método con formato actualizado
     function MetodoPagoRow($metodo, $total)
     {
-        $ancho_celda = 69.25;
+        $ancho_celda = 40;
         $this->SetFont('Arial', '', 8);
-        $this->Cell($ancho_celda, 10, utf8_decode($metodo), 1, 0, 'C');
-        $this->Cell($ancho_celda, 10, utf8_decode('S/. ' . number_format($total, 2, '.', ',')), 1, 0, 'C');
+        $this->Cell($ancho_celda, 8, utf8_decode($metodo), 1, 0, 'C');
+        $this->Cell($ancho_celda, 8, utf8_decode('S/. ' . number_format($total, 2, '.', ',')), 1, 0, 'C');
         $this->Ln();
     }
 
@@ -84,7 +84,7 @@ class PDF extends FPDF
     function MostrarTotalesPorMetodo()
     {
         if (!empty($this->totalesPorMetodo)) {
-            $this->Ln(8);
+            $this->Ln(5);
             $this->MetodoPagoHeader();
             $totalGeneral = 0;
             foreach ($this->totalesPorMetodo as $metodo => $total) {
@@ -94,10 +94,9 @@ class PDF extends FPDF
             // Agregar fila total general
             $this->SetFont('Arial', 'B', 8);
             $this->SetFillColor(188, 188, 188);
-            $ancho_celda = 69.25;
-            $this->Cell($ancho_celda, 10, utf8_decode(strtoupper('Total General')), 1, 0, 'C', true);
-            $this->Cell($ancho_celda, 10, utf8_decode('S/. ' . number_format($totalGeneral, 2, '.', ',')), 1, 0, 'C', true);
-            $this->Ln(10);
+            $ancho_celda = 40;
+            $this->Cell($ancho_celda, 8, utf8_decode(strtoupper('Total General')), 1, 0, 'C', true);
+            $this->Cell($ancho_celda, 8, utf8_decode('S/. ' . number_format($totalGeneral, 2, '.', ',')), 1, 0, 'C', true);
         }
     }
 
@@ -106,11 +105,11 @@ class PDF extends FPDF
     {
         $ancho_celda = 44.25;
         $this->SetFont('Arial', '', 8);
-        $this->Cell($ancho_celda, 10, utf8_decode($row['apoderado_tipo']), 1, 0,'C');
-        $this->Cell($ancho_celda, 10, utf8_decode($row['apoderado_documento']), 1, 0,'C');
-        $this->Cell($ancho_celda, 10, utf8_decode($row['apoderado_dni']), 1, 0,'C');
-        $this->Cell(100, 10, utf8_decode($row['apoderado_nombre']), 1, 0,'C');
-        $this->Cell($ancho_celda, 10, utf8_decode($row['apoderado_telefono']), 1, 0,'C');
+        $this->Cell($ancho_celda, 8, utf8_decode($row['apoderado_tipo']), 1, 0,'C');
+        $this->Cell($ancho_celda, 8, utf8_decode($row['apoderado_documento']), 1, 0,'C');
+        $this->Cell($ancho_celda, 8, utf8_decode($row['apoderado_dni']), 1, 0,'C');
+        $this->Cell(100, 8, utf8_decode($row['apoderado_nombre']), 1, 0,'C');
+        $this->Cell($ancho_celda, 8, utf8_decode($row['apoderado_telefono']), 1, 0,'C');
         $this->Ln();
     }
 
@@ -119,14 +118,14 @@ class PDF extends FPDF
     {
         $ancho_celda = 25.285;
         $this->SetFont('Arial', '', 8);
-        $this->Cell($ancho_celda, 7, utf8_decode($row['institucion_lectivo']), 1, 0, 'C');
-        $this->Cell($ancho_celda, 7, utf8_decode($row['institucion_nivel']), 1, 0, 'C');
-        $this->Cell($ancho_celda, 7, utf8_decode($row['institucion_grado']), 1, 0, 'C');
-        $this->Cell(100, 7, utf8_decode($row['alumno_nombre']), 1, 0, 'C');
-        $this->Cell($ancho_celda, 7, utf8_decode($row['pago_numeracion']), 1, 0, 'C');
-        $this->Cell($ancho_celda, 7, utf8_decode($row['pago_fecha']), 1, 0, 'C');
-        $this->Cell($ancho_celda, 7, utf8_decode('S/. '.$row['pago_monto']), 1, 0, 'C');
-        $this->Cell($ancho_celda, 7, utf8_decode($row['metodo_pago']), 1, 0, 'C');
+        $this->Cell($ancho_celda, 8, utf8_decode($row['institucion_lectivo']), 1, 0, 'C');
+        $this->Cell($ancho_celda, 8, utf8_decode($row['institucion_nivel']), 1, 0, 'C');
+        $this->Cell($ancho_celda, 8, utf8_decode($row['institucion_grado']), 1, 0, 'C');
+        $this->Cell(100, 8, utf8_decode($row['alumno_nombre']), 1, 0, 'C');
+        $this->Cell($ancho_celda, 8, utf8_decode($row['pago_numeracion']), 1, 0, 'C');
+        $this->Cell($ancho_celda, 8, utf8_decode($row['pago_fecha']), 1, 0, 'C');
+        $this->Cell($ancho_celda, 8, utf8_decode('S/. '.$row['pago_monto']), 1, 0, 'C');
+        $this->Cell($ancho_celda, 8, utf8_decode($row['metodo_pago']), 1, 0, 'C');
         $this->Ln();
 
         // Acumular totales por método
@@ -155,7 +154,7 @@ while ($row = $datos->fetch_assoc()) {
         $pdf->AddPage();
         $pdf->ApoderadoHeader();
         $pdf->ApoderadoRow($row);
-        $pdf->Ln(8);
+        $pdf->Ln(5);
         $pdf->AlumnosHeader();
         $pdf->totalesPorMetodo = [];
     }
