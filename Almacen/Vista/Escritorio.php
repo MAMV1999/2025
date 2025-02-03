@@ -19,41 +19,7 @@ if (!isset($_SESSION['nombre'])) {
                 <?php
                 $array = array(
                     "1" => array("nombre" => "REGISTRO VENTA", "link" => "almacen_salida.php"),
-                );
-                ?>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">NOMBRE</th>
-                            <th scope="col">PAGUINA</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $a = 1;
-                        while ($a <= count($array)) {
-                            echo '<tr>
-                                <th scope="row">' . $a . '</th>
-                                <td>' . $array[$a]["nombre"] . '</td>
-                                <td><a class="btn btn-primary" href="' . $array[$a]["link"] . '" role="button">Ir a ' . $array[$a]["nombre"] . '</a></td>
-                            </tr>';
-                            $a++;
-                        }
-                        ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- CUERPO_INICIO -->
-        <div class="my-3 p-3 bg-body rounded shadow-sm" id="listado">
-            <h5 class="border-bottom pb-2 mb-0"><b>COMPRAS</b></h5>
-            <div class="d-flex text-body-secondary pt-3">
-                <br>
-                <?php
-                $array = array(
-                    "1" => array("nombre" => "REGISTRO COMPRA", "link" => "almacen_ingreso.php"),
+                    "2" => array("nombre" => "REGISTRO COMPRA", "link" => "almacen_ingreso.php"),
                 );
                 ?>
                 <table class="table">
@@ -124,8 +90,9 @@ if (!isset($_SESSION['nombre'])) {
                 <br>
                 <?php
                 $array = array(
-                    "1" => array("nombre" => "REPORTE DE VENTAS", "link" => "../../Reportes/Vista/Reporte_salida.php"),
-                    "2" => array("nombre" => "REPORTE DE VENTAS X APODERADO", "link" => "../../Reportes/Vista/Reporte_salida_x_apoderado.php"),
+                    "1" => array("nombre" => "REPORTE DE PRODUCTO", "link" => "../../Reportes/Vista/almacen_producto.php"),
+                    "2" => array("nombre" => "REPORTE DE VENTAS", "link" => "../../Reportes/Vista/Reporte_salida.php"),
+                    "3" => array("nombre" => "REPORTE DE VENTAS X APODERADO", "link" => "../../Reportes/Vista/Reporte_salida_x_apoderado.php"),
                 );
                 ?>
                 <table class="table">

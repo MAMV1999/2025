@@ -114,9 +114,10 @@
                 "3" => array("nombre" => "INSTITUCION", "link" => "../../Institucion/Vista/Escritorio.php"),
                 "4" => array("nombre" => "MATRICULA 2025", "link" => "../../Matricula/Vista/Escritorio.php"),
                 "5" => array("nombre" => "MENSUALIDAD", "link" => "../../Mensualidad/Vista/Escritorio.php"),
-                "6" => array("nombre" => "DOCUMENTO", "link" => "../../Documento/Vista/Escritorio.php"),
-                "7" => array("nombre" => "ALMACEN", "link" => "../../Almacen/Vista/Escritorio.php"),
-                "8" => array("nombre" => "BIBLIOTECA", "link" => "../../Biblioteca/Vista/Escritorio.php"),
+                "6" => array("nombre" => "REGISTRO", "link" => "../../Registro/Vista/Escritorio.php"),
+                "7" => array("nombre" => "DOCUMENTO", "link" => "../../Documento/Vista/Escritorio.php"),
+                "8" => array("nombre" => "ALMACEN", "link" => "../../Almacen/Vista/Escritorio.php"),
+                "9" => array("nombre" => "BIBLIOTECA", "link" => "../../Biblioteca/Vista/Escritorio.php"),
             );
             ?>
             <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">

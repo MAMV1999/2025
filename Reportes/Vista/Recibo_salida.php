@@ -41,9 +41,8 @@ class PDF extends FPDF
 
         // Información general
         $this->SectionTitle('INFORMACIÓN GENERAL');
-        $this->SectionData('APODERADO', $data['apoderado_nombre']);
+        $this->SectionData('APODERADO(A)', $data['apoderado_nombre']);
         $this->SectionData('TELEFONO', $data['apoderado_telefono']);
-        $this->SectionData('COMPROBANTE', $data['comprobante_nombre'].' - N° '.$data['salida_numeracion']);
         $this->SectionData('FECHA', $data['salida_fecha']);
         $this->Ln(5);
 

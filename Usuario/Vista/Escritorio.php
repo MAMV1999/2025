@@ -55,7 +55,7 @@ if (!isset($_SESSION['nombre'])) {
                 <br>
                 <?php
                 $array = array(
-                    "1" => array("nombre" => "REPORTE DOCENTES", "link" => "../../Reportes/Vista/Reporte_salida.php"),
+                    "1" => array("nombre" => "REPORTE DOCENTES", "link" => "../../Reportes/Vista/reporte_usuario_docente.php"),
                 );
                 ?>
                 <table class="table">

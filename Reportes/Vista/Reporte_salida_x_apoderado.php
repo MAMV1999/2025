@@ -86,11 +86,11 @@ class PDF extends FPDF
     {
         $ancho_celda = 44.25;
         $this->SetFont('Arial', '', 8);
-        $this->Cell(25, 8, utf8_decode($row['apoderado_tipo']), 1, 0, 'C');
-        $this->Cell(25, 8, utf8_decode($row['documento_tipo']), 1, 0, 'C');
-        $this->Cell(28, 8, utf8_decode($row['numerodocumento']), 1, 0, 'C');
-        $this->Cell(80, 8, utf8_decode($row['apoderado_nombre']), 1, 0, 'C');
-        $this->Cell(0, 8, utf8_decode($row['telefono']), 1, 0, 'C');
+        $this->Cell(25, 6, utf8_decode($row['apoderado_tipo']), 1, 0, 'C');
+        $this->Cell(25, 6, utf8_decode($row['documento_tipo']), 1, 0, 'C');
+        $this->Cell(28, 6, utf8_decode($row['numerodocumento']), 1, 0, 'C');
+        $this->Cell(80, 6, utf8_decode($row['apoderado_nombre']), 1, 0, 'C');
+        $this->Cell(0, 6, utf8_decode($row['telefono']), 1, 0, 'C');
         $this->Ln();
     }
 
@@ -104,8 +104,8 @@ class PDF extends FPDF
         $this->Ln();
         $this->Cell(20, 8, utf8_decode(strtoupper('FECHA')), 1, 0, 'C', true);
         $this->Cell(20, 8, utf8_decode(strtoupper('N°')), 1, 0, 'C', true);
-        $this->Cell(20, 8, utf8_decode(strtoupper('CANTIDAD')), 1, 0, 'C', true);
-        $this->Cell(75, 8, utf8_decode(strtoupper('PRODUCTO')), 1, 0, 'C', true);
+        $this->Cell(15, 8, utf8_decode(strtoupper('CANT.')), 1, 0, 'C', true);
+        $this->Cell(80, 8, utf8_decode(strtoupper('PRODUCTO')), 1, 0, 'C', true);
         $this->Cell(25, 8, utf8_decode(strtoupper('P. UNITARIO')), 1, 0, 'C', true);
         $this->Cell(0, 8, utf8_decode(strtoupper('METODO')), 1, 0, 'C', true);
         $this->Ln();
@@ -115,12 +115,12 @@ class PDF extends FPDF
     function AlumnosRow($row)
     {
         $this->SetFont('Arial', '', 8);
-        $this->Cell(20, 8, utf8_decode($row['salida_fecha']), 1, 0, 'C');
-        $this->Cell(20, 8, utf8_decode($row['salida_numeracion']), 1, 0, 'C');
-        $this->Cell(20, 8, utf8_decode($row['stock']), 1, 0, 'C');
-        $this->Cell(75, 8, utf8_decode($row['producto_nombre']), 1, 0, 'C');
-        $this->Cell(25, 8, utf8_decode('S/. '.$row['precio_unitario']), 1, 0, 'C');
-        $this->Cell(0, 8, utf8_decode($row['metodo_pago']), 1, 0, 'C');
+        $this->Cell(20, 6, utf8_decode($row['salida_fecha']), 1, 0, 'C');
+        $this->Cell(20, 6, utf8_decode($row['salida_numeracion']), 1, 0, 'C');
+        $this->Cell(15, 6, utf8_decode($row['stock']), 1, 0, 'C');
+        $this->Cell(80, 6, utf8_decode($row['producto_nombre']), 1, 0, 'C');
+        $this->Cell(25, 6, utf8_decode('S/. '.$row['precio_unitario']), 1, 0, 'C');
+        $this->Cell(0, 6, utf8_decode($row['metodo_pago']), 1, 0, 'C');
         $this->Ln();
 
         // Acumular totales por método
