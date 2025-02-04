@@ -8,7 +8,8 @@ class Matricula_detalle
     // Método para guardar un nuevo detalle de matrícula
     public function guardar($descripcion, $id_matricula, $id_matricula_categoria, $id_usuario_apoderado_referido, $id_usuario_apoderado, $id_usuario_alumno, $observaciones)
     {
-        $sql = "INSERT INTO matricula_detalle (descripcion, id_matricula, id_matricula_categoria, id_usuario_apoderado_referido, id_usuario_apoderado, id_usuario_alumno, observaciones) VALUES ('$descripcion', '$id_matricula', '$id_matricula_categoria', '$id_usuario_apoderado_referido', '$id_usuario_apoderado', '$id_usuario_alumno', '$observaciones')";
+        $sql = "INSERT INTO matricula_detalle (descripcion, id_matricula, id_matricula_categoria, id_usuario_apoderado_referido, id_usuario_apoderado, id_usuario_alumno, observaciones)
+        VALUES ('$descripcion', '$id_matricula', '$id_matricula_categoria', '$id_usuario_apoderado_referido', '$id_usuario_apoderado', '$id_usuario_alumno', '$observaciones')";
         return ejecutarConsulta($sql);
     }
 

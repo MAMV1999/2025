@@ -17,8 +17,8 @@ class PDF extends FPDF
     {
         $this->SetY(-20);
         $this->SetFont('Arial', 'I', 8);
-        $this->Cell(0, 5, utf8_decode('Fecha y Hora de generación: ' . $this->fecha_hora_actual), 0, 1, 'C');
-        $this->Cell(0, 10, utf8_decode('Página ' . $this->PageNo() . '/{nb}'), 0, 0, 'C');
+        $this->Cell(0, 5, utf8_decode('FECHA Y HORA DE GENERACIÓN: ' . $this->fecha_hora_actual), 0, 1, 'R');
+        $this->Cell(0, 5, utf8_decode('PÁGINA ' . $this->PageNo() . '/{nb}'), 0, 0, 'R');
     }
 
     function Recibo($data)
@@ -44,18 +44,10 @@ class PDF extends FPDF
         $this->SetFont('Arial', '', 10);
         $this->Cell(35, 7, utf8_decode('Apoderado(a):'), 0);
         $this->Cell(0, 7, utf8_decode($data['apoderado_tipo_nombre'] . ' - ' . $data['apoderado_nombre_completo']), 'B', 1);
-        $this->Cell(35, 7, utf8_decode('Documento:'), 0);
-        $this->Cell(50, 7, utf8_decode($data['apoderado_tipo_documento'] . ' ' . $data['apoderado_numero_documento']), 'B', 1);
-        $this->Cell(35, 7, utf8_decode('Teléfono:'), 0);
-        $this->Cell(50, 7, utf8_decode($data['apoderado_telefono']), 'B', 1);
-        $this->Ln(5);
-
-        // Información del Alumno
-        $this->SetFont('Arial', '', 10);
         $this->Cell(35, 7, utf8_decode('Alumno(a):'), 0);
         $this->Cell(0, 7, utf8_decode($data['alumno_nombre_completo']), 'B', 1);
-        $this->Cell(35, 7, utf8_decode('Documento:'), 0);
-        $this->Cell(50, 7, utf8_decode($data['alumno_tipo_documento'] . ' ' . $data['alumno_numero_documento']), 'B', 1);
+        $this->Cell(35, 7, utf8_decode('Teléfono:'), 0);
+        $this->Cell(50, 7, utf8_decode($data['apoderado_telefono']), 'B', 1);
         $this->Ln(5);
 
         // Información del Alumno

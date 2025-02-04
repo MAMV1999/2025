@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-02-2025 a las 05:55:59
+-- Tiempo de generación: 04-02-2025 a las 22:14:18
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -1087,7 +1087,9 @@ INSERT INTO `matricula_detalle` (`id`, `descripcion`, `id_matricula`, `id_matric
 (38, 'MATRICULA 2025 - 21/01/2025\r\nNIVEL: PRIMARIA - GRADO: 3 GRADO - SECCION: A\r\n\r\nPrecio Matricula: S./220.00\r\nPrecio Mensualidad: S./310.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones:', 6, 1, NULL, 40, 38, '', '2025-01-21 17:51:37', 1),
 (39, 'MATRICULA 2025 - 28/01/2025\r\nNIVEL: PRIMARIA - GRADO: 4 GRADO - SECCION: A\r\n\r\nPrecio Matricula: S./220.00\r\nPrecio Mensualidad: S./310.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones:', 7, 1, NULL, 46, 39, '', '2025-01-28 19:49:11', 1),
 (40, 'MATRICULA 2025 - 30/01/2025\r\nNIVEL: INICIAL - GRADO: 4 AÑOS - SECCION: A\r\n\r\nPrecio Matricula: S./220.00\r\nPrecio Mensualidad: S./280.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones:', 2, 2, NULL, 47, 40, '', '2025-01-30 16:15:23', 1),
-(41, 'MATRICULA 2025 - 31/01/2025\r\nNIVEL: PRIMARIA - GRADO: 5 GRADO - SECCION: A\r\n\r\nPrecio Matricula: S./220.00\r\nPrecio Mensualidad: S./310.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones:', 8, 2, NULL, 48, 41, '', '2025-01-31 20:58:29', 1);
+(41, 'MATRICULA 2025 - 31/01/2025\r\nNIVEL: PRIMARIA - GRADO: 5 GRADO - SECCION: A\r\n\r\nPrecio Matricula: S./220.00\r\nPrecio Mensualidad: S./310.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones:', 8, 2, NULL, 48, 41, '', '2025-01-31 20:58:29', 1),
+(42, 'MATRICULA 2025 - 04/02/2025\r\nNIVEL: PRIMARIA - GRADO: 3 GRADO - SECCION: A\r\n\r\nPrecio Matricula: S./260.00\r\nPrecio Mensualidad: S./310.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones:', 6, 2, NULL, 49, 42, '', '2025-02-04 15:24:05', 1),
+(43, 'MATRICULA 2025 - 04/02/2025\r\nNIVEL: PRIMARIA - GRADO: 6 GRADO - SECCION: A\r\n\r\nPrecio Matricula: S./260.00\r\nPrecio Mensualidad: S./310.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones:', 9, 1, NULL, 50, 43, '', '2025-02-04 19:44:52', 1);
 
 -- --------------------------------------------------------
 
@@ -1175,7 +1177,9 @@ INSERT INTO `matricula_pago` (`id`, `id_matricula_detalle`, `numeracion`, `fecha
 (38, 38, '000034', '2025-01-20', 'MATRICULA 2025 - 21/01/2025\r\nNIVEL: PRIMARIA - GRADO: 3 GRADO - SECCION: A\r\n\r\nPrecio Matricula: S./220.00\r\nPrecio Mensualidad: S./310.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones:', '240.00', 3, '', '2025-01-21 17:51:37', 1),
 (39, 39, '000035', '2025-01-28', 'MATRICULA 2025 - 28/01/2025\r\nNIVEL: PRIMARIA - GRADO: 4 GRADO - SECCION: A\r\n\r\nPrecio Matricula: S./220.00\r\nPrecio Mensualidad: S./310.00\r\nPrecio Mantenimiento: S./25.00', '220.00', 1, '', '2025-01-28 19:49:11', 1),
 (40, 40, '000036', '2025-01-30', 'MATRICULA 2025 - 30/01/2025\r\nNIVEL: INICIAL - GRADO: 4 AÑOS - SECCION: A\r\n\r\nPrecio Matricula: S./220.00\r\nPrecio Mensualidad: S./280.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones:', '220.00', 1, '', '2025-01-30 16:15:23', 1),
-(41, 41, '000037', '2025-01-31', 'MATRICULA 2025 - 31/01/2025\r\nNIVEL: PRIMARIA - GRADO: 5 GRADO - SECCION: A\r\n\r\nPrecio Matricula: S./220.00\r\nPrecio Mensualidad: S./310.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones:', '240.00', 2, '', '2025-01-31 20:58:29', 1);
+(41, 41, '000037', '2025-01-31', 'MATRICULA 2025 - 31/01/2025\r\nNIVEL: PRIMARIA - GRADO: 5 GRADO - SECCION: A\r\n\r\nPrecio Matricula: S./220.00\r\nPrecio Mensualidad: S./310.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones:', '240.00', 2, '', '2025-01-31 20:58:29', 1),
+(42, 42, '000038', '2025-02-04', 'MATRICULA 2025 - 04/02/2025\r\nNIVEL: PRIMARIA - GRADO: 3 GRADO - SECCION: A\r\n\r\nPrecio Matricula: S./260.00\r\nPrecio Mensualidad: S./310.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones:', '220.00', 3, '', '2025-02-04 15:24:05', 1),
+(43, 43, '000039', '2025-02-04', 'MATRICULA 2025 - 04/02/2025\r\nNIVEL: PRIMARIA - GRADO: 6 GRADO - SECCION: A\r\n\r\nPrecio Matricula: S./260.00\r\nPrecio Mensualidad: S./310.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones:', '260.00', 1, '', '2025-02-04 19:44:52', 1);
 
 -- --------------------------------------------------------
 
@@ -1568,7 +1572,27 @@ INSERT INTO `mensualidad_detalle` (`id`, `id_mensualidad_mes`, `id_matricula_det
 (380, 7, 41, '310.00', 0, '', '2025-01-31 20:58:29', 1),
 (381, 8, 41, '310.00', 0, '', '2025-01-31 20:58:29', 1),
 (382, 9, 41, '310.00', 0, '', '2025-01-31 20:58:29', 1),
-(383, 10, 41, '335.00', 0, '', '2025-01-31 20:58:29', 1);
+(383, 10, 41, '335.00', 0, '', '2025-01-31 20:58:29', 1),
+(384, 1, 42, '310.00', 0, '', '2025-02-04 15:24:05', 1),
+(385, 2, 42, '310.00', 0, '', '2025-02-04 15:24:05', 1),
+(386, 3, 42, '310.00', 0, '', '2025-02-04 15:24:05', 1),
+(387, 4, 42, '310.00', 0, '', '2025-02-04 15:24:05', 1),
+(388, 5, 42, '335.00', 0, '', '2025-02-04 15:24:05', 1),
+(389, 6, 42, '310.00', 0, '', '2025-02-04 15:24:05', 1),
+(390, 7, 42, '310.00', 0, '', '2025-02-04 15:24:05', 1),
+(391, 8, 42, '310.00', 0, '', '2025-02-04 15:24:05', 1),
+(392, 9, 42, '310.00', 0, '', '2025-02-04 15:24:05', 1),
+(393, 10, 42, '335.00', 0, '', '2025-02-04 15:24:05', 1),
+(394, 1, 43, '310.00', 0, '', '2025-02-04 19:44:52', 1),
+(395, 2, 43, '310.00', 0, '', '2025-02-04 19:44:52', 1),
+(396, 3, 43, '310.00', 0, '', '2025-02-04 19:44:52', 1),
+(397, 4, 43, '310.00', 0, '', '2025-02-04 19:44:52', 1),
+(398, 5, 43, '335.00', 0, '', '2025-02-04 19:44:52', 1),
+(399, 6, 43, '310.00', 0, '', '2025-02-04 19:44:52', 1),
+(400, 7, 43, '310.00', 0, '', '2025-02-04 19:44:52', 1),
+(401, 8, 43, '310.00', 0, '', '2025-02-04 19:44:52', 1),
+(402, 9, 43, '310.00', 0, '', '2025-02-04 19:44:52', 1),
+(403, 10, 43, '335.00', 0, '', '2025-02-04 19:44:52', 1);
 
 -- --------------------------------------------------------
 
@@ -1667,7 +1691,9 @@ INSERT INTO `usuario_alumno` (`id`, `id_apoderado`, `id_documento`, `numerodocum
 (38, 40, 1, '79999511', 'MENDO JUAPE MATTHEW BENJAMIN', '2016-11-19', '', 2, '79999511', '79999511', '', '2025-01-21 17:51:37', 1),
 (39, 46, 1, '79174904', 'DAVILA RODRIGUEZ ARIANA MABEL', '2015-06-18', '', 1, '79174904', '79174904', '', '2025-01-28 19:49:11', 1),
 (40, 47, 1, '91968865', 'VELASCO MEZA JUAN IGNACIO', '2020-08-12', '', 2, '91968865', '91968865', '', '2025-01-30 16:15:23', 1),
-(41, 48, 1, '78541166', 'MARCA TORRES SHARON BELEN', '2014-04-19', '', 1, '78541166', '78541166', '', '2025-01-31 20:58:29', 1);
+(41, 48, 1, '78541166', 'MARCA TORRES SHARON BELEN', '2014-04-19', '', 1, '78541166', '78541166', '', '2025-01-31 20:58:29', 1),
+(42, 49, 1, '79913760', 'VELIS TORRES JOSE GAEL', '2016-09-30', '', 2, '79913760', '79913760', '', '2025-02-04 15:24:05', 1),
+(43, 50, 1, '78496580', 'PUJAY HUAMANI ANTHONELLA JASMIN', '2014-02-21', '', 1, '78496580', '78496580', '', '2025-02-04 19:44:52', 1);
 
 -- --------------------------------------------------------
 
@@ -1739,7 +1765,9 @@ INSERT INTO `usuario_apoderado` (`id`, `id_apoderado_tipo`, `id_documento`, `num
 (45, 1, 1, '09908665', 'JUDITH LIDIA SOSA RAMIREZ', '933696493', 1, 1, '09908665', '09908665', '', '2025-01-27 20:44:28', 1),
 (46, 1, 1, '62602786', 'RUDDY MADELEY RODRIGUEZ MALPARTIDA', '968478290', 1, 1, '62602786', '62602786', '', '2025-01-28 19:49:11', 1),
 (47, 1, 1, '41812264', 'MARILYN PAOLA MEZA VELAZCO', '967535724', 1, 1, '41812264', '41812264', '', '2025-01-30 16:15:23', 1),
-(48, 1, 1, '40864405', 'SARITA TORRES CHOTA', '931609867', 1, 2, '40864405', '40864405', '', '2025-01-31 20:58:29', 1);
+(48, 1, 1, '40864405', 'SARITA TORRES CHOTA', '931609867', 1, 2, '40864405', '40864405', '', '2025-01-31 20:58:29', 1),
+(49, 1, 1, '44235581', 'SUSY GABRIELA TORRES CAMPOS', '947309583', 1, 1, '44235581', '44235581', '', '2025-02-04 15:24:05', 1),
+(50, 1, 1, '09911363', 'VERONICA VICTORIA HUAMANI RAMOS', '902742180', 1, 1, '09911363', '09911363', '', '2025-02-04 19:44:52', 1);
 
 -- --------------------------------------------------------
 
@@ -2335,7 +2363,7 @@ ALTER TABLE `matricula_categoria`
 -- AUTO_INCREMENT de la tabla `matricula_detalle`
 --
 ALTER TABLE `matricula_detalle`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT de la tabla `matricula_metodo_pago`
@@ -2347,13 +2375,13 @@ ALTER TABLE `matricula_metodo_pago`
 -- AUTO_INCREMENT de la tabla `matricula_pago`
 --
 ALTER TABLE `matricula_pago`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT de la tabla `mensualidad_detalle`
 --
 ALTER TABLE `mensualidad_detalle`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=384;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=404;
 
 --
 -- AUTO_INCREMENT de la tabla `mensualidad_mes`
@@ -2365,13 +2393,13 @@ ALTER TABLE `mensualidad_mes`
 -- AUTO_INCREMENT de la tabla `usuario_alumno`
 --
 ALTER TABLE `usuario_alumno`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario_apoderado`
 --
 ALTER TABLE `usuario_apoderado`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario_apoderado_tipo`
