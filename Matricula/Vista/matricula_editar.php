@@ -37,13 +37,11 @@ if (!isset($_SESSION['nombre'])) {
                 <input type="hidden" id="id" name="id" placeholder="id" class="form-control">
 
                 <div class="p-3">
-                    <label for="id_matricula" class="form-label"><b>MATRICULA:</b></label>
-                    <select id="id_matricula" name="id_matricula" class="form-control selectpicker" data-live-search="true"></select>
-                </div>
-
-                <div class="p-3">
-                    <label for="id_matricula_categoria" class="form-label"><b>CATEGORIA:</b></label>
-                    <select id="id_matricula_categoria" name="id_matricula_categoria" class="form-control selectpicker" data-live-search="true"></select>
+                    <label for="apoderado_dni" class="form-label"><b>MATRICULA:</b></label>
+                    <div class="input-group">
+                        <select id="id_matricula" name="id_matricula" class="form-control selectpicker" data-live-search="true"></select>
+                        <select id="id_matricula_categoria" name="id_matricula_categoria" class="form-control selectpicker" data-live-search="true"></select>
+                    </div>
                 </div>
 
                 <div class="p-3">
@@ -63,12 +61,7 @@ if (!isset($_SESSION['nombre'])) {
 
                 <div class="p-3">
                     <label for="descripcion" class="form-label"><b>DESCRIPCION:</b></label>
-                    <textarea id="descripcion" name="descripcion" placeholder="Descripcion" class="form-control"></textarea>
-                </div>
-
-                <div class="p-3">
-                    <label for="observaciones" class="form-label"><b>OBSERVACIONES:</b></label>
-                    <textarea id="observaciones" name="observaciones" placeholder="Observaciones" class="form-control"></textarea>
+                    <textarea id="descripcion" name="descripcion" placeholder="Descripcion" class="form-control" style="height: 250px;"></textarea>
                 </div>
 
                 <div class="p-3">

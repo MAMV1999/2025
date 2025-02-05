@@ -13,12 +13,12 @@ if (!isset($_SESSION['nombre'])) {
 
         <!-- CUERPO_INICIO -->
         <div class="my-3 p-3 bg-body rounded shadow-sm" id="listado">
-            <h5 class="border-bottom pb-2 mb-0"><b>DOCUMENTOS</b></h5>
+            <h5 class="border-bottom pb-2 mb-0"><b>DOCUMENTACION</b></h5>
             <div class="d-flex text-body-secondary pt-3">
                 <br>
                 <?php
                 $array = array(
-                    "1" => array("nombre" => "REGISTRO DOCUMENTOS", "link" => "reg_documento.php"),
+                    "1" => array("nombre" => "REGISTRO DOCUMENTACION", "link" => "reg_documento.php"),
                 );
                 ?>
                 <table class="table">
@@ -49,7 +49,7 @@ if (!isset($_SESSION['nombre'])) {
         <hr>
 
         <p class="d-inline-flex gap-1">
-            <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">AJUSTES DOCUMENTOS</a>
+            <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">AJUSTES DOCUMENTACION</a>
         </p>
         <div class="collapse" id="collapseExample">
             <div class="card card-body">

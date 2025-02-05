@@ -68,7 +68,7 @@ switch ($_GET["op"]) {
     case 'listar_matriculas_activas':
         $rspta = $matriculaDetalle->listarMatriculasActivas();
         while ($reg = $rspta->fetch_object()) {
-            echo '<option value="' . $reg->id . '">' . $reg->lectivo . ' - ' . $reg->nivel . ' - ' . $reg->grado . ' - ' . $reg->seccion . ' -->(Aforo: ' . $reg->aforo . ', Matriculados: ' . $reg->matriculados . ')</option>';
+            echo '<option value="' . $reg->id . '">' . $reg->lectivo . ' - ' . $reg->nivel . ' - ' . $reg->grado . ' - ' . $reg->seccion . '</option>';
         }
         break;
 
@@ -95,8 +95,9 @@ switch ($_GET["op"]) {
 
     case 'listar_apoderados_referidos_activos':
         $rspta = $matriculaDetalle->listarApoderadosReferidosActivos();
+        echo '<option value="">NO TIENE REFERENCIA</option>'; // Primera opción vacía
         while ($reg = $rspta->fetch_object()) {
-            echo '<option value=' . $reg->id . '>' . $reg->nombreyapellido . '</option>';
+            echo '<option value="' . $reg->id . '">' . $reg->nombreyapellido . ' (' . $reg->repeticiones . ')</option>';
         }
         break;
 }
