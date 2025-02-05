@@ -289,10 +289,8 @@ class MatriculaDetalle
                     mm.estado AS estado,
                     il.nombre AS lectivo_nombre,
                     CONCAT(mm.nombre, ' ', il.nombre) AS nombre
-                FROM 
-                    mensualidad_mes mm
-                JOIN 
-                    institucion_lectivo il ON mm.id_institucion_lectivo = il.id;";
+                FROM mensualidad_mes mm
+                JOIN institucion_lectivo il ON mm.id_institucion_lectivo = il.id";
         return ejecutarConsulta($sql);
     }
 

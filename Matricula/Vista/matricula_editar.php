@@ -8,20 +8,22 @@ if (!isset($_SESSION['nombre'])) {
 ?>
     <?php include "../../General/Include/1_header.php"; ?>
     <main class="container">
+        <!-- TITULO -->
         <?php include "../../General/Include/3_body.php"; ?>
 
-        <!-- Listado -->
+        <!-- CUERPO_INICIO -->
         <div class="my-3 p-3 bg-body rounded shadow-sm" id="listado">
-            <h5 class="border-bottom pb-2 mb-0"><b>DETALLES DE MATRÍCULA - LISTADO</b></h5>
+            <h5 class="border-bottom pb-2 mb-0"><b>MATRICULA DETALLE - LISTADO</b></h5>
             <div class="p-3">
                 <table class="table" id="myTable">
                     <thead>
                         <tr>
+                            <th>ID</th>
                             <th>MATRICULA</th>
-                            <th>ALUMNO</th>
+                            <th>CATEGORIA</th>
                             <th>APODERADO</th>
-                            <th>CATEGORÍA</th>
-                            <th>ACCIONES</th>
+                            <th>ALUMNO</th>
+                            <th>ESTADO</th>
                         </tr>
                     </thead>
                     <tbody></tbody>
@@ -29,24 +31,18 @@ if (!isset($_SESSION['nombre'])) {
             </div>
         </div>
 
-        <!-- Formulario -->
         <div class="my-3 p-3 bg-body rounded shadow-sm" id="formulario">
-            <h5 class="border-bottom pb-2 mb-0"><b>DETALLES DE MATRÍCULA - FORMULARIO</b></h5>
+            <h5 class="border-bottom pb-2 mb-0"><b>MATRICULA DETALLE - FORMULARIO</b></h5>
             <form id="frm_form" name="frm_form" method="post">
                 <input type="hidden" id="id" name="id" placeholder="id" class="form-control">
 
                 <div class="p-3">
-                    <label for="descripcion" class="form-label"><b>DESCRIPCIÓN:</b></label>
-                    <textarea id="descripcion" name="descripcion" class="form-control" placeholder="Descripción"></textarea>
+                    <label for="id_matricula" class="form-label"><b>MATRICULA:</b></label>
+                    <select id="id_matricula" name="id_matricula" class="form-control selectpicker" data-live-search="true"></select>
                 </div>
 
                 <div class="p-3">
-                    <label for="id_matricula" class="form-label"><b>MATRÍCULA:</b></label>
-                    <input type="text" id="id_matricula" name="id_matricula" class="form-control">
-                </div>
-
-                <div class="p-3">
-                    <label for="id_matricula_categoria" class="form-label"><b>CATEGORÍA:</b></label>
+                    <label for="id_matricula_categoria" class="form-label"><b>CATEGORIA:</b></label>
                     <select id="id_matricula_categoria" name="id_matricula_categoria" class="form-control selectpicker" data-live-search="true"></select>
                 </div>
 
@@ -61,8 +57,18 @@ if (!isset($_SESSION['nombre'])) {
                 </div>
 
                 <div class="p-3">
+                    <label for="id_usuario_apoderado_referido" class="form-label"><b>APODERADO REFERIDO:</b></label>
+                    <select id="id_usuario_apoderado_referido" name="id_usuario_apoderado_referido" class="form-control selectpicker" data-live-search="true"></select>
+                </div>
+
+                <div class="p-3">
+                    <label for="descripcion" class="form-label"><b>DESCRIPCION:</b></label>
+                    <textarea id="descripcion" name="descripcion" placeholder="Descripcion" class="form-control"></textarea>
+                </div>
+
+                <div class="p-3">
                     <label for="observaciones" class="form-label"><b>OBSERVACIONES:</b></label>
-                    <textarea id="observaciones" name="observaciones" class="form-control" placeholder="Observaciones"></textarea>
+                    <textarea id="observaciones" name="observaciones" placeholder="Observaciones" class="form-control"></textarea>
                 </div>
 
                 <div class="p-3">
@@ -71,6 +77,8 @@ if (!isset($_SESSION['nombre'])) {
                 </div>
             </form>
         </div>
+        <!-- CUERPO_FIN -->
+
     </main>
     <?php include "../../General/Include/2_footer.php"; ?>
     <script src="matricula_editar.js"></script>
