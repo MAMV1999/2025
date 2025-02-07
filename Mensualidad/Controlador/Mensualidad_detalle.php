@@ -76,13 +76,12 @@ switch ($_GET["op"]) {
             $data[] = array(
                 "0" => $cont,
                 "1" => $reg->lectivo . ' - ' . $reg->nivel . ' - ' . $reg->grado,
-                "2" => $reg->categoria,
-                "3" => $reg->apoderado,
-                "4" => $reg->alumno,
-                "5" => '<button class="btn btn-warning btn-sm" onclick="mostrar(' . $reg->id . ')">EDITAR</button>
+                "2" => $reg->apoderado,
+                "3" => $reg->alumno,
+                "4" => '<button class="btn btn-warning btn-sm" onclick="mostrar(' . $reg->id . ')">EDITAR</button>
 
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#' . $reg->id . '">REPORTE</button>
+                        <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#' . $reg->id . '">PDF</button>
                         
                         <!-- Modal -->
                         <div class="modal fade" id="' . $reg->id . '" tabindex="-1" aria-labelledby="' . $reg->id . 'Label" aria-hidden="true">

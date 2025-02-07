@@ -22,7 +22,6 @@ if (!isset($_SESSION['nombre'])) {
                             <th>MATRICULA</th>
                             <th>APODERADO</th>
                             <th>ALUMNO</th>
-                            <th>CATEGORIA</th>
                             <th>ACCIONES</th>
                         </tr>
                     </thead>

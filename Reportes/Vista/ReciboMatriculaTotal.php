@@ -34,12 +34,12 @@ class PDF extends FPDF
         $this->SetFont('Arial', 'B', 7);
         $this->SetFillColor(188, 188, 188);
         $this->Cell(8, 10, utf8_decode('N°'), 1, 0, 'C', true);
-        $this->Cell(15, 10, utf8_decode('LECTIVO'), 1, 0, 'C', true);
         $this->Cell(15, 10, utf8_decode('NIVEL'), 1, 0, 'C', true);
         $this->Cell(15, 10, utf8_decode('GRADO'), 1, 0, 'C', true);
-        $this->Cell(67, 10, utf8_decode('ALUMNO'), 1, 0, 'C', true);
-        $this->Cell(67, 10, utf8_decode('APODERADO'), 1, 0, 'C', true);
-        $this->Cell(20, 10, utf8_decode('TELEFONO'), 1, 0, 'C', true);
+        $this->Cell(22, 10, utf8_decode('MATRICULA'), 1, 0, 'C', true);
+        $this->Cell(65, 10, utf8_decode('ALUMNO'), 1, 0, 'C', true);
+        $this->Cell(65, 10, utf8_decode('APODERADO'), 1, 0, 'C', true);
+        $this->Cell(18, 10, utf8_decode('TELEFONO'), 1, 0, 'C', true);
         $this->Cell(20, 10, utf8_decode('FECHA'), 1, 0, 'C', true);
         $this->Cell(20, 10, utf8_decode('N° RECIBO'), 1, 0, 'C', true);
         $this->Cell(15, 10, utf8_decode('MONTO'), 1, 0, 'C', true);
@@ -52,12 +52,12 @@ class PDF extends FPDF
         $contador = 1;
         foreach ($results as $row) {
             $this->Cell(8, 6, $contador, 1, 0, 'C');
-            $this->Cell(15, 6, utf8_decode($row['lectivo']), 1, 0, 'C');
             $this->Cell(15, 6, utf8_decode($row['nivel']), 1, 0, 'C');
             $this->Cell(15, 6, utf8_decode($row['grado']), 1, 0, 'C');
-            $this->Cell(67, 6, utf8_decode($row['nombre_alumno']), 1, 0, 'C');
-            $this->Cell(67, 6, utf8_decode($row['nombre_apoderado']), 1, 0, 'C');
-            $this->Cell(20, 6, utf8_decode($row['telefono_apoderado']), 1, 0, 'C');
+            $this->Cell(22, 6, utf8_decode($row['categoria_matricula']), 1, 0, 'C');
+            $this->Cell(65, 6, utf8_decode($row['nombre_alumno']), 1, 0, 'C');
+            $this->Cell(65, 6, utf8_decode($row['nombre_apoderado']), 1, 0, 'C');
+            $this->Cell(18, 6, utf8_decode($row['telefono_apoderado']), 1, 0, 'C');
             $this->Cell(20, 6, utf8_decode($row['fecha']), 1, 0, 'C');
             $this->Cell(20, 6, utf8_decode('N° ' . $row['numeracion']), 1, 0, 'C');
             $this->Cell(15, 6, 'S/.' . number_format($row['monto'], 2), 1, 0, 'C');

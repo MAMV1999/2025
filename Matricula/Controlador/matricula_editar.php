@@ -47,10 +47,9 @@ switch ($_GET["op"]) {
             $data[] = array(
                 "0" => count($data) + 1,
                 "1" => $reg->nivel . ' - ' . $reg->grado,
-                "2" => $reg->categoria,
-                "3" => $reg->apoderado,
-                "4" => $reg->alumno,
-                "5" => ($reg->estado) ?
+                "2" => $reg->apoderado,
+                "3" => $reg->alumno,
+                "4" => ($reg->estado) ?
                     '<button class="btn btn-warning btn-sm" onclick="mostrar(' . $reg->id . ')">EDITAR</button> <button class="btn btn-danger btn-sm" onclick="desactivar(' . $reg->id . ')">DESACTIVAR</button>'
                     :
                     '<button class="btn btn-warning btn-sm" onclick="mostrar(' . $reg->id . ')">EDITAR</button> <button class="btn btn-primary btn-sm" onclick="activar(' . $reg->id . ')">ACTIVAR</button>'

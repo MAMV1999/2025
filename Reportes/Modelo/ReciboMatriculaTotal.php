@@ -14,6 +14,7 @@ class ReciboMatriculaTotal
                     iniv.nombre AS nivel,
                     ig.nombre AS grado,
                     isec.nombre AS seccion,
+                    mc.nombre AS categoria_matricula,  -- Nueva columna agregada
                     ua.nombreyapellido AS nombre_alumno,
                     ud_alumno.nombre AS tipo_documento_alumno,
                     ua.numerodocumento AS numero_documento_alumno,
@@ -35,6 +36,7 @@ class ReciboMatriculaTotal
                 JOIN usuario_documento ud_alumno ON ua.id_documento = ud_alumno.id
                 JOIN usuario_apoderado uap ON md.id_usuario_apoderado = uap.id
                 JOIN usuario_documento ud_apoderado ON uap.id_documento = ud_apoderado.id
+                JOIN matricula_categoria mc ON md.id_matricula_categoria = mc.id  -- Nueva unión agregada
                 JOIN matricula_pago mp ON mp.id_matricula_detalle = md.id
                 JOIN matricula_metodo_pago mmp ON mp.id_matricula_metodo_pago = mmp.id
                 WHERE md.estado = 1

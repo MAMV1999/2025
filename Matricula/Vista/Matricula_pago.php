@@ -22,7 +22,6 @@ if (!isset($_SESSION['nombre'])) {
                             <th>FECHA</th>
                             <th>APODERADO</th>
                             <th>ALUMNO</th>
-                            <th>METODO</th>
                             <th>ACCIONES</th>
                         </tr>
                     </thead>

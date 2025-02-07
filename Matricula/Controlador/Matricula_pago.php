@@ -48,8 +48,7 @@ switch ($_GET["op"]) {
                 "1" => $reg->fecha,
                 "2" => $reg->apoderado,
                 "3" => $reg->alumno,
-                "4" => $reg->metodo_pago,
-                "5" => '<button class="btn btn-warning btn-sm" onclick="mostrar(' . $reg->id . ')">EDITAR</button>
+                "4" => '<button class="btn btn-warning btn-sm" onclick="mostrar(' . $reg->id . ')">EDITAR</button>
                 
                         <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#' . $reg->numeracion . '">RECIBO</button>
 
