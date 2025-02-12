@@ -41,7 +41,7 @@ class PDF extends FPDF
         $this->Cell(65, 10, utf8_decode('APODERADO'), 1, 0, 'C', true);
         $this->Cell(18, 10, utf8_decode('TELEFONO'), 1, 0, 'C', true);
         $this->Cell(20, 10, utf8_decode('FECHA'), 1, 0, 'C', true);
-        $this->Cell(20, 10, utf8_decode('N° RECIBO'), 1, 0, 'C', true);
+        $this->Cell(17, 10, utf8_decode('N° RECIBO'), 1, 0, 'C', true);
         $this->Cell(15, 10, utf8_decode('MONTO'), 1, 0, 'C', true);
         $this->Cell(0, 10, utf8_decode('MÉTODO'), 1, 1, 'C', true);
     }
@@ -59,7 +59,7 @@ class PDF extends FPDF
             $this->Cell(65, 6, utf8_decode($row['nombre_apoderado']), 1, 0, 'C');
             $this->Cell(18, 6, utf8_decode($row['telefono_apoderado']), 1, 0, 'C');
             $this->Cell(20, 6, utf8_decode($row['fecha']), 1, 0, 'C');
-            $this->Cell(20, 6, utf8_decode('N° ' . $row['numeracion']), 1, 0, 'C');
+            $this->Cell(17, 6, utf8_decode('N° ' . $row['numeracion']), 1, 0, 'C');
             $this->Cell(15, 6, 'S/.' . number_format($row['monto'], 2), 1, 0, 'C');
             $this->Cell(0, 6, utf8_decode($row['metodo_pago']), 1, 1, 'C');
 
