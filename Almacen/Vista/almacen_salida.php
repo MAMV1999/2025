@@ -49,14 +49,14 @@ if (!isset($_SESSION['nombre'])) {
                         <input type="date" id="fecha" name="fecha" placeholder="FECHA" class="form-control">
                     </div>
                 </div>
-
+                
                 <div class="p-3">
                     <label for="usuario_apoderado_id" class="form-label"><b>APODERADO:</b></label>
                     <div class="input-group">
                         <select id="usuario_apoderado_id" name="usuario_apoderado_id" class="form-control selectpicker" data-live-search="true"></select>
                     </div>
                 </div>
-
+                
                 <div class="p-3">
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">AGREGAR PRODUCTO</button>

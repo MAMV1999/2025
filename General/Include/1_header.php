@@ -96,6 +96,7 @@
     <!-- <link href="offcanvas-navbar.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="../../General/Style/offcanvas-navbar.css">
     <link rel="stylesheet" href="../../General/datatables/datatables.min.css">
+    <!-- <link rel="stylesheet" href="../../General/select/dist/css/bootstrap-select.css"> -->
 </head>
 
 <body class="bg-body-tertiary">

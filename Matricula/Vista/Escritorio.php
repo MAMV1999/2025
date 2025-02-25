@@ -56,10 +56,11 @@ if (!isset($_SESSION['nombre'])) {
                 $array = array(
                     "1" => array("nombre" => "CANTIDAD DE ALUMNOS", "link" => "../../Reportes/Vista/Matriculados_cantidad.php"),
                     "2" => array("nombre" => "LISTADO DE ALUMNOS", "link" => "../../Reportes/Vista/ReporteMatricula.php"),
-                    "3" => array("nombre" => "LISTADO DETALLE MATRICULADOS", "link" => "../../Reportes/Vista/ReciboMatriculaTotal.php"),
-                    "4" => array("nombre" => "PAGOS AGRUPADOS POR FECHA", "link" => "../../Reportes/Vista/ReporteMatriculaXFecha.php"),
-                    "5" => array("nombre" => "PAGOS AGRUPADOS POR APODERADO", "link" => "../../Reportes/Vista/ReporteMatriculaXApoderado.php"),
-                    "6" => array("nombre" => "CUMPLEAÑOS", "link" => "../../Reportes/Vista/Nacimiento.php"),
+                    "3" => array("nombre" => "LISTADO DE ALUMNOS - TUTORES", "link" => "../../Reportes/Vista/ReporteAlumnosTutores.php"),
+                    "4" => array("nombre" => "LISTADO DETALLE MATRICULADOS", "link" => "../../Reportes/Vista/ReciboMatriculaTotal.php"),
+                    "5" => array("nombre" => "PAGOS AGRUPADOS POR FECHA", "link" => "../../Reportes/Vista/ReporteMatriculaXFecha.php"),
+                    "6" => array("nombre" => "PAGOS AGRUPADOS POR APODERADO", "link" => "../../Reportes/Vista/ReporteMatriculaXApoderado.php"),
+                    "7" => array("nombre" => "CUMPLEAÑOS", "link" => "../../Reportes/Vista/Nacimiento.php"),
                 );
                 ?>
                 <table class="table">
