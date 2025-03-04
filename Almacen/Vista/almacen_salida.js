@@ -57,8 +57,25 @@ $(document).ready(function () {
 });
 
 function limpiar() {
-    // Implementación personalizada si es necesario
+    // Limpiar inputs de texto y número
+    $("#frm_form input[type='text'], #frm_form input[type='number'], #frm_form input[type='date']").val("");
+
+    // Restablecer selects al primer valor
+    $("#frm_form select").prop("selectedIndex", 0);
+
+    // Limpiar área de observaciones
+    $("#observaciones").val("");
+
+    // Limpiar la tabla de productos agregados
+    $("#tablaProductos tbody").empty();
+
+    // Resetear el total a 0
+    $("#total").val("0.00");
+
+    // Limpiar posibles clases de error o validación
+    $("#frm_form input, #frm_form select, #frm_form textarea").removeClass("is-invalid is-valid");
 }
+
 
 function MostrarListado() {
     limpiar();
@@ -70,6 +87,7 @@ function MostrarFormulario() {
     $("#listado").hide();
     $("#formulario").show();
     numeracion();
+    fecha();
 }
 
 function guardaryeditar(e) {
