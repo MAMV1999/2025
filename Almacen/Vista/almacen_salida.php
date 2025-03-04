@@ -45,18 +45,50 @@ if (!isset($_SESSION['nombre'])) {
                     <label for="apoderado_dni" class="form-label"><b>COMPROBANTE / NUMERACIÓN / FECHA:</b></label>
                     <div class="input-group">
                         <select id="almacen_comprobante_id" name="almacen_comprobante_id" class="form-control" data-live-search="true"></select>
-                        <input type="text" id="numeracion" name="numeracion" placeholder="NUMERACIÓN" class="form-control">
-                        <input type="date" id="fecha" name="fecha" placeholder="FECHA" class="form-control">
+                        <input type="text" id="numeracion" name="numeracion" placeholder="NUMERACIÓN" class="form-control" required>
+                        <input type="date" id="fecha" name="fecha" placeholder="FECHA" class="form-control" required>
                     </div>
                 </div>
-                
+
                 <div class="p-3">
                     <label for="usuario_apoderado_id" class="form-label"><b>APODERADO:</b></label>
                     <div class="input-group">
-                        <select id="usuario_apoderado_id" name="usuario_apoderado_id" class="form-control selectpicker" data-live-search="true"></select>
+                        <!-- <select id="usuario_apoderado_id" name="usuario_apoderado_id" class="form-control selectpicker" data-live-search="true"></select> -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#listar_buscador_apoderado">BUSCAR APODERADO</button>
+                        <input type="hidden" id="usuario_apoderado_id" name="usuario_apoderado_id" placeholder="ID" class="form-control" required>
+                        <input type="text" id="usuario_apoderado_nombre" name="usuario_apoderado_nombre" placeholder="NOMBRE APODERADO" class="form-control">
+                        <button type="button" class="btn btn-danger btn-sm" onclick="limpiar_apoderado();">LIMPIAR APODERADO</button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="listar_buscador_apoderado" tabindex="-1" aria-labelledby="listar_buscador_apoderado" aria-hidden="true">
+                            <div class="modal-dialog modal-xl">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="listar_buscador_apoderado">APODERADO - ALUMNO</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <table class="table table-bordered" style="width: 100%;" id="myTable3">
+                                            <thead>
+                                                <tr>
+                                                    <th style="text-align: center; width: 10%;">N°</th>
+                                                    <th style="text-align: center; width: 40%;">APODERADO</th>
+                                                    <th style="text-align: center; width: 40%;">ALUMNO</th>
+                                                    <th style="text-align: center; width: 10%;">ACCIONES</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody style="text-align: center;"></tbody>
+                                        </table>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">SALIR</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                
+
                 <div class="p-3">
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">AGREGAR PRODUCTO</button>
@@ -116,14 +148,14 @@ if (!isset($_SESSION['nombre'])) {
                 <div class="p-3">
                     <label for="observaciones" class="form-label"><b>OBSERVACIONES:</b></label>
                     <div class="input-group">
-                        <textarea id="observaciones" name="observaciones" placeholder="OBSERVACIONES" class="form-control"></textarea>
+                        <textarea id="observaciones" name="observaciones" placeholder="OBSERVACIONES" class="form-control" style="height: 150px;"></textarea>
                     </div>
                 </div>
 
                 <!-- Botones de acción -->
                 <div class="p-3">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                    <button type="button" onclick="MostrarListado();" class="btn btn-secondary">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">GUARDAR</button>
+                    <button type="button" onclick="MostrarListado();" class="btn btn-secondary">CANCELAR</button>
                 </div>
             </form>
         </div>

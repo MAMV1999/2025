@@ -178,7 +178,7 @@ switch ($_GET["op"]) {
                 "1" => $reg->lectivo . ' - ' . $reg->nivel . ' - ' . $reg->grado,
                 "2" => $reg->nombre_alumno,
                 "3" => $reg->nombre_apoderado,
-                "4" => 'N° '.$reg->numeracion_pago,
+                "4" => $reg->categoria,
                 "5" => '
                         <div class="btn-group">
                         <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#' . $reg->numeracion_pago . '">DATOS</button>

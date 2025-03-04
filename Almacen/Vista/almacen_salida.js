@@ -1,6 +1,7 @@
 var link = "../Controlador/almacen_salida.php?op=";
 var tabla;
 var tabla2;
+var tabla3;
 
 function init() {
     $("#frm_form").on("submit", function (e) {
@@ -10,9 +11,16 @@ function init() {
     actualizarFechaHora();
     setInterval(actualizarFechaHora, 1000);
     fecha();
-    listar_usuario_apoderado();
+    //listar_usuario_apoderado();
     listar_almacen_comprobante();
     listar_almacen_metodo_pago();
+}
+
+function agregarapoderado(id, nombre) {
+    event.preventDefault();
+    $("#usuario_apoderado_id").val(id);
+    $("#usuario_apoderado_nombre").val(nombre);
+    $("#listar_buscador_apoderado").modal("hide");
 }
 
 function numeracion() {
@@ -20,13 +28,13 @@ function numeracion() {
         $("#numeracion").val(data); // Asignar el valor obtenido al campo
     });
 }
-
+/*
 function listar_usuario_apoderado() {
     $.post(link + "listar_usuario_apoderado", function (r) {
         $("#usuario_apoderado_id").html(r);
     });
 }
-
+*/
 function listar_almacen_comprobante() {
     $.post(link + "listar_almacen_comprobante", function (r) {
         $("#almacen_comprobante_id").html(r);
@@ -54,16 +62,24 @@ $(document).ready(function () {
     tabla2 = $("#myTable2").DataTable({
         ajax: link + "listar_almacen_producto",
     });
+    tabla3 = $("#myTable3").DataTable({
+        ajax: link + "listar_buscador_apoderado",
+    });
 });
+
+function limpiar_apoderado() {
+    $("#usuario_apoderado_id").val("");
+    $("#usuario_apoderado_nombre").val("");
+}
 
 function limpiar() {
     // Limpiar inputs de texto y número
-    $("#frm_form input[type='text'], #frm_form input[type='number'], #frm_form input[type='date']").val("");
+    $("#frm_form input[type='hidden'], #frm_form input[type='text'], #frm_form input[type='number'], #frm_form input[type='date']").val("");
 
     // Restablecer selects al primer valor
     $("#frm_form select").prop("selectedIndex", 0);
 
-    // Limpiar área de observaciones
+    // Limpiar área
     $("#observaciones").val("");
 
     // Limpiar la tabla de productos agregados

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-03-2025 a las 01:11:49
+-- Tiempo de generación: 04-03-2025 a las 05:31:11
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -608,7 +608,7 @@ INSERT INTO `almacen_salida` (`id`, `usuario_apoderado_id`, `almacen_comprobante
 (5, 32, 1, '000005', '2025-01-07', 1, '100.00', 'SE ENTREGO LOS DOCUMENTOS - EL PAGO SE ENTREGO DIRECTAMENTE A LA DIRECTORA', '2025-01-07 11:27:44', 1),
 (6, 30, 1, '000006', '2025-01-07', 2, '100.00', 'SE ENTREGO LOS DOCUMENTOS', '2025-01-07 12:18:10', 1),
 (7, 23, 1, '000007', '2025-01-14', 2, '80.00', 'SE ENTREGO LOS DOCUMENTOS', '2025-01-14 11:04:45', 1),
-(8, 38, 1, '000008', '2025-01-15', 2, '50.00', 'VIERNES 17 DE ENERO DEL 2025 - 10:00 AM\r\nLA CITA FUE ATENDIDA', '2025-01-15 16:28:46', 1),
+(8, 49, 1, '000008', '2025-01-15', 2, '50.00', 'VIERNES 17 DE ENERO DEL 2025 - 10:00 AM\r\nLA CITA FUE ATENDIDA', '2025-01-15 16:28:46', 1),
 (9, 39, 1, '000009', '2025-01-15', 2, '50.00', 'FECHA: VIERNES 17 DE ENERO DEL 2025 - 11:30 AM\r\nLA CITA FUE ATENDIDA', '2025-01-16 09:21:36', 1),
 (10, 37, 1, '000010', '2025-01-20', 2, '378.00', 'COMPROBANTE ANULADO', '2025-01-20 13:59:53', 0),
 (11, 37, 1, '000011', '2025-01-20', 2, '408.00', 'PRODUCTO ENTREGADO', '2025-01-20 14:05:20', 1),
@@ -1418,7 +1418,7 @@ INSERT INTO `matricula_detalle` (`id`, `descripcion`, `id_matricula`, `id_matric
 (57, 'MATRICULA 2025 - 25/02/2025\r\nNIVEL: INICIAL - GRADO: 3 AÑOS - SECCION: A\r\n\r\nPrecio Matricula: S./260.00\r\nPrecio Mensualidad: S./280.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones:', 1, 2, NULL, 66, 57, '', '2025-02-25 17:07:08', 1),
 (58, 'MATRICULA 2025 - 25/02/2025\r\nNIVEL: INICIAL - GRADO: 3 AÑOS - SECCION: A\r\n\r\nPrecio Matricula: S./260.00\r\nPrecio Mensualidad: S./280.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones:', 1, 2, NULL, 67, 58, '', '2025-02-25 17:12:05', 1),
 (59, 'MATRICULA 2025 - 26/02/2025\r\nNIVEL: PRIMARIA - GRADO: 1 GRADO - SECCION: A\r\n\r\nPrecio Matricula: S./260.00\r\nPrecio Mensualidad: S./310.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones:', 4, 2, NULL, 68, 59, '', '2025-02-26 16:05:38', 1),
-(60, 'MATRICULA 2025 - 26/02/2025\r\nNIVEL: INICIAL - GRADO: 3 AÑOS - SECCION: A\r\n\r\nPrecio Matricula: S./260.00\r\nPrecio Mensualidad: S./280.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones: ALUMNO LIBRE', 1, 2, NULL, 69, 60, '', '2025-02-26 16:36:56', 1),
+(60, 'MATRICULA 2025 - 26/02/2025\r\nNIVEL: INICIAL - GRADO: 3 AÑOS - SECCION: A\r\n\r\nPrecio Matricula: S./260.00\r\nPrecio Mensualidad: S./280.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones: ALUMNO LIBRE', 1, 2, NULL, 52, 60, '', '2025-02-26 16:36:56', 1),
 (61, 'MATRICULA 2025 - 28/02/2025\r\nNIVEL: PRIMARIA - GRADO: 3 GRADO - SECCION: A\r\n\r\nPrecio Matricula: S./260.00\r\nPrecio Mensualidad: S./310.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones:', 6, 2, NULL, 71, 61, '', '2025-02-28 19:34:16', 1),
 (62, 'MATRICULA 2025 - 03/03/2025\r\nNIVEL: INICIAL - GRADO: 5 AÑOS - SECCION: A\r\n\r\nPrecio Matricula: S./260.00\r\nPrecio Mensualidad: S./290.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones:', 3, 1, NULL, 73, 62, '', '2025-03-03 13:43:41', 1),
 (63, 'MATRICULA 2025 - 03/03/2025\r\nNIVEL: PRIMARIA - GRADO: 4 GRADO - SECCION: A\r\n\r\nPrecio Matricula: S./260.00\r\nPrecio Mensualidad: S./310.00\r\nPrecio Mantenimiento: S./25.00\r\n\r\nObservaciones:', 7, 1, NULL, 74, 63, '', '2025-03-03 13:59:57', 1),
@@ -2107,7 +2107,7 @@ INSERT INTO `mensualidad_detalle` (`id`, `id_mensualidad_mes`, `id_matricula_det
 (561, 8, 59, '310.00', 0, '', '2025-02-26 16:05:39', 1),
 (562, 9, 59, '310.00', 0, '', '2025-02-26 16:05:39', 1),
 (563, 10, 59, '335.00', 0, '', '2025-02-26 16:05:39', 1),
-(564, 1, 60, '250.00', 0, '', '2025-02-26 16:36:56', 1),
+(564, 1, 60, '250.00', 0, 'ALUMNO LIBRE', '2025-02-26 16:36:56', 1),
 (565, 2, 60, '250.00', 0, '', '2025-02-26 16:36:56', 1),
 (566, 3, 60, '250.00', 0, '', '2025-02-26 16:36:56', 1),
 (567, 4, 60, '250.00', 0, '', '2025-02-26 16:36:56', 1),
@@ -2264,7 +2264,7 @@ INSERT INTO `usuario_alumno` (`id`, `id_apoderado`, `id_documento`, `numerodocum
 (47, 53, 1, '90586662', 'RAYMUNDO SOSA LUNA KRISNA', '2018-01-17', '', 1, '90586662', '90586662', '', '2025-02-07 15:05:18', 1),
 (48, 31, 1, '79077669', 'COTRINA HUAIRA YAREDMY AITANA', '2015-04-18', '', 1, '79077669', '79077669', '', '2025-02-10 15:29:48', 1),
 (49, 55, 1, '91907638', 'CHAHUA CASO DANNA ROSMADILEY', '2020-06-27', '', 1, '91907638', '91907638', '', '2025-02-10 19:34:59', 1),
-(50, 57, 1, '79057501', 'ROCA GAVILAN MARK ALEXANDER', '2015-03-16', '', 1, '79057501', '79057501', '', '2025-02-13 16:48:42', 1),
+(50, 56, 1, '79057501', 'ROCA GAVILAN MARK ALEXANDER', '2015-03-16', '', 1, '79057501', '79057501', '', '2025-02-13 16:48:42', 1),
 (51, 58, 1, '92001766', 'BENDEZU INCHICAQUI AITANA ALISON', '2020-09-04', '', 1, '92001766', '92001766', '', '2025-02-13 17:47:24', 1),
 (52, 58, 1, '91003190', 'MATOS INCHICAQUI FLAVIA ZOE', '2018-10-02', '', 1, '91003190', '91003190', '', '2025-02-13 17:50:52', 1),
 (53, 61, 1, '78264132', 'CALLIRGOS PERAMAS ALEXIS GERAD', '2013-09-12', '', 2, '78264132', '78264132', '', '2025-02-18 15:43:45', 1),
@@ -2371,7 +2371,7 @@ INSERT INTO `usuario_apoderado` (`id`, `id_apoderado_tipo`, `id_documento`, `num
 (66, 1, 1, '48207815', 'LIZ LORILEIT BOBADILLA MALQUI', '922655675', 1, 1, '48207815', '48207815', '', '2025-02-25 17:07:08', 1),
 (67, 1, 1, '42073463', 'IRIS BOBADILLA MALQUI', '946046046', 1, 1, '42073463', '42073463', '', '2025-02-25 17:12:05', 1),
 (68, 1, 3, '004543556', 'HAYDELYS FELICIDAD ECHARRY SANCHEZ', '941021071', 1, 1, '004543556', '004543556', '', '2025-02-26 16:05:38', 1),
-(69, 1, 1, '48624260', 'YAHAIRA NINOSHKA HUAMAN ROJAS', '955372719', 1, 1, '48624260', '48624260', '', '2025-02-26 16:36:56', 1),
+(69, 1, 1, '48624260', 'YAHAIRA NINOSHKA HUAMAN ROJAS', '955372719', 1, 1, '48624260', '48624260', '', '2025-02-26 16:36:56', 0),
 (70, 1, 1, '43046327', 'MIRIAM MARIBEL PALOMINO COSTILLA', '934413015', 1, 1, '43046327', '43046327', '', '2025-02-28 17:27:56', 1),
 (71, 1, 1, '42695489', 'MARUJA FLOR LOPEZ RAQUI', '997880608', 1, 1, '42695489', '42695489', '', '2025-02-28 19:34:16', 1),
 (72, 1, 1, '44617909', 'JESSICA RAQUEL SAYAVERDE YLLATUPA', '992973469', 1, 1, '44617909', '44617909', '', '2025-02-28 20:52:52', 1),

@@ -34,7 +34,7 @@ switch ($_GET["op"]) {
                 "2" => $reg->nombre_comprobante . ' - ' . $reg->numeracion,
                 "3" => $reg->fecha,
                 "4" => $reg->metodo_pago . ' - S/. ' . $reg->total,
-                "5" => $reg->estado == 1 ? 
+                "5" => $reg->estado == 1 ?
                     '
                     <button class="btn btn-danger btn-sm" onclick="desactivar(' . $reg->id . ')">DESAC.</button>
                     <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#' . $reg->numeracion . '">PDF</button>
@@ -102,6 +102,27 @@ switch ($_GET["op"]) {
                 "2" => 'S./ ' . $reg->precio_venta,
                 "3" => '" ' . $reg->stock . ' "',
                 "4" => '<button class="btn btn-warning btn-sm" onclick="agregardetalle(\'' . $reg->id_producto . '\',\'' . $reg->producto . '\',\'' . $reg->descripcion . '\',\'' . $reg->stock . '\',\'' . $reg->precio_venta . '\')">AGREGAR</button>'
+            );
+        }
+
+        echo json_encode(array(
+            "sEcho" => 1,
+            "iTotalRecords" => count($data),
+            "iTotalDisplayRecords" => count($data),
+            "aaData" => $data
+        ));
+        break;
+
+    case 'listar_buscador_apoderado':
+        $rspta = $almacensalida->listar_buscador_apoderado();
+        $data = [];
+
+        while ($reg = $rspta->fetch_object()) {
+            $data[] = array(
+                "0" => count($data) + 1,
+                "1" => $reg->apoderado,
+                "2" => $reg->alumnos,
+                "3" => '<button class="btn btn-warning btn-sm" onclick="agregarapoderado(\'' . $reg->id . '\',\'' . $reg->apoderado . '\')">AGREGAR</button>'
             );
         }
 

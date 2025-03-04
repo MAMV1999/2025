@@ -22,7 +22,7 @@ if (!isset($_SESSION['nombre'])) {
                             <th>GRADO</th>
                             <th>ALUMNO</th>
                             <th>APODERADO</th>
-                            <th>RECIBO</th>
+                            <th>TIPO</th>
                             <th>ACCIONES</th>
                         </tr>
                     </thead>

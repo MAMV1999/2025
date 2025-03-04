@@ -59,6 +59,20 @@ class AlmacenSalida
         return ejecutarConsulta($sql);
     }
 
+    public function listar_buscador_apoderado()
+    {
+        $sql = "SELECT 
+                    ua.id,
+                    ua.nombreyapellido AS apoderado,
+                    GROUP_CONCAT(ual.nombreyapellido SEPARATOR ', ') AS alumnos
+                FROM usuario_apoderado ua
+                LEFT JOIN usuario_alumno ual ON ua.id = ual.id_apoderado
+                WHERE ua.estado = 1
+                GROUP BY ua.id, ua.nombreyapellido
+                ORDER BY ua.nombreyapellido ASC";
+        return ejecutarConsulta($sql);
+    }
+
     public function listar_usuario_apoderado()
     {
         $sql = "SELECT 

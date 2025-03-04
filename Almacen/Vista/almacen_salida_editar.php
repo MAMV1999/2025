@@ -48,6 +48,12 @@ if (!isset($_SESSION['nombre'])) {
                         <li class="nav-item" role="presentation">
                             <button class="nav-link active" id="general-tab" data-bs-toggle="tab" data-bs-target="#general-tab-pane" type="button" role="tab" aria-controls="general-tab-pane" aria-selected="true">DATOS GENERALES</button>
                         </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="productos-tab" data-bs-toggle="tab" data-bs-target="#productos-tab-pane" type="button" role="tab" aria-controls="productos-tab-pane" aria-selected="true">PRODUCTOS</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pago-tab" data-bs-toggle="tab" data-bs-target="#pago-tab-pane" type="button" role="tab" aria-controls="pago-tab-pane" aria-selected="true">DATOS DE PAGO</button>
+                        </li>
                     </ul>
 
                     <div class="tab-content" id="myTabContent">
@@ -66,18 +72,24 @@ if (!isset($_SESSION['nombre'])) {
                                 <label for="usuario_apoderado_id" class="form-label"><b>APODERADO:</b></label>
                                 <select id="usuario_apoderado_id" name="usuario_apoderado_id" class="form-control" data-live-search="true" required></select>
                             </div>
+                        </div>
+                        <!-- TAB: DATOS PRODUCTOS -->
+                        <div class="tab-pane fade show" id="productos-tab-pane" role="tabpanel" aria-labelledby="productos-tab">
 
+                        </div>
+                        <!-- TAB: DATOS DE PAGO -->
+                        <div class="tab-pane fade show" id="pago-tab-pane" role="tabpanel" aria-labelledby="pago-tab">
                             <div class="p-3">
                                 <label for="id_documento" class="form-label"><b>INFORMACION DE PAGO:</b></label>
                                 <div class="input-group">
-                                <select id="almacen_metodo_pago_id" name="almacen_metodo_pago_id" class="form-control" data-live-search="true" required></select>
-                                <input type="number" step="0.01" id="total" name="total" class="form-control" placeholder="Total" required>
+                                    <select id="almacen_metodo_pago_id" name="almacen_metodo_pago_id" class="form-control" data-live-search="true" required></select>
+                                    <input type="number" step="0.01" id="total" name="total" class="form-control" placeholder="Total" required>
                                 </div>
                             </div>
 
                             <div class="p-3">
                                 <label for="observaciones" class="form-label"><b>OBSERVACIONES:</b></label>
-                                <textarea id="observaciones" name="observaciones" class="form-control" placeholder="Observaciones"></textarea>
+                                <textarea id="observaciones" name="observaciones" class="form-control" placeholder="Observaciones" style="height: 150px;"></textarea>
                             </div>
                         </div>
                     </div>
