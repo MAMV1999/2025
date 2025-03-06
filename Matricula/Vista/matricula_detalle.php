@@ -89,17 +89,17 @@ if (!isset($_SESSION['nombre'])) {
                                 <label for="alumno_dni" class="form-label"><b>DOCUMENTO:</b></label>
                                 <div class="input-group">
                                     <select id="alumno_documento" name="alumno_documento" class="form-control" data-live-search="true"></select>
-                                    <input type="text" id="alumno_dni" name="alumno_dni" class="form-control" placeholder="DNI del alumno">
+                                    <input type="text" id="alumno_dni" name="alumno_dni" class="form-control" placeholder="DNI del alumno" required>
                                     <button type="button" class="btn btn-primary" onclick="buscarAlumno()">BUSCAR</button>
                                 </div>
                             </div>
                             <div class="p-3">
                                 <label for="alumno_nombreyapellido" class="form-label"><b>NOMBRE Y APELLIDO:</b></label>
-                                <input type="text" id="alumno_nombreyapellido" name="alumno_nombreyapellido" class="form-control" placeholder="Nombre y Apellido">
+                                <input type="text" id="alumno_nombreyapellido" name="alumno_nombreyapellido" class="form-control" placeholder="Nombre y Apellido" required>
                             </div>
                             <div class="p-3">
                                 <label for="alumno_nacimiento" class="form-label"><b>FECHA DE NACIMIENTO:</b></label>
-                                <input type="date" id="alumno_nacimiento" name="alumno_nacimiento" class="form-control">
+                                <input type="date" id="alumno_nacimiento" name="alumno_nacimiento" class="form-control" required>
                             </div>
                             <div class="p-3">
                                 <label for="alumno_sexo" class="form-label"><b>SEXO:</b></label>
@@ -122,17 +122,17 @@ if (!isset($_SESSION['nombre'])) {
                                 <label for="apoderado_dni" class="form-label"><b>DOCUMENTO:</b></label>
                                 <div class="input-group">
                                     <select id="apoderado_documento" name="apoderado_documento" class="form-control" data-live-search="true"></select>
-                                    <input type="text" id="apoderado_dni" name="apoderado_dni" class="form-control" placeholder="Número de Documento">
+                                    <input type="text" id="apoderado_dni" name="apoderado_dni" class="form-control" placeholder="Número de Documento" required>
                                     <button type="button" class="btn btn-primary" onclick="buscarApoderado()">BUSCAR</button>
                                 </div>
                             </div>
                             <div class="p-3">
                                 <label for="apoderado_nombreyapellido" class="form-label"><b>NOMBRE Y APELLIDO:</b></label>
-                                <input type="text" id="apoderado_nombreyapellido" name="apoderado_nombreyapellido" class="form-control" placeholder="Nombre y Apellido">
+                                <input type="text" id="apoderado_nombreyapellido" name="apoderado_nombreyapellido" class="form-control" placeholder="Nombre y Apellido" required>
                             </div>
                             <div class="p-3">
                                 <label for="apoderado_telefono" class="form-label"><b>TELÉFONO:</b></label>
-                                <input type="text" id="apoderado_telefono" name="apoderado_telefono" class="form-control" placeholder="Teléfono">
+                                <input type="text" id="apoderado_telefono" name="apoderado_telefono" class="form-control" placeholder="Teléfono" required>
                             </div>
                             <div class="p-3">
                                 <label for="apoderado_sexo" class="form-label"><b>SEXO:</b></label>
@@ -153,8 +153,8 @@ if (!isset($_SESSION['nombre'])) {
                             <div class="p-3">
                                 <label for="apoderado_dni" class="form-label"><b>FECHA - NUMERACION:</b></label>
                                 <div class="input-group">
-                                    <input type="date" id="pago_fecha" name="pago_fecha" class="form-control">
-                                    <input type="text" id="pago_numeracion" name="pago_numeracion" class="form-control" placeholder="Numeración" readonly>
+                                    <input type="date" id="pago_fecha" name="pago_fecha" class="form-control" required>
+                                    <input type="text" id="pago_numeracion" name="pago_numeracion" class="form-control" placeholder="Numeración" readonly required>
                                 </div>
                             </div>
                             <div class="p-3">
@@ -164,7 +164,7 @@ if (!isset($_SESSION['nombre'])) {
                             <div class="p-3">
                                 <label for="apoderado_dni" class="form-label"><b>PAGO:</b></label>
                                 <div class="input-group">
-                                    <input type="text" id="pago_monto" name="pago_monto" class="form-control" placeholder="Monto">
+                                    <input type="text" id="pago_monto" name="pago_monto" class="form-control" placeholder="Monto" required>
                                     <select id="pago_metodo_id" name="pago_metodo_id" class="form-control" data-live-search="true"></select>
                                 </div>
                             </div>
@@ -198,8 +198,8 @@ if (!isset($_SESSION['nombre'])) {
                 </div>
 
                 <div class="p-3">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                    <button type="button" onclick="MostrarListado();" class="btn btn-secondary">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">GUARDAR</button>
+                    <button type="button" onclick="MostrarListado();" class="btn btn-secondary">CANCELAR</button>
                 </div>
             </form>
         </div>

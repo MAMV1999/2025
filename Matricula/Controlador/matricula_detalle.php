@@ -342,7 +342,7 @@ switch ($_GET["op"]) {
                         <td style='width: 10%;'><input type='text' name='mensualidad_id[]' value='{$reg->id}' class='form-control-plaintext' readonly></td>
                         <td style='width: 20%;'><input type='text' name='mensualidad_nombre[]' value='{$reg->nombre}' class='form-control-plaintext' readonly></td>
                         <td style='width: 30%;'><input type='text' name='descripcion[]' value='{$reg->descripcion}' class='form-control-plaintext' readonly></td>
-                        <td style='width: 15%;'><input type='text' name='mensualidad_precio[]' class='form-control-plaintext precio-mensualidad' data-mantenimiento='{$reg->mantenimiento}'></td>
+                        <td style='width: 15%;'><input type='text' name='mensualidad_precio[]' class='form-control-plaintext precio-mensualidad' required data-mantenimiento='{$reg->mantenimiento}'></td>
                         <td style='width: 25%;'><input type='text' name='fechavencimiento_format[]' value='{$reg->fechavencimiento_format}' class='form-control-plaintext'></td>
                     </tr>";
         }
@@ -353,7 +353,7 @@ switch ($_GET["op"]) {
         $rspta = $matriculaDetalle->listarApoderadosReferidosActivos();
         echo '<option value="">NO TIENE REFERENCIA</option>'; // Primera opción vacía
         while ($reg = $rspta->fetch_object()) {
-            echo '<option value="' . $reg->id . '">' . $reg->tipo_documento . ' : ' . $reg->numerodocumento . ' - ' . $reg->nombreyapellido . ' (' . $reg->repeticiones . ')</option>';
+            echo '<option value="' . $reg->id . '">' . $reg->nombreyapellido . ' (' . $reg->repeticiones . ')</option>';
         }
         break;
 }
