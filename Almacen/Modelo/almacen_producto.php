@@ -7,25 +7,43 @@ class AlmacenProducto
     {
     }
 
-    // Método para guardar un nuevo producto
-    public function guardar($nombre, $descripcion, $categoria_id, $precio_compra, $precio_venta, $stock = 0, $estado = 1)
+    // Método para guardar o editar múltiples productos a la vez
+    public function guardarEditarMasivo($detalles)
     {
-        $sql = "INSERT INTO almacen_producto (nombre, descripcion, categoria_id, precio_compra, precio_venta, stock, estado) VALUES ('$nombre', '$descripcion', '$categoria_id', '$precio_compra', '$precio_venta', '$stock', '$estado')";
-        return ejecutarConsulta($sql);
-    }
-    
+        try {
+            global $conectar;
+            foreach ($detalles as $detalle) {
+                $id = isset($detalle['id']) ? limpiarcadena($detalle['id']) : null;
+                $nombre = isset($detalle['nombre']) ? limpiarcadena($detalle['nombre']) : null;
+                $categoria_id = isset($detalle['categoria_id']) ? limpiarcadena($detalle['categoria_id']) : null;
+                $precio_compra = isset($detalle['precio_compra']) ? limpiarcadena($detalle['precio_compra']) : null;
+                $precio_venta = isset($detalle['precio_venta']) ? limpiarcadena($detalle['precio_venta']) : null;
+                $descripcion = isset($detalle['descripcion']) ? limpiarcadena($detalle['descripcion']) : '';
 
-    // Método para editar un producto existente
-    public function editar($id, $nombre, $descripcion, $categoria_id, $precio_compra, $precio_venta, $stock, $estado)
-    {
-        $sql = "UPDATE almacen_producto SET nombre='$nombre', descripcion='$descripcion', categoria_id='$categoria_id', precio_compra='$precio_compra', precio_venta='$precio_venta', stock='$stock', estado='$estado' WHERE id='$id'";
-        return ejecutarConsulta($sql);
+                if ($id) {
+                    // Actualizar producto existente
+                    $sql = "UPDATE almacen_producto SET nombre='$nombre', descripcion='$descripcion', categoria_id='$categoria_id', precio_compra='$precio_compra', precio_venta='$precio_venta', stock='0', estado='1' WHERE id='$id'";
+                } else {
+                    // Insertar nuevo producto
+                    $sql = "INSERT INTO almacen_producto (nombre, descripcion, categoria_id, precio_compra, precio_venta, stock, estado) VALUES ('$nombre', '$descripcion', '$categoria_id', '$precio_compra', '$precio_venta', '0', '1')";
+                }
+
+                if (!ejecutarConsulta($sql)) {
+                    error_log("Error en SQL: " . mysqli_error($conectar));
+                    return false;
+                }
+            }
+            return true;
+        } catch (Exception $e) {
+            error_log("Error en guardarEditarMasivo: " . $e->getMessage());
+            return false;
+        }
     }
 
     // Método para mostrar los detalles de un producto específico
     public function mostrar($id)
     {
-        $sql = "SELECT * FROM almacen_producto WHERE id='$id'";
+        $sql = "SELECT * FROM almacen_producto WHERE id='" . limpiarcadena($id) . "'";
         return ejecutarConsultaSimpleFila($sql);
     }
 
@@ -39,14 +57,14 @@ class AlmacenProducto
     // Método para desactivar un producto
     public function desactivar($id)
     {
-        $sql = "UPDATE almacen_producto SET estado='0' WHERE id='$id'";
+        $sql = "UPDATE almacen_producto SET estado='0' WHERE id='" . limpiarcadena($id) . "'";
         return ejecutarConsulta($sql);
     }
 
     // Método para activar un producto
     public function activar($id)
     {
-        $sql = "UPDATE almacen_producto SET estado='1' WHERE id='$id'";
+        $sql = "UPDATE almacen_producto SET estado='1' WHERE id='" . limpiarcadena($id) . "'";
         return ejecutarConsulta($sql);
     }
 

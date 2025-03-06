@@ -3,37 +3,28 @@ include_once("../Modelo/almacen_producto.php");
 
 $almacenProducto = new AlmacenProducto();
 
-$id = isset($_POST["id"]) ? limpiarcadena($_POST["id"]) : "";
-$nombre = isset($_POST["nombre"]) ? limpiarcadena($_POST["nombre"]) : "";
-$descripcion = isset($_POST["descripcion"]) ? limpiarcadena($_POST["descripcion"]) : "";
-$categoria_id = isset($_POST["categoria_id"]) ? limpiarcadena($_POST["categoria_id"]) : "";
-$precio_compra = isset($_POST["precio_compra"]) ? limpiarcadena($_POST["precio_compra"]) : "";
-$precio_venta = isset($_POST["precio_venta"]) ? limpiarcadena($_POST["precio_venta"]) : "";
-$stock = isset($_POST["stock"]) ? limpiarcadena($_POST["stock"]) : "";
-$estado = isset($_POST["estado"]) ? limpiarcadena($_POST["estado"]) : "1";
+$detalles = isset($_POST['detalles']) ? json_decode($_POST['detalles'], true) : [];
 
 switch ($_GET["op"]) {
     case 'guardaryeditar':
-        if (empty($id)) {
-            $rspta = $almacenProducto->guardar($nombre, $descripcion, $categoria_id, $precio_compra, $precio_venta, $stock, $estado);
-            echo $rspta ? "Producto registrado correctamente" : "No se pudo registrar el producto";
-        } else {
-            $rspta = $almacenProducto->editar($id, $nombre, $descripcion, $categoria_id, $precio_compra, $precio_venta, $stock, $estado);
-            echo $rspta ? "Producto actualizado correctamente" : "No se pudo actualizar el producto";
-        }
+        $rspta = $almacenProducto->guardarEditarMasivo($detalles);
+        echo $rspta ? "Registros actualizados correctamente" : "Error al actualizar los registros";
         break;
 
     case 'desactivar':
+        $id = isset($_POST["id"]) ? limpiarcadena($_POST["id"]) : "";
         $rspta = $almacenProducto->desactivar($id);
         echo $rspta ? "Producto desactivado correctamente" : "No se pudo desactivar el producto";
         break;
 
     case 'activar':
+        $id = isset($_POST["id"]) ? limpiarcadena($_POST["id"]) : "";
         $rspta = $almacenProducto->activar($id);
         echo $rspta ? "Producto activado correctamente" : "No se pudo activar el producto";
         break;
 
     case 'mostrar':
+        $id = isset($_POST["id"]) ? limpiarcadena($_POST["id"]) : "";
         $rspta = $almacenProducto->mostrar($id);
         echo json_encode($rspta);
         break;

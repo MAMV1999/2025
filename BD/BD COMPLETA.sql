@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-03-2025 a las 05:02:42
+-- Tiempo de generación: 06-03-2025 a las 07:25:14
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -222,7 +222,8 @@ INSERT INTO `almacen_ingreso` (`id`, `usuario_apoderado_id`, `almacen_comprobant
 (16, 26, 1, '000016', '2025-02-17', 7, '0.00', '', '2025-02-17 09:52:39', 1),
 (17, 26, 1, '000017', '2025-02-17', 7, '0.00', '', '2025-02-17 10:28:55', 1),
 (18, 26, 1, '000018', '2025-02-17', 7, '0.00', '', '2025-02-17 14:44:14', 1),
-(19, 26, 1, '000019', '2025-02-25', 7, '0.00', '', '2025-02-25 12:28:59', 1);
+(19, 26, 1, '000019', '2025-02-25', 7, '0.00', '', '2025-02-25 12:28:59', 1),
+(20, 26, 1, '000020', '2025-03-06', 7, '0.00', '', '2025-03-06 01:11:31', 1);
 
 --
 -- Disparadores `almacen_ingreso`
@@ -374,7 +375,9 @@ INSERT INTO `almacen_ingreso_detalle` (`id`, `almacen_ingreso_id`, `almacen_prod
 (104, 16, 135, 50, '0.00', ''),
 (105, 17, 136, 50, '0.00', ''),
 (106, 18, 137, 10, '0.00', ''),
-(107, 19, 106, 50, '0.00', '');
+(107, 19, 106, 50, '0.00', ''),
+(108, 20, 145, 10, '0.00', ''),
+(109, 20, 144, 10, '0.00', '');
 
 --
 -- Disparadores `almacen_ingreso_detalle`
@@ -576,12 +579,9 @@ INSERT INTO `almacen_producto` (`id`, `nombre`, `descripcion`, `categoria_id`, `
 (135, 'LIBRO COMPUTACION PRIMARIA 2025', '', 4, '0.00', '100.00', 43, '2025-02-14 12:57:42', 1),
 (136, 'MANTENIMIENTO DE AULAS - PAGO ANUAL', '', 6, '0.00', '50.00', 48, '2025-02-17 10:28:11', 1),
 (137, 'FALDA SHORT TALLA L', '', 2, '0.00', '43.00', 9, '2025-02-17 14:43:49', 1),
-(138, 'TOMATODO GRANDE', '', 5, '0.00', '15.00', 0, '2025-03-05 10:57:58', 1),
-(139, 'TOMATODO PEQUEÑO', '', 5, '0.00', '12.00', 0, '2025-03-05 10:57:58', 1),
-(140, 'TOMATODO GRANDE', '', 5, '0.00', '15.00', 0, '2025-03-05 10:58:01', 1),
-(141, 'TOMATODO PEQUEÑO', '', 5, '0.00', '12.00', 0, '2025-03-05 10:58:01', 1),
-(142, 'TOMATODO GRANDE', '', 5, '0.00', '15.00', 0, '2025-03-05 11:13:01', 1),
-(143, 'TOMATODO PEQUEÑO', '', 5, '0.00', '12.00', 0, '2025-03-05 11:13:01', 1);
+(144, 'TOMATODO PEQUEÑO', '', 5, '0.00', '15.00', 10, '2025-03-06 01:08:14', 1),
+(145, 'TOMATODO GRANDE', '', 5, '0.00', '12.00', 10, '2025-03-06 01:08:14', 1),
+(146, 'CUADERNO DE CONTROL', '', 5, '0.00', '12.00', 0, '2025-03-06 01:09:37', 1);
 
 -- --------------------------------------------------------
 
@@ -2633,7 +2633,8 @@ INSERT INTO `usuario_menu` (`id`, `nombre`, `link`, `icono`, `descripcion`, `fec
 (5, 'MENSUALIDAD', '../../Mensualidad/Vista/Escritorio.php', '', '', '2025-01-30 01:35:29', 1),
 (6, 'DOCUMENTO', '../../Documento/Vista/Escritorio.php', '', '', '2025-01-30 01:35:46', 1),
 (7, 'ALMACEN', '../../Almacen/Vista/Escritorio.php', '', '', '2025-01-30 01:36:59', 1),
-(8, 'BIBLIOTECA', '../../Biblioteca/Vista/Escritorio.php', '', '', '2025-01-30 01:37:17', 1);
+(8, 'BIBLIOTECA', '../../Biblioteca/Vista/Escritorio.php', '', '', '2025-01-30 01:37:17', 1),
+(9, 'REGISTRO', '../../Registro/Vista/Escritorio.php', '', '', '2025-03-06 06:19:14', 1);
 
 -- --------------------------------------------------------
 
@@ -2956,13 +2957,13 @@ ALTER TABLE `almacen_comprobante`
 -- AUTO_INCREMENT de la tabla `almacen_ingreso`
 --
 ALTER TABLE `almacen_ingreso`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `almacen_ingreso_detalle`
 --
 ALTER TABLE `almacen_ingreso_detalle`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
 
 --
 -- AUTO_INCREMENT de la tabla `almacen_metodo_pago`
@@ -2974,7 +2975,7 @@ ALTER TABLE `almacen_metodo_pago`
 -- AUTO_INCREMENT de la tabla `almacen_producto`
 --
 ALTER TABLE `almacen_producto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=144;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=147;
 
 --
 -- AUTO_INCREMENT de la tabla `almacen_salida`
@@ -3136,7 +3137,7 @@ ALTER TABLE `usuario_estado_civil`
 -- AUTO_INCREMENT de la tabla `usuario_menu`
 --
 ALTER TABLE `usuario_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario_sexo`
