@@ -19,7 +19,6 @@ if (!isset($_SESSION['nombre'])) {
                 <?php
                 $array = array(
                     "1" => array("nombre" => "REGISTRO UTILES ESCOLARES", "link" => "reg_documento.php"),
-                    "2" => array("nombre" => "REGISTRO ASISTENCIA", "link" => "reg_documento.php"),
                 );
                 ?>
                 <table class="table">
@@ -35,10 +34,10 @@ if (!isset($_SESSION['nombre'])) {
                         $a = 1;
                         while ($a <= count($array)) {
                             echo '<tr>
-                                <th scope="row">' . $a . '</th>
-                                <td>' . $array[$a]["nombre"] . '</td>
-                                <td><a class="btn btn-primary" href="' . $array[$a]["link"] . '" role="button">Ir a ' . $array[$a]["nombre"] . '</a></td>
-                            </tr>';
+                                    <th scope="row">' . $a . '</th>
+                                    <td>' . $array[$a]["nombre"] . '</td>
+                                    <td><a class="btn btn-primary" href="' . $array[$a]["link"] . '" role="button">Ir a ' . $array[$a]["nombre"] . '</a></td>
+                                </tr>';
                             $a++;
                         }
                         ?>
@@ -62,9 +61,7 @@ if (!isset($_SESSION['nombre'])) {
                         <br>
                         <?php
                         $array = array(
-                            "1" => array("nombre" => "RESPONSABLES DE DOCUMENTOS", "link" => "documento_responsable.php"),
-                            "2" => array("nombre" => "DOCUMENTOS", "link" => "documento.php"),
-                            "3" => array("nombre" => "ESTADO DE ENTREGA", "link" => "documento_estado.php"),
+                            "1" => array("nombre" => "RESPONSABLES", "link" => "documento_responsable.php"),
                         );
                         ?>
                         <table class="table">
@@ -80,10 +77,10 @@ if (!isset($_SESSION['nombre'])) {
                                 $a = 1;
                                 while ($a <= count($array)) {
                                     echo '<tr>
-                                <th scope="row">' . $a . '</th>
-                                <td>' . $array[$a]["nombre"] . '</td>
-                                <td><a class="btn btn-primary" href="' . $array[$a]["link"] . '" role="button">Ir a ' . $array[$a]["nombre"] . '</a></td>
-                            </tr>';
+                                            <th scope="row">' . $a . '</th>
+                                            <td>' . $array[$a]["nombre"] . '</td>
+                                            <td><a class="btn btn-primary" href="' . $array[$a]["link"] . '" role="button">Ir a ' . $array[$a]["nombre"] . '</a></td>
+                                        </tr>';
                                     $a++;
                                 }
                                 ?>
