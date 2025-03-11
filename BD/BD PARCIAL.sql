@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-03-2025 a las 13:01:21
+-- Tiempo de generación: 11-03-2025 a las 05:12:30
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -955,13 +955,13 @@ ALTER TABLE `almacen_comprobante`
 -- AUTO_INCREMENT de la tabla `almacen_ingreso`
 --
 ALTER TABLE `almacen_ingreso`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `almacen_ingreso_detalle`
 --
 ALTER TABLE `almacen_ingreso_detalle`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
 
 --
 -- AUTO_INCREMENT de la tabla `almacen_metodo_pago`
@@ -973,19 +973,19 @@ ALTER TABLE `almacen_metodo_pago`
 -- AUTO_INCREMENT de la tabla `almacen_producto`
 --
 ALTER TABLE `almacen_producto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=148;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=150;
 
 --
 -- AUTO_INCREMENT de la tabla `almacen_salida`
 --
 ALTER TABLE `almacen_salida`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
 
 --
 -- AUTO_INCREMENT de la tabla `almacen_salida_detalle`
 --
 ALTER TABLE `almacen_salida_detalle`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=246;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=304;
 
 --
 -- AUTO_INCREMENT de la tabla `documento`
@@ -997,7 +997,7 @@ ALTER TABLE `documento`
 -- AUTO_INCREMENT de la tabla `documento_detalle`
 --
 ALTER TABLE `documento_detalle`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
 
 --
 -- AUTO_INCREMENT de la tabla `documento_estado`
@@ -1063,7 +1063,7 @@ ALTER TABLE `matricula_categoria`
 -- AUTO_INCREMENT de la tabla `matricula_detalle`
 --
 ALTER TABLE `matricula_detalle`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT de la tabla `matricula_metodo_pago`
@@ -1075,13 +1075,13 @@ ALTER TABLE `matricula_metodo_pago`
 -- AUTO_INCREMENT de la tabla `matricula_pago`
 --
 ALTER TABLE `matricula_pago`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT de la tabla `mensualidad_detalle`
 --
 ALTER TABLE `mensualidad_detalle`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=664;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=724;
 
 --
 -- AUTO_INCREMENT de la tabla `mensualidad_mes`
@@ -1093,13 +1093,13 @@ ALTER TABLE `mensualidad_mes`
 -- AUTO_INCREMENT de la tabla `usuario_alumno`
 --
 ALTER TABLE `usuario_alumno`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario_apoderado`
 --
 ALTER TABLE `usuario_apoderado`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario_apoderado_tipo`
