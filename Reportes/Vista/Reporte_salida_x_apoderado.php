@@ -94,40 +94,44 @@ class PDF extends FPDF
         $this->Ln();
     }
 
-    // Encabezado para alumnos
+    // Encabezado para alumnos con columna Sub Total
     function AlumnosHeader()
     {
-        $ancho_celda = 25.285;
         $this->SetFont('Arial', 'B', 8);
         $this->SetFillColor(188, 188, 188);
         $this->Cell(0, 8, utf8_decode(strtoupper('DATOS DE LOS PRODUCTOS')), 1, 0, 'C', true);
         $this->Ln();
+
         $this->Cell(20, 8, utf8_decode(strtoupper('FECHA')), 1, 0, 'C', true);
-        $this->Cell(20, 8, utf8_decode(strtoupper('N°')), 1, 0, 'C', true);
+        $this->Cell(16, 8, utf8_decode(strtoupper('N°')), 1, 0, 'C', true);
         $this->Cell(15, 8, utf8_decode(strtoupper('CANT.')), 1, 0, 'C', true);
         $this->Cell(80, 8, utf8_decode(strtoupper('PRODUCTO')), 1, 0, 'C', true);
-        $this->Cell(25, 8, utf8_decode(strtoupper('P. UNITARIO')), 1, 0, 'C', true);
+        $this->Cell(21, 8, utf8_decode(strtoupper('P. UNITARIO')), 1, 0, 'C', true);
+        $this->Cell(21, 8, utf8_decode(strtoupper('SUB TOTAL')), 1, 0, 'C', true); // Nueva columna
         $this->Cell(0, 8, utf8_decode(strtoupper('METODO')), 1, 0, 'C', true);
         $this->Ln();
     }
 
-    // Filas de alumnos
+    // Filas de alumnos con cálculo de Sub Total
     function AlumnosRow($row)
     {
         $this->SetFont('Arial', '', 8);
+        $subtotal = $row['stock'] * $row['precio_unitario']; // Calcular el Sub Total
+
         $this->Cell(20, 6, utf8_decode($row['salida_fecha']), 1, 0, 'C');
-        $this->Cell(20, 6, utf8_decode($row['salida_numeracion']), 1, 0, 'C');
+        $this->Cell(16, 6, utf8_decode($row['salida_numeracion']), 1, 0, 'C');
         $this->Cell(15, 6, utf8_decode($row['stock']), 1, 0, 'C');
         $this->Cell(80, 6, utf8_decode($row['producto_nombre']), 1, 0, 'C');
-        $this->Cell(25, 6, utf8_decode('S/. '.$row['precio_unitario']), 1, 0, 'C');
+        $this->Cell(21, 6, utf8_decode('S/. ' . $row['precio_unitario']), 1, 0, 'C');
+        $this->Cell(21, 6, utf8_decode('S/. ' . number_format($subtotal, 2, '.', ',')), 1, 0, 'C'); // Nueva columna
         $this->Cell(0, 6, utf8_decode($row['metodo_pago']), 1, 0, 'C');
         $this->Ln();
 
-        // Acumular totales por método
+        // Acumular totales por método (se suma el subtotal en lugar de precio unitario)
         if (!isset($this->totalesPorMetodo[$row['metodo_pago']])) {
             $this->totalesPorMetodo[$row['metodo_pago']] = 0;
         }
-        $this->totalesPorMetodo[$row['metodo_pago']] += $row['precio_unitario'];
+        $this->totalesPorMetodo[$row['metodo_pago']] += $subtotal;
     }
 }
 

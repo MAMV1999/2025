@@ -90,8 +90,8 @@ if (!isset($_SESSION['nombre'])) {
                 <br>
                 <?php
                 $array = array(
-                    "1" => array("nombre" => "REPORTE DE PRODUCTO", "link" => "../../Reportes/Vista/almacen_producto.php"),
-                    "2" => array("nombre" => "REPORTE DE VENTAS", "link" => "../../Reportes/Vista/Reporte_salida.php"),
+                    "1" => array("nombre" => "REPORTE DE PRODUCTOS", "link" => "../../Reportes/Vista/almacen_producto.php"),
+                    "2" => array("nombre" => "REPORTE DE VENTAS X DIA", "link" => "../../Reportes/Vista/Reporte_salida.php"),
                     "3" => array("nombre" => "REPORTE DE VENTAS X APODERADO", "link" => "../../Reportes/Vista/Reporte_salida_x_apoderado.php"),
                 );
                 ?>
