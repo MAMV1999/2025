@@ -59,6 +59,7 @@ if (!isset($_SESSION['nombre'])) {
                 <?php
                 $array = array(
                     "1" => array("nombre" => "DETALLE DE MENSUALIDADES X MES", "link" => "../../Reportes/Vista/mensualidad_detalle_general.php"),
+                    "2" => array("nombre" => "DETALLE DE MENSUALIDADES X APODERADO", "link" => "../../Reportes/Vista/Mensualidad_reporte_x_apoderado.php"),
                 );
                 ?>
                 <table class="table">

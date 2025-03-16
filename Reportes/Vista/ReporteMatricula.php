@@ -45,15 +45,15 @@ class PDF extends FPDF
     function TableRow($row, $num)
     {
         $this->SetFont('Arial', '', 10);
-        $this->Cell(10, 8, $num, 0);
+        $this->Cell(10, 8, $num, 0, 0, 'C');
 
         if ($row['alumno'] === 'SIN ALUMNOS') {
             $this->SetFont('Arial', 'I', 12); // Cursiva para resaltar
         }
 
-        $this->Cell(120, 8, utf8_decode($row['alumno']), 0);
-        $this->Cell(30, 8, utf8_decode($row['sexo']), 0);
-        $this->Cell(30, 8, utf8_decode($row['categoria']), 0);
+        $this->Cell(120, 8, utf8_decode($row['alumno']), 0, 0, 'L');
+        $this->Cell(30, 8, utf8_decode($row['sexo']), 0, 0, 'L');
+        $this->Cell(30, 8, utf8_decode($row['categoria']), 0, 0, 'L');
         $this->Ln();
     }
 

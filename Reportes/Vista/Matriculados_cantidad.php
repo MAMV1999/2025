@@ -17,7 +17,6 @@ class PDF extends FPDF
     {
         $this->SetY(-23);
         $this->SetFont('Arial', 'I', 8);
-        $this->Cell(0, 5, utf8_decode('Fecha y Hora de generación: ' . $this->fecha_hora_actual), 0, 1, 'C');
         $this->Cell(0, 10, utf8_decode('Página ' . $this->PageNo() . '/{nb}'), 0, 0, 'C');
     }
 
@@ -27,6 +26,9 @@ class PDF extends FPDF
 
         $this->SetFont('Arial', 'B', 20);
         $this->Cell(0, 10, utf8_decode('CANTIDAD DE ALUMNOS'), 0, 1, 'C');
+
+        $this->SetFont('Arial', '', 12);
+        $this->Cell(0, 10, utf8_decode($this->fecha_hora_actual), 0, 1, 'C');
         $this->Ln(5);
 
         // Ancho de cada columna calculado para ocupar todo el margen
@@ -123,7 +125,7 @@ $pdf->AliasNbPages();
 $pdf->Reporte($data);
 
 // Definir el nombre del archivo
-$filename = 'Reporte_Matriculados.pdf';
+$filename = 'Cantidad_de_Matriculados.pdf';
 
 // Salida del PDF
 header('Content-Type: application/pdf');

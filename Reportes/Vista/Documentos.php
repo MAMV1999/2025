@@ -95,6 +95,7 @@ $reporte = $documentos->obtenerReporteDinamico($id);
 $institucionNombre = '';
 $institucionDireccion = '';
 $apoderadoNombre = '';
+$apoderadoTelefono = '';
 $institucionLectivo = '';
 $institucionNivel = '';
 $institucionGrado = '';
@@ -105,6 +106,7 @@ if ($reporte) {
     $institucionNombre = isset($fila['institucion_nombre']) ? $fila['institucion_nombre'] : '';
     $institucionDireccion = isset($fila['institucion_direccion']) ? $fila['institucion_direccion'] : '';
     $apoderadoNombre = isset($fila['apoderado_nombre']) ? $fila['apoderado_nombre'] : '';
+    $apoderadoTelefono = isset($fila['apoderado_telefono']) ? $fila['apoderado_telefono'] : '';
     $institucionLectivo = isset($fila['institucion_lectivo']) ? $fila['institucion_lectivo'] : '';
     $institucionNivel = isset($fila['institucion_nivel']) ? $fila['institucion_nivel'] : '';
     $institucionGrado = isset($fila['institucion_grado']) ? $fila['institucion_grado'] : '';
@@ -147,6 +149,7 @@ $generalData = [
     'FECHA DE EMISIÓN' => $fechaEmision,
     'LECTIVO / NIVEL / GRADO' => "$institucionLectivo / $institucionNivel / $institucionGrado",
     'APODERADO(A)' => $apoderadoNombre,
+    'TELEFONO' => $apoderadoTelefono,
     'ALUMNO(A)' => $alumnoNombre
 ];
 $pdf->GeneralData($generalData);
@@ -155,5 +158,5 @@ $pdf->GeneralData($generalData);
 $pdf->DocumentationTable($documentosData);
 
 // Salida del documento
-$pdf->Output();
+$pdf->Output('I', 'Documentos_' . str_replace(' ', '_', utf8_decode($alumnoNombre)) . '.pdf');
 ?>
