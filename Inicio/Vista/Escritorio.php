@@ -21,10 +21,11 @@ if (!isset($_SESSION['nombre'])) {
                     </div>
                     <div class="card-body">
                         <?php
+                            date_default_timezone_set("America/Lima"); // Cambia según tu ubicación
                             $hora = date("H");
-                            if ($hora >= 6 && $hora < 12) { $saludo = "BUENOS DÍAS";}
-                            elseif ($hora >= 12 && $hora < 18) { $saludo = "BUENAS TARDES";}
-                            else {$saludo = "BUENAS NOCHES"; }
+                            if ($hora >= 6 && $hora < 12) { $saludo = "BUENOS DÍAS"; }
+                            elseif ($hora >= 12 && $hora < 18) { $saludo = "BUENAS TARDES"; }
+                            else { $saludo = "BUENAS NOCHES"; }
                         ?>
                         <h5 class="card-title"><?php echo $saludo . ", " . $_SESSION['nombre']; ?></h5>
                         <p class="card-text"><?php echo $_SESSION['docente_cargo']; ?></p>
