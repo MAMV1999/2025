@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-03-2025 a las 03:58:21
+-- Tiempo de generación: 21-03-2025 a las 01:09:10
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -114,6 +114,106 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ObtenerDetallesMatricula` (`p_id` I
             documento d ON dd.id_documento = d.id
         WHERE
             md.id = ', p_id, '
+        GROUP BY 
+            md.id, ins.nombre, ins.telefono, ins.correo, ins.ruc, ins.razon_social, ins.direccion, il.nombre, niv.nombre, ig.nombre, isec.nombre, 
+            a.id, at.nombre, ad.nombre, a.numerodocumento, a.nombreyapellido, a.telefono, 
+            al.id, ald.nombre, al.numerodocumento, al.nombreyapellido
+        ORDER BY 
+            ins.nombre ASC, niv.nombre ASC, ig.nombre ASC, isec.nombre ASC, al.nombreyapellido ASC
+    ');
+
+    -- Preparar y ejecutar la consulta dinámica
+    PREPARE stmt FROM @sql;
+    EXECUTE stmt;
+    DEALLOCATE PREPARE stmt;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ObtenerDetallesMatriculaTodos` ()  BEGIN
+    -- Declaraciones para manejar el cursor y los datos
+    DECLARE done INT DEFAULT FALSE;
+    DECLARE documentoNombre VARCHAR(255);
+    DECLARE documentosCursor CURSOR FOR SELECT nombre FROM documento;
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+
+    -- Construcción inicial del SQL dinámico
+    SET @sql = 'SELECT 
+            md.id AS matricula_detalle_id,
+            ins.nombre AS institucion_nombre,
+            ins.telefono AS institucion_telefono,
+            ins.correo AS institucion_correo,
+            ins.ruc AS institucion_ruc,
+            ins.razon_social AS institucion_razon_social,
+            ins.direccion AS institucion_direccion,
+            il.nombre AS institucion_lectivo,
+            niv.nombre AS institucion_nivel, 
+            ig.nombre AS institucion_grado,
+            isec.nombre AS institucion_seccion,
+            a.id AS apoderado_id,
+            at.nombre AS apoderado_tipo,
+            ad.nombre AS apoderado_documento_tipo,
+            a.numerodocumento AS apoderado_numerodocumento,
+            a.nombreyapellido AS apoderado_nombre,
+            a.telefono AS apoderado_telefono,
+            al.id AS alumno_id,
+            ald.nombre AS alumno_documento_tipo,
+            al.numerodocumento AS alumno_numerodocumento,
+            al.nombreyapellido AS alumno_nombre';
+
+    -- Abrir el cursor para recorrer los nombres de los documentos
+    OPEN documentosCursor;
+
+    -- Bucle para agregar las columnas dinámicas al SQL
+    read_loop: LOOP
+        FETCH documentosCursor INTO documentoNombre;
+        IF done THEN
+            LEAVE read_loop;
+        END IF;
+
+        -- Añadir columnas dinámicas para los documentos
+        SET @sql = CONCAT(@sql, 
+            ', MAX(CASE WHEN d.nombre = ''', documentoNombre, ''' THEN 
+                CASE 
+                    WHEN IFNULL(dd.entregado, 0) = 1 THEN ''SI'' 
+                    ELSE ''NO'' 
+                END 
+            ELSE ''NO'' END) AS `', documentoNombre, '`',
+            ', MAX(CASE WHEN d.nombre = ''', documentoNombre, ''' THEN dd.observaciones ELSE \'\' END) AS `', documentoNombre, '_observaciones`'
+        );
+    END LOOP;
+
+    -- Cerrar el cursor
+    CLOSE documentosCursor;
+
+    -- Completar el SQL dinámico con las cláusulas FROM, WHERE, GROUP BY y ORDER BY
+    SET @sql = CONCAT(@sql, '
+        FROM 
+            matricula_detalle md
+        JOIN 
+            matricula m ON md.id_matricula = m.id
+        JOIN 
+            institucion_seccion isec ON m.id_institucion_seccion = isec.id
+        JOIN 
+            institucion_grado ig ON isec.id_institucion_grado = ig.id
+        JOIN 
+            institucion_nivel niv ON ig.id_institucion_nivel = niv.id
+        JOIN 
+            institucion_lectivo il ON niv.id_institucion_lectivo = il.id
+        JOIN 
+            institucion ins ON il.id_institucion = ins.id
+        JOIN 
+            usuario_apoderado a ON md.id_usuario_apoderado = a.id
+        JOIN 
+            usuario_apoderado_tipo at ON a.id_apoderado_tipo = at.id
+        JOIN 
+            usuario_documento ad ON a.id_documento = ad.id
+        JOIN 
+            usuario_alumno al ON md.id_usuario_alumno = al.id
+        JOIN 
+            usuario_documento ald ON al.id_documento = ald.id
+        LEFT JOIN 
+            documento_detalle dd ON md.id = dd.id_matricula_detalle
+        LEFT JOIN 
+            documento d ON dd.id_documento = d.id
         GROUP BY 
             md.id, ins.nombre, ins.telefono, ins.correo, ins.ruc, ins.razon_social, ins.direccion, il.nombre, niv.nombre, ig.nombre, isec.nombre, 
             a.id, at.nombre, ad.nombre, a.numerodocumento, a.nombreyapellido, a.telefono, 
@@ -510,7 +610,7 @@ INSERT INTO `almacen_producto` (`id`, `nombre`, `descripcion`, `categoria_id`, `
 (57, 'POLO BLANCO PRIMARIA TALLA 6', '', 2, '0.00', '34.00', 10, '2025-01-02 18:00:28', 1),
 (58, 'POLO BLANCO PRIMARIA TALLA 8', '', 2, '0.00', '34.00', 9, '2025-01-02 18:00:28', 1),
 (59, 'POLO BLANCO PRIMARIA TALLA 10', '', 2, '0.00', '36.00', 6, '2025-01-02 18:00:28', 1),
-(60, 'POLO BLANCO PRIMARIA TALLA 12', '', 2, '0.00', '39.00', 7, '2025-01-02 18:00:28', 1),
+(60, 'POLO BLANCO PRIMARIA TALLA 12', '', 2, '0.00', '39.00', 6, '2025-01-02 18:00:28', 1),
 (61, 'POLO BLANCO PRIMARIA TALLA 14', '', 2, '0.00', '41.00', 6, '2025-01-02 18:00:28', 1),
 (62, 'POLO BLANCO PRIMARIA TALLA 16', '', 2, '0.00', '43.00', 9, '2025-01-02 18:00:28', 1),
 (63, 'POLO BLANCO PRIMARIA TALLA S', '', 2, '0.00', '47.00', 7, '2025-01-02 18:00:28', 1),
@@ -556,7 +656,7 @@ INSERT INTO `almacen_producto` (`id`, `nombre`, `descripcion`, `categoria_id`, `
 (103, 'LIBRO PRIMARIA 4 GRADO 2025', '', 4, '0.00', '250.00', 4, '2025-01-20 13:50:03', 1),
 (104, 'LIBRO PRIMARIA 5 GRADO 2025', '', 4, '0.00', '255.00', 0, '2025-01-20 13:50:16', 1),
 (105, 'LIBRO PRIMARIA 6 GRADO 2025', '', 4, '0.00', '255.00', 3, '2025-01-20 13:50:28', 1),
-(106, 'PACK EBENEZER', '', 5, '0.00', '15.00', 7, '2025-01-20 13:51:16', 1),
+(106, 'PACK EBENEZER', '', 5, '0.00', '15.00', 6, '2025-01-20 13:51:16', 1),
 (107, 'CHALECO TALLA 2', '', 2, '0.00', '0.00', 0, '2025-02-06 12:29:29', 0),
 (108, 'CHALECO TALLA 4', '', 2, '0.00', '35.00', 10, '2025-02-06 12:29:46', 1),
 (109, 'CHALECO TALLA 6', '', 2, '0.00', '35.00', 8, '2025-02-06 12:30:11', 1),
@@ -567,7 +667,7 @@ INSERT INTO `almacen_producto` (`id`, `nombre`, `descripcion`, `categoria_id`, `
 (114, 'CHALECO TALLA 16', '', 2, '0.00', '45.00', 10, '2025-02-06 12:32:17', 1),
 (115, 'CHALECO TALLA S', '', 2, '0.00', '0.00', 0, '2025-02-06 12:32:30', 0),
 (116, 'CHALECO TALLA M', '', 2, '0.00', '0.00', 0, '2025-02-06 12:32:43', 0),
-(117, 'RAZ-KIDS', '', 4, '0.00', '100.00', 19, '2025-02-13 11:53:14', 1),
+(117, 'RAZ-KIDS', '', 4, '0.00', '100.00', 17, '2025-02-13 11:53:14', 1),
 (118, 'GORRO', '', 2, '0.00', '12.00', 47, '2025-02-13 13:07:43', 1),
 (119, 'MANDIL ARTE INICIAL TALLA 2', '', 2, '0.00', '0.00', 10, '2025-02-14 09:45:46', 1),
 (120, 'MANDIL ARTE INICIAL TALLA 4', '', 2, '0.00', '40.00', 9, '2025-02-14 09:46:06', 1),
@@ -591,7 +691,7 @@ INSERT INTO `almacen_producto` (`id`, `nombre`, `descripcion`, `categoria_id`, `
 (144, 'TOMATODO PEQUEÑO', '', 5, '0.00', '15.00', 10, '2025-03-06 01:08:14', 1),
 (145, 'TOMATODO GRANDE', '', 5, '0.00', '12.00', 10, '2025-03-06 01:08:14', 1),
 (146, 'CUADERNO DE CONTROL', '', 5, '0.00', '12.00', 0, '2025-03-06 01:09:37', 1),
-(147, 'PAGO DE LISTADO DE UTILES', '', 6, '0.00', '200.00', 43, '2025-03-06 10:53:11', 1),
+(147, 'PAGO DE LISTADO DE UTILES', '', 6, '0.00', '200.00', 40, '2025-03-06 10:53:11', 1),
 (148, 'BIBLIA - SIN FORRO', '', 5, '0.00', '69.00', 9, '2025-03-07 11:52:01', 1),
 (149, 'BIBLIA - CON FORRO', '', 5, '0.00', '92.00', 7, '2025-03-07 11:52:01', 1);
 
@@ -783,7 +883,13 @@ INSERT INTO `almacen_salida` (`id`, `usuario_apoderado_id`, `almacen_comprobante
 (162, 93, 1, '000162', '2025-03-18', 2, '100.00', '', '2025-03-18 13:59:50', 1),
 (163, 31, 1, '000163', '2025-03-18', 1, '100.00', '', '2025-03-18 14:28:10', 1),
 (164, 24, 1, '000164', '2025-03-18', 1, '100.00', '', '2025-03-18 14:39:14', 1),
-(165, 53, 1, '000165', '2025-03-18', 2, '100.00', '', '2025-03-18 15:05:54', 1);
+(165, 53, 1, '000165', '2025-03-18', 2, '100.00', '', '2025-03-18 15:05:54', 1),
+(166, 92, 1, '000166', '2025-03-19', 2, '15.00', '', '2025-03-19 09:15:24', 1),
+(167, 47, 1, '000167', '2025-03-19', 5, '200.00', '', '2025-03-19 09:24:57', 1),
+(168, 88, 1, '000168', '2025-03-19', 5, '400.00', '', '2025-03-19 09:25:20', 1),
+(169, 51, 1, '000169', '2025-03-19', 2, '100.00', '', '2025-03-19 14:21:17', 1),
+(170, 76, 1, '000170', '2025-03-19', 1, '39.00', '', '2025-03-19 14:53:45', 1),
+(171, 79, 1, '000171', '2025-03-19', 1, '100.00', '', '2025-03-19 15:41:18', 1);
 
 --
 -- Disparadores `almacen_salida`
@@ -1174,7 +1280,13 @@ INSERT INTO `almacen_salida_detalle` (`id`, `almacen_salida_id`, `almacen_produc
 (343, 162, 117, 1, '100.00', ''),
 (344, 163, 117, 1, '100.00', ''),
 (345, 164, 117, 1, '100.00', ''),
-(346, 165, 117, 1, '100.00', '');
+(346, 165, 117, 1, '100.00', ''),
+(347, 166, 106, 1, '15.00', ''),
+(348, 167, 147, 1, '200.00', ''),
+(349, 168, 147, 2, '200.00', ''),
+(350, 169, 117, 1, '100.00', ''),
+(351, 170, 60, 1, '39.00', ''),
+(352, 171, 117, 1, '100.00', '');
 
 --
 -- Disparadores `almacen_salida_detalle`
@@ -3468,13 +3580,13 @@ ALTER TABLE `almacen_producto`
 -- AUTO_INCREMENT de la tabla `almacen_salida`
 --
 ALTER TABLE `almacen_salida`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=166;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=172;
 
 --
 -- AUTO_INCREMENT de la tabla `almacen_salida_detalle`
 --
 ALTER TABLE `almacen_salida_detalle`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=347;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=353;
 
 --
 -- AUTO_INCREMENT de la tabla `documento`
