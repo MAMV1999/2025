@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-03-2025 a las 01:09:10
+-- Tiempo de generación: 21-03-2025 a las 22:13:38
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -148,6 +148,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ObtenerDetallesMatriculaTodos` ()  
             niv.nombre AS institucion_nivel, 
             ig.nombre AS institucion_grado,
             isec.nombre AS institucion_seccion,
+            mc.nombre AS matricula_categoria,
             a.id AS apoderado_id,
             at.nombre AS apoderado_tipo,
             ad.nombre AS apoderado_documento_tipo,
@@ -186,40 +187,24 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ObtenerDetallesMatriculaTodos` ()  
 
     -- Completar el SQL dinámico con las cláusulas FROM, WHERE, GROUP BY y ORDER BY
     SET @sql = CONCAT(@sql, '
-        FROM 
-            matricula_detalle md
-        JOIN 
-            matricula m ON md.id_matricula = m.id
-        JOIN 
-            institucion_seccion isec ON m.id_institucion_seccion = isec.id
-        JOIN 
-            institucion_grado ig ON isec.id_institucion_grado = ig.id
-        JOIN 
-            institucion_nivel niv ON ig.id_institucion_nivel = niv.id
-        JOIN 
-            institucion_lectivo il ON niv.id_institucion_lectivo = il.id
-        JOIN 
-            institucion ins ON il.id_institucion = ins.id
-        JOIN 
-            usuario_apoderado a ON md.id_usuario_apoderado = a.id
-        JOIN 
-            usuario_apoderado_tipo at ON a.id_apoderado_tipo = at.id
-        JOIN 
-            usuario_documento ad ON a.id_documento = ad.id
-        JOIN 
-            usuario_alumno al ON md.id_usuario_alumno = al.id
-        JOIN 
-            usuario_documento ald ON al.id_documento = ald.id
-        LEFT JOIN 
-            documento_detalle dd ON md.id = dd.id_matricula_detalle
-        LEFT JOIN 
-            documento d ON dd.id_documento = d.id
-        GROUP BY 
-            md.id, ins.nombre, ins.telefono, ins.correo, ins.ruc, ins.razon_social, ins.direccion, il.nombre, niv.nombre, ig.nombre, isec.nombre, 
-            a.id, at.nombre, ad.nombre, a.numerodocumento, a.nombreyapellido, a.telefono, 
-            al.id, ald.nombre, al.numerodocumento, al.nombreyapellido
-        ORDER BY 
-            ins.nombre ASC, niv.nombre ASC, ig.nombre ASC, isec.nombre ASC, al.nombreyapellido ASC
+        FROM matricula_detalle md
+        JOIN matricula m ON md.id_matricula = m.id
+        JOIN institucion_seccion isec ON m.id_institucion_seccion = isec.id
+        JOIN institucion_grado ig ON isec.id_institucion_grado = ig.id
+        JOIN institucion_nivel niv ON ig.id_institucion_nivel = niv.id
+        JOIN institucion_lectivo il ON niv.id_institucion_lectivo = il.id
+        JOIN institucion ins ON il.id_institucion = ins.id
+        JOIN usuario_apoderado a ON md.id_usuario_apoderado = a.id
+        JOIN usuario_apoderado_tipo at ON a.id_apoderado_tipo = at.id
+        JOIN usuario_documento ad ON a.id_documento = ad.id
+        JOIN usuario_alumno al ON md.id_usuario_alumno = al.id
+        JOIN usuario_documento ald ON al.id_documento = ald.id
+        JOIN matricula_categoria mc ON md.id_matricula_categoria = mc.id
+        LEFT JOIN documento_detalle dd ON md.id = dd.id_matricula_detalle
+        LEFT JOIN documento d ON dd.id_documento = d.id
+        GROUP BY md.id, ins.nombre, ins.telefono, ins.correo, ins.ruc, ins.razon_social, ins.direccion, il.nombre, niv.nombre, ig.nombre, isec.nombre, mc.nombre,
+        a.id, at.nombre, ad.nombre, a.numerodocumento, a.nombreyapellido, a.telefono, al.id, ald.nombre, al.numerodocumento, al.nombreyapellido
+        ORDER BY ins.nombre ASC, niv.nombre ASC, ig.nombre ASC, isec.nombre ASC, al.nombreyapellido ASC
     ');
 
     -- Preparar y ejecutar la consulta dinámica
@@ -648,7 +633,7 @@ INSERT INTO `almacen_producto` (`id`, `nombre`, `descripcion`, `categoria_id`, `
 (95, 'CITA PSICOLÓGICA - INMEDIATA', '', 3, '0.00', '50.00', 7, '2025-01-15 15:21:52', 1),
 (96, 'CITA PSICOLÓGICA - PROGRAMADO', '', 3, '0.00', '30.00', 10, '2025-01-15 15:22:54', 1),
 (97, 'LIBRO INICIAL 3 AÑOS 2025', '', 4, '0.00', '220.00', 5, '2025-01-20 13:48:15', 1),
-(98, 'LIBRO INICIAL 4 AÑOS 2025', '', 4, '0.00', '220.00', 6, '2025-01-20 13:48:42', 1),
+(98, 'LIBRO INICIAL 4 AÑOS 2025', '', 4, '0.00', '220.00', 5, '2025-01-20 13:48:42', 1),
 (99, 'LIBRO INICIAL 5 AÑOS 2025', '', 4, '0.00', '220.00', 3, '2025-01-20 13:48:59', 1),
 (100, 'LIBRO PRIMARIA 1 GRADO 2025', '', 4, '0.00', '240.00', 6, '2025-01-20 13:49:23', 1),
 (101, 'LIBRO PRIMARIA 2 GRADO 2025', '', 4, '0.00', '240.00', 1, '2025-01-20 13:49:37', 1),
@@ -658,7 +643,7 @@ INSERT INTO `almacen_producto` (`id`, `nombre`, `descripcion`, `categoria_id`, `
 (105, 'LIBRO PRIMARIA 6 GRADO 2025', '', 4, '0.00', '255.00', 3, '2025-01-20 13:50:28', 1),
 (106, 'PACK EBENEZER', '', 5, '0.00', '15.00', 6, '2025-01-20 13:51:16', 1),
 (107, 'CHALECO TALLA 2', '', 2, '0.00', '0.00', 0, '2025-02-06 12:29:29', 0),
-(108, 'CHALECO TALLA 4', '', 2, '0.00', '35.00', 10, '2025-02-06 12:29:46', 1),
+(108, 'CHALECO TALLA 4', '', 2, '0.00', '35.00', 9, '2025-02-06 12:29:46', 1),
 (109, 'CHALECO TALLA 6', '', 2, '0.00', '35.00', 8, '2025-02-06 12:30:11', 1),
 (110, 'CHALECO TALLA 8', '', 2, '0.00', '40.00', 9, '2025-02-06 12:30:27', 1),
 (111, 'CHALECO TALLA 10', '', 2, '0.00', '40.00', 8, '2025-02-06 12:30:44', 1),
@@ -667,7 +652,7 @@ INSERT INTO `almacen_producto` (`id`, `nombre`, `descripcion`, `categoria_id`, `
 (114, 'CHALECO TALLA 16', '', 2, '0.00', '45.00', 10, '2025-02-06 12:32:17', 1),
 (115, 'CHALECO TALLA S', '', 2, '0.00', '0.00', 0, '2025-02-06 12:32:30', 0),
 (116, 'CHALECO TALLA M', '', 2, '0.00', '0.00', 0, '2025-02-06 12:32:43', 0),
-(117, 'RAZ-KIDS', '', 4, '0.00', '100.00', 17, '2025-02-13 11:53:14', 1),
+(117, 'RAZ-KIDS', '', 4, '0.00', '100.00', 16, '2025-02-13 11:53:14', 1),
 (118, 'GORRO', '', 2, '0.00', '12.00', 47, '2025-02-13 13:07:43', 1),
 (119, 'MANDIL ARTE INICIAL TALLA 2', '', 2, '0.00', '0.00', 10, '2025-02-14 09:45:46', 1),
 (120, 'MANDIL ARTE INICIAL TALLA 4', '', 2, '0.00', '40.00', 9, '2025-02-14 09:46:06', 1),
@@ -691,7 +676,7 @@ INSERT INTO `almacen_producto` (`id`, `nombre`, `descripcion`, `categoria_id`, `
 (144, 'TOMATODO PEQUEÑO', '', 5, '0.00', '15.00', 10, '2025-03-06 01:08:14', 1),
 (145, 'TOMATODO GRANDE', '', 5, '0.00', '12.00', 10, '2025-03-06 01:08:14', 1),
 (146, 'CUADERNO DE CONTROL', '', 5, '0.00', '12.00', 0, '2025-03-06 01:09:37', 1),
-(147, 'PAGO DE LISTADO DE UTILES', '', 6, '0.00', '200.00', 40, '2025-03-06 10:53:11', 1),
+(147, 'PAGO DE LISTADO DE UTILES', '', 6, '0.00', '200.00', 39, '2025-03-06 10:53:11', 1),
 (148, 'BIBLIA - SIN FORRO', '', 5, '0.00', '69.00', 9, '2025-03-07 11:52:01', 1),
 (149, 'BIBLIA - CON FORRO', '', 5, '0.00', '92.00', 7, '2025-03-07 11:52:01', 1);
 
@@ -889,7 +874,11 @@ INSERT INTO `almacen_salida` (`id`, `usuario_apoderado_id`, `almacen_comprobante
 (168, 88, 1, '000168', '2025-03-19', 5, '400.00', '', '2025-03-19 09:25:20', 1),
 (169, 51, 1, '000169', '2025-03-19', 2, '100.00', '', '2025-03-19 14:21:17', 1),
 (170, 76, 1, '000170', '2025-03-19', 1, '39.00', '', '2025-03-19 14:53:45', 1),
-(171, 79, 1, '000171', '2025-03-19', 1, '100.00', '', '2025-03-19 15:41:18', 1);
+(171, 79, 1, '000171', '2025-03-19', 1, '100.00', '', '2025-03-19 15:41:18', 1),
+(172, 25, 1, '000172', '2025-03-21', 1, '100.00', '', '2025-03-21 07:43:50', 1),
+(173, 55, 1, '000173', '2025-03-21', 1, '220.00', 'PAGO 1 - LIBRO INICIAL 4 AÑOS 2025	20 SOLES\r\nPAGO 2 - LIBRO INICIAL 4 AÑOS 2025	200 SOLES', '2025-03-21 11:16:17', 1),
+(174, 37, 1, '000174', '2025-03-21', 1, '35.00', '', '2025-03-21 12:49:39', 1),
+(175, 67, 1, '000175', '2025-03-21', 2, '200.00', '', '2025-03-21 12:50:10', 1);
 
 --
 -- Disparadores `almacen_salida`
@@ -1286,7 +1275,11 @@ INSERT INTO `almacen_salida_detalle` (`id`, `almacen_salida_id`, `almacen_produc
 (349, 168, 147, 2, '200.00', ''),
 (350, 169, 117, 1, '100.00', ''),
 (351, 170, 60, 1, '39.00', ''),
-(352, 171, 117, 1, '100.00', '');
+(352, 171, 117, 1, '100.00', ''),
+(353, 172, 117, 1, '100.00', ''),
+(354, 173, 98, 1, '220.00', ''),
+(355, 174, 108, 1, '35.00', ''),
+(356, 175, 147, 1, '200.00', '');
 
 --
 -- Disparadores `almacen_salida_detalle`
@@ -3580,13 +3573,13 @@ ALTER TABLE `almacen_producto`
 -- AUTO_INCREMENT de la tabla `almacen_salida`
 --
 ALTER TABLE `almacen_salida`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=172;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=176;
 
 --
 -- AUTO_INCREMENT de la tabla `almacen_salida_detalle`
 --
 ALTER TABLE `almacen_salida_detalle`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=353;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=357;
 
 --
 -- AUTO_INCREMENT de la tabla `documento`
