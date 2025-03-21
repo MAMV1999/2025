@@ -21,6 +21,7 @@ BEGIN
             niv.nombre AS institucion_nivel, 
             ig.nombre AS institucion_grado,
             isec.nombre AS institucion_seccion,
+            mc.nombre AS matricula_categoria,
             a.id AS apoderado_id,
             at.nombre AS apoderado_tipo,
             ad.nombre AS apoderado_documento_tipo,
@@ -59,40 +60,24 @@ BEGIN
 
     -- Completar el SQL dinámico con las cláusulas FROM, WHERE, GROUP BY y ORDER BY
     SET @sql = CONCAT(@sql, '
-        FROM 
-            matricula_detalle md
-        JOIN 
-            matricula m ON md.id_matricula = m.id
-        JOIN 
-            institucion_seccion isec ON m.id_institucion_seccion = isec.id
-        JOIN 
-            institucion_grado ig ON isec.id_institucion_grado = ig.id
-        JOIN 
-            institucion_nivel niv ON ig.id_institucion_nivel = niv.id
-        JOIN 
-            institucion_lectivo il ON niv.id_institucion_lectivo = il.id
-        JOIN 
-            institucion ins ON il.id_institucion = ins.id
-        JOIN 
-            usuario_apoderado a ON md.id_usuario_apoderado = a.id
-        JOIN 
-            usuario_apoderado_tipo at ON a.id_apoderado_tipo = at.id
-        JOIN 
-            usuario_documento ad ON a.id_documento = ad.id
-        JOIN 
-            usuario_alumno al ON md.id_usuario_alumno = al.id
-        JOIN 
-            usuario_documento ald ON al.id_documento = ald.id
-        LEFT JOIN 
-            documento_detalle dd ON md.id = dd.id_matricula_detalle
-        LEFT JOIN 
-            documento d ON dd.id_documento = d.id
-        GROUP BY 
-            md.id, ins.nombre, ins.telefono, ins.correo, ins.ruc, ins.razon_social, ins.direccion, il.nombre, niv.nombre, ig.nombre, isec.nombre, 
-            a.id, at.nombre, ad.nombre, a.numerodocumento, a.nombreyapellido, a.telefono, 
-            al.id, ald.nombre, al.numerodocumento, al.nombreyapellido
-        ORDER BY 
-            ins.nombre ASC, niv.nombre ASC, ig.nombre ASC, isec.nombre ASC, al.nombreyapellido ASC
+        FROM matricula_detalle md
+        JOIN matricula m ON md.id_matricula = m.id
+        JOIN institucion_seccion isec ON m.id_institucion_seccion = isec.id
+        JOIN institucion_grado ig ON isec.id_institucion_grado = ig.id
+        JOIN institucion_nivel niv ON ig.id_institucion_nivel = niv.id
+        JOIN institucion_lectivo il ON niv.id_institucion_lectivo = il.id
+        JOIN institucion ins ON il.id_institucion = ins.id
+        JOIN usuario_apoderado a ON md.id_usuario_apoderado = a.id
+        JOIN usuario_apoderado_tipo at ON a.id_apoderado_tipo = at.id
+        JOIN usuario_documento ad ON a.id_documento = ad.id
+        JOIN usuario_alumno al ON md.id_usuario_alumno = al.id
+        JOIN usuario_documento ald ON al.id_documento = ald.id
+        JOIN matricula_categoria mc ON md.id_matricula_categoria = mc.id
+        LEFT JOIN documento_detalle dd ON md.id = dd.id_matricula_detalle
+        LEFT JOIN documento d ON dd.id_documento = d.id
+        GROUP BY md.id, ins.nombre, ins.telefono, ins.correo, ins.ruc, ins.razon_social, ins.direccion, il.nombre, niv.nombre, ig.nombre, isec.nombre, mc.nombre,
+        a.id, at.nombre, ad.nombre, a.numerodocumento, a.nombreyapellido, a.telefono, al.id, ald.nombre, al.numerodocumento, al.nombreyapellido
+        ORDER BY ins.nombre ASC, niv.nombre ASC, ig.nombre ASC, isec.nombre ASC, al.nombreyapellido ASC
     ');
 
     -- Preparar y ejecutar la consulta dinámica
