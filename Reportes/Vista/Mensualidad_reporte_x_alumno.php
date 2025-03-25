@@ -48,6 +48,9 @@ class PDFMensualidadAlumno extends FPDF
         $this->Cell(50, 8, utf8_decode("ALUMNO(A)"), $borde, 0);
         $this->Cell(0, 8, utf8_decode("{$datos['nombre_alumno']}"), $borde, 1);
 
+        $this->Cell(50, 8, utf8_decode("TELEFONO"), $borde, 0);
+        $this->Cell(0, 8, utf8_decode("{$datos['telefono_apoderado']}"), $borde, 1);
+
         $this->Cell(50, 8, utf8_decode("CODIGO"), $borde, 0);
         $this->Cell(0, 8, utf8_decode("{$datos['numero_documento_alumno']}"), $borde, 1);
         $this->Ln(5);
@@ -66,19 +69,31 @@ class PDFMensualidadAlumno extends FPDF
         $this->SetFont('Arial', '', 10);
 
         foreach ($mensualidades as $mensualidad) {
+            $estado = strtoupper(trim($mensualidad['estado']));
+            $esPendiente = ($estado == 'PENDIENTE');
+        
             $this->Cell(30, 8, utf8_decode($mensualidad['mes']), 1, 0, 'C');
-            $this->Cell(30, 8, 'S/ '.number_format($mensualidad['monto'], 2), 1, 0, 'C');
-            $this->Cell(30, 8, utf8_decode($mensualidad['estado']), 1, 0, 'C');
+            $this->Cell(30, 8, 'S/ ' . number_format($mensualidad['monto'], 2), 1, 0, 'C');
+        
+            // Si es pendiente, aplicar fondo gris claro solo a esta celda
+            if ($esPendiente) {
+                $this->SetFillColor(220, 220, 220); // plomo claro
+                $this->Cell(30, 8, utf8_decode($mensualidad['estado']), 1, 0, 'C', true);
+                $this->SetFillColor(255, 255, 255); // restaurar fondo blanco
+            } else {
+                $this->Cell(30, 8, utf8_decode($mensualidad['estado']), 1, 0, 'C');
+            }
+        
             $this->Cell(100, 8, utf8_decode($mensualidad['observacion']), 1, 0, 'C');
             $this->Ln();
         }
+        
     }
 }
 
 // Obtener datos
 $modelo = new Reportemensualidadxalumno();
 $id_matricula_detalle = $_GET['id'];
-//$id_matricula_detalle = '1';
 
 // Obtener los datos del modelo y convertirlos en un array
 $resultado = $modelo->listar($id_matricula_detalle);
@@ -136,7 +151,7 @@ if (!empty($datos)) {
     $pdf->addTitulo($institucion);
     $pdf->addInformacionGeneral($informacion_general);
     $pdf->addTablaMensualidades($mensualidades);
-    $pdf->Output();
+    $pdf->Output('I', utf8_decode('REPORTE DE MENSUALIDAD '.$informacion_general['nombre_alumno']) . '.pdf');
 } else {
     echo "No se encontraron datos para el ID especificado.";
 }
