@@ -60,6 +60,7 @@ if (!isset($_SESSION['nombre'])) {
                 $array = array(
                     "1" => array("nombre" => "DETALLE DE MENSUALIDADES X MES", "link" => "../../Reportes/Vista/mensualidad_detalle_general.php"),
                     "2" => array("nombre" => "DETALLE DE MENSUALIDADES X APODERADO", "link" => "../../Reportes/Vista/Mensualidad_reporte_x_apoderado.php"),
+                    "3" => array("nombre" => "DETALLE DE MENSUALIDADES PAGADAS X MES", "link" => "../../Reportes/Vista/mensualidad_detalle_pagado.php"),
                 );
                 ?>
                 <table class="table">

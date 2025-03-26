@@ -1,30 +1,21 @@
 <?php
 require_once("../../database.php");
 
-class Mensualidad_detalle
+class Mensualidad_detalle_pagado
 {
     public function __construct() {}
 
-    public function listar_mensualidad_detalle_general()
+    public function listar_mensualidad_detalle_pagado()
     {
         $sql = "SELECT 
-                    mensualidad_detalle.id AS detalle_id,
-                    mensualidad_detalle.id_matricula_detalle AS matricula_detalle_id,
-                    institucion_lectivo.id AS lectivo_id,
                     institucion_lectivo.nombre AS lectivo_nombre,
-                    institucion_nivel.id AS nivel_id,
                     institucion_nivel.nombre AS nivel_nombre,
-                    institucion_grado.id AS grado_id,
                     institucion_grado.nombre AS grado_nombre,
-                    institucion_seccion.id AS seccion_id,
                     institucion_seccion.nombre AS seccion_nombre,
-                    usuario_apoderado.id AS apoderado_id,
                     usuario_apoderado.nombreyapellido AS apoderado_nombre,
                     usuario_apoderado.telefono AS apoderado_telefono,
-                    usuario_alumno.id AS alumno_id,
                     usuario_alumno.numerodocumento AS alumno_codigo,
                     usuario_alumno.nombreyapellido AS alumno_nombre,
-                    mensualidad_detalle.id_mensualidad_mes AS mensualidad_mes_id,
                     mensualidad_mes.nombre AS mensualidad_mes_nombre,
                     mensualidad_detalle.monto AS detalle_monto,
                     CASE 
@@ -58,7 +49,8 @@ class Mensualidad_detalle
                     institucion_seccion.estado = 1 AND
                     institucion_grado.estado = 1 AND
                     institucion_nivel.estado = 1 AND
-                    institucion_lectivo.estado = 1
+                    institucion_lectivo.estado = 1 AND
+                    mensualidad_detalle.pagado = 1
                 ORDER BY 
                     mensualidad_detalle.id_mensualidad_mes ASC,
                     institucion_lectivo.nombre ASC,
