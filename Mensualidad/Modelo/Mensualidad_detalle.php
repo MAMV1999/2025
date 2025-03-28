@@ -89,6 +89,7 @@ public function listar()
             mc.nombre AS categoria,
             uap.nombreyapellido AS apoderado, 
             ual.nombreyapellido AS alumno, 
+            ual.numerodocumento AS codigo, 
             SUM(md.monto) AS total_monto, 
             COUNT(md.id) AS num_mensualidades,
             md.estado AS estado

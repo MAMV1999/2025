@@ -19,6 +19,9 @@ if (!isset($_SESSION['nombre'])) {
                 <?php
                 $array = array(
                     "1" => array("nombre" => "REGISTRO UTILES ESCOLARES", "link" => "reg_documento.php"),
+                    "2" => array("nombre" => "REGISTRO ASISTENCIAS", "link" => "reg_documento.php"),
+                    "3" => array("nombre" => "REGISTRO JUSTIFICACIONES", "link" => "reg_documento.php"),
+                    "4" => array("nombre" => "REGISTRO INCIDENCIAS", "link" => "reg_documento.php"),
                 );
                 ?>
                 <table class="table">
