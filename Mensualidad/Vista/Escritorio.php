@@ -58,9 +58,11 @@ if (!isset($_SESSION['nombre'])) {
                 <br>
                 <?php
                 $array = array(
-                    "1" => array("nombre" => "DETALLE DE MENSUALIDADES X MES", "link" => "../../Reportes/Vista/mensualidad_detalle_general.php"),
-                    "2" => array("nombre" => "DETALLE DE MENSUALIDADES X APODERADO", "link" => "../../Reportes/Vista/Mensualidad_reporte_x_apoderado.php"),
-                    "3" => array("nombre" => "DETALLE DE MENSUALIDADES PAGADAS X MES", "link" => "../../Reportes/Vista/mensualidad_detalle_pagado.php"),
+                    "1" => array("nombre" => "DETALLE DE MENSUALIDADES", "link" => "../../Reportes/Vista/Mensualidad_reporte_general.php"),
+                    "2" => array("nombre" => "DETALLE DE MENSUALIDADES X MES", "link" => "../../Reportes/Vista/mensualidad_detalle_general.php"),
+                    "3" => array("nombre" => "DETALLE DE MENSUALIDADES X APODERADO", "link" => "../../Reportes/Vista/Mensualidad_reporte_x_apoderado.php"),
+                    "4" => array("nombre" => "DETALLE DE MENSUALIDADES PAGADAS", "link" => "../../Reportes/Vista/mensualidad_detalle_pagado.php"),
+                    "5" => array("nombre" => "DETALLE DE MENSUALIDADES PENDIENTES", "link" => "../../Reportes/Vista/mensualidad_detalle_deudores.php"),
                 );
                 ?>
                 <table class="table">

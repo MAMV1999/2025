@@ -51,6 +51,7 @@ class PDF extends FPDF
     {
         $this->SetFont('Arial', '', 7);
         $orientacion = 'C';
+    
         foreach ($results as $row) {
             $this->Cell(15, 6, utf8_decode($row['nivel_nombre']), 1, 0, $orientacion);
             $this->Cell(15, 6, utf8_decode($row['grado_nombre']), 1, 0, $orientacion);
@@ -58,9 +59,17 @@ class PDF extends FPDF
             $this->Cell(60, 6, utf8_decode($row['apoderado_nombre']), 1, 0, $orientacion);
             $this->Cell(18, 6, utf8_decode($row['apoderado_telefono']), 1, 0, $orientacion);
             $this->Cell(15, 6, 'S/.' . number_format($row['detalle_monto'], 2), 1, 0, $orientacion);
-            $this->Cell(17, 6, utf8_decode($row['detalle_estado_pago']), 1, 1, $orientacion);
+    
+            // Evaluar estado de pago y aplicar color
+            if (strtoupper($row['detalle_estado_pago']) === 'PENDIENTE') {
+                $this->SetFillColor(220, 220, 220); // gris claro/plomo medio
+                $this->Cell(17, 6, utf8_decode($row['detalle_estado_pago']), 1, 1, $orientacion, true);
+            } else {
+                $this->Cell(17, 6, utf8_decode($row['detalle_estado_pago']), 1, 1, $orientacion);
+            }
         }
     }
+    
 }
 
 // Obtener los datos

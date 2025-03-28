@@ -75,11 +75,24 @@ class PDF extends FPDF
         foreach ($data as $row) {
             $this->Cell(10, 8, utf8_decode($row['numero']), 1, 0, 'C');
             $this->Cell(100, 8, utf8_decode($row['nombre']), 1);
-            $this->Cell(20, 8, utf8_decode($row['entregado']), 1, 0, 'C');
+    
+            // Definir color según el valor SI o NO
+            $entregado = strtoupper(trim($row['entregado']));
+            if ($entregado === 'NO') {
+                // Plomo medio: RGB(192, 192, 192)
+                $this->SetFillColor(192, 192, 192);
+                $this->Cell(20, 8, utf8_decode($entregado), 1, 0, 'C', true);
+            } else {
+                // Fondo blanco
+                $this->SetFillColor(255, 255, 255);
+                $this->Cell(20, 8, utf8_decode($entregado), 1, 0, 'C', true);
+            }
+    
             $this->Cell(0, 8, utf8_decode($row['observaciones']), 1, 0, 'C');
             $this->Ln();
         }
     }
+    
 }
 
 // Crear un objeto de la clase Documentos
