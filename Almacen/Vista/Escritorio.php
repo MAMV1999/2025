@@ -93,6 +93,7 @@ if (!isset($_SESSION['nombre'])) {
                     "1" => array("nombre" => "REPORTE DE PRODUCTOS", "link" => "../../Reportes/Vista/almacen_producto.php"),
                     "2" => array("nombre" => "REPORTE DE VENTAS X DIA", "link" => "../../Reportes/Vista/Reporte_salida.php"),
                     "3" => array("nombre" => "REPORTE DE VENTAS X APODERADO", "link" => "../../Reportes/Vista/Reporte_salida_x_apoderado.php"),
+                    "4" => array("nombre" => "REPORTE DE VENTAS X PRODUCTO", "link" => "../../Reportes/Vista/Reporte_salida_x_producto.php"),
                 );
                 ?>
                 <table class="table">

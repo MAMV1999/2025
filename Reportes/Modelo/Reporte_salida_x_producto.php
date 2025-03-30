@@ -1,7 +1,7 @@
 <?php
 require_once("../../database.php");
 
-class Reportesalidaxapoderado
+class Reportesalidaxproducto
 {
     public function __construct() {}
 
@@ -33,8 +33,7 @@ class Reportesalidaxapoderado
                 LEFT JOIN usuario_documento ud ON ua.id_documento = ud.id
                 LEFT JOIN almacen_metodo_pago amp ON ass.almacen_metodo_pago_id = amp.id
                 WHERE ass.estado = 1
-                ORDER BY ua.nombreyapellido ASC, ass.fecha ASC, ass.numeracion ASC";
+                ORDER BY ap.nombre ASC, ass.fecha ASC";
         return ejecutarConsulta($sql);
     }
-
 }
