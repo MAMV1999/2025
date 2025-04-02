@@ -52,7 +52,7 @@ class PDF extends FPDF
         $contador = 1;
         foreach ($results as $row) {
             $this->Cell(8, 6, $contador, 1, 0, 'C');
-            $this->Cell(23, 6, utf8_decode($row['documento_tipo'].' - '.$row['numerodocumento']), 1, 0, 'C');
+            $this->Cell(23, 6, utf8_decode($row['documento_tipo'].' '.$row['numerodocumento']), 1, 0, 'C');
             $this->Cell(70, 6, utf8_decode($row['docente_nombre']), 1, 0, 'C');
             $this->Cell(20, 6, utf8_decode($row['telefono']), 1, 0, 'C');
             $this->Cell(20, 6, utf8_decode($row['fecha_nacimiento']), 1, 0, 'C');

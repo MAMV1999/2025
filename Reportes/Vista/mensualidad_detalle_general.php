@@ -62,7 +62,7 @@ class PDF extends FPDF
     
             // Evaluar estado de pago y aplicar color
             if (strtoupper($row['detalle_estado_pago']) === 'PENDIENTE') {
-                $this->SetFillColor(220, 220, 220); // gris claro/plomo medio
+                $this->SetFillColor(192, 192, 192);
                 $this->Cell(17, 6, utf8_decode($row['detalle_estado_pago']), 1, 1, $orientacion, true);
             } else {
                 $this->Cell(17, 6, utf8_decode($row['detalle_estado_pago']), 1, 1, $orientacion);

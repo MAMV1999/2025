@@ -14,7 +14,7 @@ switch ($_GET["op"]) {
     case 'guardaryeditar':
         $detalles = isset($_POST['detalles']) ? json_decode($_POST['detalles'], true) : [];
         $rspta = $mensualidadDetalle->guardarEditarMasivo($detalles);
-    
+
         echo $rspta ? "Registros actualizados correctamente" : "No se pudieron actualizar todos los registros";
         break;
 
@@ -76,8 +76,8 @@ switch ($_GET["op"]) {
             $data[] = array(
                 "0" => $cont,
                 "1" => $reg->lectivo . ' - ' . $reg->nivel . ' - ' . $reg->grado,
-                "2" => $reg->apoderado,
-                "3" => $reg->alumno,
+                "2" => (strlen($reg->apoderado) > 40) ? substr($reg->apoderado, 0, 37) . '...' : $reg->apoderado,
+                "3" => (strlen($reg->alumno) > 40) ? substr($reg->alumno, 0, 37) . '...' : $reg->alumno,
                 "4" => $reg->codigo,
                 "5" => '<button class="btn btn-warning btn-sm" onclick="mostrar(' . $reg->id . ')">EDITAR</button>
 

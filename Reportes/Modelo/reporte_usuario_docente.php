@@ -38,7 +38,8 @@ class Reportedocente
                 LEFT JOIN usuario_estado_civil uec ON ud.id_estado_civil = uec.id
                 LEFT JOIN usuario_sexo usex ON ud.id_sexo = usex.id
                 LEFT JOIN usuario_cargo ucar ON ud.id_cargo = ucar.id
-                LEFT JOIN usuario_tipo_contrato utc ON ud.id_tipo_contrato = utc.id";
+                LEFT JOIN usuario_tipo_contrato utc ON ud.id_tipo_contrato = utc.id
+                ORDER BY ud.nombreyapellido ASC";
         return ejecutarConsulta($sql);
     }
 
