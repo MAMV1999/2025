@@ -38,38 +38,65 @@ class PDF extends FPDF
 
         $this->SetFont('Arial', 'B', 7);
         $this->SetFillColor(188, 188, 188);
-        $this->Cell(15, 10, utf8_decode('NIVEL'), 1, 0, $orientacion, true);
-        $this->Cell(15, 10, utf8_decode('GRADO'), 1, 0, $orientacion, true);
-        $this->Cell(60, 10, utf8_decode('ALUMNO'), 1, 0, $orientacion, true);
-        $this->Cell(60, 10, utf8_decode('APODERADO'), 1, 0, $orientacion, true);
-        $this->Cell(18, 10, utf8_decode('TELEFONO'), 1, 0, $orientacion, true);
-        $this->Cell(15, 10, utf8_decode('MONTO'), 1, 0, $orientacion, true);
-        $this->Cell(17, 10, utf8_decode('ESTADO'), 1, 1, $orientacion, true);
+        $this->Cell(8, 8, utf8_decode('N°'), 1, 0, $orientacion, true); // Numeración
+        $this->Cell(23, 8, utf8_decode('NIVEL GRADO'), 1, 0, $orientacion, true);
+        $this->Cell(60, 8, utf8_decode('ALUMNO'), 1, 0, $orientacion, true);
+        $this->Cell(60, 8, utf8_decode('APODERADO'), 1, 0, $orientacion, true);
+        $this->Cell(18, 8, utf8_decode('TELEFONO'), 1, 0, $orientacion, true);
+        $this->Cell(15, 8, utf8_decode('MONTO'), 1, 0, $orientacion, true);
+        $this->Cell(0, 8, utf8_decode('ESTADO'), 1, 1, $orientacion, true);
     }
 
     function FillTable($results)
     {
-        $this->SetFont('Arial', '', 7);
+        $this->SetFont('Arial', '', 6.5);
         $orientacion = 'C';
-    
+        $num = 1;
+
+        $total_general = 0;
+        $total_pagado = 0;
+        $total_pendiente = 0;
+
         foreach ($results as $row) {
-            $this->Cell(15, 6, utf8_decode($row['nivel_nombre']), 1, 0, $orientacion);
-            $this->Cell(15, 6, utf8_decode($row['grado_nombre']), 1, 0, $orientacion);
-            $this->Cell(60, 6, utf8_decode($row['alumno_nombre']), 1, 0, $orientacion);
-            $this->Cell(60, 6, utf8_decode($row['apoderado_nombre']), 1, 0, $orientacion);
+            $monto = floatval($row['detalle_monto']);
+            $estado = strtoupper($row['detalle_estado_pago']);
+
+            $total_general += $monto;
+            if ($estado === 'PAGADO') {
+                $total_pagado += $monto;
+            } elseif ($estado === 'PENDIENTE') {
+                $total_pendiente += $monto;
+            }
+
+            $this->Cell(8, 6, $num++, 1, 0, $orientacion);
+            $this->Cell(23, 6, utf8_decode(substr($row['nivel_nombre'], 0, 4) . ' ' . $row['grado_nombre']), 1, 0, $orientacion);
+            $this->Cell(60, 6, utf8_decode(substr($row['alumno_nombre'], 0, 35)), 1, 0, $orientacion);
+            $this->Cell(60, 6, utf8_decode(substr($row['apoderado_nombre'], 0, 35)), 1, 0, $orientacion);
             $this->Cell(18, 6, utf8_decode($row['apoderado_telefono']), 1, 0, $orientacion);
-            $this->Cell(15, 6, 'S/.' . number_format($row['detalle_monto'], 2), 1, 0, $orientacion);
-    
-            // Evaluar estado de pago y aplicar color
-            if (strtoupper($row['detalle_estado_pago']) === 'PENDIENTE') {
+            $this->Cell(15, 6, 'S/.' . number_format($monto, 2), 1, 0, $orientacion);
+
+            if ($estado === 'PENDIENTE') {
                 $this->SetFillColor(192, 192, 192);
-                $this->Cell(17, 6, utf8_decode($row['detalle_estado_pago']), 1, 1, $orientacion, true);
+                $this->Cell(0, 6, utf8_decode($row['detalle_estado_pago']), 1, 1, $orientacion, true);
             } else {
-                $this->Cell(17, 6, utf8_decode($row['detalle_estado_pago']), 1, 1, $orientacion);
+                $this->Cell(0, 6, utf8_decode($row['detalle_estado_pago']), 1, 1, $orientacion);
             }
         }
+
+        // Agregar fila de totales
+        $this->SetFont('Arial', 'B', 6.5);
+        $this->Cell(169, 6, 'TOTAL GENERAL', 1, 0, 'R');
+        $this->Cell(15, 6, 'S/.' . number_format($total_general, 2), 1, 0, 'C');
+        $this->Cell(0, 6, '', 1, 1);
+
+        $this->Cell(169, 6, 'TOTAL PAGADO', 1, 0, 'R');
+        $this->Cell(15, 6, 'S/.' . number_format($total_pagado, 2), 1, 0, 'C');
+        $this->Cell(0, 6, '', 1, 1);
+
+        $this->Cell(169, 6, 'TOTAL PENDIENTE', 1, 0, 'R');
+        $this->Cell(15, 6, 'S/.' . number_format($total_pendiente, 2), 1, 0, 'C');
+        $this->Cell(0, 6, '', 1, 1);
     }
-    
 }
 
 // Obtener los datos
@@ -109,7 +136,7 @@ foreach ($meses as $mes => $registros) {
 }
 
 // Salida del archivo
-$filename = 'MENSUALIDADES_'.$fecha_hora_actual.'.pdf';
+$filename = 'MENSUALIDADES_' . $fecha_hora_actual . '.pdf';
 
 header('Content-Type: application/pdf');
 header('Content-Disposition: inline; filename="' . $filename . '"');
