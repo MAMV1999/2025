@@ -110,27 +110,28 @@
 
             <?php
             $array = array(
-                "1" => array("nombre" => "INICIO", "link" => "../../Inicio/Vista/Escritorio.php"),
-                "2" => array("nombre" => "USUARIO", "link" => "../../Usuario/Vista/Escritorio.php"),
-                "3" => array("nombre" => "INSTITUCION", "link" => "../../Institucion/Vista/Escritorio.php"),
-                "4" => array("nombre" => "MATRICULA 2025", "link" => "../../Matricula/Vista/Escritorio.php"),
-                "5" => array("nombre" => "MENSUALIDAD", "link" => "../../Mensualidad/Vista/Escritorio.php"),
-                "6" => array("nombre" => "FACTURACION", "link" => "../../Mensualidad/Vista/Escritorio.php"),
-                "7" => array("nombre" => "REGISTRO", "link" => "../../Registro/Vista/Escritorio.php"),
-                "8" => array("nombre" => "DOCUMENTO", "link" => "../../Documento/Vista/Escritorio.php"),
-                "9" => array("nombre" => "ALMACEN", "link" => "../../Almacen/Vista/Escritorio.php"),
-                "10" => array("nombre" => "BIBLIOTECA", "link" => "../../Biblioteca/Vista/Escritorio.php"),
+                "1" => array(   "nombre" => "INICIO",           "link" => "Inicio",         "cargo" => array("TODOS")),
+                "2" => array(   "nombre" => "USUARIO",          "link" => "Usuario",        "cargo" => array("ADMINISTRATIVO")),
+                "3" => array(   "nombre" => "INSTITUCION",      "link" => "Institucion",    "cargo" => array("ADMINISTRATIVO")),
+                "4" => array(   "nombre" => "MATRICULA 2025",   "link" => "Matricula",      "cargo" => array("DIRECTOR", "ADMINISTRATIVO")),
+                "5" => array(   "nombre" => "MENSUALIDAD",      "link" => "Mensualidad",    "cargo" => array("DIRECTOR", "ADMINISTRATIVO")),
+                "6" => array(   "nombre" => "FACTURACION",      "link" => "Mensualidad",    "cargo" => array("DIRECTOR", "ADMINISTRATIVO")),
+                "7" => array(   "nombre" => "REGISTRO",         "link" => "Registro",       "cargo" => array("TODOS")),
+                "8" => array(   "nombre" => "DOCUMENTO",        "link" => "Documento",      "cargo" => array("DIRECTOR", "ADMINISTRATIVO")),
+                "9" => array(   "nombre" => "ALMACEN",          "link" => "Almacen",        "cargo" => array("DIRECTOR", "ADMINISTRATIVO")),
+                "10" => array(  "nombre" => "BIBLIOTECA",       "link" => "Biblioteca",     "cargo" => array("TODOS")),
             );
             ?>
             <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <?php
-                    $a = 1;
-                    while ($a <= count($array)) {
-                        echo '<li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="' . $array[$a]["link"] . '">' . $array[$a]["nombre"] . '</a>
-                            </li>';
-                        $a++;
+                    $cargoSesion = $_SESSION['docente_cargo']; // por ejemplo: "DIRECTOR", "ADMINISTRATIVO", etc.
+                    foreach ($array as $item) {
+                        if (in_array("TODOS", $item["cargo"]) || in_array($cargoSesion, $item["cargo"])) {
+                            echo '<li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="../../' . $item["link"] . '/Vista/Escritorio.php">' . $item["nombre"] . '</a>
+                      </li>';
+                        }
                     }
                     ?>
                 </ul>
@@ -140,8 +141,8 @@
                             <span class="visually-hidden">Toggle Dropstart</span>
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="../../Inicio/Vista/Perfil.php"><?php echo $_SESSION['nombre'];?></a></li>
-                            <li><a class="dropdown-item" target="_blank" href="../../Reportes/Vista/usuario_docente.php?id=<?php echo $_SESSION['docente_id'];?>">INFORMACION PERSONAL - PDF</a></li>
+                            <li><a class="dropdown-item" href="../../Inicio/Vista/Perfil.php"><?php echo $_SESSION['nombre']; ?></a></li>
+                            <li><a class="dropdown-item" target="_blank" href="../../Reportes/Vista/usuario_docente.php?id=<?php echo $_SESSION['docente_id']; ?>">INFORMACION PERSONAL - PDF</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
