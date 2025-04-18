@@ -63,6 +63,7 @@ if (!isset($_SESSION['nombre'])) {
                     "3" => array("nombre" => "DETALLE DE MENSUALIDADES X APODERADO", "link" => "../../Reportes/Vista/Mensualidad_reporte_x_apoderado.php"),
                     "4" => array("nombre" => "DETALLE DE MENSUALIDADES PAGADAS", "link" => "../../Reportes/Vista/mensualidad_detalle_pagado.php"),
                     "5" => array("nombre" => "DETALLE DE MENSUALIDADES PENDIENTES", "link" => "../../Reportes/Vista/mensualidad_detalle_deudores.php"),
+                    "6" => array("nombre" => "LISTADO DE MENSUALIDADES BCP", "link" => "../../Reportes/Vista/Mensualidad_reporte_bcp.php"),
                 );
                 ?>
                 <table class="table">
