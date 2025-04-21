@@ -22,7 +22,7 @@ class AlmacenProducto
 
                 if ($id) {
                     // Actualizar producto existente
-                    $sql = "UPDATE almacen_producto SET nombre='$nombre', descripcion='$descripcion', categoria_id='$categoria_id', precio_compra='$precio_compra', precio_venta='$precio_venta', stock='0', estado='1' WHERE id='$id'";
+                    $sql = "UPDATE almacen_producto SET nombre='$nombre', descripcion='$descripcion', categoria_id='$categoria_id', precio_compra='$precio_compra', precio_venta='$precio_venta' WHERE id='$id'";
                 } else {
                     // Insertar nuevo producto
                     $sql = "INSERT INTO almacen_producto (nombre, descripcion, categoria_id, precio_compra, precio_venta, stock, estado) VALUES ('$nombre', '$descripcion', '$categoria_id', '$precio_compra', '$precio_venta', '0', '1')";

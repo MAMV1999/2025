@@ -13,13 +13,12 @@ if (!isset($_SESSION['nombre'])) {
 
         <!-- CUERPO_INICIO -->
         <div class="my-3 p-3 bg-body rounded shadow-sm" id="listado">
-            <h5 class="border-bottom pb-2 mb-0"><b>BIBLIOTECA</b></h5>
+            <h5 class="border-bottom pb-2 mb-0"><b>FACTURACION</b></h5>
             <div class="d-flex text-body-secondary pt-3">
                 <br>
                 <?php
                 $array = array(
-                    "1" => array("nombre" => "REGISTRO LIBROS", "link" => "biblioteca_libro.php"),
-                    "2" => array("nombre" => "REGISTRO PRESTAMOS / DEVOLUCIONES", "link" => "biblioteca_libro.php"),
+                    "1" => array("nombre" => "MENSUALIDADES PAGADAS X MES", "link" => "Institucion.php"),
                 );
                 ?>
                 <table class="table">
@@ -47,22 +46,21 @@ if (!isset($_SESSION['nombre'])) {
             </div>
         </div>
 
-        <hr>
 
         <p class="d-inline-flex gap-1">
-            <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">AJUSTES BIBLIOTECA</a>
+            <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">AJUSTES DE INSTITUCION</a>
         </p>
         <div class="collapse" id="collapseExample">
             <div class="card card-body">
 
                 <!-- CUERPO_INICIO -->
                 <div class="my-3 p-3 bg-body rounded shadow-sm" id="listado">
-                    <h5 class="border-bottom pb-2 mb-0"><b>AJUSTES DE BIBLIOTECA</b></h5>
+                    <h5 class="border-bottom pb-2 mb-0"><b>VALIDACION</b></h5>
                     <div class="d-flex text-body-secondary pt-3">
                         <br>
                         <?php
                         $array = array(
-                            "1" => array("nombre" => "REGISTRO LIBROS", "link" => "reg_documento.php"),
+                            "1" => array("nombre" => "VALIDACION PARA ELIMINAR", "link" => "InstitucionValidacion.php"),
                         );
                         ?>
                         <table class="table">
@@ -92,6 +90,7 @@ if (!isset($_SESSION['nombre'])) {
 
             </div>
         </div>
+
 
     </main>
     <?php include "../../General/Include/2_footer.php"; ?>

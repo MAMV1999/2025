@@ -115,7 +115,7 @@
                 "3" => array(   "nombre" => "INSTITUCION",      "link" => "Institucion",    "cargo" => array("ADMINISTRATIVO")),
                 "4" => array(   "nombre" => "MATRICULA 2025",   "link" => "Matricula",      "cargo" => array("DIRECTOR", "ADMINISTRATIVO")),
                 "5" => array(   "nombre" => "MENSUALIDAD",      "link" => "Mensualidad",    "cargo" => array("DIRECTOR", "ADMINISTRATIVO")),
-                "6" => array(   "nombre" => "FACTURACION",      "link" => "Mensualidad",    "cargo" => array("DIRECTOR", "ADMINISTRATIVO")),
+                "6" => array(   "nombre" => "FACTURACION",      "link" => "Facturacion",    "cargo" => array("DIRECTOR", "ADMINISTRATIVO")),
                 "7" => array(   "nombre" => "REGISTRO",         "link" => "Registro",       "cargo" => array("TODOS")),
                 "8" => array(   "nombre" => "DOCUMENTO",        "link" => "Documento",      "cargo" => array("DIRECTOR", "ADMINISTRATIVO")),
                 "9" => array(   "nombre" => "ALMACEN",          "link" => "Almacen",        "cargo" => array("DIRECTOR", "ADMINISTRATIVO")),

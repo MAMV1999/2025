@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-04-2025 a las 07:30:19
+-- Tiempo de generación: 21-04-2025 a las 17:31:50
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -224,6 +224,22 @@ CREATE TRIGGER `actualizar_stock_salida` AFTER INSERT ON `almacen_salida_detalle
 END
 $$
 DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `biblioteca_libro`
+--
+
+CREATE TABLE `biblioteca_libro` (
+  `id` int(11) NOT NULL,
+  `codigo` varchar(50) NOT NULL,
+  `nombre` varchar(255) NOT NULL,
+  `stock` int(11) NOT NULL DEFAULT '0',
+  `observaciones` text,
+  `fecha_creado` datetime DEFAULT CURRENT_TIMESTAMP,
+  `estado` tinyint(1) DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -638,22 +654,6 @@ CREATE TABLE `usuario_estado_civil` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `usuario_menu`
---
-
-CREATE TABLE `usuario_menu` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(100) NOT NULL,
-  `link` varchar(255) NOT NULL,
-  `icono` varchar(100) NOT NULL,
-  `descripcion` text,
-  `fechacreado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `estado` tinyint(1) DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `usuario_sexo`
 --
 
@@ -741,6 +741,12 @@ ALTER TABLE `almacen_salida_detalle`
   ADD PRIMARY KEY (`id`),
   ADD KEY `almacen_salida_id` (`almacen_salida_id`),
   ADD KEY `almacen_producto_id` (`almacen_producto_id`);
+
+--
+-- Indices de la tabla `biblioteca_libro`
+--
+ALTER TABLE `biblioteca_libro`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `documento`
@@ -919,12 +925,6 @@ ALTER TABLE `usuario_estado_civil`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `usuario_menu`
---
-ALTER TABLE `usuario_menu`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indices de la tabla `usuario_sexo`
 --
 ALTER TABLE `usuario_sexo`
@@ -987,6 +987,12 @@ ALTER TABLE `almacen_salida`
 --
 ALTER TABLE `almacen_salida_detalle`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=387;
+
+--
+-- AUTO_INCREMENT de la tabla `biblioteca_libro`
+--
+ALTER TABLE `biblioteca_libro`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `documento`
@@ -1131,12 +1137,6 @@ ALTER TABLE `usuario_documento`
 --
 ALTER TABLE `usuario_estado_civil`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT de la tabla `usuario_menu`
---
-ALTER TABLE `usuario_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario_sexo`

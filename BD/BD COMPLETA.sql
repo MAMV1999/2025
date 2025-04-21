@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-04-2025 a las 07:30:05
+-- Tiempo de generación: 21-04-2025 a las 17:31:32
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -1344,6 +1344,22 @@ CREATE TRIGGER `actualizar_stock_salida` AFTER INSERT ON `almacen_salida_detalle
 END
 $$
 DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `biblioteca_libro`
+--
+
+CREATE TABLE `biblioteca_libro` (
+  `id` int(11) NOT NULL,
+  `codigo` varchar(50) NOT NULL,
+  `nombre` varchar(255) NOT NULL,
+  `stock` int(11) NOT NULL DEFAULT '0',
+  `observaciones` text,
+  `fecha_creado` datetime DEFAULT CURRENT_TIMESTAMP,
+  `estado` tinyint(1) DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -2841,7 +2857,7 @@ INSERT INTO `mensualidad_detalle` (`id`, `id_mensualidad_mes`, `id_matricula_det
 (811, 8, 84, '310.00', 0, 0, '', '2025-03-18 13:50:06', 1),
 (812, 9, 84, '310.00', 0, 0, '', '2025-03-18 13:50:06', 1),
 (813, 10, 84, '335.00', 0, 0, '', '2025-03-18 13:50:06', 1),
-(814, 1, 85, '0.00', 1, 0, 'ANULADO', '2025-03-31 15:47:18', 1),
+(814, 1, 85, '0.00', 1, 0, 'ANULADO - INGRESO EN ABRIL', '2025-03-31 15:47:18', 1),
 (815, 2, 85, '310.00', 0, 0, '', '2025-03-31 15:47:18', 1),
 (816, 3, 85, '310.00', 0, 0, '', '2025-03-31 15:47:18', 1),
 (817, 4, 85, '310.00', 0, 0, '', '2025-03-31 15:47:18', 1),
@@ -2851,7 +2867,7 @@ INSERT INTO `mensualidad_detalle` (`id`, `id_mensualidad_mes`, `id_matricula_det
 (821, 8, 85, '310.00', 0, 0, '', '2025-03-31 15:47:18', 1),
 (822, 9, 85, '310.00', 0, 0, '', '2025-03-31 15:47:19', 1),
 (823, 10, 85, '335.00', 0, 0, '', '2025-03-31 15:47:19', 1),
-(824, 1, 86, '0.00', 1, 0, 'ANULADO', '2025-03-31 16:41:55', 1),
+(824, 1, 86, '0.00', 1, 0, 'ANULADO - INGRESO EN ABRIL', '2025-03-31 16:41:55', 1),
 (825, 2, 86, '300.00', 0, 0, 'DSCTO. HERMANOS -10', '2025-03-31 16:41:55', 1),
 (826, 3, 86, '300.00', 0, 0, '', '2025-03-31 16:41:55', 1),
 (827, 4, 86, '300.00', 0, 0, '', '2025-03-31 16:41:55', 1),
@@ -2861,7 +2877,7 @@ INSERT INTO `mensualidad_detalle` (`id`, `id_mensualidad_mes`, `id_matricula_det
 (831, 8, 86, '300.00', 0, 0, '', '2025-03-31 16:41:55', 1),
 (832, 9, 86, '300.00', 0, 0, '', '2025-03-31 16:41:55', 1),
 (833, 10, 86, '325.00', 0, 0, '', '2025-03-31 16:41:55', 1),
-(834, 1, 87, '0.00', 1, 0, 'ANULADO', '2025-04-04 19:27:00', 1),
+(834, 1, 87, '0.00', 1, 0, 'ANULADO - INGRESO EN ABRIL', '2025-04-04 19:27:00', 1),
 (835, 2, 87, '280.00', 0, 0, '', '2025-04-04 19:27:00', 1),
 (836, 3, 87, '280.00', 0, 0, '', '2025-04-04 19:27:00', 1),
 (837, 4, 87, '280.00', 0, 0, '', '2025-04-04 19:27:01', 1),
@@ -3282,37 +3298,6 @@ INSERT INTO `usuario_estado_civil` (`id`, `nombre`, `observaciones`, `fechacread
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `usuario_menu`
---
-
-CREATE TABLE `usuario_menu` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(100) NOT NULL,
-  `link` varchar(255) NOT NULL,
-  `icono` varchar(100) NOT NULL,
-  `descripcion` text,
-  `fechacreado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `estado` tinyint(1) DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `usuario_menu`
---
-
-INSERT INTO `usuario_menu` (`id`, `nombre`, `link`, `icono`, `descripcion`, `fechacreado`, `estado`) VALUES
-(1, 'INICIO', '../../Inicio/Vista/Escritorio.php', '', '', '2025-01-30 01:32:55', 1),
-(2, 'USUARIO', '../../Usuario/Vista/Escritorio.php', '', '', '2025-01-30 01:34:31', 1),
-(3, 'INSTITUCION', '../../Institucion/Vista/Escritorio.php', '', '', '2025-01-30 01:34:49', 1),
-(4, 'MATRICULA', '../../Matricula/Vista/Escritorio.php', '', '', '2025-01-30 01:35:06', 1),
-(5, 'MENSUALIDAD', '../../Mensualidad/Vista/Escritorio.php', '', '', '2025-01-30 01:35:29', 1),
-(6, 'DOCUMENTO', '../../Documento/Vista/Escritorio.php', '', '', '2025-01-30 01:35:46', 1),
-(7, 'ALMACEN', '../../Almacen/Vista/Escritorio.php', '', '', '2025-01-30 01:36:59', 1),
-(8, 'BIBLIOTECA', '../../Biblioteca/Vista/Escritorio.php', '', '', '2025-01-30 01:37:17', 1),
-(9, 'REGISTRO', '../../Registro/Vista/Escritorio.php', '', '', '2025-03-06 06:19:14', 1);
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `usuario_sexo`
 --
 
@@ -3416,6 +3401,12 @@ ALTER TABLE `almacen_salida_detalle`
   ADD PRIMARY KEY (`id`),
   ADD KEY `almacen_salida_id` (`almacen_salida_id`),
   ADD KEY `almacen_producto_id` (`almacen_producto_id`);
+
+--
+-- Indices de la tabla `biblioteca_libro`
+--
+ALTER TABLE `biblioteca_libro`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `documento`
@@ -3594,12 +3585,6 @@ ALTER TABLE `usuario_estado_civil`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `usuario_menu`
---
-ALTER TABLE `usuario_menu`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indices de la tabla `usuario_sexo`
 --
 ALTER TABLE `usuario_sexo`
@@ -3662,6 +3647,12 @@ ALTER TABLE `almacen_salida`
 --
 ALTER TABLE `almacen_salida_detalle`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=387;
+
+--
+-- AUTO_INCREMENT de la tabla `biblioteca_libro`
+--
+ALTER TABLE `biblioteca_libro`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `documento`
@@ -3806,12 +3797,6 @@ ALTER TABLE `usuario_documento`
 --
 ALTER TABLE `usuario_estado_civil`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT de la tabla `usuario_menu`
---
-ALTER TABLE `usuario_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario_sexo`
