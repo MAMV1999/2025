@@ -18,7 +18,7 @@ if (!isset($_SESSION['nombre'])) {
                 <br>
                 <?php
                 $array = array(
-                    "1" => array("nombre" => "MENSUALIDADES PAGADAS X MES", "link" => "Institucion.php"),
+                    "1" => array("nombre" => "FACTURACIÓN EMITIDAS X MES", "link" => "Facturacion_x_mes.php"),
                 );
                 ?>
                 <table class="table">
@@ -48,7 +48,7 @@ if (!isset($_SESSION['nombre'])) {
 
 
         <p class="d-inline-flex gap-1">
-            <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">AJUSTES DE INSTITUCION</a>
+            <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">AJUSTES DE FACTURACION</a>
         </p>
         <div class="collapse" id="collapseExample">
             <div class="card card-body">
