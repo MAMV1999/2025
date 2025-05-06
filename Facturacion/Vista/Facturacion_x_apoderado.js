@@ -1,4 +1,4 @@
-var link = "../Controlador/mensualidad_x_apoderado.php?op=";
+var link = "../Controlador/Facturacion_x_apoderado.php?op=";
 var tabla;
 
 function init() {
@@ -36,14 +36,12 @@ function guardaryeditar(e) {
     $("#accordionExample .accordion-item").each(function () {
         $(this).find("tbody tr").each(function () {
             let id = $(this).find("input[name^='id-']").val(); // Verifica este selector
-            let monto = $(this).find("input[name^='monto-']").val(); // Verifica este selector
-            let pagado = $(this).find("input[name^='pagado-']:checked").val(); // Verifica este selector
+            let recibo = $(this).find("input[name^='recibo-']").val(); // Verifica este selector
             let observaciones = $(this).find("input[name^='observaciones-']").val(); // Verifica este selector
 
             detalles.push({
                 id: id,
-                monto: monto,
-                pagado: pagado,
+                recibo: recibo,
                 observaciones: observaciones
             });
         });
@@ -77,26 +75,26 @@ function mostrar(id_apoderado) {
             let meses = detalle.meses.split(", ");
             let montos = detalle.montos.split(", ");
             let observaciones = detalle.observaciones.split(", ");
-            let estadosPago = detalle.estados_pago.split(", ");
+            let estadosRecibo = detalle.estados_recibo.split(", ");
 
-            // Asegurarse de que `estadosPago` tenga un valor para cada mes
-            estadosPago = estadosPago.map(estado => (estado === "1" || estado === "0") ? estado : "0");
+            // Asegurarse de que `estadosRecibo` tenga un valor para cada mes
+            estadosRecibo = estadosRecibo.map(estado => (estado === "1" || estado === "0") ? estado : "0");
 
             // Generar el contenido del acordeón
             let filaMeses = idsMeses.map((idMes, i) => {
-                let estado = estadosPago[i] || "0"; // Usar "0" como valor predeterminado si el estado no está definido
+                let estado = estadosRecibo[i] || "0"; // Usar "0" como valor predeterminado si el estado no está definido
 
                 return `
                     <tr>
                         <td style="width: 25%; height: auto;">${meses[i]}</td>
-                        <td style="width: 25%; height: auto;"><input type="text" class="form-control" name="monto-${idMes}" value="${montos[i]}" /></td>
+                        <td style="width: 25%; height: auto;">${montos[i]}</td>
                         <td style="width: 25%; height: auto;">
                             <div class="form-check form-check-inline">
-                                <input type="radio" name="pagado-${index}-${idMes}" value="1" ${estadosPago[i] === "1" ? "checked" : ""} class="form-check-input estado-pago-radio" data-id="${idMes}">
-                                <label class="form-check-label">PAGADO</label>
+                                <input type="radio" name="pagado-${index}-${idMes}" value="1" ${estadosRecibo[i] === "1" ? "checked" : ""} class="form-check-input estado-pago-radio" data-id="${idMes}">
+                                <label class="form-check-label">EMITIDO</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input type="radio" name="pagado-${index}-${idMes}" value="0" ${estadosPago[i] === "0" ? "checked" : ""} class="form-check-input estado-pago-radio" data-id="${idMes}">
+                                <input type="radio" name="pagado-${index}-${idMes}" value="0" ${estadosRecibo[i] === "0" ? "checked" : ""} class="form-check-input estado-pago-radio" data-id="${idMes}">
                                 <label class="form-check-label">PENDIENTE</label>
                             </div>
                             <input type="hidden" name="id-${idMes}" value="${idsmd[i]}" />
@@ -150,7 +148,7 @@ function mostrar(id_apoderado) {
                                     <tr>
                                         <th>MES</th>
                                         <th>MONTO</th>
-                                        <th>ESTADO</th>
+                                        <th>FACTURA</th>
                                         <th>OBSERVACIONES</th>
                                     </tr>
                                 </thead>

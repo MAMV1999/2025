@@ -19,9 +19,7 @@ if (!isset($_SESSION['nombre'])) {
                     <thead>
                         <tr>
                             <th>N°</th>
-                            <th>DOCUMENTO</th>
                             <th>APODERADO</th>
-                            <th>TELEFONO</th>
                             <th>ALUMNO(S)</th>
                             <th>ACCIONES</th>
                         </tr>
@@ -50,7 +48,7 @@ if (!isset($_SESSION['nombre'])) {
 
     </main>
     <?php include "../../General/Include/2_footer.php"; ?>
-    <script src="mensualidad_x_apoderado.js"></script>
+    <script src="Facturacion_x_apoderado.js"></script>
 <?php
 }
 ob_end_flush();
