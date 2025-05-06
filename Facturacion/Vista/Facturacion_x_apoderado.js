@@ -37,12 +37,10 @@ function guardaryeditar(e) {
         $(this).find("tbody tr").each(function () {
             let id = $(this).find("input[name^='id-']").val(); // Verifica este selector
             let recibo = $(this).find("input[name^='recibo-']").val(); // Verifica este selector
-            let observaciones = $(this).find("input[name^='observaciones-']").val(); // Verifica este selector
 
             detalles.push({
                 id: id,
-                recibo: recibo,
-                observaciones: observaciones
+                recibo: recibo
             });
         });
     });
@@ -99,7 +97,6 @@ function mostrar(id_apoderado) {
                             </div>
                             <input type="hidden" name="id-${idMes}" value="${idsmd[i]}" />
                         </td>
-                        <td style="width: 25%; height: auto;"><input type="text" class="form-control" placeholder="OBSERVACIONES" name="observaciones-${idMes}" value="${observaciones[i]}" /></td>
                     </tr>
                 `;
             }).join("");
@@ -149,7 +146,6 @@ function mostrar(id_apoderado) {
                                         <th>MES</th>
                                         <th>MONTO</th>
                                         <th>FACTURA</th>
-                                        <th>OBSERVACIONES</th>
                                     </tr>
                                 </thead>
                                 <tbody>
