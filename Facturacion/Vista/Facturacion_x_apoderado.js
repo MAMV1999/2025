@@ -36,7 +36,7 @@ function guardaryeditar(e) {
     $("#accordionExample .accordion-item").each(function () {
         $(this).find("tbody tr").each(function () {
             let id = $(this).find("input[name^='id-']").val(); // Verifica este selector
-            let recibo = $(this).find("input[name^='recibo-']").val(); // Verifica este selector
+            let recibo = $(this).find("input[name^='recibo-']:checked").val(); // Verifica este selector
 
             detalles.push({
                 id: id,
@@ -72,7 +72,6 @@ function mostrar(id_apoderado) {
             let idsMeses = detalle.ids_mes.split(", ");
             let meses = detalle.meses.split(", ");
             let montos = detalle.montos.split(", ");
-            let observaciones = detalle.observaciones.split(", ");
             let estadosRecibo = detalle.estados_recibo.split(", ");
 
             // Asegurarse de que `estadosRecibo` tenga un valor para cada mes
@@ -88,11 +87,11 @@ function mostrar(id_apoderado) {
                         <td style="width: 25%; height: auto;">${montos[i]}</td>
                         <td style="width: 25%; height: auto;">
                             <div class="form-check form-check-inline">
-                                <input type="radio" name="pagado-${index}-${idMes}" value="1" ${estadosRecibo[i] === "1" ? "checked" : ""} class="form-check-input estado-pago-radio" data-id="${idMes}">
+                                <input type="radio" name="recibo-${index}-${idMes}" value="1" ${estadosRecibo[i] === "1" ? "checked" : ""} class="form-check-input estado-pago-radio" data-id="${idMes}">
                                 <label class="form-check-label">EMITIDO</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input type="radio" name="pagado-${index}-${idMes}" value="0" ${estadosRecibo[i] === "0" ? "checked" : ""} class="form-check-input estado-pago-radio" data-id="${idMes}">
+                                <input type="radio" name="recibo-${index}-${idMes}" value="0" ${estadosRecibo[i] === "0" ? "checked" : ""} class="form-check-input estado-pago-radio" data-id="${idMes}">
                                 <label class="form-check-label">PENDIENTE</label>
                             </div>
                             <input type="hidden" name="id-${idMes}" value="${idsmd[i]}" />
