@@ -19,6 +19,7 @@ if (!isset($_SESSION['nombre'])) {
                 <?php
                 $array = array(
                     "1" => array("nombre" => "FACTURACIÓN EMITIDAS X MES", "link" => "Facturacion_x_mes.php"),
+                    "2" => array("nombre" => "FACTURACIÓN EMITIDAS X APODERADO", "link" => "Facturacion_x_apoderado.php"),
                 );
                 ?>
                 <table class="table">
