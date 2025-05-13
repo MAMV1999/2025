@@ -66,12 +66,37 @@ if (!isset($_SESSION['nombre'])) {
     <?php include "../../General/Include/2_footer.php"; ?>
     <script src="Facturacion_x_mes.js"></script>
     <script>
-        function copiarAlPortapapeles(texto) {
-            navigator.clipboard.writeText(texto).then(() => {
-                alert("COPIADO");
-            }).catch(err => {
-                console.error('Error al copiar al portapapeles', err);
-            });
+        function copiarAlPortapapeles(texto, event) {
+            event.preventDefault();
+            // Si el navegador soporta la API moderna
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(texto)
+                    .then(() => alert("COPIADO"))
+                    .catch(err => {
+                        console.error("Error al copiar con clipboard API", err);
+                        fallbackCopiar(texto);
+                    });
+            } else {
+                // Si no, usa método alternativo
+                fallbackCopiar(texto);
+            }
+        }
+
+        function fallbackCopiar(texto) {
+            const textarea = document.createElement("textarea");
+            textarea.value = texto;
+            textarea.style.position = "fixed"; // Evita que se mueva al scroll
+            textarea.style.left = "-9999px";
+            document.body.appendChild(textarea);
+            textarea.focus();
+            textarea.select();
+            try {
+                document.execCommand("copy");
+            } catch (err) {
+                console.error("Fallback: No se pudo copiar", err);
+                alert("No se pudo copiar");
+            }
+            document.body.removeChild(textarea);
         }
     </script>
 <?php

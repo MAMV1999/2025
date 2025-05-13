@@ -66,10 +66,10 @@ function mostrar(id_mensualidad_mes) {
                     <tr>
                         <td>${index + 1}</td>
                         <td>${detalle.mensualidad_nombre} ${detalle.institucion_lectivo_nombre} - ${detalle.grado_nombre}</td>
-                        <td>${detalle.apoderado_numero_documento}</td>
-                        <td>${detalle.apoderado_nombre}</td>
-                        <td>${detalle.monto}</td>
-                        <td><button type="button" onclick="copiarAlPortapapeles('${detalle.descripcion_mensualidad}')" class="btn btn-outline-secondary btn-sm">DESC.</button></td>
+                        <td>${detalle.apoderado_numero_documento}&nbsp;&nbsp;&nbsp;<button class="btn btn-outline-secondary btn-sm" onclick="copiarAlPortapapeles('${detalle.apoderado_numero_documento}', event)">DNI</button></td>
+                        <td>${detalle.apoderado_nombre}&nbsp;&nbsp;&nbsp;<button class="btn btn-outline-secondary btn-sm" onclick="copiarAlPortapapeles('${detalle.apoderado_nombre}', event)">Apo.</button></td>
+                        <td>${detalle.monto}&nbsp;&nbsp;&nbsp;<button class="btn btn-outline-secondary btn-sm" onclick="copiarAlPortapapeles('${detalle.monto}', event)">Mont.</button></td>
+                        <td><button class="btn btn-outline-secondary btn-sm" onclick="copiarAlPortapapeles('${detalle.descripcion_mensualidad}', event)">Desc.</button></td>
                         <td>
                             <input type="hidden" name="id${index}" value="${detalle.mensualidad_detalle_id}">
                             <input type="checkbox" name="recibo${index}" ${detalle.recibo == 1 ? "checked" : ""} style="width: 30px; height: 30px;">
