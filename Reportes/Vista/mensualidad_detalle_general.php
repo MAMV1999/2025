@@ -68,18 +68,18 @@ class PDF extends FPDF
                 $total_pendiente += $monto;
             }
 
-            $this->Cell(8, 6, $num++, 1, 0, $orientacion);
-            $this->Cell(23, 6, utf8_decode(substr($row['nivel_nombre'], 0, 4) . ' ' . $row['grado_nombre']), 1, 0, $orientacion);
-            $this->Cell(60, 6, utf8_decode(substr($row['alumno_nombre'], 0, 35)), 1, 0, $orientacion);
-            $this->Cell(60, 6, utf8_decode(substr($row['apoderado_nombre'], 0, 35)), 1, 0, $orientacion);
-            $this->Cell(18, 6, utf8_decode($row['apoderado_telefono']), 1, 0, $orientacion);
-            $this->Cell(15, 6, 'S/.' . number_format($monto, 2), 1, 0, $orientacion);
+            $this->Cell(8, 5, $num++, 1, 0, $orientacion);
+            $this->Cell(23, 5, utf8_decode(substr($row['nivel_nombre'], 0, 4) . ' ' . $row['grado_nombre']), 1, 0, $orientacion);
+            $this->Cell(60, 5, utf8_decode(substr($row['alumno_nombre'], 0, 35)), 1, 0, $orientacion);
+            $this->Cell(60, 5, utf8_decode(substr($row['apoderado_nombre'], 0, 35)), 1, 0, $orientacion);
+            $this->Cell(18, 5, utf8_decode($row['apoderado_telefono']), 1, 0, $orientacion);
+            $this->Cell(15, 5, 'S/.' . number_format($monto, 2), 1, 0, $orientacion);
 
             if ($estado === 'PENDIENTE') {
                 $this->SetFillColor(192, 192, 192);
-                $this->Cell(0, 6, utf8_decode($row['detalle_estado_pago']), 1, 1, $orientacion, true);
+                $this->Cell(0, 5, utf8_decode($row['detalle_estado_pago']), 1, 1, $orientacion, true);
             } else {
-                $this->Cell(0, 6, utf8_decode($row['detalle_estado_pago']), 1, 1, $orientacion);
+                $this->Cell(0, 5, utf8_decode($row['detalle_estado_pago']), 1, 1, $orientacion);
             }
         }
 
