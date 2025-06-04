@@ -40,9 +40,9 @@ if (!isset($_SESSION['nombre'])) {
                             <tr>
                                 <th>N°</th>
                                 <th>MATRICULA</th>
-                                <th>N° DOCUMENTO</th>
                                 <th>NOMBRE Y APELLIDO</th>
-                                <th>MONTO</th>
+                                <th>N° DOCUMENTO</th>
+                                <th>DESC.</th>
                                 <th>MONTO</th>
                                 <th>ESTADO</th>
                             </tr>

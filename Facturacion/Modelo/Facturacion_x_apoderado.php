@@ -57,6 +57,7 @@ class Facturacion_x_apoderado
                     isec.nombre AS seccion,
                     ual.numerodocumento AS codigo,
                     ual.nombreyapellido AS nombre_alumno, 
+                    GROUP_CONCAT(CONCAT('MENSUALIDAD ', mm.nombre, ' ', il.nombre, ' - ', iniv.nombre, ' - ', ig.nombre) ORDER BY mm.id ASC SEPARATOR ', ') AS descripcion_mensualidad,
                     GROUP_CONCAT(md.id ORDER BY mm.id ASC SEPARATOR ', ') AS ids_mensualidad_detalle, 
                     GROUP_CONCAT(mm.id ORDER BY mm.id ASC SEPARATOR ', ') AS ids_mes, 
                     GROUP_CONCAT(mm.nombre ORDER BY mm.id ASC SEPARATOR ', ') AS meses, 

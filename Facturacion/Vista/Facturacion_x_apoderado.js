@@ -70,6 +70,7 @@ function mostrar(id_apoderado) {
         detalles.forEach((detalle, index) => {
             let idsmd = detalle.ids_mensualidad_detalle.split(", ");
             let idsMeses = detalle.ids_mes.split(", ");
+            let descripcion_mensualidad = detalle.descripcion_mensualidad.split(", ");
             let meses = detalle.meses.split(", ");
             let montos = detalle.montos.split(", ");
             let estadosRecibo = detalle.estados_recibo.split(", ");
@@ -83,8 +84,8 @@ function mostrar(id_apoderado) {
 
                 return `
                     <tr>
-                        <td style="width: 25%; height: auto;">${meses[i]}</td>
-                        <td style="width: 25%; height: auto;">${montos[i]}</td>
+                        <td style="width: 25%; height: auto;">${meses[i]}&nbsp;&nbsp;&nbsp;<button class="btn btn-outline-secondary btn-sm" onclick="copiarAlPortapapeles('${descripcion_mensualidad[i]}', event)">Desc.</button></td>
+                        <td style="width: 25%; height: auto;">${montos[i]}&nbsp;&nbsp;&nbsp;<button class="btn btn-outline-secondary btn-sm" onclick="copiarAlPortapapeles('${montos[i]}', event)">Mon.</button></td>
                         <td style="width: 25%; height: auto;">
                             <div class="form-check form-check-inline">
                                 <input type="radio" name="recibo-${index}-${idMes}" value="1" ${estadosRecibo[i] === "1" ? "checked" : ""} class="form-check-input estado-pago-radio" data-id="${idMes}">
@@ -122,7 +123,7 @@ function mostrar(id_apoderado) {
                                     </tr>
                                     <tr>
                                         <th>APODERADO</th>
-                                        <td>${detalle.tipo_apoderado} - ${detalle.nombre_apoderado}</td>
+                                        <td>${detalle.tipo_apoderado} - ${detalle.nombre_apoderado}&nbsp;&nbsp;&nbsp;<button class="btn btn-outline-secondary btn-sm" onclick="copiarAlPortapapeles('${detalle.numerodocumento}', event)">DNI</button></td>
                                     </tr>
                                     <tr>
                                         <th>ALUMNO(A)</th>
