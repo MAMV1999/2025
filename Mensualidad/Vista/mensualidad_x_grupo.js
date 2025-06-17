@@ -145,7 +145,7 @@ function mostrar(id_apoderado) {
                                 </tbody>
                             </table>
                             <br>
-                            <table class="table table-bordered">
+                            <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
                                         <th>MES</th>
