@@ -5,7 +5,7 @@ class AlmacenSalida
 {
     public function __construct() {}
 
-    public function guardar($usuario_apoderado_id, $almacen_comprobante_id, $numeracion, $fecha, $almacen_metodo_pago_id, $total, $observaciones, $productos)
+    public function guardar($usuario_apoderado_id, $almacen_comprobante_id, $numeracion, $fecha, $hora, $almacen_metodo_pago_id, $total, $observaciones, $productos)
     {
         try {
             // Limpiar los datos principales
@@ -13,12 +13,13 @@ class AlmacenSalida
             $almacen_comprobante_id = limpiarcadena($almacen_comprobante_id);
             $numeracion = limpiarcadena($numeracion);
             $fecha = limpiarcadena($fecha);
+            $hora = limpiarcadena($hora);
             $almacen_metodo_pago_id = limpiarcadena($almacen_metodo_pago_id);
             $total = limpiarcadena($total);
             $observaciones = limpiarcadena($observaciones);
 
             // Insertar el registro en almacen_salida
-            $sqlSalida = "INSERT INTO almacen_salida (usuario_apoderado_id, almacen_comprobante_id, numeracion, fecha, almacen_metodo_pago_id, total, observaciones) VALUES ('$usuario_apoderado_id', '$almacen_comprobante_id', '$numeracion', '$fecha', '$almacen_metodo_pago_id', '$total', '$observaciones')";
+            $sqlSalida = "INSERT INTO almacen_salida (usuario_apoderado_id, almacen_comprobante_id, numeracion, fecha, hora, almacen_metodo_pago_id, total, observaciones) VALUES ('$usuario_apoderado_id', '$almacen_comprobante_id', '$numeracion', '$fecha', '$hora', '$almacen_metodo_pago_id', '$total', '$observaciones')";
             $almacen_salida_id = ejecutarConsulta_retornarID($sqlSalida);
 
             // Insertar los detalles en almacen_salida_detalle

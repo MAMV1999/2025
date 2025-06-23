@@ -36,6 +36,7 @@ class Recibosalida
                     almacen_comprobante.nombre AS comprobante_nombre,
                     almacen_salida.numeracion AS salida_numeracion,
                     DATE_FORMAT(almacen_salida.fecha, '%d/%m/%Y') AS salida_fecha,
+                    almacen_salida.hora AS salida_hora,
                     almacen_salida.almacen_metodo_pago_id AS metodo_pago_id,
                     almacen_metodo_pago.nombre AS metodo_pago_nombre,
                     almacen_salida.total AS salida_total,

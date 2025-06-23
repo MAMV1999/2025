@@ -47,6 +47,7 @@ if (!isset($_SESSION['nombre'])) {
                         <select id="almacen_comprobante_id" name="almacen_comprobante_id" class="form-control" data-live-search="true"></select>
                         <input type="text" id="numeracion" name="numeracion" placeholder="NUMERACIÓN" class="form-control" required>
                         <input type="date" id="fecha" name="fecha" placeholder="FECHA" class="form-control" required>
+                        <input type="text" id="hora" name="hora" placeholder="HORA" class="form-control" required>
                     </div>
                 </div>
 

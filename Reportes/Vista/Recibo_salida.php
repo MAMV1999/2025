@@ -16,6 +16,8 @@ class PDF extends FPDF
     function Footer()
     {
         $this->SetY(-23);
+        $this->SetFont('Arial', 'B', 8);
+        $this->Cell(0, 5, utf8_decode('GRACIAS POR SU COMPRA, VUELVA PRONTO'), 1, 1, 'C');
         $this->SetFont('Arial', 'I', 8);
         $this->Cell(0, 5, utf8_decode('FECHA Y HORA DE GENERACIÓN: ' . $this->fecha_hora_actual), 0, 1, 'C');
         $this->Cell(0, 10, utf8_decode('PÁGINA ' . $this->PageNo() . '/{nb}'), 0, 0, 'C');
@@ -43,7 +45,8 @@ class PDF extends FPDF
         $this->SectionTitle('INFORMACIÓN GENERAL');
         $this->SectionData('APODERADO(A)', $data['apoderado_nombre']);
         $this->SectionData('TELEFONO', $data['apoderado_telefono']);
-        $this->SectionData('FECHA', $data['salida_fecha']);
+        $this->SectionData('FECHA EMISIÓN', $data['salida_fecha']);
+        $this->SectionData('HORA', $data['salida_hora']);
         $this->Ln(5);
 
         // Detalles de productos
@@ -65,11 +68,13 @@ class PDF extends FPDF
             $this->Cell(23, 7, 'S/ ' . number_format($producto['detalle_precio_unitario'], 2), 1, 0, 'C');
             $this->Cell(29, 7, 'S/ ' . number_format($subtotal, 2), 1, 1, 'C');
         }
+        $this->Cell(161, 7, '', 0, 0, 'C');
+        $this->Cell(29, 7, 'S/ ' . number_format($data['salida_total'], 2), 1, 1, 'C');
         $this->Ln(5);
 
         // Información general
         $this->SectionTitle('INFORMACIÓN DE PAGO');
-        $this->SectionData('TOTAL', 'S/ ' . number_format($data['salida_total'], 2));
+        $this->SectionData('TOTAL VENTA', 'S/ ' . number_format($data['salida_total'], 2));
         $this->SectionData('MÉTODO DE PAGO', $data['metodo_pago_nombre']);
         $this->SectionData('ESTADO', $data['salida_estado_observaciones']);
         $this->Ln(5);
@@ -90,8 +95,9 @@ class PDF extends FPDF
 
     function SectionData($label, $data)
     {
-        $this->SetFont('Arial', '', 10);
+        $this->SetFont('Arial', 'B', 10);
         $this->Cell(80, 7, utf8_decode($label), 1);
+        $this->SetFont('Arial', '', 10);
         $this->Cell(0, 7, utf8_decode($data), 1, 1);
     }
 }

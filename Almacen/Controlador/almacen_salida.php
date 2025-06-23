@@ -10,13 +10,14 @@ switch ($_GET["op"]) {
         $almacen_comprobante_id = $_POST['almacen_comprobante_id'] ?? null;
         $numeracion = $_POST['numeracion'] ?? null;
         $fecha = $_POST['fecha'] ?? null;
+        $hora = $_POST['hora'] ?? null;
         $almacen_metodo_pago_id = $_POST['almacen_metodo_pago_id'] ?? null;
         $total = $_POST['total'] ?? null;
         $observaciones = $_POST['observaciones'] ?? null;
         $productos = $_POST['productos'] ?? [];
 
-        if ($usuario_apoderado_id && $almacen_comprobante_id && $numeracion && $fecha && $almacen_metodo_pago_id && $total && !empty($productos)) {
-            $resultado = $almacensalida->guardar($usuario_apoderado_id, $almacen_comprobante_id, $numeracion, $fecha, $almacen_metodo_pago_id, $total, $observaciones, $productos);
+        if ($usuario_apoderado_id && $almacen_comprobante_id && $numeracion && $fecha && $hora && $almacen_metodo_pago_id && $total && !empty($productos)) {
+            $resultado = $almacensalida->guardar($usuario_apoderado_id, $almacen_comprobante_id, $numeracion, $fecha, $hora, $almacen_metodo_pago_id, $total, $observaciones, $productos);
             echo $resultado ? "Registro guardado correctamente" : "Error al guardar el registro";
         } else {
             echo "Datos incompletos. Verifique e intente nuevamente.";

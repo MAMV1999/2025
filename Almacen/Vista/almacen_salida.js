@@ -11,6 +11,7 @@ function init() {
     actualizarFechaHora();
     setInterval(actualizarFechaHora, 1000);
     fecha();
+    hora();
     //listar_usuario_apoderado();
     listar_almacen_comprobante();
     listar_almacen_metodo_pago();
@@ -53,6 +54,16 @@ function fecha() {
     var month = ("0" + (now.getMonth() + 1)).slice(-2);
     var today = now.getFullYear() + "-" + (month) + "-" + (day);
     $("#fecha").val(today);
+}
+
+function hora() {
+    var now = new Date();
+    var hours = ("0" + now.getHours()).slice(-2);
+    var minutes = ("0" + now.getMinutes()).slice(-2);
+    var seconds = ("0" + now.getSeconds()).slice(-2);
+    var currentTime = hours + ":" + minutes + ":" + seconds;
+    $("#hora").val(currentTime);
+    //setInterval(hora, 1000);
 }
 
 $(document).ready(function () {
@@ -104,6 +115,7 @@ function MostrarFormulario() {
     $("#formulario").show();
     numeracion();
     fecha();
+    hora();
 }
 
 function guardaryeditar(e) {
