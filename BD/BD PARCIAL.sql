@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-06-2025 a las 18:57:32
+-- Tiempo de generación: 28-06-2025 a las 21:55:45
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -166,6 +166,7 @@ CREATE TABLE `almacen_salida` (
   `almacen_comprobante_id` int(11) NOT NULL,
   `numeracion` varchar(50) NOT NULL,
   `fecha` date NOT NULL,
+  `hora` time DEFAULT NULL,
   `almacen_metodo_pago_id` int(11) NOT NULL,
   `total` decimal(10,2) NOT NULL,
   `observaciones` text,
