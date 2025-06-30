@@ -68,7 +68,9 @@ class PDF extends FPDF
             $this->Cell(23, 7, 'S/ ' . number_format($producto['detalle_precio_unitario'], 2), 1, 0, 'C');
             $this->Cell(29, 7, 'S/ ' . number_format($subtotal, 2), 1, 1, 'C');
         }
-        $this->Cell(161, 7, '', 0, 0, 'C');
+        $this->SetFont('Arial', 'B', 10);
+        $this->Cell(161, 7, 'TOTAL VENTA ', 1, 0, 'R');
+        $this->SetFont('Arial', '', 10);
         $this->Cell(29, 7, 'S/ ' . number_format($data['salida_total'], 2), 1, 1, 'C');
         $this->Ln(5);
 
