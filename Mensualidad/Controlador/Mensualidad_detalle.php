@@ -79,27 +79,52 @@ switch ($_GET["op"]) {
                 "2" => (strlen($reg->apoderado) > 40) ? substr($reg->apoderado, 0, 37) . '...' : $reg->apoderado,
                 "3" => (strlen($reg->alumno) > 40) ? substr($reg->alumno, 0, 37) . '...' : $reg->alumno,
                 "4" => $reg->codigo,
-                "5" => '<button class="btn btn-warning btn-sm" onclick="mostrar(' . $reg->id . ')">EDITAR</button>
-
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#' . $reg->id . '">PDF</button>
+                "5" => '
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">OPCIONES</button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" onclick="mostrar(' . $reg->id . ')">EDITAR</a></li>
+                                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#pdf_' . $reg->id . '">PDF</a></li>
+                                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#bcp_' . $reg->id . '">BCP</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#">Separated link</a></li>
+                            </ul>
+                        </div>
                         
-                        <!-- Modal -->
-                        <div class="modal fade" id="' . $reg->id . '" tabindex="-1" aria-labelledby="' . $reg->id . 'Label" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="' . $reg->id . 'Label">' . $reg->alumno . '</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <iframe src="../../Reportes/Vista/Mensualidad_reporte_x_alumno.php?id=' . $reg->id . '" type="application/pdf" width="100%" height="600px"></iframe>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CERRAR</button>
-                            </div>
+                        <!-- Modal PDF -->
+                        <div class="modal fade" id="pdf_' . $reg->id . '" tabindex="-1" aria-labelledby="pdf_' . $reg->id . 'Label" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="' . $reg->id . 'Label">' . $reg->alumno . '</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <iframe src="../../Reportes/Vista/Mensualidad_reporte_x_alumno.php?id=' . $reg->id . '" type="application/pdf" width="100%" height="600px"></iframe>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CERRAR</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+
+                        <!-- Modal BCP -->
+                        <div class="modal fade" id="bcp_' . $reg->id . '" tabindex="-1" aria-labelledby="bcp_' . $reg->id . 'Label" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="' . $reg->id . 'Label">' . $reg->alumno . '</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <iframe src="../../Reportes/Vista/Mensualidad_reporte_bcp_id.php?id=' . $reg->id . '" type="application/pdf" width="100%" height="600px"></iframe>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CERRAR</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                 '
             );
