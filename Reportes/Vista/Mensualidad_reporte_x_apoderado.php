@@ -79,6 +79,7 @@ foreach ($resultados as $fila) {
     // Limitar el nombre del alumno a 40 caracteres
     $nombre_alumno = utf8_decode(mb_substr($fila['nombre_alumno'], 0, 35));
     $montos = explode(', ', utf8_decode($fila['montos']));
+    $estados = explode(', ', utf8_decode($fila['estados_pago']));
 
     $pdf->SetFont('Arial', '', 8); // Reducimos tamaño de letra para mantener todo dentro del margen
     $pdf->Cell(7, 6, $contador, 1, 0, 'C');
@@ -87,8 +88,18 @@ foreach ($resultados as $fila) {
     $pdf->Cell(19, 6, $documento_alumno, 1, 0, 'C');
 
     // Agregar los montos en las columnas correspondientes a los meses
-    foreach ($montos as $monto) {
-        $pdf->Cell(15, 6, $monto, 1, 0, 'C');
+
+    foreach ($montos as $idx => $monto) {
+        $estado = isset($estados[$idx]) ? $estados[$idx] : 0;
+    
+        if ($estado == 0) {
+            // Deuda → celda gris y sin monto
+            $pdf->SetFillColor(200,200,200);
+            $pdf->Cell(15, 6, $monto, 1, 0, 'C', true);
+        } else {
+            // Pagado → celda en blanco (sin monto, sin color)
+            $pdf->Cell(15, 6, $monto, 1, 0, 'C', false);
+        }
     }
 
 
