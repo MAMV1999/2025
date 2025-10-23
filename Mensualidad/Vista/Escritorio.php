@@ -61,9 +61,10 @@ if (!isset($_SESSION['nombre'])) {
                     "1" => array("nombre" => "DETALLE DE MENSUALIDADES", "link" => "../../Reportes/Vista/Mensualidad_reporte_general.php"),
                     "2" => array("nombre" => "DETALLE DE MENSUALIDADES X MES", "link" => "../../Reportes/Vista/mensualidad_detalle_general.php"),
                     "3" => array("nombre" => "DETALLE DE MENSUALIDADES X APODERADO", "link" => "../../Reportes/Vista/Mensualidad_reporte_x_apoderado.php"),
-                    "4" => array("nombre" => "DETALLE DE MENSUALIDADES PAGADAS", "link" => "../../Reportes/Vista/mensualidad_detalle_pagado.php"),
-                    "5" => array("nombre" => "DETALLE DE MENSUALIDADES PENDIENTES", "link" => "../../Reportes/Vista/mensualidad_detalle_deudores.php"),
-                    "6" => array("nombre" => "LISTADO DE MENSUALIDADES BCP", "link" => "../../Reportes/Vista/Mensualidad_reporte_bcp.php"),
+                    "4" => array("nombre" => "DETALLE DE MENSUALIDADES X GRADO", "link" => "../../Reportes/Vista/Mensualidad_reporte_x_grado.php"),
+                    "5" => array("nombre" => "DETALLE DE MENSUALIDADES PAGADAS", "link" => "../../Reportes/Vista/mensualidad_detalle_pagado.php"),
+                    "6" => array("nombre" => "DETALLE DE MENSUALIDADES PENDIENTES", "link" => "../../Reportes/Vista/mensualidad_detalle_deudores.php"),
+                    "7" => array("nombre" => "LISTADO DE MENSUALIDADES BCP", "link" => "../../Reportes/Vista/Mensualidad_reporte_bcp.php"),
                 );
                 ?>
                 <table class="table">
