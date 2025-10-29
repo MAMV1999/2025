@@ -45,7 +45,7 @@ class Facturacion_x_apoderado
 
     public function listar_frm($id)
     {
-        $sql = "SELECT 
+        $sql = "SELECT
                     uat.nombre AS tipo_apoderado,
                     ud.nombre AS tipo_documento,
                     ua.numerodocumento AS numerodocumento,
@@ -56,15 +56,17 @@ class Facturacion_x_apoderado
                     ig.nombre AS grado,
                     isec.nombre AS seccion,
                     ual.numerodocumento AS codigo,
-                    ual.nombreyapellido AS nombre_alumno, 
-                    GROUP_CONCAT(CONCAT('MENSUALIDAD ', mm.nombre, ' ', il.nombre, ' - ', iniv.nombre, ' - ', ig.nombre) ORDER BY mm.id ASC SEPARATOR ', ') AS descripcion_mensualidad,
-                    GROUP_CONCAT(md.id ORDER BY mm.id ASC SEPARATOR ', ') AS ids_mensualidad_detalle, 
-                    GROUP_CONCAT(mm.id ORDER BY mm.id ASC SEPARATOR ', ') AS ids_mes, 
-                    GROUP_CONCAT(mm.nombre ORDER BY mm.id ASC SEPARATOR ', ') AS meses, 
-                    GROUP_CONCAT(md.monto ORDER BY mm.id ASC SEPARATOR ', ') AS montos, 
-                    GROUP_CONCAT(md.pagado ORDER BY mm.id ASC SEPARATOR ', ') AS estados_pago,
-                    GROUP_CONCAT(md.recibo ORDER BY mm.id ASC SEPARATOR ', ') AS estados_recibo,
-                    GROUP_CONCAT(md.observaciones ORDER BY mm.id ASC SEPARATOR ', ') AS observaciones
+                    ual.nombreyapellido AS nombre_alumno,
+
+                    GROUP_CONCAT( CASE WHEN md.monto > 0 THEN CONCAT('MENSUALIDAD ', mm.nombre, ' ', il.nombre, ' - ', iniv.nombre, ' - ', ig.nombre) END ORDER BY mm.id ASC SEPARATOR ', ' ) AS descripcion_mensualidad,
+                    GROUP_CONCAT( CASE WHEN md.monto > 0 THEN md.id END ORDER BY mm.id ASC SEPARATOR ', ' ) AS ids_mensualidad_detalle,
+                    GROUP_CONCAT( CASE WHEN md.monto > 0 THEN mm.id END ORDER BY mm.id ASC SEPARATOR ', ' ) AS ids_mes,
+                    GROUP_CONCAT( CASE WHEN md.monto > 0 THEN mm.nombre END ORDER BY mm.id ASC SEPARATOR ', ' ) AS meses,
+                    GROUP_CONCAT( CASE WHEN md.monto > 0 THEN md.monto END ORDER BY mm.id ASC SEPARATOR ', ' ) AS montos,
+                    GROUP_CONCAT( CASE WHEN md.monto > 0 THEN md.pagado END ORDER BY mm.id ASC SEPARATOR ', ' ) AS estados_pago,
+                    GROUP_CONCAT( CASE WHEN md.monto > 0 THEN md.recibo END ORDER BY mm.id ASC SEPARATOR ', ' ) AS estados_recibo,
+                    GROUP_CONCAT( CASE WHEN md.monto > 0 THEN md.observaciones END ORDER BY mm.id ASC SEPARATOR ', ' ) AS observaciones
+                
                 FROM mensualidad_detalle md
                 JOIN matricula_detalle mtd ON md.id_matricula_detalle = mtd.id
                 JOIN usuario_alumno ual ON mtd.id_usuario_alumno = ual.id
@@ -77,11 +79,18 @@ class Facturacion_x_apoderado
                 JOIN usuario_apoderado ua ON mtd.id_usuario_apoderado = ua.id
                 JOIN usuario_apoderado_tipo uat ON ua.id_apoderado_tipo = uat.id
                 JOIN usuario_documento ud ON ua.id_documento = ud.id
+                
                 WHERE ua.id = '$id'
+                
                 AND ua.estado = 1 AND md.estado = 1 AND mtd.estado = 1 AND ual.estado = 1
                 AND m.estado = 1 AND isec.estado = 1 AND ig.estado = 1 AND iniv.estado = 1
                 AND il.estado = 1 AND mm.estado = 1 AND md.pagado = 1
-                GROUP BY ua.id, ua.nombreyapellido, ua.numerodocumento, ua.telefono, uat.nombre, ud.nombre, il.nombre, iniv.nombre, ig.nombre, isec.nombre, ual.nombreyapellido
+                
+                GROUP BY
+                    ua.id, ua.nombreyapellido, ua.numerodocumento, ua.telefono,
+                    uat.nombre, ud.nombre, il.nombre, iniv.nombre, ig.nombre,
+                    isec.nombre, ual.nombreyapellido
+                
                 ORDER BY il.nombre ASC, iniv.nombre ASC, ig.nombre ASC, isec.nombre ASC, ual.nombreyapellido ASC";
         return ejecutarConsulta($sql);
     }
